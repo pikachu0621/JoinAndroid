@@ -18,5 +18,8 @@ class Application: Application() {
         ToastUtils.init(this)
         LogsUtils.init(this)
         SharedPreferencesUtils.init(this)
+
+        //你是小狗吧？哈哈哈哈哈哈哈
+        //12345上山打老虎
     }
 }
