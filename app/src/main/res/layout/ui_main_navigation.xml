@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    android:animationCache="true"
+    android:background="@color/color_bg">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_item1"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cl_item2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/cb_item1"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/sr_ic_main_index"
+            android:button="@null"
+            android:checked="true"
+            android:clickable="false"
+            app:layout_constraintBottom_toTopOf="@id/tv_item1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatCheckedTextView
+            android:id="@+id/tv_item1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/main_index"
+            android:textColor="@color/sr_text_main"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/cb_item1"
+            app:layout_constraintStart_toStartOf="@+id/cb_item1"
+            app:layout_constraintTop_toBottomOf="@+id/cb_item1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_item2"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/cl_item1"
+        app:layout_constraintEnd_toStartOf="@+id/cl_item3"
+        app:layout_constraintStart_toEndOf="@+id/cl_item1"
+        app:layout_constraintTop_toTopOf="@+id/cl_item1">
+
+        <RadioButton
+            android:id="@+id/cb_item2"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/sr_ic_main_info"
+            android:button="@null"
+            android:checked="false"
+            android:clickable="false"
+            app:layout_constraintBottom_toTopOf="@+id/tv_item2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatCheckedTextView
+            android:id="@+id/tv_item2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="@string/main_app"
+            android:textColor="@color/sr_text_main"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/cb_item2"
+            app:layout_constraintStart_toStartOf="@+id/cb_item2"
+            app:layout_constraintTop_toBottomOf="@+id/cb_item2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_item3"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@+id/cl_item1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cl_item2"
+        app:layout_constraintTop_toTopOf="@+id/cl_item1">
+
+        <RadioButton
+            android:id="@+id/cb_item3"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/sr_ic_main_me"
+            android:button="@null"
+            android:checked="false"
+            android:clickable="false"
+            app:layout_constraintBottom_toTopOf="@+id/tv_item3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatCheckedTextView
+            android:id="@+id/tv_item3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="@string/main_me"
+            android:textColor="@color/sr_text_main"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/cb_item3"
+            app:layout_constraintStart_toStartOf="@+id/cb_item3"
+            app:layout_constraintTop_toBottomOf="@+id/cb_item3" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

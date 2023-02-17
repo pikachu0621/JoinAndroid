@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--    QMUI 图片圆角  -->
+    <declare-styleable name="QMUIRadiusImageView">
+        <attr format="dimension" name="qmui_border_width"/>
+        <attr format="color" name="qmui_border_color"/>
+        <attr format="color" name="qmui_selected_mask_color"/>
+        <attr format="color" name="qmui_selected_border_color"/>
+        <attr format="dimension" name="qmui_selected_border_width"/>
+        <attr format="dimension" name="qmui_corner_radius"/>
+        <attr format="boolean" name="qmui_is_oval"/>
+        <attr format="boolean" name="qmui_is_circle"/>
+        <attr format="boolean" name="qmui_is_touch_select_mode_enabled"/>
+    </declare-styleable>
+
+
+    <!--QMUI 卡片-->
+    <declare-styleable name="QMUIShadowView">
+        <attr name="qmui_maxWidth" format="dimension" />
+        <attr name="qmui_maxHeight" format="dimension" />
+        <attr name="qmui_minWidth" format="dimension" />
+        <attr name="qmui_minHeight" format="dimension" />
+        <attr name="qmui_bottomDividerHeight" format="dimension" />
+        <attr name="qmui_bottomDividerColor" format="color|reference" />
+        <attr name="qmui_bottomDividerInsetLeft" format="dimension" />
+        <attr name="qmui_bottomDividerInsetRight" format="dimension" />
+        <attr name="qmui_topDividerHeight" format="dimension" />
+        <attr name="qmui_topDividerColor" format="color|reference" />
+        <attr name="qmui_topDividerInsetLeft" format="dimension" />
+        <attr name="qmui_topDividerInsetRight" format="dimension" />
+        <attr name="qmui_leftDividerWidth" format="dimension" />
+        <attr name="qmui_leftDividerColor" format="color|reference" />
+        <attr name="qmui_leftDividerInsetTop" format="dimension" />
+        <attr name="qmui_leftDividerInsetBottom" format="dimension" />
+        <attr name="qmui_rightDividerWidth" format="dimension" />
+        <attr name="qmui_rightDividerColor" format="color|reference" />
+        <attr name="qmui_rightDividerInsetTop" format="dimension" />
+        <attr name="qmui_rightDividerInsetBottom" format="dimension" />
+        <attr name="qmui_radius" format="dimension" />
+        <attr name="qmui_borderColor" format="color" />
+        <attr name="qmui_borderWidth" format="dimension" />
+        <attr name="qmui_outerNormalColor" format="color|reference" />
+        <attr name="qmui_hideRadiusSide" format="enum">
+            <enum name="none" value="0" />
+            <enum name="top" value="1" />
+            <enum name="right" value="2" />
+            <enum name="bottom" value="3" />
+            <enum name="left" value="4" />
+        </attr>
+        <attr name="qmui_showBorderOnlyBeforeL" format="boolean" />
+        <attr name="qmui_shadowElevation" format="dimension" />
+        <attr name="qmui_useThemeGeneralShadowElevation" format="boolean" />
+        <!--0 - 1-->
+        <attr name="qmui_shadowAlpha" format="float" />
+        <attr name="qmui_outlineInsetTop" format="dimension" />
+        <attr name="qmui_outlineInsetLeft" format="dimension" />
+        <attr name="qmui_outlineInsetRight" format="dimension" />
+        <attr name="qmui_outlineInsetBottom" format="dimension" />
+        <attr name="qmui_outlineExcludePadding" format="boolean" />
+        <!-- 大于等于9.0才有效果-->
+        <attr name="qmui_shadowColor" format="color" />
+    </declare-styleable>
+
+
+</resources>
