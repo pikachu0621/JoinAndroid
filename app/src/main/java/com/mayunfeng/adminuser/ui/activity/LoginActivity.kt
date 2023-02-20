@@ -1,40 +1,71 @@
 package com.mayunfeng.adminuser.ui.activity
 
 import android.os.Bundle
-import android.view.KeyEvent
-import androidx.fragment.app.Fragment
-import androidx.viewpager2.widget.ViewPager2
-import com.pikachu.utils.adapter.PagerAdapter2
+import android.text.InputType
+import android.view.View
+import androidx.core.widget.addTextChangedListener
+import com.mayunfeng.adminuser.R
 import com.mayunfeng.adminuser.base.AppBaseActivity
 import com.mayunfeng.adminuser.databinding.ActivityLoginBinding
-import com.mayunfeng.adminuser.ui.fragment.LoginEmailFragment
-import com.mayunfeng.adminuser.ui.fragment.LoginUserFragment
 
 class LoginActivity : AppBaseActivity<ActivityLoginBinding>() {
 
 
     override fun onAppCreate(savedInstanceState: Bundle?) {
-        vp2 = binding.vpPager
-        binding.vpPager.adapter = PagerAdapter2(this, arrayListOf<Fragment>().apply {
-            add(LoginUserFragment.newInstance())
-            add(LoginEmailFragment.newInstance())
-        })
+        click()
     }
 
+    private fun click() {
 
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if ( keyCode == KeyEvent.KEYCODE_BACK && binding.vpPager.currentItem == 1) {
-            binding.vpPager.currentItem = 0
-            return true
+        binding.etUserName.addTextChangedListener {
+            binding.ctvPws.isChecked =
+                (!binding.etUserName.text.isNullOrEmpty() && !binding.etUserPassword.text.isNullOrEmpty())
+            binding.ctvPws.isClickable = binding.ctvPws.isChecked
+            binding.imgDel1.visibility = if (!binding.etUserName.text.isNullOrEmpty()) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
         }
-        return super.onKeyDown(keyCode, event)
-    }
 
-
-    companion object {
-        private var vp2: ViewPager2? = null
-        fun setCurrentItem(item: Int) {
-            vp2?.currentItem = item
+        binding.etUserPassword.addTextChangedListener {
+            binding.ctvPws.isChecked =
+                (!binding.etUserName.text.isNullOrEmpty() && !binding.etUserPassword.text.isNullOrEmpty())
+            binding.ctvPws.isClickable = binding.ctvPws.isChecked
+            binding.imgDel2.visibility = if (!binding.etUserPassword.text.isNullOrEmpty()) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
         }
+        binding.imgDel1.setOnClickListener {
+            binding.etUserName.setText("")
+        }
+        binding.imgDel2.setOnClickListener {
+            binding.etUserPassword.setText("")
+        }
+        binding.imgShow.setOnClickListener {
+            if (it.tag == "true") {
+                it.tag = "false"
+                binding.etUserPassword.inputType =
+                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                binding.imgShow.setImageResource(R.drawable.ic_login_edit_hide)
+            } else {
+                it.tag = "true"
+                binding.etUserPassword.inputType =
+                    InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_NORMAL
+                binding.imgShow.setImageResource(R.drawable.ic_login_edit_show)
+            }
+            binding.etUserPassword.setSelection(binding.etUserPassword.length())
+        }
+
+        // 登录
+        binding.ctvPws.setOnClickListener {
+            showToast("goto user")
+        }
+
+        binding.ctvPws.isChecked = false
+        binding.ctvPws.isClickable = false
     }
+
 }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/nav_header_height"
+    android:padding="@dimen/activity_vertical_margin">
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_drawer_pi" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appCompatTextView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_vertical_margin"
+        android:text="高数第15节课-未签到/当前暂无打卡"
+        android:textColor="@color/color_grey1"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView2"
+        app:layout_constraintStart_toEndOf="@+id/appCompatImageView2"
+        app:layout_constraintTop_toTopOf="@+id/appCompatImageView2" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="1dp"
+        app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/appCompatImageView2"
+        app:srcCompat="@drawable/ic_drawer_back" />
+
+
+    <com.pikachu.utils.view.QMUIRadiusImageView
+        android:id="@+id/QMUIRadiusImageView"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:src="@mipmap/test"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="@+id/appCompatImageView2"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView2"
+        app:qmui_corner_radius="30dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -31,11 +31,6 @@ public class PkRecyclerView extends RecyclerView {
     }
 
 
-    @Override
-    public void scrollBy(int x, int y) {
-        super.scrollBy(x, y);
-
-    }
 
 
 

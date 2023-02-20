@@ -1,0 +1,34 @@
+package com.mayunfeng.adminuser.ui.widget
+
+import android.content.Context
+import android.util.AttributeSet
+import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.recyclerview.R
+
+/**
+ *
+ * @ProjectName:    考勤记录管理系统
+ * @Package:        com.mayunfeng.adminuser.ui.widget
+ * @Author:         pkpk.run
+ * @Description:    null
+ */
+class NavigationView : LinearLayoutCompat {
+
+    constructor(context: Context) : this(context, null)
+
+    constructor(context: Context, attrs: AttributeSet?) : this(
+        context,
+        attrs,
+        R.attr.recyclerViewStyle
+    )
+
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
+
+
+    }
+
+}
