@@ -27,12 +27,10 @@ abstract class AppBaseActivity<T : ViewBinding> : BaseActivity<T>() {
             findViewById<View>(R.id.app_back)?.setOnClickListener {
                 finish()
             }
-            findViewById<View>(R.id.app_status)?.setOnClickListener {
-                finish()
+            findViewById<View>(R.id.app_status)?.let {
+                it.layoutParams.height =
+                UiUtils.getStatusBarHeight(this@AppBaseActivity)
             }
-
-            UiUtils.getStatusBarHeight(this@AppBaseActivity)
-
         } catch (_: Exception) {
         }
         onAppCreate(savedInstanceState)

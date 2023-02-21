@@ -13,14 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
+
+    <include
+        android:id="@+id/main_drawer"
+        layout="@layout/ui_main_drawer"
         android:layout_marginEnd="-64dp"
-        android:fitsSystemWindows="false"
-        app:insetForeground="@android:color/transparent"
-        app:headerLayout="@layout/ui_nav_header_main"
-        app:menu="@menu/activity_main_drawer" />
+        android:layout_gravity="start"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </androidx.drawerlayout.widget.DrawerLayout>

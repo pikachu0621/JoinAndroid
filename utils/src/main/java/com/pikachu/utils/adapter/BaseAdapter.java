@@ -59,7 +59,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
      * @param itemViewType 当前 item 的类型
      * @param data         所有数据
      */
-    public abstract void onBindView(ViewBinding binding, T itemData, int position, int itemViewType, List<T> data);
+    public abstract void onBindView(@NonNull ViewBinding binding, T itemData, int position, int itemViewType, @NonNull List<T> data);
 
 
 
@@ -96,6 +96,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
         if (onItemClickListener != null){
             holder.binding.getRoot().setOnClickListener(v -> onItemClickListener.onClick(v, itemData, position));
         }
+        if (holder.binding == null) return;
         onBindView(holder.binding, itemData, position,  getItemViewType(position), data);
     }
 

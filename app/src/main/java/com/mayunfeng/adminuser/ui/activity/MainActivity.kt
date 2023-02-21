@@ -3,6 +3,7 @@ package com.mayunfeng.adminuser.ui.activity
 import android.os.Bundle
 import com.gyf.immersionbar.ImmersionBar
 import com.mayunfeng.adminuser.R
+import com.mayunfeng.adminuser.adapter.TestAdapter
 import com.mayunfeng.adminuser.base.AppBaseActivity
 import com.mayunfeng.adminuser.databinding.ActivityMainBinding
 
@@ -23,6 +24,6 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
     }
 
     private fun initNavigationFragment() {
-        // binding.navView
+        binding.mainContent.recycler.setAdapter(TestAdapter(), 1)
     }
 }

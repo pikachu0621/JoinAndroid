@@ -1,5 +1,7 @@
 package com.pikachu.utils.adapter;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
 import androidx.viewbinding.ViewBinding;
 
 import com.pikachu.utils.utils.ViewBindingUtils;
@@ -34,7 +36,7 @@ public abstract class QuickAdapter<V extends ViewBinding, T > extends BaseAdapte
      * @param position 当前 item 的游标
      * @param data  所有数据
      */
-    public abstract void onQuickBindView(V binding, T itemData , int position,  List<T> data);
+    public abstract void onQuickBindView(@NonNull V binding, T itemData , int position, @NonNull List<T> data);
 
 
     @Override

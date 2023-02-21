@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_bg">
+
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/color_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srlEnableLoadMore="false"
+        app:srlEnableOverScrollBounce="true"
+        app:srlEnableOverScrollDrag="true"
+        app:srlEnableRefresh="false">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/activity_vertical_margin">
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/appCompatImageView2"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="26dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_drawer_pi" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/appCompatTextView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activity_vertical_margin"
+                    android:text="高数第15节课-未签到/当前暂无打卡"
+                    android:textColor="@color/color_grey1"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView2"
+                    app:layout_constraintStart_toEndOf="@+id/appCompatImageView2"
+                    app:layout_constraintTop_toTopOf="@+id/appCompatImageView2" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:padding="1dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/appCompatImageView2"
+                    app:srcCompat="@drawable/ic_drawer_back" />
+
+
+                <com.pikachu.utils.view.QMUIRadiusImageView
+                    android:id="@+id/QMUIRadiusImageView"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginTop="30dp"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/user_img"
+                    app:layout_constraintStart_toStartOf="@+id/appCompatImageView2"
+                    app:layout_constraintTop_toBottomOf="@+id/appCompatImageView2"
+                    app:qmui_corner_radius="32dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="7dp"
+                    android:text="麻云凤"
+                    android:textColor="@color/color_grey1"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/QMUIRadiusImageView"
+                    app:layout_constraintTop_toTopOf="@+id/QMUIRadiusImageView" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_user_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="7dp"
+                    android:text="用户ID: 0000000001"
+                    android:textColor="@color/color_grey1"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/QMUIRadiusImageView"
+                    app:layout_constraintStart_toEndOf="@+id/QMUIRadiusImageView" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="@dimen/activity_vertical_margin"
+                    android:background="@drawable/dw_me_class_bg"
+                    android:drawableStart="@drawable/ic_drawer_me_girl"
+                    android:gravity="center"
+                    android:paddingHorizontal="7dp"
+                    android:text="女"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_user_name"
+                    app:layout_constraintStart_toEndOf="@+id/tv_user_name"
+                    app:layout_constraintTop_toTopOf="@+id/tv_user_name" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_admin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/dw_me_class_bg"
+                    android:gravity="center"
+                    android:paddingHorizontal="7dp"
+                    android:text="成员/管理员"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_user_name"
+                    app:layout_constraintStart_toEndOf="@+id/tv_sex"
+                    app:layout_constraintTop_toTopOf="@+id/tv_user_name" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="30dp"
+                    android:alpha="0.05"
+                    android:background="@color/color_grey1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/QMUIRadiusImageView" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/drawer_recycler"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view"
+                    tools:itemCount="8"
+                    tools:listitem="@layout/item_drawer_nav"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appCompatTextView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_vertical_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:drawableTop="@drawable/ic_drawer_setting"
+        android:text="更多设置"
+        android:textColor="@color/color_grey1"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appCompatTextView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:drawableTop="@drawable/ic_drawer_light"
+        android:text="切换主题"
+        android:textColor="@color/color_grey1"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/appCompatTextView5" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:drawableTop="@drawable/ic_drawer_user_out"
+        android:text="退出登录"
+        android:layout_marginStart="30dp"
+        android:textColor="@color/color_grey1"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/appCompatTextView6" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
