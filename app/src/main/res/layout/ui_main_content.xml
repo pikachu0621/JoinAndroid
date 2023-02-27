@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:background="@color/color_bg">
 
     <View
         android:id="@+id/app_status"
@@ -13,15 +14,130 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.mayunfeng.adminuser.ui.widget.MRecyclerView
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:layout_constraintTop_toBottomOf="@+id/app_status" />
+
+    <com.pikachu.utils.view.QMUIRadiusImageView
+        android:id="@+id/iv_brand_return"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:src="@mipmap/user_img"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_status"
+        app:qmui_border_color="@color/color_principal"
+        app:qmui_is_oval="true" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/main_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:text="@string/test_2"
+        android:textColor="@color/color_grey1"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/iv_brand_return"
+        app:layout_constraintTop_toTopOf="@+id/iv_brand_return" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/main_user_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="@string/test_6"
+        android:textColor="@color/color_grey1"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_brand_return"
+        app:layout_constraintStart_toEndOf="@+id/main_user_state_bg" />
+
+    <View
+        android:id="@+id/main_user_state_bg"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:background="@drawable/dr_main_state_in"
+        app:layout_constraintBottom_toBottomOf="@+id/main_user_state"
+        app:layout_constraintStart_toStartOf="@+id/main_user_name"
+        app:layout_constraintTop_toTopOf="@+id/main_user_state" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/add_group_code"
+        android:layout_width="?actionBarSize"
+        android:layout_height="?actionBarSize"
+        android:layout_marginEnd="5dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="center"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view2"
+        app:srcCompat="@drawable/ic_main_head_add_code" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/add_group"
+        android:layout_width="?actionBarSize"
+        android:layout_height="?actionBarSize"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="center"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintEnd_toStartOf="@+id/add_group_code"
+        app:layout_constraintTop_toTopOf="@+id/view2"
+        app:srcCompat="@drawable/ic_main_head_add_group" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/user_msg"
+        android:layout_width="?actionBarSize"
+        android:layout_height="?actionBarSize"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="center"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintEnd_toStartOf="@+id/add_group"
+        app:layout_constraintTop_toTopOf="@+id/view2"
+        app:srcCompat="@drawable/ic_main_head_msg" />
+
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/smartRefreshLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:id="@+id/recycler"
+        android:background="@color/color_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_status" />
+        app:layout_constraintTop_toBottomOf="@+id/view2">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <!--todo-->
+                <!--用户 （签到，我的团队，历史记录，我的资料）
+                管理员 （发起签到，签到，批阅签到，我的团队）-->
 
 
 
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:background="@drawable/dw_main_gradient_dow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

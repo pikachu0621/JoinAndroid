@@ -51,7 +51,7 @@ class MRecyclerView : SmartRefreshLayout {
         @RecyclerView.Orientation orientation: Int = RecyclerView.VERTICAL
     ) {
         recyclerView.adapter = adapter
-        setAutoLayoutManager(item, orientation)
+        setAutoLayoutManager(context, recyclerView, item, orientation)
     }
 
     fun setLayoutManager(layout: RecyclerView.LayoutManager) {
@@ -62,18 +62,22 @@ class MRecyclerView : SmartRefreshLayout {
      * @param item          一行有几个item
      * @param orientation   布局方向    [RecyclerView.VERTICAL 竖向]    [RecyclerView.HORIZONTAL 横向]  只在 item = 1 时生效
      */
-    fun setAutoLayoutManager(
-        item: Int = 1,
-        @RecyclerView.Orientation orientation: Int = RecyclerView.VERTICAL
-    ) {
-        if (item == 1) {
-            recyclerView.layoutManager = LinearLayoutManager(context).apply {
-                setOrientation(orientation)
+    companion object {
+        fun setAutoLayoutManager(
+            context: Context,
+            recyclerView: RecyclerView,
+            item: Int = 1,
+            @RecyclerView.Orientation orientation: Int = RecyclerView.VERTICAL
+        ) {
+            if (item == 1) {
+                recyclerView.layoutManager = LinearLayoutManager(context).apply {
+                    setOrientation(orientation)
+                }
+            } else {
+                recyclerView.layoutManager = GridLayoutManager(context, item)
             }
-        } else {
-            recyclerView.layoutManager = GridLayoutManager(context, item)
         }
-
     }
+
 
 }

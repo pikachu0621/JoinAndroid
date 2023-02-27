@@ -13,7 +13,7 @@ import com.pikachu.utils.adapter.QuickAdapter
 class TestAdapter(`data`: MutableList<String> ? = MutableList(20) { "20" } ) : QuickAdapter<ItemTestBinding, String>(`data`) {
     override fun onQuickBindView(
         binding: ItemTestBinding,
-        itemData: String?,
+        itemData: String,
         position: Int,
         `data`: MutableList<String>
     ) {

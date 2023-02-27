@@ -7,10 +7,11 @@
     android:background="@color/color_bg">
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/smartRefreshLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/color_bg"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/view_bot"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,15 +27,15 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/activity_vertical_margin">
+                android:layout_height="wrap_content">
 
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/appCompatImageView2"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginTop="26dp"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="32dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_drawer_pi" />
@@ -44,7 +45,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/activity_vertical_margin"
-                    android:text="高数第15节课-未签到/当前暂无打卡"
+                    android:text="@string/test_1"
                     android:textColor="@color/color_grey1"
                     android:textSize="15sp"
                     app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView2"
@@ -53,8 +54,10 @@
 
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/out_dr"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
                     android:padding="1dp"
                     app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView2"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -79,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/activity_vertical_margin"
                     android:layout_marginTop="7dp"
-                    android:text="麻云凤"
+                    android:text="@string/test_2"
                     android:textColor="@color/color_grey1"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -93,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginBottom="7dp"
-                    android:text="用户ID: 0000000001"
+                    android:text="@string/test_5"
                     android:textColor="@color/color_grey1"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/QMUIRadiusImageView"
@@ -109,12 +112,13 @@
                     android:drawableStart="@drawable/ic_drawer_me_girl"
                     android:gravity="center"
                     android:paddingHorizontal="7dp"
-                    android:text="女"
+                    android:text="@string/test_3"
                     android:textColor="@color/white"
                     android:textSize="10sp"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_user_name"
                     app:layout_constraintStart_toEndOf="@+id/tv_user_name"
-                    app:layout_constraintTop_toTopOf="@+id/tv_user_name" />
+                    app:layout_constraintTop_toTopOf="@+id/tv_user_name"
+                    tools:ignore="SmallSp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_admin"
@@ -124,17 +128,19 @@
                     android:background="@drawable/dw_me_class_bg"
                     android:gravity="center"
                     android:paddingHorizontal="7dp"
-                    android:text="成员/管理员"
+                    android:text="@string/test_4"
                     android:textColor="@color/white"
                     android:textSize="10sp"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_user_name"
                     app:layout_constraintStart_toEndOf="@+id/tv_sex"
-                    app:layout_constraintTop_toTopOf="@+id/tv_user_name" />
+                    app:layout_constraintTop_toTopOf="@+id/tv_user_name"
+                    tools:ignore="SmallSp" />
 
                 <View
                     android:id="@+id/view"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
                     android:layout_marginTop="30dp"
                     android:alpha="0.05"
                     android:background="@color/color_grey1"
@@ -146,60 +152,88 @@
                     android:id="@+id/drawer_recycler"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:overScrollMode="never"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view"
                     tools:itemCount="8"
-                    tools:listitem="@layout/item_drawer_nav"/>
+                    tools:listitem="@layout/item_drawer_nav" />
+                <View
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/drawer_recycler" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+
         </androidx.core.widget.NestedScrollView>
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="12dp"
+        android:background="@drawable/dw_main_gradient_top"
+        app:layout_constraintBottom_toBottomOf="@+id/smartRefreshLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/view_bot"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:background="@color/color_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/appCompatTextView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:drawableTop="@drawable/ic_drawer_setting"
-        android:text="更多设置"
+        android:drawablePadding="4dp"
+        android:text="@string/drawer_setting"
         android:textColor="@color/color_grey1"
         android:textSize="14sp"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view_bot" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/appCompatTextView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:drawableTop="@drawable/ic_drawer_light"
-        android:text="切换主题"
+        android:drawableTop="@drawable/ic_drawer_problem"
+        android:drawablePadding="4dp"
+        android:text="@string/drawer_problem"
         android:textColor="@color/color_grey1"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView5"
         app:layout_constraintStart_toEndOf="@+id/appCompatTextView5" />
 
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appCompatTextView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:drawableTop="@drawable/ic_drawer_user_out"
-        android:text="退出登录"
         android:layout_marginStart="30dp"
+        android:drawableTop="@drawable/ic_drawer_out"
+        android:drawablePadding="4dp"
+        android:text="@string/drawer_out"
         android:textColor="@color/color_grey1"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView5"
         app:layout_constraintStart_toEndOf="@+id/appCompatTextView6" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,7 +36,7 @@ public abstract class QuickAdapter<V extends ViewBinding, T > extends BaseAdapte
      * @param position 当前 item 的游标
      * @param data  所有数据
      */
-    public abstract void onQuickBindView(@NonNull V binding, T itemData , int position, @NonNull List<T> data);
+    public abstract void onQuickBindView(@NonNull V binding, @NonNull T itemData , int position, @NonNull List<T> data);
 
 
     @Override
