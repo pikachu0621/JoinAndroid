@@ -1,17 +1,17 @@
-package com.mayunfeng.adminuser.adapter
+package com.mayunfeng.join.adapter
 
 import android.app.Activity
 import android.content.Intent
 import android.view.View
-import com.mayunfeng.adminuser.R
-import com.mayunfeng.adminuser.databinding.ItemDrawerNavBinding
-import com.mayunfeng.adminuser.ui.activity.StartSignActivity
+import com.mayunfeng.join.R
+import com.mayunfeng.join.databinding.ItemDrawerNavBinding
+import com.mayunfeng.join.ui.activity.StartSignActivity
 import com.pikachu.utils.adapter.QuickAdapter
 
 /**
  *
  * @ProjectName:    考勤记录管理系统
- * @Package:        com.mayunfeng.adminuser.adapter
+ * @Package:        com.mayunfeng.join.adapter
  * @Author:         pkpk.run
  * @Description:    null
  */

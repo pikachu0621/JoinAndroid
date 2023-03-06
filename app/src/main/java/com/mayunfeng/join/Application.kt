@@ -1,24 +1,19 @@
-package com.mayunfeng.adminuser
+package com.mayunfeng.join
 
 import android.app.Application
-import android.content.Context
-import com.mayunfeng.adminuser.ui.widget.LoadFooter
-import com.mayunfeng.adminuser.ui.widget.LoadHeader
+import com.mayunfeng.adminuser.R
+import com.mayunfeng.join.ui.widget.LoadFooter
+import com.mayunfeng.join.ui.widget.LoadHeader
 import com.pikachu.utils.utils.LogsUtils
 import com.pikachu.utils.utils.SharedPreferencesUtils
 import com.pikachu.utils.utils.ToastUtils
-import com.scwang.smart.refresh.footer.ClassicsFooter
-import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
-import com.scwang.smart.refresh.layout.api.RefreshFooter
-import com.scwang.smart.refresh.layout.api.RefreshLayout
-import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator
 
 
 /**
  *
  * @ProjectName:    考勤记录管理系统
- * @Package:        com.mayunfeng.adminuser
+ * @Package:        com.mayunfeng.join
  * @Author:         pkpk.run
  * @Description:    null
  */

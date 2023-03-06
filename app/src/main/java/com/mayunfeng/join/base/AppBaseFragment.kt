@@ -1,4 +1,4 @@
-package com.mayunfeng.adminuser.base
+package com.mayunfeng.join.base
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
@@ -8,7 +8,7 @@ import com.pikachu.utils.base.BaseFragment
 /**
  *
  * @ProjectName:    考勤记录管理系统
- * @Package:        com.mayunfeng.adminuser.base
+ * @Package:        com.mayunfeng.join.base
  * @Author:         pkpk.run
  * @Description:    null
  */

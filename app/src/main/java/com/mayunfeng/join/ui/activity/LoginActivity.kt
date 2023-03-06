@@ -1,12 +1,12 @@
-package com.mayunfeng.adminuser.ui.activity
+package com.mayunfeng.join.ui.activity
 
 import android.os.Bundle
 import android.text.InputType
 import android.view.View
 import androidx.core.widget.addTextChangedListener
-import com.mayunfeng.adminuser.R
-import com.mayunfeng.adminuser.base.AppBaseActivity
-import com.mayunfeng.adminuser.databinding.ActivityLoginBinding
+import com.mayunfeng.join.R
+import com.mayunfeng.join.base.AppBaseActivity
+import com.mayunfeng.join.databinding.ActivityLoginBinding
 
 class LoginActivity : AppBaseActivity<ActivityLoginBinding>() {
 

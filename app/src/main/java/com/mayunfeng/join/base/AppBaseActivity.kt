@@ -1,21 +1,17 @@
-package com.mayunfeng.adminuser.base
+package com.mayunfeng.join.base
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.widget.LinearLayoutCompat
-import androidx.core.view.allViews
 import androidx.viewbinding.ViewBinding
 import com.gyf.immersionbar.ImmersionBar
-import com.mayunfeng.adminuser.R
+import com.mayunfeng.join.R
 import com.pikachu.utils.base.BaseActivity
 import com.pikachu.utils.utils.UiUtils
 
 /**
  *
  * @ProjectName:    考勤记录管理系统
- * @Package:        com.mayunfeng.adminuser.base
+ * @Package:        com.mayunfeng.join.base
  * @Author:         pkpk.run
  * @Description:    null
  */

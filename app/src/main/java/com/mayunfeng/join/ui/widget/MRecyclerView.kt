@@ -1,4 +1,4 @@
-package com.mayunfeng.adminuser.ui.widget
+package com.mayunfeng.join.ui.widget
 
 import android.content.Context
 import android.util.AttributeSet
@@ -13,7 +13,7 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 /**
  *
  * @ProjectName:    考勤记录管理系统
- * @Package:        com.mayunfeng.adminuser.ui.widget
+ * @Package:        com.mayunfeng.join.ui.widget
  * @Author:         pkpk.run
  * @Description:    null
  */

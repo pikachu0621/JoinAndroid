@@ -1,4 +1,4 @@
-package com.mayunfeng.adminuser
+package com.mayunfeng.join
 
 import org.junit.Test
 

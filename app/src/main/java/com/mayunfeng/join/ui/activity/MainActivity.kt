@@ -1,20 +1,15 @@
-package com.mayunfeng.adminuser.ui.activity
+package com.mayunfeng.join.ui.activity
 
-import android.content.Intent
 import android.os.Bundle
 import com.gyf.immersionbar.ImmersionBar
-import com.mayunfeng.adminuser.R
-import com.mayunfeng.adminuser.adapter.MainDrawerAdapter
-import com.mayunfeng.adminuser.adapter.MainMsgAdapter
-import com.mayunfeng.adminuser.base.AppBaseActivity
-import com.mayunfeng.adminuser.databinding.ActivityMainBinding
-import com.mayunfeng.adminuser.mode.MainMsgData
-import com.mayunfeng.adminuser.ui.widget.MRecyclerView
-import com.pikachu.utils.adapter.BaseAdapter.OnItemClickListener
+import com.mayunfeng.join.R
+import com.mayunfeng.join.adapter.MainDrawerAdapter
+import com.mayunfeng.join.adapter.MainMsgAdapter
+import com.mayunfeng.join.base.AppBaseActivity
+import com.mayunfeng.join.databinding.ActivityMainBinding
+import com.mayunfeng.join.mode.MainMsgData
+import com.mayunfeng.join.ui.widget.MRecyclerView
 import com.pikachu.utils.utils.TimeUtils
-import com.scwang.smart.refresh.layout.api.RefreshLayout
-import com.scwang.smart.refresh.layout.listener.OnLoadMoreListener
-import com.scwang.smart.refresh.layout.listener.OnRefreshListener
 
 class MainActivity : AppBaseActivity<ActivityMainBinding>() {
 

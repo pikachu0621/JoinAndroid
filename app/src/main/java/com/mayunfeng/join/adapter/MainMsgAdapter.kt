@@ -1,17 +1,16 @@
-package com.mayunfeng.adminuser.adapter
+package com.mayunfeng.join.adapter
 
 import android.annotation.SuppressLint
 import android.view.View
-import com.mayunfeng.adminuser.R
-import com.mayunfeng.adminuser.databinding.ItemDrawerNavBinding
-import com.mayunfeng.adminuser.databinding.ItemMainMsgBinding
-import com.mayunfeng.adminuser.mode.MainMsgData
+import com.mayunfeng.join.R
+import com.mayunfeng.join.databinding.ItemMainMsgBinding
+import com.mayunfeng.join.mode.MainMsgData
 import com.pikachu.utils.adapter.QuickAdapter
 
 /**
  *
  * @ProjectName:    考勤记录管理系统
- * @Package:        com.mayunfeng.adminuser.adapter
+ * @Package:        com.mayunfeng.join.adapter
  * @Author:         pkpk.run
  * @Description:    null
  */

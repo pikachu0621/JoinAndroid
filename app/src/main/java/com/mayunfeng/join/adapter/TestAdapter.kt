@@ -1,12 +1,12 @@
-package com.mayunfeng.adminuser.adapter
+package com.mayunfeng.join.adapter
 
-import com.mayunfeng.adminuser.databinding.ItemTestBinding
+import com.mayunfeng.join.databinding.ItemTestBinding
 import com.pikachu.utils.adapter.QuickAdapter
 
 /**
  *
  * @ProjectName:    考勤记录管理系统
- * @Package:        com.mayunfeng.adminuser.adapter
+ * @Package:        com.mayunfeng.join.adapter
  * @Author:         pkpk.run
  * @Description:    null
  */

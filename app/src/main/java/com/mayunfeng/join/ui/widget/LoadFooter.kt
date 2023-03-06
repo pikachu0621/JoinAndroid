@@ -1,4 +1,4 @@
-package com.mayunfeng.adminuser.ui.widget
+package com.mayunfeng.join.ui.widget
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -6,11 +6,8 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
-import android.widget.ViewAnimator
-import com.mayunfeng.adminuser.R
-import com.mayunfeng.adminuser.databinding.UiLoadFooterBinding
-import com.pikachu.utils.utils.LogsUtils
-import com.scwang.smart.refresh.classics.ClassicsAbstract
+import com.mayunfeng.join.R
+import com.mayunfeng.join.databinding.UiLoadFooterBinding
 import com.scwang.smart.refresh.layout.api.RefreshFooter
 import com.scwang.smart.refresh.layout.api.RefreshKernel
 import com.scwang.smart.refresh.layout.api.RefreshLayout
@@ -20,7 +17,7 @@ import com.scwang.smart.refresh.layout.constant.SpinnerStyle
 /**
  *
  * @ProjectName:    考勤记录管理系统
- * @Package:        com.mayunfeng.adminuser.ui.widget
+ * @Package:        com.mayunfeng.join.ui.widget
  * @Author:         pkpk.run
  * @Description:    null
  */

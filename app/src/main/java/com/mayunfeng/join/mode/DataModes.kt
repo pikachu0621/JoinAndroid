@@ -1,9 +1,9 @@
-package com.mayunfeng.adminuser.mode
+package com.mayunfeng.join.mode
 
 /**
  *
  * @ProjectName:    考勤记录管理系统
- * @Package:        com.mayunfeng.adminuser.mode
+ * @Package:        com.mayunfeng.join.mode
  * @Author:         pkpk.run
  * @Description:    null
  */
