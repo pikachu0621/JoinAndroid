@@ -4,6 +4,7 @@
     <color name="color_principal">#62BC67</color>
     <color name="color_secondary">#9962BC67</color>
     <color name="color_bg">#FFFFFF</color>
+    <color name="color_bg_secondary">#FAFAFA</color>
 
     <color name="color_grey1">#000000</color>
     <color name="color_grey2">#797979</color>
@@ -11,6 +12,15 @@
 
     <color name="color_girl">#E44545</color>
     <color name="color_boy">#459FE4</color>
+
+    <color name="color_main_top1">#42C271</color>
+    <color name="color_main_top2">#A042C2</color>
+    <color name="color_main_top3">#C2A242</color>
+    <color name="color_main_top4">#4286C2</color>
+    <color name="color_main_top5">#4299C2</color>
+    <color name="color_main_top6">#C24242</color>
+
+
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>

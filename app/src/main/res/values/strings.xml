@@ -24,8 +24,28 @@
     <string name="drawer_out">退出登录</string>
 
 
+    <!--更新-->
+    <string name="load_header_up_data">更新成功</string>
+    <string name="load_footer_err">加载失败</string>
+    <string name="load_footer_null">没有数据啦</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+
+    <!--main top-->
+    <!--用户 （签到，我的团队，历史记录，我的资料）
+       管理员 （发起签到，签到，批阅签到，我的团队）-->
+    <string name="main_top_user_sign_start">当前签到</string>
+    <string name="main_top_user_sign_group">我的团队</string>
+    <string name="main_top_user_sign_record">历史记录</string>
+    <string name="main_top_user_info">我的资料</string>
+    <string name="main_top_root_user_sign_start">发起签到</string>
+    <string name="main_top_root_user_sign_check">批阅签到</string>
+    <!--msg-->
+    <string name="main_list_item_join">加</string>
+    <string name="main_list_item_sign">签</string>
+
+    <!--StartSignActivity-->
+    <string name="main_start_sign_nul">当前没有签到任务哦</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="test">TEST</string>
     <string name="test_1">高数第15节课-未签到/当前暂无打卡</string>
@@ -34,4 +54,6 @@
     <string name="test_4">成员/管理员</string>
     <string name="test_5">用户ID: 0000000001</string>
     <string name="test_6">在线 - 当前无签到任务</string>
+    <string name="test_7">02-03 13:22</string>
+    <string name="test_8">\@麻云凤 myf 据开发商的后果发挥几点开始广泛的好几个 据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个 02-03 13:22</string>
 </resources>

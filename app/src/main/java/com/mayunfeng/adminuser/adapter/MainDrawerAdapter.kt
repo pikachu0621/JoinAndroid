@@ -1,8 +1,11 @@
 package com.mayunfeng.adminuser.adapter
 
+import android.app.Activity
+import android.content.Intent
 import android.view.View
 import com.mayunfeng.adminuser.R
 import com.mayunfeng.adminuser.databinding.ItemDrawerNavBinding
+import com.mayunfeng.adminuser.ui.activity.StartSignActivity
 import com.pikachu.utils.adapter.QuickAdapter
 
 /**
@@ -16,24 +19,25 @@ import com.pikachu.utils.adapter.QuickAdapter
 data class MainDrawerItemData(
     val iconR: Int,
     val title: String,
+    val activityClz: Class<out Activity>? = null,
     val partition: String? = null
 ) {
     companion object {
         fun addUserItem(isRootUser: Boolean): List<MainDrawerItemData> =
             arrayListOf<MainDrawerItemData>().apply {
-                add(MainDrawerItemData(0, "", "我的"))
-                add(MainDrawerItemData(R.drawable.ic_drawer_user_sign_start, "当前签到"))
-                add(MainDrawerItemData(R.drawable.ic_drawer_user_sign_group, "我的组"))
-                add(MainDrawerItemData(R.drawable.ic_drawer_user_sign_add_group, "加入组"))
-                add(MainDrawerItemData(R.drawable.ic_drawer_user_sign_info, "历史记录"))
-                add(MainDrawerItemData(R.drawable.ic_drawer_user_sign_msg, "我的信息"))
+                add(MainDrawerItemData(0, "", partition = "我的"))
+                add(MainDrawerItemData(R.drawable.ic_drawer_user_sign_start, "当前签到", StartSignActivity::class.java))
+                add(MainDrawerItemData(R.drawable.ic_drawer_user_sign_group, "我的组", StartSignActivity::class.java))
+                add(MainDrawerItemData(R.drawable.ic_drawer_user_sign_add_group, "加入组", StartSignActivity::class.java))
+                add(MainDrawerItemData(R.drawable.ic_drawer_user_sign_info, "历史记录", StartSignActivity::class.java))
+                add(MainDrawerItemData(R.drawable.ic_drawer_user_sign_msg, "我的信息", StartSignActivity::class.java))
                 if (!isRootUser) return@apply
-                add(MainDrawerItemData(0, "", "管理员"))
-                add(MainDrawerItemData(R.drawable.ic_drawer_root_user_sign_start, "发起签到"))
-                add(MainDrawerItemData(R.drawable.ic_drawer_root_user_sign_add_group, "创建组"))
-                add(MainDrawerItemData(R.drawable.ic_drawer_root_user_sign_group, "已创建的组"))
-                add(MainDrawerItemData(R.drawable.ic_drawer_root_user_sign_review, "批阅签到"))
-                add(MainDrawerItemData(R.drawable.ic_drawer_root_user_sign_info, "签到信息"))
+                add(MainDrawerItemData(0, "", partition = "管理员"))
+                add(MainDrawerItemData(R.drawable.ic_drawer_root_user_sign_start, "发起签到", StartSignActivity::class.java))
+                add(MainDrawerItemData(R.drawable.ic_drawer_root_user_sign_add_group, "创建组", StartSignActivity::class.java))
+                add(MainDrawerItemData(R.drawable.ic_drawer_root_user_sign_group, "已创建的组", StartSignActivity::class.java))
+                add(MainDrawerItemData(R.drawable.ic_drawer_root_user_sign_review, "批阅签到", StartSignActivity::class.java))
+                add(MainDrawerItemData(R.drawable.ic_drawer_root_user_sign_info, "签到信息", StartSignActivity::class.java))
             }
     }
 }
@@ -50,9 +54,6 @@ class MainDrawerAdapter(isRootUser: Boolean) :
     ) {
         binding.appCompatImageView.setImageResource(itemData.iconR)
         binding.appCompatTextView4.text = itemData.title
-
-
-
         itemData.partition ?. let {
             binding.conPartition.text = it
             binding.conClick.visibility = View.GONE
@@ -60,6 +61,11 @@ class MainDrawerAdapter(isRootUser: Boolean) :
         } ?: let {
             binding.conClick.visibility = View.VISIBLE
             binding.conPartition.visibility = View.GONE
+        }
+        binding.conClick.setOnClickListener {
+            if (itemData.activityClz != null) {
+                context.startActivity(Intent(context, itemData.activityClz))
+            }
         }
     }
 

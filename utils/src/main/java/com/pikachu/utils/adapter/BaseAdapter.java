@@ -129,7 +129,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseAdapter.Vi
      */
     public void refreshData(List<T> data) {
         if (data == null) return;
-        this.data = null;
+        if (this.data != null) this.data.clear();
         this.data = new ArrayList<>(data);
         notifyDataSetChanged();
     }

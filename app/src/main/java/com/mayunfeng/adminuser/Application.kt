@@ -1,9 +1,19 @@
 package com.mayunfeng.adminuser
 
 import android.app.Application
+import android.content.Context
+import com.mayunfeng.adminuser.ui.widget.LoadFooter
+import com.mayunfeng.adminuser.ui.widget.LoadHeader
 import com.pikachu.utils.utils.LogsUtils
 import com.pikachu.utils.utils.SharedPreferencesUtils
 import com.pikachu.utils.utils.ToastUtils
+import com.scwang.smart.refresh.footer.ClassicsFooter
+import com.scwang.smart.refresh.header.ClassicsHeader
+import com.scwang.smart.refresh.layout.SmartRefreshLayout
+import com.scwang.smart.refresh.layout.api.RefreshFooter
+import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.scwang.smart.refresh.layout.listener.DefaultRefreshFooterCreator
+
 
 /**
  *
@@ -18,8 +28,28 @@ class Application: Application() {
         ToastUtils.init(this)
         LogsUtils.init(this)
         SharedPreferencesUtils.init(this)
-
-        //你是小狗吧？哈哈哈哈哈哈哈
-        //12345上山打老虎
+    }
+    companion object{
+        init {
+            //设置全局的Header构建器
+            SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
+                //全局设置主题颜色
+                layout.setPrimaryColorsId(
+                    R.color.color_principal,
+                    R.color.color_grey1
+                )
+                LoadHeader(context)
+            }
+            //设置全局的Footer构建器
+            SmartRefreshLayout.setDefaultRefreshFooterCreator { context, layout ->
+                //全局设置主题颜色
+                layout.setPrimaryColorsId(
+                    R.color.color_principal,
+                    R.color.color_grey1
+                )
+                // ClassicsFooter(context)
+                LoadFooter(context)
+            }
+        }
     }
 }
