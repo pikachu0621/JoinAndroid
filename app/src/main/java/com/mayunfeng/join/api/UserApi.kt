@@ -35,7 +35,4 @@ interface UserApi {
     ): Observable<BaseBean<UserLoginBean>>
 
 
-
-
-
 }

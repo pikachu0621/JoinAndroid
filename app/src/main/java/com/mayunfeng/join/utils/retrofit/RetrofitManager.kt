@@ -1,5 +1,6 @@
-package com.mayunfeng.join.utils
+package com.mayunfeng.join.utils.retrofit
 
+import io.reactivex.rxjava3.core.Observable
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -13,7 +14,7 @@ import java.util.concurrent.Executors
  * @Author:         pkpk.run
  * @Description:    null
  */
-class RetrofitManager() {
+class RetrofitManager private constructor(){
 
 
 
@@ -45,8 +46,6 @@ class RetrofitManager() {
             .callbackExecutor(Executors.newSingleThreadExecutor())
             .build()
     }
-
-
 
 
     fun <T> create(service: Class<T>): T = retrofit!!.create(service)

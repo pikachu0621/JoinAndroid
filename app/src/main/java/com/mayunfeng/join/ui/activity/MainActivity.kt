@@ -1,8 +1,8 @@
 package com.mayunfeng.join.ui.activity
 
 import android.annotation.SuppressLint
-import android.database.Observable
 import android.os.Bundle
+import android.util.Log
 import com.gyf.immersionbar.ImmersionBar
 import com.mayunfeng.join.BASE_URL
 import com.mayunfeng.join.HTTP_OK
@@ -17,7 +17,10 @@ import com.mayunfeng.join.bean.UserLoginBean
 import com.mayunfeng.join.databinding.ActivityMainBinding
 import com.mayunfeng.join.dialog.LoadingDialog
 import com.mayunfeng.join.ui.widget.MRecyclerView
-import com.mayunfeng.join.utils.RetrofitManager
+import com.mayunfeng.join.utils.MyRetrofitObserver
+import com.mayunfeng.join.utils.ReflectionUtils
+import com.mayunfeng.join.utils.retrofit.RetrofitManager
+import com.mayunfeng.join.utils.retrofit.RetrofitObserver
 import com.pikachu.utils.utils.GlideUtils
 import com.pikachu.utils.utils.SharedPreferencesUtils
 import com.pikachu.utils.utils.TimeUtils
@@ -25,6 +28,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlin.reflect.KCallable
 
 
 enum class UserGrade(
@@ -88,32 +92,23 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
             .userInfo(loginToken)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<BaseBean<UserLoginBean>> {
-
-                var error = false
-                override fun onSubscribe(d: Disposable) {
+            .subscribe(object : MyRetrofitObserver<BaseBean<UserLoginBean>>() {
+                override fun onRetrofitSubscribe(d: Disposable) {
                     loadingDialog.show()
-                    error = false
                 }
 
-                override fun onError(e: Throwable) {
+                override fun onRetrofitError(t: BaseBean<UserLoginBean>?, e: Throwable) {
                     loadingDialog.dismiss()
                     showToast(R.string.login_user_token_failure)
                     startActivity(LoginActivity::class.java)
                     finish()
                 }
 
-                override fun onComplete() {
-                    if(error) return
+                override fun onRetrofitComplete(t: BaseBean<UserLoginBean>) {
                     loadingDialog.dismiss()
                 }
 
-                override fun onNext(t: BaseBean<UserLoginBean>) {
-                    if (t.error_code !== HTTP_OK) {
-                        onError(Throwable(t.reason))
-                        error = true
-                        return
-                    }
+                override fun onRetrofitNext(t: BaseBean<UserLoginBean>) {
                     initUserInfoUi(t)
                 }
             })

@@ -12,12 +12,13 @@ import com.mayunfeng.join.bean.BaseBean
 import com.mayunfeng.join.bean.UserLoginBean
 import com.mayunfeng.join.databinding.ActivityLoginBinding
 import com.mayunfeng.join.dialog.LoadingDialog
-import com.mayunfeng.join.utils.RetrofitManager
+import com.mayunfeng.join.utils.MyRetrofitObserver
+import com.mayunfeng.join.utils.retrofit.RetrofitManager
+import com.mayunfeng.join.utils.retrofit.RetrofitObserver
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
-import retrofit2.http.HTTP
 
 class LoginActivity : AppBaseActivity<ActivityLoginBinding>() {
     private lateinit var loadingDialog: LoadingDialog
@@ -88,31 +89,23 @@ class LoginActivity : AppBaseActivity<ActivityLoginBinding>() {
             .login(binding.etUserName.text.toString(), binding.etUserPassword.text.toString())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<BaseBean<UserLoginBean>> {
-                var error = false
-                override fun onSubscribe(d: Disposable) {
+            .subscribe(object : MyRetrofitObserver<BaseBean<UserLoginBean>>() {
+                override fun onRetrofitSubscribe(d: Disposable) {
                     loadingDialog.show()
-                    error = false
                 }
 
-                override fun onError(e: Throwable) {
-                    loadingDialog.dismiss()
-                    showToast(e.message)
-                }
-
-                override fun onComplete() {
-                    if (error) return
+                override fun onRetrofitComplete(t: BaseBean<UserLoginBean>) {
                     loadingDialog.dismiss()
                     startActivity(MainActivity::class.java)
                     finish()
                 }
 
-                override fun onNext(t: BaseBean<UserLoginBean>) {
-                    if (t.error_code !== HTTP_OK) {
-                        onError(Throwable(t.reason))
-                        error = true
-                        return
-                    }
+                override fun onRetrofitError(t: BaseBean<UserLoginBean>?, e: Throwable) {
+                    loadingDialog.dismiss()
+                    showToast(t?.reason ?: e.message)
+                }
+
+                override fun onRetrofitNext(t: BaseBean<UserLoginBean>) {
                     val result = t.result!!
                     MainActivity.writeLoginToken(result.loginToken)
                     MainActivity.writeUserAccount(result.userAccount)

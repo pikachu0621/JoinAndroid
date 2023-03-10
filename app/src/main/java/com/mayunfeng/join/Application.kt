@@ -3,7 +3,7 @@ package com.mayunfeng.join
 import android.app.Application
 import com.mayunfeng.join.ui.widget.LoadFooter
 import com.mayunfeng.join.ui.widget.LoadHeader
-import com.mayunfeng.join.utils.RetrofitManager
+import com.mayunfeng.join.utils.retrofit.RetrofitManager
 import com.pikachu.utils.utils.LogsUtils
 import com.pikachu.utils.utils.SharedPreferencesUtils
 import com.pikachu.utils.utils.ToastUtils
