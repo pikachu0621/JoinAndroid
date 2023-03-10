@@ -45,7 +45,7 @@ public abstract class BaseDialog<T extends ViewBinding> extends Dialog {
      *
      * @param binding 布局
      */
-    protected abstract void onViewCreate(T binding);
+    protected abstract void onViewCreate(@NonNull T binding);
 
 
     @Override
@@ -84,11 +84,14 @@ public abstract class BaseDialog<T extends ViewBinding> extends Dialog {
         this.amount = amount;
     }
 
-    public void setWidthProportion(@FloatRange(from = 0, to = 1) float widthProportion) {
+    public void setWidthProportion(@FloatRange(from = 0F, to = 1F) float widthProportion) {
         WindowManager manager =getWindow().getWindowManager();
         DisplayMetrics outMetrics = new DisplayMetrics();
         manager.getDefaultDisplay().getMetrics(outMetrics);
-        int width = (int)(outMetrics.widthPixels * widthProportion);
+        int width = 0;
+        if (widthProportion > 0){
+            width = (int)(outMetrics.widthPixels * widthProportion);
+        }
         getWindow().setLayout(width == 0 ? WindowManager.LayoutParams.WRAP_CONTENT: width, WindowManager.LayoutParams.WRAP_CONTENT);
         this.widthProportion = widthProportion;
     }

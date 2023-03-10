@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.view.View
 import com.mayunfeng.join.R
 import com.mayunfeng.join.databinding.ItemMainMsgBinding
-import com.mayunfeng.join.mode.MainMsgData
+import com.mayunfeng.join.bean.MainMsgBean
 import com.pikachu.utils.adapter.QuickAdapter
 
 /**
@@ -14,15 +14,15 @@ import com.pikachu.utils.adapter.QuickAdapter
  * @Author:         pkpk.run
  * @Description:    null
  */
-class MainMsgAdapter(`data`: MutableList<MainMsgData>? = null) :
-    QuickAdapter<ItemMainMsgBinding, MainMsgData>(`data`) {
+class MainMsgAdapter(`data`: MutableList<MainMsgBean>? = null) :
+    QuickAdapter<ItemMainMsgBinding, MainMsgBean>(`data`) {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onQuickBindView(
         binding: ItemMainMsgBinding,
-        itemData: MainMsgData,
+        itemData: MainMsgBean,
         position: Int,
-        `data`: MutableList<MainMsgData>
+        `data`: MutableList<MainMsgBean>
     ) {
         binding.title.text = itemData.titleStr
         binding.time.text = itemData.timeStr

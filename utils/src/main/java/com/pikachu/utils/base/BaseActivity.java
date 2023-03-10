@@ -15,6 +15,7 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewpager2.widget.ViewPager2;
@@ -69,6 +70,9 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
 
     public void showToast(String msg) {
         ToastUtils.showToast(context, msg);
+    }
+    public void showToast(@StringRes int msg) {
+        ToastUtils.showToast(context, getString(msg));
     }
     public void showToast(Object msg) {
         ToastUtils.showToast(context, msg);

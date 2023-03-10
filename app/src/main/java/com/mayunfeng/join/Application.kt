@@ -1,9 +1,9 @@
 package com.mayunfeng.join
 
 import android.app.Application
-import com.mayunfeng.adminuser.R
 import com.mayunfeng.join.ui.widget.LoadFooter
 import com.mayunfeng.join.ui.widget.LoadHeader
+import com.mayunfeng.join.utils.RetrofitManager
 import com.pikachu.utils.utils.LogsUtils
 import com.pikachu.utils.utils.SharedPreferencesUtils
 import com.pikachu.utils.utils.ToastUtils
@@ -17,14 +17,20 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
  * @Author:         pkpk.run
  * @Description:    null
  */
-class Application: Application() {
+
+const val BASE_URL = "http://192.168.0.105:8081"
+const val HTTP_OK = 200
+
+class Application : Application() {
     override fun onCreate() {
         super.onCreate()
         ToastUtils.init(this)
         LogsUtils.init(this)
         SharedPreferencesUtils.init(this)
+        RetrofitManager.init(BASE_URL)
     }
-    companion object{
+
+    companion object {
         init {
             //设置全局的Header构建器
             SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
