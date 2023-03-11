@@ -5,6 +5,10 @@
     <string name="main_me">管理员</string>
 
 
+    <!--activity-->
+    <string name="activity_title_edit_user">编辑资料</string>
+
+
     <!-- login -->
     <string name="login_welcome">欢迎使用</string>
     <string name="login_welcome_2">未注册的账号将自动注册并登录</string>
@@ -55,11 +59,23 @@
     <!--StartSignActivity-->
     <string name="main_start_sign_nul">当前没有签到任务哦</string>
 
+    <!--EditUserInfoActivity-->
+    <string name="edit_user_info_account">账号</string>
+    <string name="edit_user_info_name">姓名</string>
+    <string name="edit_user_info_sex">性别</string>
+    <string name="edit_user_info_age">年龄</string>
+    <string name="edit_user_info_introduce">个性签名</string>
+    <string name="edit_user_info_introduce_vice">点击编辑</string>
+    <string name="edit_user_info_unit">所属单位/学校</string>
+    <string name="edit_user_info_create_time">创建时间</string>
+    <string name="edit_user_info_password">修改密码</string>
+    <string name="edit_user_info_password_vice">点击修改</string>
 
 
     <!--dialog -->
     <string name="dialog_load_title">加载中...</string>
     <string name="dialog_load_title_login">登录中...</string>
+    <string name="dialog_load_title_net_error">网络异常！</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="test">TEST</string>
@@ -71,4 +87,9 @@
     <string name="test_6">在线 - 当前无签到任务</string>
     <string name="test_7">02-03 13:22</string>
     <string name="test_8">\@麻云凤 myf 据开发商的后果发挥几点开始广泛的好几个 据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个 02-03 13:22</string>
+    <string name="test_9">22</string>
+    <string name="test_10">新乡学院</string>
+    <string name="test_11">2023-03-10 21:16:45</string>
+    <string name="test_12">valuable@136.com</string>
+
 </resources>

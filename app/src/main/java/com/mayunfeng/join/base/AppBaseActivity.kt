@@ -7,6 +7,10 @@ import com.gyf.immersionbar.ImmersionBar
 import com.mayunfeng.join.R
 import com.pikachu.utils.base.BaseActivity
 import com.pikachu.utils.utils.UiUtils
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+
 
 /**
  *
@@ -19,6 +23,12 @@ abstract class AppBaseActivity<T : ViewBinding> : BaseActivity<T>() {
     abstract fun onAppCreate(savedInstanceState: Bundle?)
     override fun initActivity(savedInstanceState: Bundle?) {
         setActivityWindowsInfo(resources.getBoolean(R.bool.isStatusBar))
+        EventBus.getDefault().register(this)
+        // 发布粘性事件
+        //EventBus.getDefault().postSticky(asnDetailEventBus)
+        // 发布普通事件
+        // EventBus.getDefault().post(messageEvent);
+
         try {
             findViewById<View>(R.id.app_back)?.setOnClickListener {
                 finish()
@@ -32,6 +42,13 @@ abstract class AppBaseActivity<T : ViewBinding> : BaseActivity<T>() {
         onAppCreate(savedInstanceState)
     }
 
+    //处理普通事件
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    open fun eventBus(event: Any?) { }
+
+    //处理黏性事件
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    open fun stickyEventBus(event: Any?) { }
 
     open fun setActivityWindowsInfo(isStatusBar: Boolean) {
         ImmersionBar.with(this)
@@ -44,4 +61,9 @@ abstract class AppBaseActivity<T : ViewBinding> : BaseActivity<T>() {
     }
 
 
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().removeAllStickyEvents()
+        EventBus.getDefault().unregister(this)
+    }
 }

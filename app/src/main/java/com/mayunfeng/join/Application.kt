@@ -1,9 +1,12 @@
 package com.mayunfeng.join
 
 import android.app.Application
+import com.mayunfeng.join.bean.BaseBean
+import com.mayunfeng.join.bean.UserLoginBean
 import com.mayunfeng.join.ui.widget.LoadFooter
 import com.mayunfeng.join.ui.widget.LoadHeader
 import com.mayunfeng.join.utils.retrofit.RetrofitManager
+import com.pikachu.utils.utils.GlideUtils
 import com.pikachu.utils.utils.LogsUtils
 import com.pikachu.utils.utils.SharedPreferencesUtils
 import com.pikachu.utils.utils.ToastUtils
@@ -28,9 +31,13 @@ class Application : Application() {
         LogsUtils.init(this)
         SharedPreferencesUtils.init(this)
         RetrofitManager.init(BASE_URL)
+        GlideUtils.init(BASE_URL)
     }
 
     companion object {
+
+        fun getUrl(relativePath: String): String = GlideUtils.getUrl(BASE_URL, relativePath)
+
         init {
             //设置全局的Header构建器
             SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->

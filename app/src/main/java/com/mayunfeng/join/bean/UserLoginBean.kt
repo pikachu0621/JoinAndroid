@@ -1,19 +1,21 @@
 package com.mayunfeng.join.bean
 
+import java.io.Serializable
+
 data class UserLoginBean(
-    val baseTag: Any,
-    val createTime: String,
-    val id: Int,
-    val loginToken: String,
-    val updateTime: String,
-    val userAccount: String,
-    val userAge: Int,
-    val userGrade: Int,
-    val userImg: String,
-    val userIntroduce: String,
-    val userLimit: Boolean,
-    val userName: String,
-    val userPassword: String,
-    val userSex: Boolean,
-    val userUnit: String
-)
+    var baseTag: Any,
+    var createTime: String,
+    var id: Int,
+    var loginToken: String,
+    var updateTime: String,
+    var userAccount: String,
+    var userAge: Int,
+    var userGrade: Int,
+    var userImg: String,
+    var userIntroduce: String,
+    var userLimit: Boolean,
+    var userName: String,
+    var userPassword: String,
+    var userSex: Boolean,
+    var userUnit: String
+): Serializable

@@ -1,5 +1,7 @@
 package com.pikachu.utils.utils;
 
+import static com.pikachu.utils.utils.ToastUtils.context;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
@@ -7,6 +9,7 @@ import android.net.Uri;
 import android.widget.ImageView;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
 
@@ -19,6 +22,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Objects;
 
 /**
  * @ProjectName: 一带一路
@@ -28,10 +32,33 @@ import java.net.URL;
  */
 public class GlideUtils {
 
+    private static String baseUrl = null;
+    private static String token = null;
+    private static String tokenVal = null;
 
     public static Load with(Context context){
         return new Load(Glide.with(context));
     }
+
+    public static void init(String baseUrl){
+        GlideUtils.baseUrl = baseUrl;
+    }
+
+    public static void initToken(String token, String tokenVal){
+        GlideUtils.token = token;
+        GlideUtils.tokenVal = tokenVal;
+    }
+
+    public static String getUrl(@NonNull String baseUrl, @NonNull String relativePath){
+        String relativeUrlStr = relativePath.trim();
+        int bLength = baseUrl.length() - 1;
+        String baseUrlStr = baseUrl;
+        if (baseUrl.lastIndexOf("/") == bLength) baseUrlStr = baseUrl.substring(0, bLength);
+        if (relativeUrlStr.indexOf("/") != 0) relativeUrlStr = "/" + relativeUrlStr;
+        return baseUrlStr + relativeUrlStr;
+    }
+
+
 
     public static class Load {
         private final RequestManager requestManager;
@@ -48,9 +75,24 @@ public class GlideUtils {
             return new Into(requestManager.load(drawable));
         }
 
-        public Into load( @Nullable String string){
+        public Into load(@Nullable String string){
             return new Into(requestManager.load(string));
         }
+
+        public Into loadBaseUrl(@NonNull String string, String token, String tokenVal){
+            String s = Objects.requireNonNull(baseUrl, "baseUrl == null");
+            if (string.contains("http://") || string.contains("https://")){
+                return new Into(requestManager.load(string));
+            }
+            String url = getUrl(s, string);
+            if (token != null && tokenVal != null) url = url+"?"+token+"="+tokenVal;
+            return new Into(requestManager.load(url));
+        }
+
+        public Into loadBaseUrl(@NonNull String string){
+            return loadBaseUrl(string, token, tokenVal);
+        }
+
 
         public Into load(@Nullable Uri uri){
             return new Into(requestManager.load(uri));

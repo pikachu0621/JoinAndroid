@@ -13,4 +13,45 @@
         <item name="android:statusBarColor">@color/color_bg</item>
         <!-- Customize your theme here. -->
     </style>
+
+
+
+
+    <style name="MeSettingImage">
+        <item name="android:layout_width">28dp</item>
+        <item name="android:layout_height">28dp</item>
+    </style>
+    <style name="MeSettingText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/color_grey1</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+    <style name="MeSettingTextVice">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/color_grey2</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+    </style>
+    <style name="MeSettingGoImage">
+        <item name="android:layout_width">12dp</item>
+        <item name="android:layout_height">12dp</item>
+        <item name="android:alpha">0.6</item>
+        <item name="android:rotation">180</item>
+        <item name="android:src">@drawable/ic_app_back</item>
+    </style>
+    <style name="MeSettingClickLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_marginTop">1dp</item>
+        <item name="android:background">@color/color_bg</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingEnd">@dimen/activity_horizontal_margin</item>
+    </style>
 </resources>

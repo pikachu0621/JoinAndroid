@@ -1,10 +1,12 @@
 package com.mayunfeng.join.ui.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
+import android.view.KeyEvent
 import android.view.View
 import androidx.core.widget.addTextChangedListener
-import com.mayunfeng.join.HTTP_OK
 import com.mayunfeng.join.R
 import com.mayunfeng.join.api.UserApi
 import com.mayunfeng.join.base.AppBaseActivity
@@ -13,26 +15,43 @@ import com.mayunfeng.join.bean.UserLoginBean
 import com.mayunfeng.join.databinding.ActivityLoginBinding
 import com.mayunfeng.join.dialog.LoadingDialog
 import com.mayunfeng.join.utils.MyRetrofitObserver
+import com.mayunfeng.join.utils.UserUtils
 import com.mayunfeng.join.utils.retrofit.RetrofitManager
-import com.mayunfeng.join.utils.retrofit.RetrofitObserver
+import com.pikachu.utils.utils.NetUtils
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class LoginActivity : AppBaseActivity<ActivityLoginBinding>() {
+
+
+
+    companion object{
+        fun startLoginActivity(activity: Activity) {
+            activity.startActivity(Intent(activity, LoginActivity::class.java))
+            activity.overridePendingTransition(R.anim.aty_in, R.anim.aty_ont)
+        }
+    }
+
     private lateinit var loadingDialog: LoadingDialog
+
+
 
     override fun onAppCreate(savedInstanceState: Bundle?) {
         loadingDialog = LoadingDialog(context, getString(R.string.dialog_load_title_login))
         click()
-        val readUserAccount = MainActivity.readUserAccount()
+        val readUserAccount = UserUtils.readUserAccount()
         if (!readUserAccount.isNullOrEmpty()) {
             binding.etUserName.setText(readUserAccount)
         }
     }
 
     private fun click() {
+
+        binding.appBack.setOnClickListener {
+            finishTs()
+        }
+
         binding.etUserName.addTextChangedListener {
             binding.ctvPws.isChecked =
                 (!binding.etUserName.text.isNullOrEmpty() && !binding.etUserPassword.text.isNullOrEmpty())
@@ -82,8 +101,28 @@ class LoginActivity : AppBaseActivity<ActivityLoginBinding>() {
         binding.ctvPws.isClickable = false
     }
 
-    private fun loginUser() {
 
+    private fun finishTs(){
+        finish()
+        overridePendingTransition(R.anim.aty_ont, R.anim.aty_out)
+    }
+
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finishTs()
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
+    }
+
+
+
+    private fun loginUser() {
+        if (!NetUtils.isNetworkConnected(context)) {
+            showToast(R.string.dialog_load_title_net_error)
+            return
+        }
         RetrofitManager.getInstance()
             .create(UserApi::class.java)
             .login(binding.etUserName.text.toString(), binding.etUserPassword.text.toString())
@@ -97,7 +136,7 @@ class LoginActivity : AppBaseActivity<ActivityLoginBinding>() {
                 override fun onRetrofitComplete(t: BaseBean<UserLoginBean>) {
                     loadingDialog.dismiss()
                     startActivity(MainActivity::class.java)
-                    finish()
+                    finishTs()
                 }
 
                 override fun onRetrofitError(t: BaseBean<UserLoginBean>?, e: Throwable) {
@@ -107,11 +146,12 @@ class LoginActivity : AppBaseActivity<ActivityLoginBinding>() {
 
                 override fun onRetrofitNext(t: BaseBean<UserLoginBean>) {
                     val result = t.result!!
-                    MainActivity.writeLoginToken(result.loginToken)
-                    MainActivity.writeUserAccount(result.userAccount)
+                    UserUtils.writeLoginToken(result.loginToken)
+                    UserUtils.writeUserAccount(result.userAccount)
                 }
             })
     }
+
 
 
 }

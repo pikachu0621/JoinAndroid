@@ -2,10 +2,9 @@ package com.mayunfeng.join.ui.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import com.gyf.immersionbar.ImmersionBar
+import com.mayunfeng.join.Application
 import com.mayunfeng.join.BASE_URL
-import com.mayunfeng.join.HTTP_OK
 import com.mayunfeng.join.R
 import com.mayunfeng.join.adapter.MainDrawerAdapter
 import com.mayunfeng.join.adapter.MainMsgAdapter
@@ -18,17 +17,16 @@ import com.mayunfeng.join.databinding.ActivityMainBinding
 import com.mayunfeng.join.dialog.LoadingDialog
 import com.mayunfeng.join.ui.widget.MRecyclerView
 import com.mayunfeng.join.utils.MyRetrofitObserver
-import com.mayunfeng.join.utils.ReflectionUtils
+import com.mayunfeng.join.utils.UserUtils
 import com.mayunfeng.join.utils.retrofit.RetrofitManager
-import com.mayunfeng.join.utils.retrofit.RetrofitObserver
 import com.pikachu.utils.utils.GlideUtils
-import com.pikachu.utils.utils.SharedPreferencesUtils
+import com.pikachu.utils.utils.NetUtils
 import com.pikachu.utils.utils.TimeUtils
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.functions.Consumer
 import io.reactivex.rxjava3.schedulers.Schedulers
-import kotlin.reflect.KCallable
 
 
 enum class UserGrade(
@@ -43,23 +41,9 @@ enum class UserGrade(
 @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
 class MainActivity : AppBaseActivity<ActivityMainBinding>() {
 
-
     private var mainMsgAdapter: MainMsgAdapter? = null
     private lateinit var loadingDialog: LoadingDialog
-
-
-    companion object {
-        fun writeUserAccount(userAccount: String) =
-            SharedPreferencesUtils.write("user_account", userAccount)
-
-
-        fun writeLoginToken(loginToken: String) =
-            SharedPreferencesUtils.write("login_token", loginToken)
-
-
-        fun readUserAccount(): String? = SharedPreferencesUtils.readString("user_account")
-        fun readLoginToken(): String? = SharedPreferencesUtils.readString("login_token")
-    }
+    private lateinit var userInfo: UserLoginBean
 
 
     override fun setActivityWindowsInfo(isStatusBar: Boolean) {
@@ -80,13 +64,21 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
     }
 
     private fun loadUserInfo() {
-        val loginToken = readLoginToken()
+        val loginToken = UserUtils.readLoginToken()
         if (loginToken == null || loginToken.isEmpty()) {
             showToast(R.string.login_user_token_nul)
-            startActivity(LoginActivity::class.java)
+            LoginActivity.startLoginActivity(this)
             finish()
             return
         }
+
+        if (!NetUtils.isNetworkConnected(context)) {
+            showToast(R.string.dialog_load_title_net_error)
+            LoginActivity.startLoginActivity(this)
+            finish()
+            return
+        }
+
         RetrofitManager.getInstance()
             .create(UserApi::class.java)
             .userInfo(loginToken)
@@ -100,7 +92,10 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
                 override fun onRetrofitError(t: BaseBean<UserLoginBean>?, e: Throwable) {
                     loadingDialog.dismiss()
                     showToast(R.string.login_user_token_failure)
-                    startActivity(LoginActivity::class.java)
+                    t?.let {
+                        UserUtils.writeLoginToken("")
+                    }
+                    LoginActivity.startLoginActivity(this@MainActivity)
                     finish()
                 }
 
@@ -116,18 +111,22 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
 
     // 用户数据
 
-
     private fun initUserInfoUi(userInfo: BaseBean<UserLoginBean>) {
+
         val resultUserData = userInfo.result!!
+        this.userInfo = resultUserData
+        GlideUtils.initToken("token", UserUtils.readLoginToken())
 
         // 用户名
         binding.mainContent.mainUserName.text = resultUserData.userName
         binding.mainDrawer.tvUserName.text = resultUserData.userName
 
         // 用户头像
-        GlideUtils.with(this).load("${BASE_URL}/images/${resultUserData.userImg}")
+        GlideUtils.with(this)
+            .loadBaseUrl(resultUserData.userImg)
             .into(binding.mainDrawer.QMUIRadiusImageView)
-        GlideUtils.with(this).load("${BASE_URL}/images/${resultUserData.userImg}")
+        GlideUtils.with(this)
+            .loadBaseUrl(resultUserData.userImg)
             .into(binding.mainContent.ivBrandReturn)
 
 
@@ -188,9 +187,18 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
 
         // 退出登录
         binding.mainDrawer.appCompatTextView7.setOnClickListener {
-            writeLoginToken("")
-            startActivity(LoginActivity::class.java)
+            UserUtils.writeLoginToken("")
+            LoginActivity.startLoginActivity(this)
             finish()
+        }
+
+
+        // 用户信息
+        binding.mainDrawer.QMUIRadiusImageView.setOnClickListener {
+            EditUserInfoActivity.startEditUserInfoActivity(this, userInfo)
+        }
+        binding.mainContent.userInfo.setOnClickListener {
+            EditUserInfoActivity.startEditUserInfoActivity(this, userInfo)
         }
 
 

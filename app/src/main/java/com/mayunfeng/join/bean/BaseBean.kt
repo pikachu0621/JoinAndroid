@@ -1,6 +1,7 @@
 package com.mayunfeng.join.bean
 
 import com.google.gson.annotations.Expose
+import java.io.Serializable
 
 /**
  *
@@ -12,5 +13,5 @@ import com.google.gson.annotations.Expose
 data class BaseBean<T>(
     val reason: String,
     val error_code: Int,
-    val result: T?
-)
+    var result: T?
+): Serializable
