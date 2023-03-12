@@ -45,9 +45,9 @@ class EditInfoDialog(
 
         binding.etUserName.addTextChangedListener {
             binding.ctvPws.isChecked = if (EditUserInfoDialogType.PASSWORD == eType) {
-                !binding.etUserName.text.isNullOrEmpty()
-            } else {
                 (!binding.etUserName.text.isNullOrEmpty() && !binding.etUserPassword.text.isNullOrEmpty())
+            } else {
+                !binding.etUserName.text.isNullOrEmpty()
             }
             binding.ctvPws.isClickable = binding.ctvPws.isChecked
             binding.imgDel1.visibility = if (!binding.etUserName.text.isNullOrEmpty()) {
@@ -86,17 +86,14 @@ class EditInfoDialog(
         }
 
         binding.ctvPws.setOnClickListener {
-            if(binding.etUserName.text.toString().isEmpty()) {
-                ToastUtils.showToast(context.getString(R.string.dialog_edit_nul))
-                return@setOnClickListener
-            }
             if (clickOk(this,
                     binding.etUserName.text.toString(),
                     binding.etUserPassword.text.toString())) {
                 dismiss()
             }
         }
-
+        binding.ctvPws.isChecked = false
+        binding.ctvPws.isClickable = false
     }
 
 
