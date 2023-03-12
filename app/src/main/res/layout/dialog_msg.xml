@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dr_dialog_load_bg">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/msg"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/test_12"
+        android:textColor="@color/color_grey1"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="26dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:alpha="0.05"
+        android:background="@color/color_grey1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/msg" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/cancel"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:gravity="center"
+        android:text="@string/dialog_msg_cancel"
+        android:textColor="@color/color_grey1"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/ok"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/msg" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/ok"
+        android:layout_width="0dp"
+        android:layout_height="46dp"
+        android:gravity="center"
+        android:text="@string/dialog_msg_confirm"
+        android:textColor="@color/color_principal"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cancel"
+        app:layout_constraintTop_toBottomOf="@+id/msg" />
+
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:alpha="0.06"
+        android:background="@color/color_grey1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/msg" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

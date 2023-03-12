@@ -72,10 +72,22 @@
     <string name="edit_user_info_password_vice">点击修改</string>
 
 
+
     <!--dialog -->
     <string name="dialog_load_title">加载中...</string>
     <string name="dialog_load_title_login">登录中...</string>
     <string name="dialog_load_title_net_error">网络异常！</string>
+    <string name="dialog_msg_cancel">取消</string>
+    <string name="dialog_msg_confirm">确认</string>
+    <string name="dialog_msg_complete">完成</string>
+    <string name="dialog_msg_out_login">你可能错过签到任务，确认退出登录吗？</string>
+    <string name="dialog_edit_old_password">旧密码</string>
+    <string name="dialog_edit_new_password">新密码</string>
+    <string name="dialog_edit_modify">修改</string>
+    <string name="dialog_edit_input">请输入</string>
+    <string name="dialog_edit_sex_title">修改性别</string>
+    <string name="dialog_edit_age_title">修改年龄</string>
+    <string name="dialog_edit_nul">不能为空</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="test">TEST</string>

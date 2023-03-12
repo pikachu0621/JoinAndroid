@@ -1,6 +1,7 @@
 package com.pikachu.utils.base;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,16 +36,20 @@ public abstract class BaseBottomSheetDialog<T extends ViewBinding> extends Botto
      *
      * @param binding 布局
      */
-    protected abstract void onViewCreate(T binding);
+    protected abstract void onViewCreate(@NonNull T binding);
 
 
     public BaseBottomSheetDialog(@NonNull Context context) {
         super(context, R.style.BottomSheetDialog);
         binding = ViewBindingUtils.create(getClass(), LayoutInflater.from(context));
         root = binding.getRoot();
-        onViewCreate(binding);
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        onViewCreate(binding);
+    }
 
     public void show() {
         setCancelable(cancelable);

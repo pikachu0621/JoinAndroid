@@ -91,11 +91,13 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/user_account"
                             style="@style/MeSettingTextVice"
+                            android:layout_marginEnd="0dp"
                             android:text="@string/test_12" />
-                        <androidx.appcompat.widget.AppCompatImageView style="@style/MeSettingGoImage" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
-                    <androidx.appcompat.widget.LinearLayoutCompat style="@style/MeSettingClickLayout">
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/user_name_click"
+                        style="@style/MeSettingClickLayout">
                         <androidx.appcompat.widget.AppCompatTextView
                             style="@style/MeSettingText"
                             android:text="@string/edit_user_info_name" />
@@ -119,7 +121,9 @@
                         <androidx.appcompat.widget.AppCompatImageView style="@style/MeSettingGoImage" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
-                    <androidx.appcompat.widget.LinearLayoutCompat style="@style/MeSettingClickLayout">
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/user_age_click"
+                        style="@style/MeSettingClickLayout">
                         <androidx.appcompat.widget.AppCompatTextView
                             style="@style/MeSettingText"
                             android:text="@string/edit_user_info_age" />
@@ -131,6 +135,7 @@
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                     <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/user_introduce_click"
                         style="@style/MeSettingClickLayout"
                         android:layout_marginTop="10dp">
                         <androidx.appcompat.widget.AppCompatTextView
@@ -142,7 +147,9 @@
                         <androidx.appcompat.widget.AppCompatImageView style="@style/MeSettingGoImage" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
-                    <androidx.appcompat.widget.LinearLayoutCompat style="@style/MeSettingClickLayout">
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/user_unit_click"
+                        style="@style/MeSettingClickLayout">
                         <androidx.appcompat.widget.AppCompatTextView
                             style="@style/MeSettingText"
                             android:text="@string/edit_user_info_unit" />
@@ -160,12 +167,13 @@
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/user_create_time"
                             style="@style/MeSettingTextVice"
+                            android:layout_marginEnd="0dp"
                             android:text="@string/test_11" />
-                        <androidx.appcompat.widget.AppCompatImageView style="@style/MeSettingGoImage" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
                     <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/user_password_click"
                         style="@style/MeSettingClickLayout"
                         android:layout_marginTop="10dp">
                         <androidx.appcompat.widget.AppCompatTextView

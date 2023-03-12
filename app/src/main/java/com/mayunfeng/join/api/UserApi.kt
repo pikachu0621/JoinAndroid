@@ -29,10 +29,12 @@ interface UserApi {
 
 
     // 根据token 获取用户数据
-    @GET("/myf-user-api/user-info-token")
+    @GET("/myf-user-api/user-info")
     fun userInfo(
         @Query("token") account: String?
     ): Observable<BaseBean<UserLoginBean>>
 
+
+    // todo
 
 }

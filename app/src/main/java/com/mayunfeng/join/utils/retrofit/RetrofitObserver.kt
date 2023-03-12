@@ -1,12 +1,9 @@
 package com.mayunfeng.join.utils.retrofit
 
-import com.mayunfeng.join.HTTP_OK
-import com.mayunfeng.join.bean.BaseBean
-import com.mayunfeng.join.bean.UserLoginBean
+
 import com.mayunfeng.join.utils.ReflectionUtils
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
-import java.lang.reflect.Field
 import kotlin.reflect.*
 
 /**

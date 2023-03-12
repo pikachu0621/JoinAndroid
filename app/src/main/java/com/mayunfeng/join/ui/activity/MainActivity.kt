@@ -15,6 +15,7 @@ import com.mayunfeng.join.bean.MainMsgBean
 import com.mayunfeng.join.bean.UserLoginBean
 import com.mayunfeng.join.databinding.ActivityMainBinding
 import com.mayunfeng.join.dialog.LoadingDialog
+import com.mayunfeng.join.dialog.MsgDialog
 import com.mayunfeng.join.ui.widget.MRecyclerView
 import com.mayunfeng.join.utils.MyRetrofitObserver
 import com.mayunfeng.join.utils.UserUtils
@@ -187,9 +188,12 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
 
         // 退出登录
         binding.mainDrawer.appCompatTextView7.setOnClickListener {
-            UserUtils.writeLoginToken("")
-            LoginActivity.startLoginActivity(this)
-            finish()
+            MsgDialog(context, getString(R.string.dialog_msg_out_login), {
+                UserUtils.writeLoginToken("")
+                LoginActivity.startLoginActivity(this)
+                finish()
+                true
+            }).show()
         }
 
 
