@@ -61,9 +61,9 @@ public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActiv
         setContentView(binding.getRoot());
         context = this;
         appManager = AppManagerUtils.getAppManager();
+        appManager.addActivity(this);
         initActivity(savedInstanceState);
     }
-
 
     protected abstract void initActivity(Bundle savedInstanceState);
 

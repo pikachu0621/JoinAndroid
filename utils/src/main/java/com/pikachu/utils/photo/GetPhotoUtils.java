@@ -75,8 +75,8 @@ public class GetPhotoUtils {
 
 
     // 获取全部图片   数据库里的
-    public static List<File> getSystemList() {
-        List<File> result = new ArrayList<>();
+    public static List<String> getSystemList() {
+        List<String> result = new ArrayList<>();
         ContentResolver contentResolver = context.getContentResolver();
         @SuppressLint("Recycle")
         Cursor cursor = contentResolver.query(uri, null, null, null, ContactsContract.Contacts._ID + " DESC");
@@ -84,10 +84,7 @@ public class GetPhotoUtils {
         while (cursor.moveToNext()) {
             int index = cursor.getColumnIndexOrThrow(data);
             String path = cursor.getString(index); // 文件地址
-            File file = new File(path);
-            if (file.exists()) {
-                result.add(file);
-            }
+            result.add(path);
         }
         return result;
     }
@@ -95,8 +92,8 @@ public class GetPhotoUtils {
 
     // 获取相册 （按文件夹分  不同文件夹算一个）
     public static List<PhotoModule> getSystemLibs() {
-        File fileOne = null;
-        List<File> files = new ArrayList<>();
+        String fileOne = null;
+        List<String> files = new ArrayList<>();
         List<PhotoModule> photoModules = new ArrayList<>();
         ContentResolver contentResolver = context.getContentResolver();
         @SuppressLint("Recycle")
@@ -105,14 +102,11 @@ public class GetPhotoUtils {
         while (cursor.moveToNext()) {
             int index = cursor.getColumnIndexOrThrow(data);
             String path = cursor.getString(index);
-            File file = new File(path);
-            if (file.exists()) {
-                files.add(file);
-                if (fileOne == null){
-                    fileOne = file;
-                }
-                compareAdd(photoModules, file);
+            files.add(path);
+            if (fileOne == null){
+                fileOne = path;
             }
+            compareAdd(photoModules, path);
         }
         if (photoModules.size() > 0) {
             Collections.sort(photoModules, (o1, o2) -> o2.getFiles().size() - o1.getFiles().size());
@@ -126,9 +120,9 @@ public class GetPhotoUtils {
 
 
 
-    private static void compareAdd(List<PhotoModule> photoModules, File file){
+    private static void compareAdd(List<PhotoModule> photoModules, String file){
 
-        String parent = file.getParent() == null ? "" : file.getParent();
+        String parent = getParent(file) == null ? "" : getParent(file);
 
         for (PhotoModule photoModule : photoModules){
             String path = photoModule.getPath() == null ? "" : photoModule.getPath();
@@ -138,16 +132,25 @@ public class GetPhotoUtils {
             }
         }
 
-        File parentFile = file.getParentFile();
+        String parentFile = getParent(file);
+
         String name = "";
         if (parentFile != null){
-           name = parentFile.getName();
+           name = getName(parentFile);
         }
-        List<File> files = new ArrayList<>();
+        List<String> files = new ArrayList<>();
         files.add(file);
         photoModules.add(new PhotoModule(parent, name, file, files));
     }
 
+
+    private static String getParent(String filePath){
+         return filePath.substring(0, filePath.lastIndexOf(File.separator));
+    }
+
+    private static String getName(String filePath){
+        return filePath.substring(filePath.lastIndexOf(File.separator) + 1 );
+    }
 
 
 }

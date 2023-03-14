@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.View
 import com.mayunfeng.join.R
 import com.mayunfeng.join.databinding.ItemDrawerNavBinding
+import com.mayunfeng.join.ui.activity.CropActivity
 import com.mayunfeng.join.ui.activity.StartSignActivity
 import com.pikachu.utils.adapter.QuickAdapter
 
@@ -27,7 +28,7 @@ data class MainDrawerItemData(
             arrayListOf<MainDrawerItemData>().apply {
                 add(MainDrawerItemData(0, "", partition = "我的"))
                 add(MainDrawerItemData(R.drawable.ic_drawer_user_sign_start, "当前签到", StartSignActivity::class.java))
-                add(MainDrawerItemData(R.drawable.ic_drawer_user_sign_group, "我创建的组", StartSignActivity::class.java))
+                add(MainDrawerItemData(R.drawable.ic_drawer_user_sign_group, "我创建的组", CropActivity::class.java))
                 add(MainDrawerItemData(R.drawable.ic_drawer_user_sign_add_group, "我加入的组", StartSignActivity::class.java))
                 add(MainDrawerItemData(R.drawable.ic_drawer_user_sign_info, "历史记录", StartSignActivity::class.java))
                 add(MainDrawerItemData(R.drawable.ic_drawer_user_sign_msg, "我的信息", StartSignActivity::class.java))

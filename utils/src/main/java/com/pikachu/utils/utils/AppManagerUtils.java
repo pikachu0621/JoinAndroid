@@ -32,7 +32,7 @@ public final class AppManagerUtils {
      */
     public void addActivity(Activity activity) {
         if (activityStack == null) {
-            activityStack = new Stack<Activity>();
+            activityStack = new Stack<>();
         }
         activityStack.add(activity);
     }
@@ -41,8 +41,7 @@ public final class AppManagerUtils {
      * 获取当前Activity（堆栈中最后一个压入的）
      */
     public Activity currentActivity() {
-        Activity activity = activityStack.lastElement();
-        return activity;
+        return activityStack.lastElement();
     }
 
     /**
@@ -103,6 +102,24 @@ public final class AppManagerUtils {
         }
         activityStack.clear();
     }
+
+    /**
+     * 结束所有Activity  除去activityClass
+     */
+    public void finishAllActivity(Class<? extends Activity>... activityClass) {
+        for (int i = 0, size = activityStack.size(); i < size; i++) {
+            if (null != activityStack.get(i)) {
+                Activity activity = activityStack.get(i);
+                for (Class<? extends Activity> aClass : activityClass) {
+                    if (activity.getClass() != aClass) {
+                        activity.finish();
+                    }
+                }
+            }
+        }
+    }
+
+
 
     /**
      * 退出应用程序

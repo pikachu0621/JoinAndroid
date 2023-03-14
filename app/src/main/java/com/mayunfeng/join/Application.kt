@@ -21,8 +21,12 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
  * @Description:    null
  */
 
-const val BASE_URL = "http://192.168.0.105:8081"
+// http://192.168.0.105:8012
+// http://42.192.221.73:8012
+const val BASE_URL = "http://192.168.0.105:8012"
 const val HTTP_OK = 200
+const val TOKEN_ERROR_KEY = "token"
+const val TOKEN_ERROR_CODE = -201
 
 class Application : Application() {
     override fun onCreate() {

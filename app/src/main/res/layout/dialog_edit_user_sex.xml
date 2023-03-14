@@ -6,7 +6,7 @@
     android:background="@drawable/dr_dialog_bottom_bg"
     android:paddingTop="@dimen/activity_horizontal_margin"
     android:paddingHorizontal="@dimen/activity_horizontal_margin"
-    android:paddingBottom="32dp">
+    android:paddingBottom="80dp">
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatCheckedTextView
         android:id="@+id/ok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

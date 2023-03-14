@@ -21,8 +21,10 @@ import kotlin.reflect.*
  *              onComplete
  */
 abstract class RetrofitObserver<T : Any>(
+    private val retrofitObserverInterface: RtObserverListener<T>,
     private val myJsonStatusProperty: KCallable<Int>,
-    private var myJsonStatusCode: Int = 200
+    private var myJsonStatusCode: Int = 200,
+    private val errorStatusCodeBefore: (code: Int) -> Boolean = { false }   // 处理状态码  true 拦截事件   false 不拦截事件
 ) : Observer<T> {
 
 
@@ -37,7 +39,7 @@ abstract class RetrofitObserver<T : Any>(
      */
     final override fun onSubscribe(d: Disposable) {
         error = false
-        onRetrofitSubscribe(d)
+        retrofitObserverInterface.onRetrofitSubscribe(d)
     }
 
     /**
@@ -49,15 +51,20 @@ abstract class RetrofitObserver<T : Any>(
         val errorCode =
             ReflectionUtils.getAnyValue(t, myJsonStatusProperty.name, Integer::class.java)
         if (errorCode == null || errorCode.toInt() != myJsonStatusCode) {
-            onRetrofitError(
+            error = true
+            var errorCodeBefore = false
+            if (errorCode != null){
+                errorCodeBefore = errorStatusCodeBefore(errorCode.toInt())
+            }
+            retrofitObserverInterface.onRetrofitError(
                 t,
+                errorCodeBefore,
                 Throwable("errorCode == null || errorCode.toInt() != myJsonStatusCode")
             )
-            error = true
             return
         }
         this.t = t
-        onRetrofitNext(t)
+        retrofitObserverInterface.onRetrofitNext(t)
     }
 
     /**
@@ -66,7 +73,7 @@ abstract class RetrofitObserver<T : Any>(
      * @param e
      */
     final override fun onError(e: Throwable) {
-        onRetrofitError(null, e)
+        retrofitObserverInterface.onRetrofitError(null, false, e)
     }
 
     /**
@@ -75,16 +82,6 @@ abstract class RetrofitObserver<T : Any>(
      */
     final override fun onComplete() {
         if (error) return
-        onRetrofitComplete(t)
+        retrofitObserverInterface.onRetrofitComplete(t)
     }
-
-
-    abstract fun onRetrofitSubscribe(d: Disposable)
-
-    abstract fun onRetrofitNext(t: T)
-
-    abstract fun onRetrofitError(t: T?, e: Throwable)
-
-    abstract fun onRetrofitComplete(t: T)
-
 }

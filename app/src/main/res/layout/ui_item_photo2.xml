@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    tools:ignore="ResourceName"
+    android:gravity="center_vertical"
+    android:layout_marginBottom="1dp"
+    android:background="@color/color_bg">
+    <ImageView
+        android:id="@+id/p_9"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:background="@color/color_bg"/>
+
+    <TextView
+        android:id="@+id/p_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="全部图片（66）"
+        android:ellipsize="middle"
+        android:singleLine="true"
+        android:textColor="@color/color_grey1"
+        android:textSize="15sp"
+        android:layout_marginStart="15dp"
+        android:textStyle="bold" />
+</LinearLayout>

@@ -16,6 +16,8 @@ import androidx.annotation.RawRes;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.LazyHeaders;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.RequestOptions;
@@ -85,7 +87,7 @@ public class GlideUtils {
                 return new Into(requestManager.load(string));
             }
             String url = getUrl(s, string);
-            if (token != null && tokenVal != null) url = url+"?"+token+"="+tokenVal;
+            if (token != null && tokenVal != null) url = url+ (url.contains("?") ? "&" : "?" ) +token+"="+tokenVal;
             return new Into(requestManager.load(url));
         }
 
@@ -108,6 +110,19 @@ public class GlideUtils {
 
         public Into load(@Nullable File file){
             return new Into(requestManager.load(file));
+        }
+
+
+        public Into loadHeaderToken(@NonNull String relativeUrl){
+            if (relativeUrl.contains("http://") || relativeUrl.contains("https://")){
+                return new Into(requestManager.load(relativeUrl));
+            }
+            String s = Objects.requireNonNull(baseUrl, "baseUrl == null");
+            String url = getUrl(s, relativeUrl);
+            GlideUrl glideUrl = new GlideUrl(url, new LazyHeaders.Builder()
+                    .addHeader(token, tokenVal)
+                    .build());
+           return  new Into(requestManager.load(glideUrl));
         }
     }
 

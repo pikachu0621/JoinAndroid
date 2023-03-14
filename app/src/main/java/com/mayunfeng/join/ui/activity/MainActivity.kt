@@ -2,10 +2,10 @@ package com.mayunfeng.join.ui.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import com.bumptech.glide.load.model.stream.QMediaStoreUriLoader
 import com.gyf.immersionbar.ImmersionBar
-import com.mayunfeng.join.Application
-import com.mayunfeng.join.BASE_URL
 import com.mayunfeng.join.R
+import com.mayunfeng.join.TOKEN_ERROR_KEY
 import com.mayunfeng.join.adapter.MainDrawerAdapter
 import com.mayunfeng.join.adapter.MainMsgAdapter
 import com.mayunfeng.join.api.UserApi
@@ -18,15 +18,17 @@ import com.mayunfeng.join.dialog.LoadingDialog
 import com.mayunfeng.join.dialog.MsgDialog
 import com.mayunfeng.join.ui.widget.MRecyclerView
 import com.mayunfeng.join.utils.MyRetrofitObserver
+import com.mayunfeng.join.utils.MyRetrofitObserver.Companion.mySubscribeMainThread
 import com.mayunfeng.join.utils.UserUtils
+import com.mayunfeng.join.utils.retrofit.QuickRtObserverListener
 import com.mayunfeng.join.utils.retrofit.RetrofitManager
+import com.mayunfeng.join.utils.retrofit.RetrofitManager.Companion.subscribeMainThread
+import com.mayunfeng.join.utils.retrofit.RetrofitObserver
 import com.pikachu.utils.utils.GlideUtils
 import com.pikachu.utils.utils.NetUtils
 import com.pikachu.utils.utils.TimeUtils
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.functions.Consumer
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 
@@ -40,11 +42,13 @@ enum class UserGrade(
 
 
 @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
-class MainActivity : AppBaseActivity<ActivityMainBinding>() {
+class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
 
     private var mainMsgAdapter: MainMsgAdapter? = null
     private lateinit var loadingDialog: LoadingDialog
     private lateinit var userInfo: UserLoginBean
+
+    private var userApi = RetrofitManager.getInstance().create(UserApi::class.java)
 
 
     override fun setActivityWindowsInfo(isStatusBar: Boolean) {
@@ -72,6 +76,8 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
             finish()
             return
         }
+        // todo 全局数据
+        UserUtils.loginTokenInit(null)
 
         if (!NetUtils.isNetworkConnected(context)) {
             showToast(R.string.dialog_load_title_net_error)
@@ -79,67 +85,56 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
             finish()
             return
         }
+        userApi.sendUserInfo(loginToken).mySubscribeMainThread(this, object : QuickRtObserverListener<BaseBean<UserLoginBean>>{
+            override fun onStart(d: Disposable) {
+                loadingDialog.show()
+            }
 
-        RetrofitManager.getInstance()
-            .create(UserApi::class.java)
-            .userInfo(loginToken)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : MyRetrofitObserver<BaseBean<UserLoginBean>>() {
-                override fun onRetrofitSubscribe(d: Disposable) {
-                    loadingDialog.show()
-                }
+            override fun onError(t: BaseBean<UserLoginBean>?, isHandled: Boolean, e: Throwable) {
+                loadingDialog.dismiss()
+                if (isHandled) return
+                showToast(R.string.login_user_token_failure)
+                LoginActivity.startLoginActivity(this@MainActivity)
+                finish()
+            }
 
-                override fun onRetrofitError(t: BaseBean<UserLoginBean>?, e: Throwable) {
-                    loadingDialog.dismiss()
-                    showToast(R.string.login_user_token_failure)
-                    t?.let {
-                        UserUtils.writeLoginToken("")
-                    }
-                    LoginActivity.startLoginActivity(this@MainActivity)
-                    finish()
-                }
-
-                override fun onRetrofitComplete(t: BaseBean<UserLoginBean>) {
-                    loadingDialog.dismiss()
-                }
-
-                override fun onRetrofitNext(t: BaseBean<UserLoginBean>) {
-                    initUserInfoUi(t)
-                }
-            })
+            override fun onComplete(t: BaseBean<UserLoginBean>) {
+                initUserInfoUi(t.result!!)
+                loadingDialog.dismiss()
+            }
+        })
     }
 
-    // 用户数据
+    override fun onEventBus(event: UserLoginBean, key: Int?, msg: String?) {
+        initUserInfoUi(event)
+    }
 
-    private fun initUserInfoUi(userInfo: BaseBean<UserLoginBean>) {
-
-        val resultUserData = userInfo.result!!
-        this.userInfo = resultUserData
-        GlideUtils.initToken("token", UserUtils.readLoginToken())
+    // 渲染 用户数据
+    private fun initUserInfoUi(userLoginBean: UserLoginBean) {
+        this.userInfo = userLoginBean
 
         // 用户名
-        binding.mainContent.mainUserName.text = resultUserData.userName
-        binding.mainDrawer.tvUserName.text = resultUserData.userName
+        binding.mainContent.mainUserName.text = userLoginBean.userName
+        binding.mainDrawer.tvUserName.text = userLoginBean.userName
 
         // 用户头像
         GlideUtils.with(this)
-            .loadBaseUrl(resultUserData.userImg)
+            .loadHeaderToken(userLoginBean.userImg)
             .into(binding.mainDrawer.QMUIRadiusImageView)
         GlideUtils.with(this)
-            .loadBaseUrl(resultUserData.userImg)
+            .loadHeaderToken(userLoginBean.userImg)
             .into(binding.mainContent.ivBrandReturn)
 
 
         // 性别
-        binding.mainDrawer.tvSex.text = if (resultUserData.userSex)
+        binding.mainDrawer.tvSex.text = if (userLoginBean.userSex)
             getString(R.string.drawer_sex_boy)
         else
             getString(R.string.drawer_sex_girl)
 
         // 性别图标
         binding.mainDrawer.tvSex.setCompoundDrawablesRelative(
-            if (resultUserData.userSex) {
+            if (userLoginBean.userSex) {
                 resources.getDrawable(R.drawable.ic_drawer_me_boy, null)
             } else {
                 resources.getDrawable(R.drawable.ic_drawer_me_girl, null)
@@ -147,7 +142,7 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
         )
 
         // 用户等级
-        binding.mainDrawer.tvAdmin.text = when (resultUserData.userGrade) {
+        binding.mainDrawer.tvAdmin.text = when (userLoginBean.userGrade) {
             UserGrade.RootUser.code -> getString(R.string.login_user_grade_2)
             UserGrade.AdministratorUser.code -> getString(R.string.login_user_grade_1)
             else -> getString(R.string.login_user_grade_0)
@@ -155,7 +150,7 @@ class MainActivity : AppBaseActivity<ActivityMainBinding>() {
 
         // 用户账号
         binding.mainDrawer.tvUserId.text =
-            "${getString(R.string.login_user_id)}${resultUserData.userAccount}"
+            "${getString(R.string.login_user_id)}${userLoginBean.userAccount}"
 
         //....
 

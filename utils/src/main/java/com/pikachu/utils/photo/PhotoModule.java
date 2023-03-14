@@ -14,30 +14,30 @@ public class PhotoModule {
 
     private String path; // 相册路径 全
     private String name; // 相册名字
-    private File file; // 第一张图片
-    private List<File> files; // 相册所有图片
+    private String file; // 第一张图片
+    private List<String> files; // 相册所有图片
 
 
-    public PhotoModule(String path, String name, File file, List<File> files) {
+    public PhotoModule(String path, String name, String file, List<String> files) {
         this.path = path;
         this.name = name;
         this.file = file;
         this.files = files;
     }
 
-    public File getFile() {
+    public String getFile() {
         return file;
     }
 
-    public void setFile(File file) {
+    public void setFile(String file) {
         this.file = file;
     }
 
-    public List<File> getFiles() {
+    public List<String> getFiles() {
         return files;
     }
 
-    public void setFiles(List<File> files) {
+    public void setFiles(List<String> files) {
         this.files = files;
     }
 

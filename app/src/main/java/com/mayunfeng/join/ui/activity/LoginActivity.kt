@@ -8,6 +8,7 @@ import android.view.KeyEvent
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import com.mayunfeng.join.R
+import com.mayunfeng.join.TOKEN_ERROR_KEY
 import com.mayunfeng.join.api.UserApi
 import com.mayunfeng.join.base.AppBaseActivity
 import com.mayunfeng.join.bean.BaseBean
@@ -16,13 +17,18 @@ import com.mayunfeng.join.databinding.ActivityLoginBinding
 import com.mayunfeng.join.dialog.LoadingDialog
 import com.mayunfeng.join.utils.MyRetrofitObserver
 import com.mayunfeng.join.utils.UserUtils
+import com.mayunfeng.join.utils.retrofit.QuickRtObserverListener
 import com.mayunfeng.join.utils.retrofit.RetrofitManager
+import com.mayunfeng.join.utils.retrofit.RetrofitManager.Companion.subscribeMainThread
+import com.mayunfeng.join.utils.retrofit.RetrofitObserver
+import com.pikachu.utils.utils.GlideUtils
 import com.pikachu.utils.utils.NetUtils
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
-class LoginActivity : AppBaseActivity<ActivityLoginBinding>() {
+class LoginActivity : AppBaseActivity<ActivityLoginBinding, UserLoginBean>(), QuickRtObserverListener<BaseBean<UserLoginBean>> {
 
 
 
@@ -125,32 +131,33 @@ class LoginActivity : AppBaseActivity<ActivityLoginBinding>() {
         }
         RetrofitManager.getInstance()
             .create(UserApi::class.java)
-            .login(binding.etUserName.text.toString(), binding.etUserPassword.text.toString())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : MyRetrofitObserver<BaseBean<UserLoginBean>>() {
-                override fun onRetrofitSubscribe(d: Disposable) {
-                    loadingDialog.show()
-                }
-
-                override fun onRetrofitComplete(t: BaseBean<UserLoginBean>) {
-                    loadingDialog.dismiss()
-                    startActivity(MainActivity::class.java)
-                    finishTs()
-                }
-
-                override fun onRetrofitError(t: BaseBean<UserLoginBean>?, e: Throwable) {
-                    loadingDialog.dismiss()
-                    showToast(t?.reason ?: e.message)
-                }
-
-                override fun onRetrofitNext(t: BaseBean<UserLoginBean>) {
-                    val result = t.result!!
-                    UserUtils.writeLoginToken(result.loginToken)
-                    UserUtils.writeUserAccount(result.userAccount)
-                }
-            })
+            .sendLogin(binding.etUserName.text.toString(), binding.etUserPassword.text.toString())
+            .subscribeMainThread(MyRetrofitObserver(this@LoginActivity,this))
     }
+
+
+    override fun onStart(d: Disposable) {
+        loadingDialog.show()
+    }
+
+    override fun onError(t: BaseBean<UserLoginBean>?, isHandled: Boolean, e: Throwable) {
+        loadingDialog.dismiss()
+        if (isHandled) return
+        showToast(t?.reason ?: e.message)
+    }
+
+    override fun onComplete(t: BaseBean<UserLoginBean>) {
+        loadingDialog.dismiss()
+        val result = t.result!!
+        UserUtils.writeUserAccount(result.userAccount)
+        // todo 全局添加 Header
+        UserUtils.loginTokenInit(result.loginToken!!)
+
+        startActivity(MainActivity::class.java)
+        finishTs()
+    }
+
+
 
 
 

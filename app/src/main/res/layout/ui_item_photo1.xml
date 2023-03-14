@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    tools:ignore="ResourceName">
+
+    <ImageView
+        android:id="@+id/p_7"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@color/color_bg" />
+
+
+
+
+    <TextView
+        android:id="@+id/p_8_2"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="4dp"
+        android:ellipsize="middle"
+        android:singleLine="true"
+        android:text="@string/app_name"
+        android:textSize="12sp"
+        android:visibility="gone"/>
+
+    <View
+        android:id="@+id/p_8_1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone" />
+
+    <RadioButton
+        android:id="@+id/p_8"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/sr_photo_item"
+        android:button="@null"
+        android:checked="false"
+        android:clickable="false" />
+
+
+</RelativeLayout>

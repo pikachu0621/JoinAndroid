@@ -6,7 +6,7 @@
     android:background="@drawable/dr_dialog_bottom_bg"
     android:paddingTop="@dimen/activity_horizontal_margin"
     android:paddingHorizontal="@dimen/activity_horizontal_margin"
-    android:paddingBottom="32dp">
+    android:paddingBottom="80dp">
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -53,7 +53,6 @@
             android:background="@drawable/dr_dialog_edit_view_bg"
             android:hint="@string/login_name"
             android:lines="1"
-            android:maxLength="12"
             android:paddingHorizontal="10dp"
             android:textColorHint="@color/color_grey3"
             android:textSize="14sp"

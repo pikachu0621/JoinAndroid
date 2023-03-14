@@ -12,6 +12,7 @@ import com.mayunfeng.join.R
 import com.mayunfeng.join.databinding.DialogEditUserInfoBinding
 import com.mayunfeng.join.databinding.DialogEditUserSexBinding
 import com.pikachu.utils.base.BaseBottomSheetDialog
+import com.pikachu.utils.utils.NetUtils
 import com.pikachu.utils.utils.OtherUtils
 import com.pikachu.utils.utils.ToastUtils
 
@@ -33,21 +34,23 @@ class EditInfoDialog(
     context: Context,
     private val title: String,
     private val hint: String,
+    private val defaultData: String,
     private val maxLength: Int,
     private val eType: EditUserInfoDialogType = EditUserInfoDialogType.DEF,
     private val clickOk: (dialog: EditInfoDialog, value1: String, value2: String) -> Boolean = { _, _, _-> false }
 ) : BaseBottomSheetDialog<DialogEditUserInfoBinding>(context) {
 
     override fun onViewCreate(binding: DialogEditUserInfoBinding) {
+        binding.etUserName.filters = arrayOf(InputFilter.LengthFilter(maxLength))
         binding.title.text = title
         binding.etUserName.hint = hint
-        binding.etUserName.filters = arrayOf(InputFilter.LengthFilter(maxLength))
+
 
         binding.etUserName.addTextChangedListener {
             binding.ctvPws.isChecked = if (EditUserInfoDialogType.PASSWORD == eType) {
                 (!binding.etUserName.text.isNullOrEmpty() && !binding.etUserPassword.text.isNullOrEmpty())
             } else {
-                !binding.etUserName.text.isNullOrEmpty()
+                !binding.etUserName.text.isNullOrEmpty() && defaultData != binding.etUserName.text.toString()
             }
             binding.ctvPws.isClickable = binding.ctvPws.isChecked
             binding.imgDel1.visibility = if (!binding.etUserName.text.isNullOrEmpty()) {
@@ -60,10 +63,11 @@ class EditInfoDialog(
         if (eType == EditUserInfoDialogType.HIGH) {
 
             binding.etUserName.maxLines = 4
+            binding.etUserName.setLines(4)
             binding.etUserName.gravity = Gravity.TOP
 
         } else if (eType == EditUserInfoDialogType.PASSWORD) {
-
+            binding.etUserName.setText("")
             binding.edVal2.visibility = View.VISIBLE
             binding.etUserPassword.addTextChangedListener {
                 binding.ctvPws.isChecked =
@@ -86,6 +90,10 @@ class EditInfoDialog(
         }
 
         binding.ctvPws.setOnClickListener {
+            if (!NetUtils.isNetworkConnected(context)) {
+                ToastUtils.showToast(context.getString(R.string.dialog_load_title_net_error))
+                return@setOnClickListener
+            }
             if (clickOk(this,
                     binding.etUserName.text.toString(),
                     binding.etUserPassword.text.toString())) {
@@ -94,12 +102,14 @@ class EditInfoDialog(
         }
         binding.ctvPws.isChecked = false
         binding.ctvPws.isClickable = false
+        binding.etUserName.setText(defaultData)
     }
 
 
     override fun show() {
         super.show()
         OtherUtils.showSoftInputFromWindow(binding.etUserName)
+        binding.etUserName.setSelection(binding.etUserName.length())
     }
 }
 
@@ -115,6 +125,7 @@ class EditSexDialog(
 ) : BaseBottomSheetDialog<DialogEditUserSexBinding>(context) {
 
     override fun onViewCreate(binding: DialogEditUserSexBinding) {
+        val dfIsBoy = isBoy
 
         val boy0 = getGreyImg(context, R.drawable.ic_edit_dialog_sex_boy, 0F)
         val boy1 = getGreyImg(context, R.drawable.ic_edit_dialog_sex_boy, 1F)
@@ -131,19 +142,29 @@ class EditSexDialog(
             binding.girl.setImageDrawable(girl0)
             binding.boy.setImageDrawable(boy1)
             isBoy = true
+            binding.ok.isChecked = isBoy != dfIsBoy
+            binding.ok.isClickable = isBoy != dfIsBoy
         }
 
         binding.girl.setOnClickListener {
             binding.boy.setImageDrawable(boy0)
             binding.girl.setImageDrawable(girl1)
             isBoy = false
+            binding.ok.isChecked = isBoy != dfIsBoy
+            binding.ok.isClickable = isBoy != dfIsBoy
         }
 
         binding.ok.setOnClickListener {
+            if (!NetUtils.isNetworkConnected(context)) {
+                ToastUtils.showToast(context.getString(R.string.dialog_load_title_net_error))
+                return@setOnClickListener
+            }
             if (clickOk(this, isBoy)) {
                 dismiss()
             }
         }
+        binding.ok.isChecked = false
+        binding.ok.isClickable = false
     }
 
 
@@ -155,7 +176,7 @@ class EditSexDialog(
             setSaturation(sat)
         }
         dr.colorFilter = ColorMatrixColorFilter(matrix)
-        return dr;
+        return dr
     }
 
 

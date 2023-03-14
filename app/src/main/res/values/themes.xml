@@ -54,4 +54,12 @@
         <item name="android:paddingStart">@dimen/activity_horizontal_margin</item>
         <item name="android:paddingEnd">@dimen/activity_horizontal_margin</item>
     </style>
+
+
+    <style name="BackImage">
+        <item name="android:layout_width">?actionBarSize</item>item>
+        <item name="android:layout_height">?actionBarSize</item>item>
+        <item name="android:scaleType">center</item>
+        <item name="android:src">@drawable/ic_app_back</item>
+    </style>
 </resources>
