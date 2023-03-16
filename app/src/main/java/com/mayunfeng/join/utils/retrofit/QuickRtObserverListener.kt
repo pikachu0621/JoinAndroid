@@ -19,16 +19,29 @@ interface QuickRtObserverListener<T> : RtObserverListener<T> {
         onComplete(t)
     }
 
-    override  fun onRetrofitError(t: T?, isHandled: Boolean, e: Throwable){
-        onError(t, isHandled, e)
+    override  fun onRetrofitError(t: T?, e: Throwable){
+        onError(t, e)
     }
 
-    override fun onRetrofitComplete(t: T){ }
+    override fun onRetrofitComplete(t: T){}
 
 
-    fun onStart(d: Disposable)
+    /**
+     * 开始时
+     */
+    fun onStart(d: Disposable){
 
+    }
+
+    /**
+     * 完成时
+     */
     fun onComplete(t: T)
 
-    fun onError(t: T?, isHandled: Boolean, e: Throwable)
+    /**
+     * 失败时
+     */
+    fun onError(t: T?, e: Throwable){
+
+    }
 }

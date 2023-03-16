@@ -39,7 +39,7 @@
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:text="@string/test_2"
         android:ellipsize="end"
-        android:maxLines="1"
+        android:singleLine="true"
         android:maxLength="14"
         android:textColor="@color/color_grey1"
         android:textSize="14sp"

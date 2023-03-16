@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:windowSoftInputMode="adjustResize"
+    android:windowIsFloating="false"
+    tools:context=".ui.activity.CreateGroupActivity">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/color_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/app_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/app_back" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/app_back"
+        android:layout_width="?actionBarSize"
+        android:layout_height="?actionBarSize"
+        android:scaleType="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_app_back" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/activity_title_create_group"
+        android:textColor="@color/color_grey1"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/app_back"
+        app:layout_constraintStart_toEndOf="@+id/app_back"
+        app:layout_constraintTop_toTopOf="@+id/app_back" />
+
+
+
+
+    <androidx.appcompat.widget.AppCompatCheckedTextView
+        android:id="@+id/ok"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:checked="false"
+        android:gravity="center"
+        android:text="@string/dialog_msg_complete"
+        android:textAlignment="center"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:textColor="@color/sr_text_ok"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/app_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/app_back" />
+
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/smartRefreshLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/color_bg_secondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_back"
+        app:srlEnableLoadMore="false"
+        app:srlEnableOverScrollBounce="true"
+        app:srlEnableOverScrollDrag="true"
+        app:srlEnableRefresh="false">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <com.pikachu.utils.view.QMUIRadiusImageView
+                    android:id="@+id/group_image"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="30dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:qmui_is_circle="true" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/group_image_mask"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/dr_create_add_image_bg"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_create_add_image"
+                    app:layout_constraintBottom_toBottomOf="@+id/group_image"
+                    app:layout_constraintEnd_toEndOf="@+id/group_image"
+                    app:layout_constraintStart_toStartOf="@+id/group_image"
+                    app:layout_constraintTop_toTopOf="@+id/group_image" />
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/dr_dialog_load_bg"
+                    android:orientation="vertical"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    android:windowSoftInputMode="adjustResize"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/group_image">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/MeSettingText"
+                        android:text="@string/create_group_name"
+                        android:textStyle="bold" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/ed_val"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/title">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/group_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/dr_dialog_edit_view_bg"
+                            android:hint="@string/create_group_name_input"
+                            android:lines="1"
+                            android:maxLength="12"
+                            android:minHeight="50dp"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="15dp"
+                            android:textColorHint="@color/color_grey3"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_del_1"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:padding="15dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="@+id/group_name"
+                            app:layout_constraintTop_toTopOf="@+id/group_name"
+                            app:srcCompat="@drawable/ic_login_edit_delete" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/dr_dialog_load_bg"
+                    android:orientation="vertical"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/name">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/MeSettingText"
+                        android:text="@string/create_group_type"
+                        android:textStyle="bold" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_marginTop="10dp"
+                        android:id="@+id/classList"
+                        android:scrollbars="none"
+                        android:overScrollMode="never"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:listitem="@layout/item_create_group_type"
+                        tools:itemCount="7"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:spanCount="3"/>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/introduce"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                    android:background="@drawable/dr_dialog_load_bg"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    android:windowSoftInputMode="adjustResize"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/type">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/MeSettingText"
+                        android:text="@string/create_group_introduce"
+                        android:textStyle="bold" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/title">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:fillViewport="true"
+                            android:id="@+id/group_introduce"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/dr_dialog_edit_view_bg"
+                            android:hint="@string/create_group_introduce_input"
+                            android:lines="4"
+                            android:gravity="start"
+                            android:maxLength="100"
+                            android:minHeight="50dp"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="15dp"
+                            android:textColorHint="@color/color_grey3"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_del_2"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:padding="15dp"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="@+id/group_introduce"
+                            app:layout_constraintTop_toTopOf="@+id/group_introduce"
+                            app:srcCompat="@drawable/ic_login_edit_delete" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:background="@drawable/dw_main_gradient_dow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_back" />
+</androidx.constraintlayout.widget.ConstraintLayout>

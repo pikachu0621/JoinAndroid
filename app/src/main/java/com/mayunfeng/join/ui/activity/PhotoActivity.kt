@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -13,8 +14,12 @@ import android.view.View
 import android.view.animation.DecelerateInterpolator
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mayunfeng.join.adapter.PhotoRecycler1Adapter
-import com.mayunfeng.join.adapter.PhotoRecycler2Adapter
+import com.hjq.permissions.OnPermissionCallback
+import com.hjq.permissions.Permission
+import com.hjq.permissions.XXPermissions
+import com.mayunfeng.join.R
+import com.mayunfeng.join.ui.adapter.PhotoRecycler1Adapter
+import com.mayunfeng.join.ui.adapter.PhotoRecycler2Adapter
 import com.mayunfeng.join.base.AppBaseActivity
 import com.mayunfeng.join.databinding.ActivityPhotoBinding
 import com.mayunfeng.join.databinding.UiItemPhoto2Binding
@@ -49,13 +54,13 @@ class PhotoActivity : AppBaseActivity<ActivityPhotoBinding, Serializable>(),
                     has!!.clear()
                 }
                 photoChooseListener!!.onChooseClick(has, 0)
-                finish()
+                finishTs()
             }
         }
         binding.top5.setOnClickListener {
             if (photoChooseListener != null) {
                 photoChooseListener!!.onChooseClick(has, num)
-                finish()
+                finishTs()
             }
         }
         photoRecycler1Adapter = PhotoRecycler1Adapter(null, type, this, this)
@@ -69,7 +74,8 @@ class PhotoActivity : AppBaseActivity<ActivityPhotoBinding, Serializable>(),
         photoRecycler1Adapter!!.setMaxNum(maxNum)
         binding.top3.text = "全部" + GetPhotoUtils.getTypeStr()
         binding.p61.text = "没有" + GetPhotoUtils.getTypeStr()
-        readPhoto()
+        permissions()
+        // readPhoto()
     }
 
     private fun readPhoto() {
@@ -175,16 +181,44 @@ class PhotoActivity : AppBaseActivity<ActivityPhotoBinding, Serializable>(),
                     has!!.clear()
                 }
                 photoChooseListener!!.onChooseClick(has, 0)
-                finish()
+                finishTs()
             }
         }
         return super.onKeyDown(keyCode, event)
     }
 
+    private fun finishTs(){
+        finish()
+        overridePendingTransition(R.anim.aty_ont, R.anim.aty_out)
+    }
+
     override fun onRestart() {
         super.onRestart()
-        readPhoto()
+        if (XXPermissions.isGranted(context, Permission.WRITE_EXTERNAL_STORAGE)) {
+            readPhoto()
+        }
     }
+
+
+
+    private fun permissions(){
+        XXPermissions.with(this)
+            .permission(Permission.WRITE_EXTERNAL_STORAGE)
+            .request(object : OnPermissionCallback {
+                override fun onGranted(permissions: MutableList<String>, allGranted: Boolean) {
+                    readPhoto()
+                }
+                override fun onDenied(permissions: MutableList<String>, doNotAskAgain: Boolean) {
+                    if (doNotAskAgain) {
+                        XXPermissions.startPermissionActivity(context, permissions)
+                        showToast("已被被永久拒绝授权，请手动授予")
+                        return
+                    }
+                    showToast("权限失败")
+                }
+            })
+    }
+
 
     companion object {
         private var photoChooseListener: PhotoChooseListener? = null
@@ -262,6 +296,9 @@ class PhotoActivity : AppBaseActivity<ActivityPhotoBinding, Serializable>(),
             Companion.maxW = maxW
             borderW = borderWDp
             context.startActivity(Intent(context, PhotoActivity::class.java))
+            if (context is Activity) {
+                context.overridePendingTransition(R.anim.aty_in, R.anim.aty_ont)
+            }
         }
     }
 }

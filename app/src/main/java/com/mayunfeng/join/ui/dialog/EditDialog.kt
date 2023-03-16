@@ -1,4 +1,4 @@
-package com.mayunfeng.join.dialog
+package com.mayunfeng.join.ui.dialog
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -8,13 +8,19 @@ import android.text.InputFilter
 import android.view.Gravity
 import android.view.View
 import androidx.core.widget.addTextChangedListener
+import com.github.gzuliyujiang.wheelpicker.annotation.DateMode
+import com.github.gzuliyujiang.wheelpicker.entity.DateEntity
 import com.mayunfeng.join.R
+import com.mayunfeng.join.databinding.DialogEditUserAgeBinding
 import com.mayunfeng.join.databinding.DialogEditUserInfoBinding
 import com.mayunfeng.join.databinding.DialogEditUserSexBinding
 import com.pikachu.utils.base.BaseBottomSheetDialog
 import com.pikachu.utils.utils.NetUtils
 import com.pikachu.utils.utils.OtherUtils
 import com.pikachu.utils.utils.ToastUtils
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 /**
  *
@@ -24,7 +30,7 @@ import com.pikachu.utils.utils.ToastUtils
  * @Description:    null
  */
 enum class EditUserInfoDialogType(
-    val type: Int
+    val type: Int,
 ) {
     DEF(1), HIGH(2), PASSWORD(3)
 }
@@ -37,7 +43,7 @@ class EditInfoDialog(
     private val defaultData: String,
     private val maxLength: Int,
     private val eType: EditUserInfoDialogType = EditUserInfoDialogType.DEF,
-    private val clickOk: (dialog: EditInfoDialog, value1: String, value2: String) -> Boolean = { _, _, _-> false }
+    private val clickOk: (dialog: EditInfoDialog, value1: String, value2: String) -> Boolean = { _, _, _ -> false },
 ) : BaseBottomSheetDialog<DialogEditUserInfoBinding>(context) {
 
     override fun onViewCreate(binding: DialogEditUserInfoBinding) {
@@ -94,9 +100,12 @@ class EditInfoDialog(
                 ToastUtils.showToast(context.getString(R.string.dialog_load_title_net_error))
                 return@setOnClickListener
             }
-            if (clickOk(this,
+            if (clickOk(
+                    this,
                     binding.etUserName.text.toString(),
-                    binding.etUserPassword.text.toString())) {
+                    binding.etUserPassword.text.toString()
+                )
+            ) {
                 dismiss()
             }
         }
@@ -114,14 +123,10 @@ class EditInfoDialog(
 }
 
 
-
-
-
-
 class EditSexDialog(
     context: Context,
     private var isBoy: Boolean,
-    private val clickOk: (dialog: EditSexDialog, isBoy: Boolean) -> Boolean = {_,_-> false }
+    private val clickOk: (dialog: EditSexDialog, isBoy: Boolean) -> Boolean = { _, _ -> false },
 ) : BaseBottomSheetDialog<DialogEditUserSexBinding>(context) {
 
     override fun onViewCreate(binding: DialogEditUserSexBinding) {
@@ -179,5 +184,74 @@ class EditSexDialog(
         return dr
     }
 
+
+}
+
+
+class EditAgeDialog(
+    context: Context,
+    private var birth: String,
+    private val clickOk: (dialog: EditAgeDialog, isBoy: String) -> Boolean = { _, _ -> false },
+) : BaseBottomSheetDialog<DialogEditUserAgeBinding>(context) {
+
+
+    private val startData = DateEntity.target(1901, 2, 1)
+    private val endData = DateEntity.today()
+    private var selectedDate = DateEntity.today()
+
+    override fun onViewCreate(binding: DialogEditUserAgeBinding) {
+        val typeface = Typeface.defaultFromStyle(Typeface.BOLD)
+        val color = context.resources.getColor(R.color.color_grey1)
+        binding.dateWheelLayout.yearLabelView.setTextColor(color)
+        binding.dateWheelLayout.yearLabelView.typeface = typeface
+        binding.dateWheelLayout.monthLabelView.setTextColor(color)
+        binding.dateWheelLayout.monthLabelView.typeface = typeface
+        binding.dateWheelLayout.dayLabelView.setTextColor(color)
+        binding.dateWheelLayout.dayLabelView.typeface = typeface
+        binding.dateWheelLayout.setDateMode(DateMode.YEAR_MONTH_DAY)
+        binding.dateWheelLayout.setDateLabel("年", "月", "日")
+        selectedDate = setSelectedDate(birth)
+        binding.dateWheelLayout.setOnDateSelectedListener { year, month, day ->
+            binding.ok.isChecked = selectedDate.day != day || selectedDate.month != month || selectedDate.year != year
+            binding.ok.isClickable = binding.ok.isChecked
+        }
+
+        binding.ok.setOnClickListener {
+            val year = binding.dateWheelLayout.selectedYear
+            val month = binding.dateWheelLayout.selectedMonth
+            val day = binding.dateWheelLayout.selectedDay
+            if (!NetUtils.isNetworkConnected(context)) {
+                ToastUtils.showToast(context.getString(R.string.dialog_load_title_net_error))
+                return@setOnClickListener
+            }
+            if (clickOk(this,
+                    "$year-${
+                        if(month<= 9) "0" else ""
+                    }$month-${
+                        if(day<= 9) "0" else ""
+                    }$day")) {
+                dismiss()
+            }
+        }
+    }
+
+   private fun setSelectedDate(date: String, pattern: String = "yyyy-MM-dd"): DateEntity {
+        val simpleDateFormat = SimpleDateFormat(pattern,  Locale.SIMPLIFIED_CHINESE)
+        var parse: Date?
+        try {
+            parse = simpleDateFormat.parse(date)
+            if (parse == null) parse = Date()
+        } catch (e: Exception) {
+            parse = Date()
+            e.printStackTrace()
+        }
+         return DateEntity.target(parse)
+    }
+
+
+    override fun show() {
+        super.show()
+        binding.dateWheelLayout.setRange(this.startData, this.endData, this.selectedDate)
+    }
 
 }

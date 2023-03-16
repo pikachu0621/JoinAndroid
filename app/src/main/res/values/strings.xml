@@ -1,12 +1,11 @@
 <resources>
     <string name="app_name">考勤记录管理系统</string>
-    <string name="main_index">控制台</string>
-    <string name="main_app">数据管理</string>
-    <string name="main_me">管理员</string>
 
 
     <!--activity-->
     <string name="activity_title_edit_user">编辑资料</string>
+    <string name="activity_title_create_group">创建组</string>
+    <string name="activity_title_my_create_group">我创的建组</string>
 
 
     <!-- login -->
@@ -56,6 +55,7 @@
     <string name="main_list_item_join">加</string>
     <string name="main_list_item_sign">签</string>
 
+
     <!--StartSignActivity-->
     <string name="main_start_sign_nul">当前没有签到任务哦</string>
 
@@ -64,6 +64,7 @@
     <string name="edit_user_info_name">姓名</string>
     <string name="edit_user_info_sex">性别</string>
     <string name="edit_user_info_age">年龄</string>
+    <string name="edit_user_info_birth">出生日期</string>
     <string name="edit_user_info_introduce">个性签名</string>
     <string name="edit_user_info_introduce_vice">点击编辑</string>
     <string name="edit_user_info_unit">所属单位/学校</string>
@@ -74,12 +75,24 @@
     <!--PhotoActivity-->
     <string name="photo_title">全部图片</string>
     <string name="photo_nul">没有图片</string>
+    <string name="photo_crop">图片裁剪</string>
+    <string name="photo_choose_nul">未选图片</string>
+    <string name="photo_crop_error">裁剪失败</string>
 
+
+    <!--activity_create_group-->
+    <string name="create_group_name">组名</string>
+    <string name="create_group_name_input">给组起个好听的名字吧</string>
+    <string name="create_group_introduce">组介绍</string>
+    <string name="create_group_introduce_input">添加介绍更方便组员了解本组用途哦！</string>
+    <string name="create_group_type">组类型</string>
+    <string name="create_group_error">失败</string>
+    <string name="create_group_create_error">创建失败</string>
 
     <!--dialog -->
-    <string name="dialog_load_title">加载中...</string>
-    <string name="dialog_load_title_login">登录中...</string>
-    <string name="dialog_load_title_modify">修改中...</string>
+    <string name="dialog_load_title">加载中…</string>
+    <string name="dialog_load_title_login">登录中…</string>
+    <string name="dialog_load_title_modify">修改中…</string>
     <string name="dialog_load_title_net_error">网络异常！</string>
     <string name="dialog_msg_cancel">取消</string>
     <string name="dialog_msg_confirm">确认</string>
@@ -91,6 +104,7 @@
     <string name="dialog_edit_input">请输入</string>
     <string name="dialog_edit_sex_title">修改性别</string>
     <string name="dialog_edit_age_title">修改年龄</string>
+    <string name="dialog_edit_birth_title">修改出生日期</string>
     <string name="dialog_edit_nul">不能为空</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -107,6 +121,7 @@
     <string name="test_10">新乡学院</string>
     <string name="test_11">2023-03-10 21:16:45</string>
     <string name="test_12">valuable@136.com</string>
+    <string name="test_13">100人</string>
 
 
 </resources>

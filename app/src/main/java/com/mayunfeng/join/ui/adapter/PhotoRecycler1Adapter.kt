@@ -1,4 +1,4 @@
-package com.mayunfeng.join.adapter
+package com.mayunfeng.join.ui.adapter
 
 import android.app.Activity
 import android.graphics.drawable.Drawable

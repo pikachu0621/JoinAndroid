@@ -11,7 +11,10 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import androidx.annotation.IntDef;
+import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -52,16 +55,16 @@ public final class FileUtils {
         return sb.toString();
     }
 
-    public static String readFileString(String filePath){
+    public static String readFileString(String filePath) {
         try {
-          return readFileAsString(new File(filePath));
+            return readFileAsString(new File(filePath));
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public static String readFileString(File file){
+    public static String readFileString(File file) {
         try {
             return readFileAsString(file);
         } catch (IOException e) {
@@ -69,7 +72,6 @@ public final class FileUtils {
             return null;
         }
     }
-
 
 
     /**
@@ -93,7 +95,6 @@ public final class FileUtils {
             }
         }
     }
-
 
 
     /**
@@ -157,10 +158,13 @@ public final class FileUtils {
 
 
     // 保存图片
-    public static File saveImage(@NonNull File file, @NonNull Bitmap bmp) {
+    public static File saveImage(@NonNull File file, @NonNull Bitmap bmp, @IntRange(from = 0, to = 100) int quality, @Nullable Bitmap.CompressFormat type) {
         try {
             FileOutputStream fos = new FileOutputStream(file);
-            bmp.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            if (type == null) {
+                type = Bitmap.CompressFormat.PNG;
+            }
+            bmp.compress(type, quality, fos);
             fos.flush();
             fos.close();
         } catch (IOException e) {
@@ -169,8 +173,8 @@ public final class FileUtils {
         return file;
     }
 
-    public static File saveImage(@NonNull String path, @NonNull Bitmap bmp) {
-        return saveImage(new File(path), bmp);
+    public static File saveImage(@NonNull String path, @NonNull Bitmap bmp, @IntRange(from = 0, to = 100) int quality, @Nullable Bitmap.CompressFormat type) {
+        return saveImage(new File(path), bmp, quality, type);
     }
 
 

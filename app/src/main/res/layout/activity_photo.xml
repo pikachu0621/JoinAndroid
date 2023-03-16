@@ -16,9 +16,12 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/app_back"
-            style="@style/BackImage"
+            android:layout_width="?actionBarSize"
+            android:layout_height="?actionBarSize"
+            android:padding="14dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_drawer_back" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/top_3"
@@ -60,7 +63,7 @@
             android:layout_marginEnd="@dimen/activity_horizontal_margin"
             android:textColor="@color/color_bg"
             android:textStyle="bold"
-            android:textSize="14sp"
+            android:textSize="13sp"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -106,7 +109,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:srlEnableLoadMore="false"
-            android:layout_marginBottom="80dp"
             app:srlEnableOverScrollBounce="true"
             app:srlEnableOverScrollDrag="true"
             app:srlEnableRefresh="false">

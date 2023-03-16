@@ -4,14 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/dr_dialog_bottom_bg"
-    android:paddingTop="@dimen/activity_horizontal_margin"
     android:paddingHorizontal="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_horizontal_margin"
     android:paddingBottom="32dp">
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login_name_welcome"
+        android:text="@string/dialog_edit_birth_title"
         android:textColor="@color/color_grey1"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -19,8 +20,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/ctv_pws"
+    <androidx.appcompat.widget.AppCompatCheckedTextView
+        android:id="@+id/ok"
         android:layout_width="46dp"
         android:layout_height="46dp"
         android:checked="false"
@@ -34,47 +35,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/title" />
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ed_val"
-        android:layout_width="0dp"
+    <com.github.gzuliyujiang.wheelpicker.widget.DateWheelLayout
+        android:id="@+id/dateWheelLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title">
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_user_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingVertical="15dp"
-            android:background="@drawable/dr_dialog_edit_view_bg"
-            android:hint="@string/login_name"
-            android:lines="1"
-            android:maxLength="12"
-            android:paddingHorizontal="5dp"
-            android:textColorHint="@color/color_grey3"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/img_del_1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:padding="15dp"
-            app:layout_constraintEnd_toEndOf="@+id/et_user_name"
-            app:layout_constraintTop_toTopOf="@+id/et_user_name"
-            app:srcCompat="@drawable/ic_login_edit_delete" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:wheel_indicatorSize="0dp"
+        app:wheel_itemSpace="46dp"
+        app:wheel_itemTextBoldSelected="true"
+        app:wheel_itemTextColor="@color/color_grey2"
+        app:wheel_itemTextColorSelected="@color/color_principal"
+        app:wheel_itemTextSize="14sp"
+        app:wheel_itemTextSizeSelected="18sp"
+        app:wheel_visibleItemCount="3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

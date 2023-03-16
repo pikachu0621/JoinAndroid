@@ -123,12 +123,9 @@ public class LikeQQCropView extends View {
 
     public LikeQQCropView setRadius(float radius) {
         this.radius = radius;
-        post(new Runnable() {
-            @Override
-            public void run() {
-                refreshPath();
-                invalidate();
-            }
+        post(() -> {
+            refreshPath();
+            invalidate();
         });
 
         return this;
@@ -393,7 +390,7 @@ public class LikeQQCropView extends View {
 
     /*裁剪*/
     public Bitmap clip(){
-        if(sizeChanged==false){
+        if(!sizeChanged){
             return null;
         }
         Paint paint=new Paint(Paint.ANTI_ALIAS_FLAG);

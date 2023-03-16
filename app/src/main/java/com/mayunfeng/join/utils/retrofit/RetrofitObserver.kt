@@ -24,12 +24,14 @@ abstract class RetrofitObserver<T : Any>(
     private val retrofitObserverInterface: RtObserverListener<T>,
     private val myJsonStatusProperty: KCallable<Int>,
     private var myJsonStatusCode: Int = 200,
-    private val errorStatusCodeBefore: (code: Int) -> Boolean = { false }   // 处理状态码  true 拦截事件   false 不拦截事件
+    private val retrofitInterceptor: RetrofitInterceptor<T>? = null
 ) : Observer<T> {
 
 
     private var error = false
     private lateinit var t: T
+
+
 
     /**
      * 开始订阅时
@@ -39,6 +41,7 @@ abstract class RetrofitObserver<T : Any>(
      */
     final override fun onSubscribe(d: Disposable) {
         error = false
+        if (retrofitInterceptor?.onRetrofitSubscribe(d) == true) return
         retrofitObserverInterface.onRetrofitSubscribe(d)
     }
 
@@ -48,22 +51,16 @@ abstract class RetrofitObserver<T : Any>(
      * @param t
      */
     final override fun onNext(t: T) {
-        val errorCode =
-            ReflectionUtils.getAnyValue(t, myJsonStatusProperty.name, Integer::class.java)
+        val errorCode = ReflectionUtils.getAnyValue(t, myJsonStatusProperty.name, Integer::class.java)
         if (errorCode == null || errorCode.toInt() != myJsonStatusCode) {
             error = true
-            var errorCodeBefore = false
-            if (errorCode != null){
-                errorCodeBefore = errorStatusCodeBefore(errorCode.toInt())
-            }
-            retrofitObserverInterface.onRetrofitError(
-                t,
-                errorCodeBefore,
-                Throwable("errorCode == null || errorCode.toInt() != myJsonStatusCode")
-            )
+            val throwable = Throwable("errorCode == null || errorCode.toInt() != myJsonStatusCode")
+            if (retrofitInterceptor?.onRetrofitCode(errorCode?.toInt()) == true) return
+            retrofitObserverInterface.onRetrofitError(t, throwable)
             return
         }
         this.t = t
+        if (retrofitInterceptor?.onRetrofitNext(t) == true) return
         retrofitObserverInterface.onRetrofitNext(t)
     }
 
@@ -73,7 +70,8 @@ abstract class RetrofitObserver<T : Any>(
      * @param e
      */
     final override fun onError(e: Throwable) {
-        retrofitObserverInterface.onRetrofitError(null, false, e)
+        if (retrofitInterceptor?.onRetrofitError(t, e) == true) return
+        retrofitObserverInterface.onRetrofitError(null, e)
     }
 
     /**
@@ -82,6 +80,7 @@ abstract class RetrofitObserver<T : Any>(
      */
     final override fun onComplete() {
         if (error) return
+        if (retrofitInterceptor?.onRetrofitComplete(t) == true) return
         retrofitObserverInterface.onRetrofitComplete(t)
     }
 }

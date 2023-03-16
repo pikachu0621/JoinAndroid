@@ -15,7 +15,7 @@ interface RtObserverListener<T> {
 
     fun onRetrofitNext(t: T)
 
-    fun onRetrofitError(t: T?, isHandled: Boolean, e: Throwable)
+    fun onRetrofitError(t: T?, e: Throwable)
 
     fun onRetrofitComplete(t: T)
 

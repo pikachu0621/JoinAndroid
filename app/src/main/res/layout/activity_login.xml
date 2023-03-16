@@ -9,9 +9,12 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/app_back"
-        style="@style/BackImage"
+        android:layout_width="?actionBarSize"
+        android:layout_height="?actionBarSize"
+        android:padding="14dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_drawer_back" />
 
 
     <androidx.appcompat.widget.AppCompatTextView

@@ -5,12 +5,79 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.activity.CropActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/r_1"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/color_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/app_back"
+            android:layout_width="?actionBarSize"
+            android:layout_height="?actionBarSize"
+            android:padding="14dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_drawer_back" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/top_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="middle"
+            android:maxWidth="150dp"
+            android:singleLine="true"
+            android:text="@string/photo_crop"
+            android:textColor="@color/color_grey1"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/top_5"
+            android:layout_width="?actionBarSize"
+            android:layout_height="?actionBarSize"
+            android:padding="13dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_app_complete" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     <com.pikachu.utils.photo.LikeQQCropView
         android:id="@+id/likeView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/white" />
+        android:background="@color/color_bg"
+        app:borderColor="@color/color_bg"
+        app:bgColor="@android:color/transparent"
+        app:maxScale="6"
+        app:radius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/r_1" />
 
 
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_below="@+id/r_1"
+        android:background="@drawable/dw_main_gradient_dow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/r_1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

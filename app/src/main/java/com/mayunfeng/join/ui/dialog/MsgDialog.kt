@@ -1,4 +1,4 @@
-package com.mayunfeng.join.dialog
+package com.mayunfeng.join.ui.dialog
 
 import android.content.Context
 import com.mayunfeng.join.bean.BaseBean

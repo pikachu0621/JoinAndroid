@@ -9,6 +9,7 @@ data class UserLoginBean(
     var loginToken: String?,
     var userAccount: String,
     var userAge: Int,
+    var userBirth: String,
     var userGrade: Int,
     var userImg: String,
     var userIntroduce: String,

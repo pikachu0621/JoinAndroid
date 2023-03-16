@@ -2,34 +2,27 @@ package com.mayunfeng.join.ui.activity
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import com.bumptech.glide.load.model.stream.QMediaStoreUriLoader
 import com.gyf.immersionbar.ImmersionBar
 import com.mayunfeng.join.R
-import com.mayunfeng.join.TOKEN_ERROR_KEY
-import com.mayunfeng.join.adapter.MainDrawerAdapter
-import com.mayunfeng.join.adapter.MainMsgAdapter
+import com.mayunfeng.join.ui.adapter.MainDrawerAdapter
+import com.mayunfeng.join.ui.adapter.MainMsgAdapter
 import com.mayunfeng.join.api.UserApi
 import com.mayunfeng.join.base.AppBaseActivity
 import com.mayunfeng.join.bean.BaseBean
 import com.mayunfeng.join.bean.MainMsgBean
 import com.mayunfeng.join.bean.UserLoginBean
 import com.mayunfeng.join.databinding.ActivityMainBinding
-import com.mayunfeng.join.dialog.LoadingDialog
-import com.mayunfeng.join.dialog.MsgDialog
+import com.mayunfeng.join.ui.dialog.LoadingDialog
+import com.mayunfeng.join.ui.dialog.MsgDialog
 import com.mayunfeng.join.ui.widget.MRecyclerView
-import com.mayunfeng.join.utils.MyRetrofitObserver
 import com.mayunfeng.join.utils.MyRetrofitObserver.Companion.mySubscribeMainThread
 import com.mayunfeng.join.utils.UserUtils
 import com.mayunfeng.join.utils.retrofit.QuickRtObserverListener
 import com.mayunfeng.join.utils.retrofit.RetrofitManager
-import com.mayunfeng.join.utils.retrofit.RetrofitManager.Companion.subscribeMainThread
-import com.mayunfeng.join.utils.retrofit.RetrofitObserver
 import com.pikachu.utils.utils.GlideUtils
 import com.pikachu.utils.utils.NetUtils
 import com.pikachu.utils.utils.TimeUtils
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.schedulers.Schedulers
 
 
 enum class UserGrade(
@@ -45,11 +38,8 @@ enum class UserGrade(
 class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
 
     private var mainMsgAdapter: MainMsgAdapter? = null
-    private lateinit var loadingDialog: LoadingDialog
     private lateinit var userInfo: UserLoginBean
-
-    private var userApi = RetrofitManager.getInstance().create(UserApi::class.java)
-
+    private var userApi = RetrofitManager.getInstance()
 
     override fun setActivityWindowsInfo(isStatusBar: Boolean) {
         ImmersionBar.with(this)
@@ -63,8 +53,6 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
     override fun onAppCreate(savedInstanceState: Bundle?) {
         initUi()
         initNavigationFragment()
-
-        loadingDialog = LoadingDialog(context, getString(R.string.dialog_load_title))
         loadUserInfo()
     }
 
@@ -76,7 +64,7 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
             finish()
             return
         }
-        // todo 全局数据
+        // todo 全局token数据
         UserUtils.loginTokenInit(null)
 
         if (!NetUtils.isNetworkConnected(context)) {
@@ -85,14 +73,10 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
             finish()
             return
         }
-        userApi.sendUserInfo(loginToken).mySubscribeMainThread(this, object : QuickRtObserverListener<BaseBean<UserLoginBean>>{
-            override fun onStart(d: Disposable) {
-                loadingDialog.show()
-            }
-
-            override fun onError(t: BaseBean<UserLoginBean>?, isHandled: Boolean, e: Throwable) {
-                loadingDialog.dismiss()
-                if (isHandled) return
+        userApi.create(UserApi::class.java)
+            .sendUserInfo()
+            .mySubscribeMainThread(this,  object : QuickRtObserverListener<BaseBean<UserLoginBean>>{
+            override fun onError(t: BaseBean<UserLoginBean>?, e: Throwable) {
                 showToast(R.string.login_user_token_failure)
                 LoginActivity.startLoginActivity(this@MainActivity)
                 finish()
@@ -100,9 +84,8 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
 
             override fun onComplete(t: BaseBean<UserLoginBean>) {
                 initUserInfoUi(t.result!!)
-                loadingDialog.dismiss()
             }
-        })
+        }, R.string.dialog_load_title)
     }
 
     override fun onEventBus(event: UserLoginBean, key: Int?, msg: String?) {

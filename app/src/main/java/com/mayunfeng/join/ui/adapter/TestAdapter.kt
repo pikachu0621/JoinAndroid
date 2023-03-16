@@ -1,4 +1,4 @@
-package com.mayunfeng.join.adapter
+package com.mayunfeng.join.ui.adapter
 
 import com.mayunfeng.join.databinding.ItemTestBinding
 import com.pikachu.utils.adapter.QuickAdapter

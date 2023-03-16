@@ -2,11 +2,13 @@ package com.pikachu.utils.utils;
 
 import android.annotation.SuppressLint;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public final class TimeUtils {
 
@@ -303,14 +305,26 @@ public final class TimeUtils {
     }
 
 
-    public static String dataToStr(Date date, String type) {
+    public static String strToStr(String originDate, String originType, String toType) {
+        SimpleDateFormat sdf = new SimpleDateFormat(originType, Locale.SIMPLIFIED_CHINESE);
+        try {
+            Date parse = sdf.parse(originDate);
+            sdf = new SimpleDateFormat(toType, Locale.SIMPLIFIED_CHINESE);
+            if (parse == null) return originDate;
+            return sdf.format(parse);
+        } catch (ParseException e) {
+            return originDate;
+        }
+    }
+
+    public static String dateToStr(Date date, String type) {
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat sdf = new SimpleDateFormat();
         sdf.applyPattern(type);
         return sdf.format(date);
     }
 
-    public static String dataToStr(long time , String type) {
+    public static String dateToStr(long time , String type) {
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat sdf = new SimpleDateFormat();
         sdf.applyPattern(type);

@@ -85,7 +85,7 @@
                     android:text="@string/test_2"
                     android:maxLength="14"
                     android:ellipsize="end"
-                    android:maxLines="1"
+                    android:singleLine="true"
                     android:textColor="@color/color_grey1"
                     android:textSize="16sp"
                     android:textStyle="bold"

@@ -7,6 +7,9 @@
     android:background="@color/color_bg"
     tools:context=".ui.activity.EditUserInfoActivity">
 
+
+
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/app_back"
         android:layout_width="?actionBarSize"
@@ -96,6 +99,18 @@
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                     <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/user_age_click"
+                        style="@style/MeSettingClickLayout">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/MeSettingText"
+                            android:text="@string/edit_user_info_age" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/user_age"
+                            style="@style/MeSettingTextVice"
+                            android:text="@string/test_9" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
                         android:id="@+id/user_name_click"
                         style="@style/MeSettingClickLayout">
                         <androidx.appcompat.widget.AppCompatTextView
@@ -122,17 +137,18 @@
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                     <androidx.appcompat.widget.LinearLayoutCompat
-                        android:id="@+id/user_age_click"
+                        android:id="@+id/user_birth_click"
                         style="@style/MeSettingClickLayout">
                         <androidx.appcompat.widget.AppCompatTextView
                             style="@style/MeSettingText"
-                            android:text="@string/edit_user_info_age" />
+                            android:text="@string/edit_user_info_birth" />
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/user_age"
+                            android:id="@+id/user_birth"
                             style="@style/MeSettingTextVice"
-                            android:text="@string/test_9" />
+                            android:text="@string/test_11" />
                         <androidx.appcompat.widget.AppCompatImageView style="@style/MeSettingGoImage" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
+
 
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:id="@+id/user_introduce_click"
