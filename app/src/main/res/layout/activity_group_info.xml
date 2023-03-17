@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.GroupInfoActivity">
+
+
+    <View
+        android:id="@+id/view6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/color_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/app_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/app_back" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/app_back"
+        android:layout_width="?actionBarSize"
+        android:layout_height="?actionBarSize"
+        android:scaleType="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_app_back" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/activity_title_my_create_group"
+        android:textColor="@color/color_grey1"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/app_back"
+        app:layout_constraintStart_toEndOf="@+id/app_back"
+        app:layout_constraintTop_toTopOf="@+id/app_back" />
+
+
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/smartRefreshLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/color_bg_secondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_back"
+        app:srlEnableLoadMore="false"
+        app:srlEnableOverScrollBounce="true"
+        app:srlEnableOverScrollDrag="true"
+        app:srlEnableRefresh="true">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="60dp"
+                    android:background="@drawable/dr_dialog_load_bg"
+                    android:orientation="vertical"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    android:windowSoftInputMode="adjustResize"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/group_image">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/group_name"
+                        style="@style/MeSettingText"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:text="@string/create_group_name"
+                        android:textStyle="bold" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <com.pikachu.utils.view.QMUIRadiusImageView
+                                android:id="@+id/group_user1"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:scaleType="centerCrop"
+                                android:src="@mipmap/user_img"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:qmui_is_circle="true" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:ellipsize="end"
+                                android:gravity="center"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:text="@string/test_8"
+                                android:textColor="@color/color_grey1"
+                                android:textSize="12sp" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <com.pikachu.utils.view.QMUIRadiusImageView
+                                android:id="@+id/group_user2"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:scaleType="centerCrop"
+                                android:src="@mipmap/user_img"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:qmui_is_circle="true" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:ellipsize="end"
+                                android:gravity="center"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:text="@string/test_8"
+                                android:textColor="@color/color_grey1"
+                                android:textSize="12sp" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <com.pikachu.utils.view.QMUIRadiusImageView
+                                android:id="@+id/group_user3"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:scaleType="centerCrop"
+                                android:src="@mipmap/user_img"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:qmui_is_circle="true" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:ellipsize="end"
+                                android:gravity="center"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:text="@string/test_8"
+                                android:textColor="@color/color_grey1"
+                                android:textSize="12sp" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <com.pikachu.utils.view.QMUIRadiusImageView
+                                android:id="@+id/group_user4"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:scaleType="centerCrop"
+                                android:src="@mipmap/user_img"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:qmui_is_circle="true" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:ellipsize="end"
+                                android:gravity="center"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:text="@string/test_8"
+                                android:textColor="@color/color_grey1"
+                                android:textSize="12sp" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/group_user5"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:background="@drawable/dr_create_add_image_bg"
+                                android:padding="5dp"
+                                android:src="@drawable/ic_drawer_root_user_sign_info"
+                                android:tint="@color/color_bg"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:qmui_is_circle="true" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:ellipsize="end"
+                                android:gravity="center"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:text="@string/group_info_more"
+                                android:textColor="@color/color_grey1"
+                                android:textSize="12sp" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <com.pikachu.utils.view.QMUIRadiusImageView
+                    android:id="@+id/group_image"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="40dp"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/user_img"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:qmui_border_color="@color/color_bg_secondary"
+                    app:qmui_border_width="2dp"
+                    app:qmui_is_circle="true" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/appCompatTextView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:text="@string/group_info_info"
+                    android:textColor="@color/color_grey2"
+                    android:textSize="12sp"
+                    app:layout_constraintTop_toBottomOf="@+id/name"
+                    tools:layout_editor_absoluteX="16dp" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="3dp"
+                    android:background="@drawable/dr_dialog_load_bg"
+                    android:orientation="vertical"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    android:windowSoftInputMode="adjustResize"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/appCompatTextView8">
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/MeSettingText"
+                            android:layout_height="50dp"
+                            android:gravity="center_vertical"
+                            android:text="组名称" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/MeSettingTextVice"
+                            android:text="@string/test_2" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/color_bg_secondary"/>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/MeSettingText"
+                            android:layout_height="50dp"
+                            android:gravity="center_vertical"
+                            android:text="组号和二维码" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/MeSettingTextVice"
+                            android:text="@string/test_2" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/color_bg_secondary"/>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/MeSettingText"
+                            android:layout_height="50dp"
+                            android:gravity="center_vertical"
+                            android:text="组人数" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/MeSettingTextVice"
+                            android:text="@string/test_2" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/color_bg_secondary"/>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/MeSettingText"
+                            android:layout_height="50dp"
+                            android:gravity="center_vertical"
+                            android:text="组类型" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/MeSettingTextVice"
+                            android:text="@string/test_2" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/color_bg_secondary"/>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/MeSettingText"
+                            android:layout_height="50dp"
+                            android:gravity="center_vertical"
+                            android:text="组简介" />
+                        <androidx.appcompat.widget.AppCompatTextView
+                            style="@style/MeSettingTextVice"
+                            android:text="@string/test_2"
+                            android:layout_marginTop="-6dp"/>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/join"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                    android:background="@drawable/dr_dialog_load_bg"
+                    android:gravity="center"
+                    android:text="加入该组/退出该组/解散该组"
+                    android:textColor="@color/color_principal"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/info" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:background="@drawable/dw_main_gradient_dow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_back" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

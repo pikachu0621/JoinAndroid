@@ -26,7 +26,7 @@
         app:srcCompat="@drawable/ic_app_back" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_user_name"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -103,6 +103,19 @@
                     app:layout_constraintEnd_toEndOf="@+id/group_image"
                     app:layout_constraintStart_toStartOf="@+id/group_image"
                     app:layout_constraintTop_toTopOf="@+id/group_image" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/appCompatImageView3"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="56dp"
+                    android:layout_marginTop="56dp"
+                    android:background="@drawable/dr_edit_user_edt_bg"
+                    android:scaleType="center"
+                    app:layout_constraintStart_toStartOf="@+id/group_image"
+                    app:layout_constraintTop_toTopOf="@+id/group_image"
+                    app:srcCompat="@drawable/ic_edit_user_edt" />
 
 
                 <androidx.appcompat.widget.LinearLayoutCompat

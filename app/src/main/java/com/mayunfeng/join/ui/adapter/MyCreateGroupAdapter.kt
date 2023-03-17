@@ -13,7 +13,9 @@ import com.pikachu.utils.utils.TimeUtils
  * @Author:         pkpk.run
  * @Description:    null
  */
-class MyCreateGroupAdapter(`data`: MutableList<GroupBean>? = null) :
+class MyCreateGroupAdapter(private val clickItem:(itemData: GroupBean) -> Unit,
+                           private val clickMore:(itemData: GroupBean) -> Unit,
+                           `data`: MutableList<GroupBean>? = null):
     QuickAdapter<ItemMyCreateBinding, GroupBean>(`data`) {
     override fun onQuickBindView(
         binding: ItemMyCreateBinding,
@@ -28,5 +30,7 @@ class MyCreateGroupAdapter(`data`: MutableList<GroupBean>? = null) :
         binding.tvAdmin.text = itemData.groupType
         binding.people.text = "${ itemData.groupPeople }人"
         binding.time.text = TimeUtils.strToStr(itemData.createTime, "yyyy-MM-dd HH:mm:ss", "MM-dd HH:mm")
+        binding.root.setOnClickListener { clickItem(itemData) }
+        binding.more.setOnClickListener { clickMore(itemData) }
     }
 }

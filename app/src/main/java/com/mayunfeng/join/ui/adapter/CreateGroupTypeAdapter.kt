@@ -23,6 +23,13 @@ class CreateGroupTypeAdapter(
 
     fun getType(): String = cok
 
+    fun setType(type: String){
+        cok = type
+        cokPos = `data`.indexOf(type)
+        refresh()
+    }
+
+
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onQuickBindView(
         binding: ItemCreateGroupTypeBinding,

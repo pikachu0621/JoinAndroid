@@ -1,13 +1,17 @@
 package com.mayunfeng.join.base
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.InspectableProperty.EnumEntry
 import androidx.viewbinding.ViewBinding
 import com.gyf.immersionbar.ImmersionBar
 import com.mayunfeng.join.R
 import com.mayunfeng.join.bean.BaseEventBean
 import com.pikachu.utils.base.BaseActivity
+import com.pikachu.utils.utils.DarkModeUtils
 import com.pikachu.utils.utils.UiUtils
+import io.reactivex.rxjava3.annotations.Experimental
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -45,7 +49,6 @@ abstract class AppBaseActivity<T : ViewBinding, ED : Serializable> : BaseActivit
     }
 
 
-
     // ------------------------------------------------------------------- eventbus
 
     // 发布普通事件
@@ -59,6 +62,7 @@ abstract class AppBaseActivity<T : ViewBinding, ED : Serializable> : BaseActivit
     }
 
     // 处理普通事件
+    @kotlin.jvm.Throws
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun baseEventBus(event: BaseEventBean<ED>?) {
         event ?: return
@@ -75,6 +79,7 @@ abstract class AppBaseActivity<T : ViewBinding, ED : Serializable> : BaseActivit
     }
 
     //处理黏性事件
+    @kotlin.jvm.Throws
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     fun baseStickyEventBus(event: BaseEventBean<ED>?) {
         event ?: return

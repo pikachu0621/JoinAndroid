@@ -29,7 +29,7 @@ abstract class RetrofitObserver<T : Any>(
 
 
     private var error = false
-    private lateinit var t: T
+    private var t: T? = null
 
 
 
@@ -70,6 +70,7 @@ abstract class RetrofitObserver<T : Any>(
      * @param e
      */
     final override fun onError(e: Throwable) {
+        error = true
         if (retrofitInterceptor?.onRetrofitError(t, e) == true) return
         retrofitObserverInterface.onRetrofitError(null, e)
     }
@@ -80,7 +81,7 @@ abstract class RetrofitObserver<T : Any>(
      */
     final override fun onComplete() {
         if (error) return
-        if (retrofitInterceptor?.onRetrofitComplete(t) == true) return
-        retrofitObserverInterface.onRetrofitComplete(t)
+        if (retrofitInterceptor?.onRetrofitComplete(t!!) == true) return
+        retrofitObserverInterface.onRetrofitComplete(t!!)
     }
 }

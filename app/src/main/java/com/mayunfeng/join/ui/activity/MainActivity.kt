@@ -19,6 +19,7 @@ import com.mayunfeng.join.utils.MyRetrofitObserver.Companion.mySubscribeMainThre
 import com.mayunfeng.join.utils.UserUtils
 import com.mayunfeng.join.utils.retrofit.QuickRtObserverListener
 import com.mayunfeng.join.utils.retrofit.RetrofitManager
+import com.pikachu.utils.utils.DarkModeUtils
 import com.pikachu.utils.utils.GlideUtils
 import com.pikachu.utils.utils.NetUtils
 import com.pikachu.utils.utils.TimeUtils
@@ -181,6 +182,14 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
         }
         binding.mainContent.userInfo.setOnClickListener {
             EditUserInfoActivity.startEditUserInfoActivity(this, userInfo)
+        }
+
+        binding.mainDrawer.appCompatTextView6.setOnClickListener {
+            if (DarkModeUtils.isDarkMode(context)) {
+                DarkModeUtils.applyDayMode(this)
+            } else {
+                DarkModeUtils.applyNightMode(this)
+            }
         }
 
 

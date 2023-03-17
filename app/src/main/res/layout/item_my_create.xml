@@ -20,11 +20,13 @@
 
         <com.pikachu.utils.view.QMUIRadiusImageView
             android:id="@+id/group_image"
-            android:layout_width="46dp"
-            android:layout_height="46dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:scaleType="centerCrop"
             android:src="@mipmap/user_img"
             android:layout_marginStart="5dp"
+            app:qmui_border_width="1.5dp"
+            app:qmui_border_color="@color/color_principal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:qmui_is_circle="true" />
@@ -34,30 +36,29 @@
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:ellipsize="middle"
-            android:singleLine="true"
+            android:maxLines="1"
             android:text="@string/test_2"
             android:textColor="@color/color_grey1"
             android:textSize="15sp"
             android:textStyle="bold"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="10dp"
             app:layout_constraintStart_toEndOf="@+id/group_image"
             app:layout_constraintTop_toTopOf="@+id/group_image" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_admin"
             android:layout_width="wrap_content"
-            android:layout_height="18dp"
-            android:background="@drawable/dr_login_goto_true"
+            android:layout_height="20dp"
+            android:background="@drawable/dr_my_create_group_item_type_bg"
             android:gravity="center"
             android:paddingHorizontal="7dp"
-            android:text="@string/test_4"
+            android:text="@string/test_2"
             android:textColor="@color/white"
             android:textSize="10sp"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            app:layout_constraintBottom_toBottomOf="@+id/title"
-            app:layout_constraintStart_toEndOf="@+id/title"
-            app:layout_constraintTop_toTopOf="@+id/title"
+            app:layout_constraintBottom_toBottomOf="@+id/group_image"
+            app:layout_constraintStart_toStartOf="@+id/group_image"
+            android:layout_marginStart="26dp"
             tools:ignore="SmallSp" />
 
 
@@ -65,31 +66,36 @@
             android:id="@+id/people"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
             android:text="@string/test_13"
+            android:layout_marginBottom="2dp"
             android:textColor="@color/color_principal"
             android:textSize="12sp"
             android:textStyle="bold"
+            android:layout_marginStart="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/group_image"
-            app:layout_constraintStart_toStartOf="@+id/title" />
+            app:layout_constraintStart_toEndOf="@+id/tv_admin" />
 
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:text="@string/test_7"
             android:textColor="@color/color_grey2"
             android:textSize="12sp"
             android:textStyle="bold"
+            android:layout_marginStart="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/people"
             app:layout_constraintStart_toEndOf="@+id/people"
             app:layout_constraintTop_toTopOf="@+id/people" />
 
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="40dp"
+            android:id="@+id/more"
+            android:layout_width="45dp"
             android:layout_height="0dp"
+            android:background="?android:attr/selectableItemBackground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

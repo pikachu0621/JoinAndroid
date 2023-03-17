@@ -6,10 +6,7 @@ import com.mayunfeng.join.bean.UserLoginBean
 import com.mayunfeng.join.ui.widget.LoadFooter
 import com.mayunfeng.join.ui.widget.LoadHeader
 import com.mayunfeng.join.utils.retrofit.RetrofitManager
-import com.pikachu.utils.utils.GlideUtils
-import com.pikachu.utils.utils.LogsUtils
-import com.pikachu.utils.utils.SharedPreferencesUtils
-import com.pikachu.utils.utils.ToastUtils
+import com.pikachu.utils.utils.*
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 
 
@@ -23,7 +20,7 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 
 // http://192.168.0.105:8012
 // http://42.192.221.73:8012
-const val BASE_URL = "http://42.192.221.73:8012"
+const val BASE_URL = "http://192.168.0.105:8012"
 const val HTTP_OK = 200
 const val TOKEN_ERROR_KEY = "token"
 const val TOKEN_ERROR_CODE = -3
@@ -34,6 +31,7 @@ class Application : Application() {
         ToastUtils.init(this)
         LogsUtils.init(this)
         SharedPreferencesUtils.init(this)
+        DarkModeUtils.init(this)
         RetrofitManager.init(BASE_URL)
         GlideUtils.init(BASE_URL)
     }

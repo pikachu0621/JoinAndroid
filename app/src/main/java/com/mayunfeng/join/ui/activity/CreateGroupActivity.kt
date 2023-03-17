@@ -1,5 +1,8 @@
 package com.mayunfeng.join.ui.activity
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.View
@@ -16,6 +19,8 @@ import com.mayunfeng.join.ui.adapter.CreateGroupTypeAdapter
 import com.mayunfeng.join.utils.MyRetrofitObserver.Companion.mySubscribeMainThread
 import com.mayunfeng.join.utils.retrofit.QuickRtObserverListener
 import com.mayunfeng.join.utils.retrofit.RetrofitManager
+import com.pikachu.utils.type.JumpType
+import com.pikachu.utils.utils.GlideUtils
 import io.reactivex.rxjava3.disposables.Disposable
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -34,14 +39,36 @@ class CreateGroupActivity : AppBaseActivity<ActivityCreateGroupBinding, Serializ
     private val groupApi: GroupApi = RetrofitManager.getInstance().create(GroupApi::class.java)
     private var imageFile: File? = null
     private var createGroupTypeAdapter: CreateGroupTypeAdapter? = null
+    private var groupBean: GroupBean? = null
 
+
+    companion object{
+        fun startCreateGroupActivity(context: Context, groupBean: GroupBean) {
+            context.startActivity(Intent(context, CreateGroupActivity::class.java).apply {
+                putExtra(JumpType.J0, groupBean)
+            })
+        }
+    }
 
     override fun onAppCreate(savedInstanceState: Bundle?) {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+        groupBean = getSerializableExtra(JumpType.J0, GroupBean::class.java)
         initUi()
         initEdit()
         initTypeList()
         sendGroup()
+        if (groupBean != null) initDataUi(groupBean!!)
+    }
+
+    private fun initDataUi(groupBean: GroupBean) {
+        // 修改数据
+        binding.title.setText(R.string.activity_title_create_group_edit)
+        binding.groupImageMask.visibility = View.GONE
+        GlideUtils.with(context).loadHeaderToken(groupBean.groupImg).into(binding.groupImage)
+        binding.groupName.setText(groupBean.groupName)
+        binding.groupIntroduce.setText(groupBean.groupIntroduce)
+        binding.ok.isChecked = true
+        binding.ok.isClickable = true
     }
 
     // 发送数据
@@ -50,23 +77,29 @@ class CreateGroupActivity : AppBaseActivity<ActivityCreateGroupBinding, Serializ
         binding.ok.setOnClickListener {
             if (!binding.groupName.text.isNullOrEmpty() && !binding.groupIntroduce.text.isNullOrEmpty() && binding.groupImageMask.visibility != View.VISIBLE){
                 // 上传
-                val addFormDataPart = MultipartBody.Builder().setType(MultipartBody.FORM)
-                    .addFormDataPart("name", binding.groupName.text.toString())
-                    .addFormDataPart("type", createGroupTypeAdapter!!.getType())
-                    .addFormDataPart("ird", binding.groupIntroduce.text.toString())
-                    .addFormDataPart(
-                        "img",
-                        imageFile!!.name,
-                        RequestBody.create(MediaType.parse("image/png"), imageFile!!)
-                    )
-                    .build()
-                groupApi.sendCreateGroup(addFormDataPart).mySubscribeMainThread(this, this)
+                if (groupBean == null){
+                    val addFormDataPart = MultipartBody.Builder().setType(MultipartBody.FORM)
+                        .addFormDataPart("name", binding.groupName.text.toString())
+                        .addFormDataPart("type", createGroupTypeAdapter!!.getType())
+                        .addFormDataPart("ird", binding.groupIntroduce.text.toString())
+                        .addFormDataPart("img", imageFile!!.name, RequestBody.create(MediaType.parse("image/png"), imageFile!!))
+                        .build()
+                    groupApi.sendCreateGroup(addFormDataPart).mySubscribeMainThread(this, this)
+                    return@setOnClickListener
+                }
+                val addFormDataPart = MultipartBody.Builder().setType(MultipartBody.FORM).apply {
+                    addFormDataPart("id", "${ groupBean!!.id }")
+                    if (!binding.groupName.text.isNullOrEmpty()) addFormDataPart("name", binding.groupName.text.toString())
+                    addFormDataPart("type", createGroupTypeAdapter!!.getType())
+                    if (!binding.groupName.text.isNullOrEmpty()) addFormDataPart("ird", binding.groupIntroduce.text.toString())
+                    if (imageFile != null && imageFile!!.exists()) addFormDataPart("img", imageFile!!.name, RequestBody.create(MediaType.parse("image/png"), imageFile!!))
+                }.build()
+                groupApi.sendEditUserGroup(addFormDataPart).mySubscribeMainThread(this, this)
             }
         }
     }
 
     private fun initUi() {
-
         binding.groupImage.setOnClickListener {
             PhotoActivity.goPhotoImage(context, 1, 4, 1, this )
         }
@@ -112,10 +145,11 @@ class CreateGroupActivity : AppBaseActivity<ActivityCreateGroupBinding, Serializ
 
             override fun onComplete(t: BaseBean<Array<String>>) {
                 val result = mutableListOf<String>().apply { addAll(t.result!!) }
-                createGroupTypeAdapter = CreateGroupTypeAdapter(result) {
-                    showToast(it)
-                }
+                createGroupTypeAdapter = CreateGroupTypeAdapter(result) {}
                 binding.classList.adapter = createGroupTypeAdapter
+                if (groupBean != null){
+                    createGroupTypeAdapter!!.setType(groupBean!!.groupType)
+                }
             }
         })
     }
@@ -152,6 +186,7 @@ class CreateGroupActivity : AppBaseActivity<ActivityCreateGroupBinding, Serializ
     // 创建成功
     override fun onComplete(t: BaseBean<GroupBean>) {
         showToast(R.string.dialog_msg_complete)
+        postEventBus(t)
         finish()
     }
 }

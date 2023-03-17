@@ -7,6 +7,7 @@ import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 /**
  *
@@ -33,5 +34,26 @@ interface GroupApi {
      */
     @GET("/myf-group-api/user-create-group")
     fun sendUserCreateGroup(): Observable<BaseBean<ArrayList<GroupBean>>>
+
+
+
+
+    /**
+     * 删除群组
+     */
+    @GET("/myf-group-api/delete-group/{id}")
+    fun sendDeleteGroup(@Path("id") id: Long): Observable<BaseBean<ArrayList<GroupBean>>>
+
+
+
+
+    /**
+     * 编辑群组
+     */
+    @POST("/myf-group-api/edit-group")
+    fun sendEditUserGroup(
+        @Body body: RequestBody // 带其他参数的    不要 @Multipart
+    ): Observable<BaseBean<GroupBean>>
+
 
 }

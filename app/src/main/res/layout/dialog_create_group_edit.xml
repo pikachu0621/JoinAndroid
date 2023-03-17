@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dr_dialog_bottom_bg"
+    android:paddingTop="@dimen/activity_horizontal_margin"
+    android:paddingBottom="40dp">
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="30dp"
+        android:layout_height="4dp"
+        android:background="@drawable/dr_login_goto_false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/edit"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:drawableStart="@drawable/ic_my_group_item_dialog_edit"
+        android:drawablePadding="20dp"
+        android:paddingHorizontal="@dimen/activity_horizontal_margin"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:paddingVertical="16dp"
+        android:text="@string/my_create_group_dialog_edit"
+        android:textColor="@color/color_grey1"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view4" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/send"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/activity_horizontal_margin"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:drawableStart="@drawable/ic_my_group_item_dialog_send"
+        android:drawablePadding="20dp"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:paddingVertical="16dp"
+        android:text="@string/my_create_group_dialog_send"
+        android:textColor="@color/color_grey1"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/dissolve"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/activity_horizontal_margin"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:drawableStart="@drawable/ic_my_group_item_dialog_dissolve"
+        android:drawablePadding="20dp"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:paddingVertical="16dp"
+        android:text="@string/my_create_group_dialog_dissolve"
+        android:textColor="@color/color_grey1"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/send"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

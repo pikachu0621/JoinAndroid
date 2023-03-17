@@ -10,7 +10,7 @@ import java.io.Serializable
  * @Description:    null
  */
 data class GroupBean(
-    val id: Int,
+    val id: Long,
     val userId: Int,
     val groupImg: String,
     val groupIntroduce: String,

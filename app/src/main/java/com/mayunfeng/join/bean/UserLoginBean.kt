@@ -5,7 +5,7 @@ import java.io.Serializable
 data class UserLoginBean(
     var baseTag: Any?,
     var createTime: String,
-    var id: Int,
+    var id: Long,
     var loginToken: String?,
     var userAccount: String,
     var userAge: Int,
