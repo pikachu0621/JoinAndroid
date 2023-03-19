@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_bg"
+    tools:context=".ui.activity.UserInfoActivity">
+
+
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/app_back"
+        android:layout_width="?actionBarSize"
+        android:layout_height="?actionBarSize"
+        android:scaleType="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_app_back" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="@string/activity_title_user_info"
+        android:textColor="@color/color_grey1"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/app_back"
+        app:layout_constraintStart_toEndOf="@+id/app_back"
+        app:layout_constraintTop_toTopOf="@+id/app_back" />
+
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/smartRefreshLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/color_bg_secondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_back"
+        app:srlEnableLoadMore="false"
+        app:srlEnableOverScrollBounce="true"
+        app:srlEnableOverScrollDrag="true"
+        app:srlEnableRefresh="false">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <com.pikachu.utils.view.QMUIRadiusImageView
+                    android:id="@+id/user_image"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="30dp"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/user_img"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:qmui_is_circle="true" />
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/user_image">
+
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                        android:background="@drawable/dr_dialog_load_bg"
+                        android:orientation="vertical">
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:background="@null"
+                            style="@style/MeSettingClickLayout">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/MeSettingText"
+                                android:text="@string/edit_user_info_account" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/user_account"
+                                style="@style/MeSettingTextVice"
+                                android:layout_marginEnd="0dp"
+                                android:text="@string/test_12" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/user_age_click"
+                            style="@style/MeSettingClickLayout">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/MeSettingText"
+                                android:text="@string/edit_user_info_age" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/user_age"
+                                style="@style/MeSettingTextVice"
+                                android:text="@string/test_9" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/user_name_click"
+                            style="@style/MeSettingClickLayout">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/MeSettingText"
+                                android:text="@string/edit_user_info_name" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/user_name"
+                                style="@style/MeSettingTextVice"
+                                android:text="@string/test_2" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/user_sex_click"
+                            style="@style/MeSettingClickLayout">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/MeSettingText"
+                                android:text="@string/edit_user_info_sex" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/user_sex"
+                                style="@style/MeSettingTextVice"
+                                android:text="@string/test_3" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/user_unit_click"
+                            style="@style/MeSettingClickLayout"
+                            android:background="@null">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/MeSettingText"
+                                android:text="@string/edit_user_info_unit" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/user_school"
+                                style="@style/MeSettingTextVice"
+                                android:text="@string/test_10" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                        android:background="@drawable/dr_dialog_load_bg"
+                        android:orientation="vertical"
+                        android:paddingVertical="6dp">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/user_introduce_click"
+                            style="@style/MeSettingClickLayout"
+                            android:background="@null"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/MeSettingText"
+                                android:gravity="center_vertical"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0"
+                                android:text="@string/edit_user_info_introduce" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/user_introduce"
+                                style="@style/MeSettingTextVice"
+                                android:layout_marginTop="8dp"
+                                android:text="@string/test_8" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:background="@drawable/dw_main_gradient_dow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_back" />
+</androidx.constraintlayout.widget.ConstraintLayout>

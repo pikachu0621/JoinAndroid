@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.View
 import com.mayunfeng.join.R
 import com.mayunfeng.join.api.GroupApi
+import com.mayunfeng.join.api.JoinGroupApi
 import com.mayunfeng.join.base.AppBaseActivity
 import com.mayunfeng.join.bean.BaseBean
 import com.mayunfeng.join.bean.GroupBean
 import com.mayunfeng.join.databinding.ActivityMyCreateGroupBinding
+import com.mayunfeng.join.databinding.ActivityMyJoinGroupBinding
 import com.mayunfeng.join.databinding.DialogCreateGroupEditBinding
 import com.mayunfeng.join.ui.adapter.MyCreateGroupAdapter
+import com.mayunfeng.join.ui.adapter.MyJoinGroupAdapter
 import com.mayunfeng.join.ui.dialog.MsgDialog
 import com.mayunfeng.join.utils.MyRetrofitObserver.Companion.mySubscribeMainThread
 import com.mayunfeng.join.utils.retrofit.QuickRtObserverListener
@@ -20,14 +23,14 @@ import com.pikachu.utils.utils.UiUtils
 import java.io.Serializable
 
 /**
- * 我创建的组
+ * 我加入的组
  */
-class MyCreateGroupActivity : AppBaseActivity<ActivityMyCreateGroupBinding, Serializable>(),
+class MyJoinGroupActivity : AppBaseActivity<ActivityMyJoinGroupBinding, Serializable>(),
     QuickRtObserverListener<BaseBean<ArrayList<GroupBean>>> {
 
 
-    private val groupApi: GroupApi = RetrofitManager.getInstance().create(GroupApi::class.java)
-    private var myCreateGroupAdapter: MyCreateGroupAdapter? = null
+    private val joinGroupApi: JoinGroupApi = RetrofitManager.getInstance().create(JoinGroupApi::class.java)
+    private var myJoinGroupAdapter: MyJoinGroupAdapter? = null
 
     override fun onAppCreate(savedInstanceState: Bundle?) {
         initUi()
@@ -36,40 +39,15 @@ class MyCreateGroupActivity : AppBaseActivity<ActivityMyCreateGroupBinding, Seri
 
     private fun loadUserGroup() {
         binding.smartRefreshLayout.autoRefresh()
-        groupApi.sendUserCreateGroup().mySubscribeMainThread(this, this, -1)
+        joinGroupApi.sendMyJoinGroup().mySubscribeMainThread(this, this, -1)
     }
 
     private fun initUi() {
-        myCreateGroupAdapter = MyCreateGroupAdapter({
+        myJoinGroupAdapter = MyJoinGroupAdapter({
             // 跳转group 详情页
             startActivity(GroupInfoActivity::class.java, it.id)
-        }, { group ->
-            object : BaseBottomSheetDialog<DialogCreateGroupEditBinding>(context) {
-                override fun onViewCreate(binding: DialogCreateGroupEditBinding) {
-                    binding.edit.setOnClickListener {
-                        CreateGroupActivity.startCreateGroupActivity(context, group)
-                        dismiss()
-                    }
-                    binding.dissolve.setOnClickListener {
-                        MsgDialog(
-                            context,
-                            getString(R.string.my_create_group_dialog_dissolve_msg),
-                            {
-                                groupApi.sendDeleteGroup(group.id).mySubscribeMainThread(
-                                    this@MyCreateGroupActivity,
-                                    this@MyCreateGroupActivity
-                                )
-                                dismiss()
-                                true
-                            }).show()
-                    }
-                    binding.send.setOnClickListener {
-                        // 跳转二维码界面
-                    }
-                }
-            }.show()
         })
-        binding.recycler.adapter = myCreateGroupAdapter
+        binding.recycler.adapter = myJoinGroupAdapter
 
         binding.smartRefreshLayout.setOnRefreshListener {
             loadUserGroup()
@@ -99,7 +77,7 @@ class MyCreateGroupActivity : AppBaseActivity<ActivityMyCreateGroupBinding, Seri
             return
         }
         binding.appNul.root.visibility = View.GONE
-        myCreateGroupAdapter!!.refreshData(t.result)
+        myJoinGroupAdapter!!.refreshData(t.result)
     }
 
 

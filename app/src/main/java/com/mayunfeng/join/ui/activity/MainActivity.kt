@@ -12,7 +12,6 @@ import com.mayunfeng.join.bean.BaseBean
 import com.mayunfeng.join.bean.MainMsgBean
 import com.mayunfeng.join.bean.UserLoginBean
 import com.mayunfeng.join.databinding.ActivityMainBinding
-import com.mayunfeng.join.ui.dialog.LoadingDialog
 import com.mayunfeng.join.ui.dialog.MsgDialog
 import com.mayunfeng.join.ui.widget.MRecyclerView
 import com.mayunfeng.join.utils.MyRetrofitObserver.Companion.mySubscribeMainThread
@@ -23,7 +22,6 @@ import com.pikachu.utils.utils.DarkModeUtils
 import com.pikachu.utils.utils.GlideUtils
 import com.pikachu.utils.utils.NetUtils
 import com.pikachu.utils.utils.TimeUtils
-import io.reactivex.rxjava3.disposables.Disposable
 
 
 enum class UserGrade(

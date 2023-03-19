@@ -19,4 +19,6 @@ data class GroupBean(
     val createTime: String,
     val groupPeople: Int,
     val baseTag: Any?,
+    val groupTopFourPeople: List<UserLoginBean>,
+    val groupAndUser: Int
 ): Serializable

@@ -56,4 +56,11 @@ interface GroupApi {
     ): Observable<BaseBean<GroupBean>>
 
 
+
+    /**
+     * 查询群组info
+     */
+    @GET("/myf-group-api/query-group/{id}")
+    fun sendQueryGroupInfo(@Path("id") id: Long): Observable<BaseBean<GroupBean>>
+
 }

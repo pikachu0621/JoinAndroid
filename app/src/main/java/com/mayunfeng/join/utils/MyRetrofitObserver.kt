@@ -69,9 +69,9 @@ class MyRetrofitObserver<T : Any>(
     }) {
 
     companion object {
-        fun <T : Any> Observable<T>.mySubscribeMainThread(
+        fun <E : Any> Observable<E>.mySubscribeMainThread(
             activity: Activity,
-            quick: QuickRtObserverListener<T>,
+            quick: QuickRtObserverListener<E>,
             loadDialogTitle: Int = R.string.dialog_load_title, // -1 不启用
         ) {
             this.subscribeOn(Schedulers.io())

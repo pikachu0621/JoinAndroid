@@ -16,4 +16,22 @@ data class UserLoginBean(
     var userName: String,
     var userSex: Boolean,
     var userUnit: String
-): Serializable
+) : Serializable {
+    companion object {
+        fun createNull(): UserLoginBean =
+            UserLoginBean(
+                null,
+                "",
+                0,
+                "",
+                "",
+                0,
+                "",
+                0,
+                "",
+                "",
+                "",
+                false,
+                "")
+    }
+}

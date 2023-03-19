@@ -80,182 +80,28 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/group_name"
                         style="@style/MeSettingText"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="26dp"
                         android:gravity="center"
                         android:text="@string/create_group_name"
                         android:textStyle="bold" />
 
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
-                        android:orientation="horizontal">
-
-                        <androidx.appcompat.widget.LinearLayoutCompat
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/user_msg"
+                            android:layout_marginTop="20dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                            android:orientation="horizontal"
+                            android:overScrollMode="never"
+                            tools:itemCount="4"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:listitem="@layout/item_group_info_user"/>
 
-                            <com.pikachu.utils.view.QMUIRadiusImageView
-                                android:id="@+id/group_user1"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:scaleType="centerCrop"
-                                android:src="@mipmap/user_img"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:qmui_is_circle="true" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="3dp"
-                                android:ellipsize="end"
-                                android:gravity="center"
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                android:text="@string/test_8"
-                                android:textColor="@color/color_grey1"
-                                android:textSize="12sp" />
-                        </androidx.appcompat.widget.LinearLayoutCompat>
-
-                        <androidx.appcompat.widget.LinearLayoutCompat
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <com.pikachu.utils.view.QMUIRadiusImageView
-                                android:id="@+id/group_user2"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:scaleType="centerCrop"
-                                android:src="@mipmap/user_img"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:qmui_is_circle="true" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="3dp"
-                                android:ellipsize="end"
-                                android:gravity="center"
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                android:text="@string/test_8"
-                                android:textColor="@color/color_grey1"
-                                android:textSize="12sp" />
-                        </androidx.appcompat.widget.LinearLayoutCompat>
-
-                        <androidx.appcompat.widget.LinearLayoutCompat
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <com.pikachu.utils.view.QMUIRadiusImageView
-                                android:id="@+id/group_user3"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:scaleType="centerCrop"
-                                android:src="@mipmap/user_img"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:qmui_is_circle="true" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="3dp"
-                                android:ellipsize="end"
-                                android:gravity="center"
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                android:text="@string/test_8"
-                                android:textColor="@color/color_grey1"
-                                android:textSize="12sp" />
-                        </androidx.appcompat.widget.LinearLayoutCompat>
-
-                        <androidx.appcompat.widget.LinearLayoutCompat
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <com.pikachu.utils.view.QMUIRadiusImageView
-                                android:id="@+id/group_user4"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:scaleType="centerCrop"
-                                android:src="@mipmap/user_img"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:qmui_is_circle="true" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="3dp"
-                                android:ellipsize="end"
-                                android:gravity="center"
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                android:text="@string/test_8"
-                                android:textColor="@color/color_grey1"
-                                android:textSize="12sp" />
-                        </androidx.appcompat.widget.LinearLayoutCompat>
-
-                        <androidx.appcompat.widget.LinearLayoutCompat
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:id="@+id/group_user5"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:background="@drawable/dr_create_add_image_bg"
-                                android:padding="5dp"
-                                android:src="@drawable/ic_drawer_root_user_sign_info"
-                                android:tint="@color/color_bg"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:qmui_is_circle="true" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="3dp"
-                                android:ellipsize="end"
-                                android:gravity="center"
-                                android:maxLines="1"
-                                android:singleLine="true"
-                                android:text="@string/group_info_more"
-                                android:textColor="@color/color_grey1"
-                                android:textSize="12sp" />
-                        </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <com.pikachu.utils.view.QMUIRadiusImageView
                     android:id="@+id/group_image"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_marginTop="40dp"
                     android:scaleType="centerCrop"
                     android:src="@mipmap/user_img"
@@ -263,7 +109,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:qmui_border_color="@color/color_bg_secondary"
-                    app:qmui_border_width="2dp"
+                    app:qmui_border_width="8dp"
                     app:qmui_is_circle="true" />
 
 
@@ -302,6 +148,7 @@
                             android:gravity="center_vertical"
                             android:text="组名称" />
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/group_name_2"
                             style="@style/MeSettingTextVice"
                             android:text="@string/test_2" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -317,8 +164,9 @@
                             style="@style/MeSettingText"
                             android:layout_height="50dp"
                             android:gravity="center_vertical"
-                            android:text="组号和二维码" />
+                            android:text="组号" />
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/group_id"
                             style="@style/MeSettingTextVice"
                             android:text="@string/test_2" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -336,6 +184,8 @@
                             android:gravity="center_vertical"
                             android:text="组人数" />
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/group_people"
+                            android:textColor="@color/color_principal"
                             style="@style/MeSettingTextVice"
                             android:text="@string/test_2" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -353,8 +203,19 @@
                             android:gravity="center_vertical"
                             android:text="组类型" />
                         <androidx.appcompat.widget.AppCompatTextView
-                            style="@style/MeSettingTextVice"
-                            android:text="@string/test_2" />
+                            android:id="@+id/group_type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="24dp"
+                            android:background="@drawable/dr_my_create_group_item_type_bg"
+                            android:gravity="center"
+                            android:paddingHorizontal="@dimen/activity_horizontal_margin"
+                            android:text="@string/test_2"
+                            android:textColor="@color/white"
+                            android:textSize="10sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/group_image"
+                            app:layout_constraintStart_toStartOf="@+id/group_image"
+                            android:layout_marginStart="26dp"
+                            tools:ignore="SmallSp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
                     <View
                         android:layout_width="match_parent"
@@ -370,6 +231,7 @@
                             android:gravity="center_vertical"
                             android:text="组简介" />
                         <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/group_introduce"
                             style="@style/MeSettingTextVice"
                             android:text="@string/test_2"
                             android:layout_marginTop="-6dp"/>

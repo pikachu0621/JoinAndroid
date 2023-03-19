@@ -1,6 +1,5 @@
 package com.mayunfeng.join.ui.activity
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
@@ -21,7 +20,6 @@ import com.mayunfeng.join.utils.retrofit.QuickRtObserverListener
 import com.mayunfeng.join.utils.retrofit.RetrofitManager
 import com.pikachu.utils.type.JumpType
 import com.pikachu.utils.utils.GlideUtils
-import io.reactivex.rxjava3.disposables.Disposable
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody

@@ -4,9 +4,12 @@
 
     <!--activity-->
     <string name="activity_title_edit_user">编辑资料</string>
+    <string name="activity_title_user_info">用户信息</string>
     <string name="activity_title_create_group">创建组</string>
     <string name="activity_title_create_group_edit">修改组</string>
     <string name="activity_title_my_create_group">我创的建组</string>
+    <string name="activity_title_my_join_group">我加入的组</string>
+    <string name="activity_title_all_user">全部组员</string>
 
 
     <!-- login -->
