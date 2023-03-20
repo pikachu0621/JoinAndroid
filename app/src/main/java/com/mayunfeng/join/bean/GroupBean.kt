@@ -22,3 +22,9 @@ data class GroupBean(
     val groupTopFourPeople: List<UserLoginBean>,
     val groupAndUser: Int
 ): Serializable
+
+
+data class LGroupBean<T>(
+   val groupUserIsFounder: Boolean = false,
+   val result: T?
+): Serializable

@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="@string/activity_title_my_create_group"
+        android:text="@string/activity_title_group_info"
         android:textColor="@color/color_grey1"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -80,7 +80,7 @@
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/group_name"
                         style="@style/MeSettingText"
-                        android:layout_marginTop="26dp"
+                        android:layout_marginTop="30dp"
                         android:gravity="center"
                         android:text="@string/create_group_name"
                         android:textStyle="bold" />

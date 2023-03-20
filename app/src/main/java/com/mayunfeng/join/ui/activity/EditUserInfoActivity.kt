@@ -163,7 +163,8 @@ class EditUserInfoActivity : AppBaseActivity<ActivityEditUserInfoBinding, UserLo
         postEventBus(t.result!!)
     }
 
-    override fun onEventBus(event: UserLoginBean, key: Int?, msg: String?) {
+    override fun onEventBus(event: UserLoginBean?, key: Int?, msg: String?) {
+        event?:return
         initUserInfoUi(event)
     }
 

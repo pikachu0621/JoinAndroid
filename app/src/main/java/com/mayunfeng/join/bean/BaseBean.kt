@@ -19,7 +19,7 @@ data class BaseBean<T>(
 
 
 data class BaseEventBean<T>(
-    var ben: T,
+    var ben: T?,
     val key: Int?,
     val msg: String?,
     val tag: Class<*>?

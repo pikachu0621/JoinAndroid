@@ -2,6 +2,7 @@ package com.mayunfeng.join.api
 
 import com.mayunfeng.join.bean.BaseBean
 import com.mayunfeng.join.bean.GroupBean
+import com.mayunfeng.join.bean.LGroupBean
 import com.mayunfeng.join.bean.UserLoginBean
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
@@ -40,11 +41,11 @@ interface JoinGroupApi {
 
 
     /**
-     * 获取组的所有人
+     * 获取某个组的所有人
      * @param groupId 组id
      *
      */
     @GET("/myf-join-group-api/group-all-user/{groupId}")
-    fun queryJoinGroupAllUser(@Path("groupId") groupId: Long): Observable<BaseBean<ArrayList<UserLoginBean>>>
+    fun queryJoinGroupAllUser(@Path("groupId") groupId: Long): Observable<BaseBean<LGroupBean<ArrayList<UserLoginBean>>>>
 
 }

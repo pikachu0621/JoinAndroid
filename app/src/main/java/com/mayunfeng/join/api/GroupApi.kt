@@ -2,12 +2,11 @@ package com.mayunfeng.join.api
 
 import com.mayunfeng.join.bean.BaseBean
 import com.mayunfeng.join.bean.GroupBean
+import com.mayunfeng.join.bean.LGroupBean
+import com.mayunfeng.join.bean.UserLoginBean
 import io.reactivex.rxjava3.core.Observable
 import okhttp3.RequestBody
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 /**
  *
@@ -62,5 +61,17 @@ interface GroupApi {
      */
     @GET("/myf-group-api/query-group/{id}")
     fun sendQueryGroupInfo(@Path("id") id: Long): Observable<BaseBean<GroupBean>>
+
+
+
+    /**
+     * 踢出某用户
+     */
+    @GET("/myf-group-api/remove-user-group")
+    fun removeUserToGroup(
+        @Query("user-id") targetUserId: Long?,
+        @Query("group-id")  byGroupId: Long?
+    ): Observable<BaseBean<LGroupBean<ArrayList<UserLoginBean>>>>
+
 
 }

@@ -20,6 +20,16 @@ class AllUserAdapter(private val clickItem:(itemData: UserLoginBean) -> Unit,
                      private val clickMore:(itemData: UserLoginBean) -> Unit,
                      `data`: MutableList<UserLoginBean>? = null):
     QuickAdapter<ItemAllUserBinding, UserLoginBean>(`data`) {
+    private var isCreateUser = false
+
+    /**
+     * 是否开启编辑
+     */
+    fun setOpenEdit(isCreateUser: Boolean){
+        this.isCreateUser = isCreateUser
+        refresh()
+    }
+
     override fun onQuickBindView(
         binding: ItemAllUserBinding,
         itemData: UserLoginBean,
@@ -32,6 +42,11 @@ class AllUserAdapter(private val clickItem:(itemData: UserLoginBean) -> Unit,
         binding.title.text = itemData.userName
         binding.tvAdmin.visibility =  if (position == 0) View.VISIBLE else View.GONE
         binding.root.setOnClickListener { clickItem(itemData) }
-        binding.more.setOnClickListener { clickMore(itemData) }
+        if (isCreateUser && position != 0) {
+            binding.more.visibility = View.VISIBLE
+            binding.more.setOnClickListener { clickMore(itemData) }
+            return
+        }
+        binding.more.visibility = View.GONE
     }
 }

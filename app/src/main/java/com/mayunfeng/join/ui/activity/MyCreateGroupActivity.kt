@@ -22,6 +22,9 @@ import java.io.Serializable
 /**
  * 我创建的组
  */
+
+const val KEY = 800
+
 class MyCreateGroupActivity : AppBaseActivity<ActivityMyCreateGroupBinding, Serializable>(),
     QuickRtObserverListener<BaseBean<ArrayList<GroupBean>>> {
 
@@ -65,6 +68,7 @@ class MyCreateGroupActivity : AppBaseActivity<ActivityMyCreateGroupBinding, Seri
                     }
                     binding.send.setOnClickListener {
                         // 跳转二维码界面
+                        QRCodeDisplayActivity.startQRCodeDisplayActivity(this@MyCreateGroupActivity, group)
                     }
                 }
             }.show()
@@ -103,7 +107,7 @@ class MyCreateGroupActivity : AppBaseActivity<ActivityMyCreateGroupBinding, Seri
     }
 
 
-    override fun onEventBus(event: Serializable, key: Int?, msg: String?) {
+    override fun onEventBus(event: Serializable?, key: Int?, msg: String?) {
         loadUserGroup()
     }
 

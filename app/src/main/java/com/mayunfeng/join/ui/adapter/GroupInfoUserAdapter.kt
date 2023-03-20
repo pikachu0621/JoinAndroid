@@ -19,10 +19,12 @@ class GroupInfoUserAdapter(
     }
 
     override fun setData(`data`: MutableList<UserLoginBean>) {
-        if(`data`.size > 4)
-            refreshData(`data`.subList(0, 4))
-        `data`.add(UserLoginBean.createNull())
-        refreshData(`data`)
+        var d = `data`
+        if(`data`.size > 4){
+            d = `data`.subList(0, 4)
+        }
+        d.add(UserLoginBean.createNull())
+        refreshData(d)
     }
 
 

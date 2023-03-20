@@ -25,6 +25,7 @@ const val BASE_URL = "http://192.168.0.112:8012"
 const val HTTP_OK = 200
 const val TOKEN_ERROR_KEY = "token"
 const val TOKEN_ERROR_CODE = -3
+const val GROUP_ID_LENGTH = 1000000
 
 class Application : Application() {
     override fun onCreate() {

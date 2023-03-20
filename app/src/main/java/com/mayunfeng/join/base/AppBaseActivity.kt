@@ -1,17 +1,13 @@
 package com.mayunfeng.join.base
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.InspectableProperty.EnumEntry
 import androidx.viewbinding.ViewBinding
 import com.gyf.immersionbar.ImmersionBar
 import com.mayunfeng.join.R
 import com.mayunfeng.join.bean.BaseEventBean
 import com.pikachu.utils.base.BaseActivity
-import com.pikachu.utils.utils.DarkModeUtils
 import com.pikachu.utils.utils.UiUtils
-import io.reactivex.rxjava3.annotations.Experimental
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -52,12 +48,12 @@ abstract class AppBaseActivity<T : ViewBinding, ED : Serializable> : BaseActivit
     // ------------------------------------------------------------------- eventbus
 
     // 发布普通事件
-    fun postEventBus(ed: ED, key: Int? = 0, msg: String? = "", clazz: Class<*>? = null){
+    fun postEventBus(ed: ED?, key: Int? = 0, msg: String? = "", clazz: Class<*>? = null){
         EventBus.getDefault().post(BaseEventBean(ed, key, msg, clazz))
     }
 
     // 发布粘性事件
-    fun postEventBusSticky(ed: ED, key: Int? = 0, msg: String? = "", clazz: Class<*>? = null){
+    fun postEventBusSticky(ed: ED?, key: Int? = 0, msg: String? = "", clazz: Class<*>? = null){
         EventBus.getDefault().postSticky(BaseEventBean(ed, key, msg, clazz))
     }
 
@@ -74,7 +70,7 @@ abstract class AppBaseActivity<T : ViewBinding, ED : Serializable> : BaseActivit
         onEventBus(event.ben, event.key, event.msg)
     }
 
-    open fun onEventBus(event: ED, key: Int?, msg: String?) {
+    open fun onEventBus(event: ED?, key: Int?, msg: String?) {
 
     }
 
@@ -91,7 +87,7 @@ abstract class AppBaseActivity<T : ViewBinding, ED : Serializable> : BaseActivit
         onEventBusSticky(event.ben, event.key, event.msg)
     }
 
-    open fun onEventBusSticky(event: ED, key: Int?, msg: String?) {
+    open fun onEventBusSticky(event: ED?, key: Int?, msg: String?) {
 
     }
 

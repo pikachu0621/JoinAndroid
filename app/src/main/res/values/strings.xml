@@ -10,6 +10,9 @@
     <string name="activity_title_my_create_group">我创的建组</string>
     <string name="activity_title_my_join_group">我加入的组</string>
     <string name="activity_title_all_user">全部组员</string>
+    <string name="activity_title_qrc_join">加入二维码</string>
+    <string name="activity_title_qrc">扫一扫</string>
+    <string name="activity_title_group_info">组信息</string>
 
 
     <!-- login -->
@@ -50,7 +53,7 @@
     <!--用户 （签到，我的团队，历史记录，我的资料）
        管理员 （发起签到，签到，批阅签到，我的团队）-->
     <string name="main_top_user_sign_start">当前签到</string>
-    <string name="main_top_user_sign_group">我的团队</string>
+    <string name="main_top_user_sign_group">我的群组</string>
     <string name="main_top_user_sign_record">历史记录</string>
     <string name="main_top_user_info">我的资料</string>
     <string name="main_top_root_user_sign_start">发起签到</string>
@@ -68,7 +71,9 @@
     <string name="my_create_group_dialog_edit">编辑组信息</string>
     <string name="my_create_group_dialog_dissolve">解散此组</string>
     <string name="my_create_group_dialog_dissolve_msg">此操作不可逆，是否解散此组？</string>
+    <string name="my_create_group_dialog_dissolve_out_msg">此操作不可逆，是否解推出此组？</string>
     <string name="my_create_group_dialog_send">发起签到</string>
+    <string name="my_create_group_qrc">加入二维码</string>
 
     <!--GroupInfoActivity-->
     <string name="group_info_more">更多</string>
@@ -122,6 +127,9 @@
     <string name="dialog_edit_age_title">修改年龄</string>
     <string name="dialog_edit_birth_title">修改出生日期</string>
     <string name="dialog_edit_nul">不能为空</string>
+
+
+    <string name="all_out_user">此操作不可逆，是否请出该用户？</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="test">TEST</string>

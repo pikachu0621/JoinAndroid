@@ -81,7 +81,7 @@ class MyJoinGroupActivity : AppBaseActivity<ActivityMyJoinGroupBinding, Serializ
     }
 
 
-    override fun onEventBus(event: Serializable, key: Int?, msg: String?) {
+    override fun onEventBus(event: Serializable?, key: Int?, msg: String?) {
         loadUserGroup()
     }
 

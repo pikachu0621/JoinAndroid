@@ -166,7 +166,7 @@
                         android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
                         android:background="@drawable/dr_dialog_load_bg"
                         android:orientation="vertical"
-                        android:paddingVertical="6dp">
+                        android:paddingVertical="10dp">
 
                         <androidx.appcompat.widget.LinearLayoutCompat
                             android:id="@+id/user_introduce_click"

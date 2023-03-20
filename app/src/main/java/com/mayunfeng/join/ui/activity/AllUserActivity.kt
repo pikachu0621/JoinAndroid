@@ -3,30 +3,50 @@ package com.mayunfeng.join.ui.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.mayunfeng.join.R
+import com.mayunfeng.join.api.GroupApi
 import com.mayunfeng.join.api.JoinGroupApi
 import com.mayunfeng.join.base.AppBaseActivity
 import com.mayunfeng.join.bean.BaseBean
 import com.mayunfeng.join.bean.GroupBean
+import com.mayunfeng.join.bean.LGroupBean
 import com.mayunfeng.join.bean.UserLoginBean
 import com.mayunfeng.join.databinding.ActivityAllUserBinding
 import com.mayunfeng.join.ui.adapter.AllUserAdapter
 import com.mayunfeng.join.ui.adapter.MyJoinGroupAdapter
+import com.mayunfeng.join.ui.dialog.MsgDialog
 import com.mayunfeng.join.utils.MyRetrofitObserver.Companion.mySubscribeMainThread
 import com.mayunfeng.join.utils.retrofit.QuickRtObserverListener
 import com.mayunfeng.join.utils.retrofit.RetrofitManager
 import com.pikachu.utils.utils.TimeUtils
 import java.io.Serializable
 
+
+/**
+ * 需要传 group id
+ */
 class AllUserActivity : AppBaseActivity<ActivityAllUserBinding, Serializable>(),
-    QuickRtObserverListener<BaseBean<ArrayList<UserLoginBean>>> {
+    QuickRtObserverListener<BaseBean<LGroupBean<ArrayList<UserLoginBean>>>> {
 
 
     private var groupId: Long? = 0
     private val joinGroupApi: JoinGroupApi = RetrofitManager.getInstance().create(JoinGroupApi::class.java)
+    private val groupApi: GroupApi = RetrofitManager.getInstance().create(GroupApi::class.java)
+    private var msgDialog: MsgDialog? = null
+    private var isPostEvt = false
+
     private val allUserAdapter: AllUserAdapter = AllUserAdapter({
         UserInfoActivity.startUserInfoActivity(this, it)
-    }, {
+    }, {user->
         // todo 加移除用户
+        msgDialog = MsgDialog(context, getString(R.string.all_out_user), {
+                groupApi.removeUserToGroup(user.id, groupId)
+                    .mySubscribeMainThread(this@AllUserActivity,
+                    this@AllUserActivity)
+            isPostEvt = true
+                false
+            })
+        msgDialog!!.show()
     })
     override fun onAppCreate(savedInstanceState: Bundle?) {
         groupId = longExtra
@@ -56,20 +76,27 @@ class AllUserActivity : AppBaseActivity<ActivityAllUserBinding, Serializable>(),
         }
     }
 
-    override fun onError(t: BaseBean<ArrayList<UserLoginBean>>?, e: Throwable) {
+    override fun onError(t: BaseBean<LGroupBean<ArrayList<UserLoginBean>>>?, e: Throwable) {
         binding.smartRefreshLayout.finishRefresh()
+        msgDialog?.dismiss()
         showToast(t?.reason ?: e.message)
     }
 
 
-    override fun onComplete(t: BaseBean<ArrayList<UserLoginBean>>) {
+    override fun onComplete(t: BaseBean<LGroupBean<ArrayList<UserLoginBean>>>) {
         binding.smartRefreshLayout.finishRefresh()
-        if (t.result.isNullOrEmpty()) {
+        msgDialog?.dismiss()
+        if (isPostEvt){
+            postEventBus(null, GroupInfoActivityEvt)
+            isPostEvt = false
+        }
+        if (t.result!!.result.isNullOrEmpty()) {
             binding.appNul.root.visibility = View.VISIBLE
             return
         }
         binding.appNul.root.visibility = View.GONE
-        allUserAdapter.refreshData(t.result)
+        allUserAdapter.setOpenEdit(t.result!!.groupUserIsFounder)
+        allUserAdapter.refreshData(t.result!!.result)
     }
 
 

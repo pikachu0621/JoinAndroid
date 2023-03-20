@@ -87,7 +87,8 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
         }, R.string.dialog_load_title)
     }
 
-    override fun onEventBus(event: UserLoginBean, key: Int?, msg: String?) {
+    override fun onEventBus(event: UserLoginBean?, key: Int?, msg: String?) {
+        event?:return
         initUserInfoUi(event)
     }
 
@@ -141,10 +142,15 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
 
     private fun initUi() {
         //  binding.mainContent.recycler.setAdapter(TestAdapter(), 1)
-
-
+        // 打卡菜单
         binding.mainContent.view2.setOnClickListener {
             binding.root.open()
+        }
+
+
+        // 扫码
+        binding.mainContent.addGroupCode.setOnClickListener{
+            startActivity(QRCodeActivity::class.java)
         }
 
 
@@ -180,6 +186,10 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
         }
         binding.mainContent.userInfo.setOnClickListener {
             EditUserInfoActivity.startEditUserInfoActivity(this, userInfo)
+        }
+        // 我的群组
+        binding.mainContent.myGroup.setOnClickListener {
+            startActivity(MyJoinGroupActivity::class.java)
         }
 
         binding.mainDrawer.appCompatTextView6.setOnClickListener {

@@ -82,13 +82,15 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    // zxing 二维码生成与扫描
+    implementation 'com.github.jenly1314:zxing-lite:2.2.1'
     // 日期选择器
     implementation 'com.github.gzu-liyujiang.AndroidPicker:AddressPicker:4.1.11'
     // 图片压缩
     implementation 'com.github.nanchen2251:CompressHelper:1.0.5'
     // 权限管理
     implementation 'com.github.getActivity:XXPermissions:16.8'
-    //下拉刷新
+    // 下拉刷新
     implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'
     implementation  'com.scwang.smart:refresh-header-material:2.0.1'
     implementation  'com.scwang.smart:refresh-header-classics:2.0.1'

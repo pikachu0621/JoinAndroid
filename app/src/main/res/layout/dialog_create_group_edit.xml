@@ -51,7 +51,7 @@
         android:focusable="true"
         android:gravity="center_vertical"
         android:paddingVertical="16dp"
-        android:text="@string/my_create_group_dialog_send"
+        android:text="@string/my_create_group_qrc"
         android:textColor="@color/color_grey1"
         android:textSize="14sp"
         android:textStyle="bold"
