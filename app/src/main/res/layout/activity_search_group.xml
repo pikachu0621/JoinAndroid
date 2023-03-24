@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.SearchGroupActivity">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/app_back"
+        android:layout_width="?actionBarSize"
+        android:layout_height="?actionBarSize"
+        android:scaleType="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_app_back" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ed_val"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/app_back"
+        app:layout_constraintEnd_toStartOf="@+id/app_search"
+        app:layout_constraintStart_toEndOf="@+id/app_back"
+        app:layout_constraintTop_toTopOf="@+id/app_back">
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_user_name"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@drawable/dr_search_bg"
+            android:hint="@string/activity_search_group"
+            android:lines="1"
+            android:minHeight="40dp"
+            android:paddingVertical="5dp"
+            android:paddingStart="40dp"
+            android:paddingEnd="10dp"
+            android:textColorHint="@color/color_grey3"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_del_2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="11dp"
+            android:tint="@color/color_grey3"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/et_user_name"
+            app:layout_constraintStart_toStartOf="@+id/et_user_name"
+            app:layout_constraintTop_toTopOf="@+id/et_user_name"
+            app:srcCompat="@drawable/ic_qrc_search" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_del_1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/et_user_name"
+            app:layout_constraintEnd_toEndOf="@+id/et_user_name"
+            app:layout_constraintTop_toTopOf="@+id/et_user_name"
+            app:srcCompat="@drawable/ic_main_head_add_code" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/app_search"
+        android:layout_width="?actionBarSize"
+        android:layout_height="?actionBarSize"
+        android:gravity="center"
+        android:scaleType="center"
+        android:text="搜索"
+        android:textColor="@color/color_grey1"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/app_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/app_back"
+        app:srcCompat="@drawable/ic_app_back" />
+
+
+
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/smartRefreshLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view3">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:listitem="@layout/item_search_group" />
+            <include
+                android:id="@+id/app_nul"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                layout="@layout/ui_app_nul" />
+        </RelativeLayout>
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:background="@drawable/dw_main_gradient_dow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_back" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,8 @@
 package com.mayunfeng.join.ui.activity
 
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.os.BatteryManager
 import android.os.Bundle
 import android.view.View
 import com.king.zxing.CameraScan
@@ -11,6 +13,7 @@ import com.king.zxing.analyze.MultiFormatAnalyzer
 import com.mayunfeng.join.R
 import com.google.zxing.Result
 import com.gyf.immersionbar.ImmersionBar
+import com.king.zxing.util.CodeUtils
 import com.mayunfeng.join.api.JoinGroupApi
 import com.mayunfeng.join.bean.BaseBean
 import com.mayunfeng.join.bean.GroupBean
@@ -20,9 +23,10 @@ import com.mayunfeng.join.utils.retrofit.RetrofitManager
 import com.pikachu.utils.base.BaseActivity
 import com.pikachu.utils.utils.ToastUtils
 import com.pikachu.utils.utils.UiUtils
+import java.io.File
 
 
-class QRCodeActivity : CaptureActivity(){
+class QRCodeActivity : CaptureActivity(), PhotoActivity.PhotoChooseListener {
 
 
     private var isWer = false
@@ -46,6 +50,15 @@ class QRCodeActivity : CaptureActivity(){
         findViewById<View>(R.id.app_status)?.let {
             it.layoutParams.height = UiUtils.getStatusBarHeight(this)
         }
+
+        findViewById<View>(R.id.qrc_image).setOnClickListener {
+            PhotoActivity.goPhotoImage(this, 1, 4, 1, this)
+        }
+        findViewById<View>(R.id.qrc_search).setOnClickListener {
+            startActivity(Intent(this, SearchGroupActivity::class.java))
+            finish()
+        }
+
     }
 
 
@@ -98,6 +111,23 @@ class QRCodeActivity : CaptureActivity(){
         return true
     }
 
+
+    /**
+     * 图片选择回调
+     */
+    override fun onChooseClick(files: MutableList<String>?, num: Int) {
+        files?:return
+        val parseQRCode = CodeUtils.parseQRCode(BitmapFactory.decodeFile(files[0]))
+        val groupId = QRCodeDisplayActivity.parseQrStr(parseQRCode)
+        if (groupId <= 0) {
+            ToastUtils.showToast("此二维码无效")
+            return
+        }
+        startActivity(Intent(this@QRCodeActivity, GroupInfoActivity::class.java).apply {
+            putExtra(BaseActivity.START_STR, groupId)
+        })
+        //finish()
+    }
 
 
 }

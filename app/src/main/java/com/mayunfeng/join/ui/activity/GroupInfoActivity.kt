@@ -12,6 +12,7 @@ import com.mayunfeng.join.databinding.ActivityGroupInfoBinding
 import com.mayunfeng.join.ui.adapter.GroupInfoUserAdapter
 import com.mayunfeng.join.ui.dialog.MsgDialog
 import com.mayunfeng.join.utils.MyRetrofitObserver.Companion.mySubscribeMainThread
+import com.mayunfeng.join.utils.UserUtils
 import com.mayunfeng.join.utils.retrofit.QuickRtObserverListener
 import com.mayunfeng.join.utils.retrofit.RetrofitManager
 import com.pikachu.utils.utils.GlideUtils
@@ -119,12 +120,22 @@ class GroupInfoActivity : AppBaseActivity<ActivityGroupInfoBinding, Serializable
             }
             else ->{ "出错" }
         }
+
+        binding.groupIdCopy.setOnClickListener {
+            UserUtils.copyStr(context, binding.groupId.text.toString())
+            showToast("已复制组ID")
+        }
+        binding.groupNameCopy.setOnClickListener {
+            UserUtils.copyStr(context, binding.groupName.text.toString())
+            showToast("已复制组名")
+        }
     }
 
 
     override fun onError(t: BaseBean<GroupBean>?, e: Throwable) {
         binding.smartRefreshLayout.finishRefresh()
         showToast(t?.reason ?: e.message)
+        finish()
     }
 
     override fun onComplete(t: BaseBean<GroupBean>) {

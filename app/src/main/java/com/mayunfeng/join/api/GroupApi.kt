@@ -74,4 +74,11 @@ interface GroupApi {
     ): Observable<BaseBean<LGroupBean<ArrayList<UserLoginBean>>>>
 
 
+    /**
+     * 模糊查询群组info
+     */
+    @GET("/myf-group-api/like-group")
+    fun sendLikeGroupList(@Query("id-name") groupNameAndGroupId: String): Observable<BaseBean<ArrayList<GroupBean>>>
+
+
 }

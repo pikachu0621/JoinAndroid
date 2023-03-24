@@ -153,6 +153,10 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
             startActivity(QRCodeActivity::class.java)
         }
 
+        // 搜索
+        binding.mainContent.addGroup.setOnClickListener{
+            startActivity(SearchGroupActivity::class.java)
+        }
 
         // 刷新
         binding.mainContent.smartRefreshLayout.setOnRefreshListener {

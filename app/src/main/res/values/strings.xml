@@ -13,6 +13,7 @@
     <string name="activity_title_qrc_join">加入二维码</string>
     <string name="activity_title_qrc">扫一扫</string>
     <string name="activity_title_group_info">组信息</string>
+    <string name="activity_title_search_group">查询组</string>
 
 
     <!-- login -->
@@ -66,6 +67,10 @@
     <!--StartSignActivity-->
     <string name="main_start_sign_nul">当前没有数据哦</string>
 
+
+    <string name="activity_qrc_image">相册</string>
+    <string name="activity_qrc_search">搜索</string>
+    <string name="activity_search_group">输入组ID/组名</string>
 
     <!--MyCreateGroupActivity-->
     <string name="my_create_group_dialog_edit">编辑组信息</string>
