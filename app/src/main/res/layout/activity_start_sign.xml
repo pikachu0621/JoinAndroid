@@ -4,8 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_bg"
+    android:background="@color/color_bg_secondary"
     tools:context=".ui.activity.StartSignActivity">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/color_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/app_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/app_back" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/app_back"
@@ -21,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="@string/app_name"
+        android:text="@string/main_top_root_user_sign_start"
         android:textColor="@color/color_grey1"
         android:textSize="15sp"
         android:textStyle="bold"
@@ -33,65 +42,86 @@
         android:id="@+id/smartRefreshLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/color_bg"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutCompat2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/app_back"
         app:srlEnableLoadMore="false"
         app:srlEnableOverScrollBounce="true"
         app:srlEnableOverScrollDrag="true"
-        app:srlEnableRefresh="true">
+        app:srlEnableRefresh="false">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.shuhart.stepview.StepView
+                android:id="@+id/step_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:sv_animationType="All"
+                app:sv_doneCircleColor="@color/color_principal"
+                app:sv_doneCircleRadius="12dp"
+                app:sv_doneStepLineColor="@color/color_principal"
+                app:sv_doneStepMarkColor="@color/color_bg"
+                app:sv_nextStepCircleColor="@color/color_principal"
+                app:sv_nextStepLineColor="@color/color_grey3"
+                app:sv_nextTextColor="@color/color_grey3"
+                app:sv_selectedCircleColor="@color/color_principal"
+                app:sv_selectedCircleRadius="12dp"
+                app:sv_selectedStepNumberColor="@color/color_bg"
+                app:sv_selectedTextColor="@color/color_principal"
+                app:sv_stepLineWidth="1dp"
+                app:sv_stepNumberTextSize="12sp"
+                app:sv_stepPadding="4dp"
+                app:sv_stepViewStyle="@style/StepView"
+                app:sv_stepsNumber="3" />
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/vpr"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/h_0"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.383"
-                    app:lottie_autoPlay="true"
-                    app:lottie_fileName="animation/animation_load_nul.json"
-                    app:lottie_loop="true"
-                    app:lottie_speed="0.8"
-                    app:lottie_colorFilter="@color/color_principal"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/main_start_sign_nul"
-                    android:textSize="14sp"
-                    android:textColor="@color/color_grey2"
-                    app:layout_constraintEnd_toEndOf="@+id/h_0"
-                    app:layout_constraintStart_toStartOf="@+id/h_0"
-                    app:layout_constraintTop_toBottomOf="@+id/h_0" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
-
-
-
+                app:layout_constraintTop_toBottomOf="@+id/step_view" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat2"
+        android:layout_width="0dp"
+        android:layout_height="90dp"
+        android:background="@color/color_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/join"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/dr_create_group_type_true_bg"
+            android:gravity="center"
+            android:text="@string/start_sign_next_step"
+            android:textColor="@color/color_bg"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
     <View
         android:id="@+id/view3"
         android:layout_width="0dp"

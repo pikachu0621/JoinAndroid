@@ -12,15 +12,15 @@ import io.reactivex.rxjava3.disposables.Disposable
 interface QuickRtObserverListener<T> : RtObserverListener<T> {
 
     override fun onRetrofitSubscribe(d: Disposable){
-        onStart(d)
+        onSendStart(d)
     }
 
     override  fun onRetrofitNext(t: T){
-        onComplete(t)
+        onSendComplete(t)
     }
 
     override  fun onRetrofitError(t: T?, e: Throwable){
-        onError(t, e)
+        onSendError(t, e)
     }
 
     override fun onRetrofitComplete(t: T){}
@@ -29,19 +29,19 @@ interface QuickRtObserverListener<T> : RtObserverListener<T> {
     /**
      * 开始时
      */
-    fun onStart(d: Disposable){
+    fun onSendStart(d: Disposable){
 
     }
 
     /**
      * 完成时
      */
-    fun onComplete(t: T)
+    fun onSendComplete(t: T)
 
     /**
      * 失败时
      */
-    fun onError(t: T?, e: Throwable){
+    fun onSendError(t: T?, e: Throwable){
 
     }
 }

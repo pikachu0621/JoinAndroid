@@ -155,6 +155,22 @@ public final class OtherUtils {
         inputManager.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);
     }
 
+    /**
+     * 隐藏输入法
+     *
+     */
+    public static void hideKeyboard(@NonNull EditText editW) {
+        editW.clearFocus();
+        try {
+            InputMethodManager imm = (InputMethodManager) editW.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(editW.getWindowToken(), 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
     //如果输入法在窗口上已经显示，则隐藏，反之则显示
     public static void showOrHide(@NonNull Context context) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);

@@ -4,7 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_bg_secondary"
     tools:context=".ui.activity.SearchGroupActivity">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/color_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/app_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/app_back" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/app_back"
@@ -33,6 +43,10 @@
             android:background="@drawable/dr_search_bg"
             android:hint="@string/activity_search_group"
             android:lines="1"
+            android:inputType="text"
+            android:imeActionLabel="@string/activity_qrc_search"
+            android:imeOptions="actionSearch"
+            android:singleLine="true"
             android:minHeight="40dp"
             android:paddingVertical="5dp"
             android:paddingStart="40dp"
@@ -74,7 +88,7 @@
         android:layout_height="?actionBarSize"
         android:gravity="center"
         android:scaleType="center"
-        android:text="搜索"
+        android:text="@string/activity_qrc_search"
         android:textColor="@color/color_grey1"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/app_back"

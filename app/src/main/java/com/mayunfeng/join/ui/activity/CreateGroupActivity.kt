@@ -136,12 +136,12 @@ class CreateGroupActivity : AppBaseActivity<ActivityCreateGroupBinding, Serializ
 
     private fun initTypeList() {
         pucApi.sendGroupType().mySubscribeMainThread(this, object :QuickRtObserverListener<BaseBean<Array<String>>>{
-            override fun onError(t: BaseBean<Array<String>>?, e: Throwable) {
+            override fun onSendError(t: BaseBean<Array<String>>?, e: Throwable) {
                 showToast(R.string.load_footer_err)
                 finish()
             }
 
-            override fun onComplete(t: BaseBean<Array<String>>) {
+            override fun onSendComplete(t: BaseBean<Array<String>>) {
                 val result = mutableListOf<String>().apply { addAll(t.result!!) }
                 createGroupTypeAdapter = CreateGroupTypeAdapter(result) {}
                 binding.classList.adapter = createGroupTypeAdapter
@@ -177,12 +177,12 @@ class CreateGroupActivity : AppBaseActivity<ActivityCreateGroupBinding, Serializ
 
 
     // 创建失败
-    override fun onError(t: BaseBean<GroupBean>?, e: Throwable) {
+    override fun onSendError(t: BaseBean<GroupBean>?, e: Throwable) {
         showToast(t?.reason ?: e.message)
     }
 
     // 创建成功
-    override fun onComplete(t: BaseBean<GroupBean>) {
+    override fun onSendComplete(t: BaseBean<GroupBean>) {
         showToast(R.string.dialog_msg_complete)
         postEventBus(t)
         finish()

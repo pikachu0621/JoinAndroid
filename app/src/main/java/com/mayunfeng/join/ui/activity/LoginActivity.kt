@@ -28,6 +28,12 @@ class LoginActivity : AppBaseActivity<ActivityLoginBinding, UserLoginBean>(), Qu
             activity.startActivity(Intent(activity, LoginActivity::class.java))
             activity.overridePendingTransition(R.anim.aty_in, R.anim.aty_ont)
         }
+
+
+        fun finishTs(activity: Activity){
+            activity.finish()
+            activity.overridePendingTransition(R.anim.aty_ont, R.anim.aty_out)
+        }
     }
 
     override fun onAppCreate(savedInstanceState: Bundle?) {
@@ -41,7 +47,7 @@ class LoginActivity : AppBaseActivity<ActivityLoginBinding, UserLoginBean>(), Qu
     private fun click() {
 
         binding.appBack.setOnClickListener {
-            finishTs()
+            finishTs(this)
         }
 
         binding.etUserName.addTextChangedListener {
@@ -94,15 +100,10 @@ class LoginActivity : AppBaseActivity<ActivityLoginBinding, UserLoginBean>(), Qu
     }
 
 
-    private fun finishTs(){
-        finish()
-        overridePendingTransition(R.anim.aty_ont, R.anim.aty_out)
-    }
-
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            finishTs()
+            finishTs(this)
             return true
         }
         return super.onKeyDown(keyCode, event)
@@ -122,18 +123,18 @@ class LoginActivity : AppBaseActivity<ActivityLoginBinding, UserLoginBean>(), Qu
     }
 
 
-    override fun onError(t: BaseBean<UserLoginBean>?, e: Throwable) {
+    override fun onSendError(t: BaseBean<UserLoginBean>?, e: Throwable) {
         showToast(t?.reason ?: e.message)
     }
 
-    override fun onComplete(t: BaseBean<UserLoginBean>) {
+    override fun onSendComplete(t: BaseBean<UserLoginBean>) {
         val result = t.result!!
         UserUtils.writeUserAccount(result.userAccount)
         // todo 全局添加 Header
         UserUtils.loginTokenInit(result.loginToken!!)
 
         startActivity(MainActivity::class.java)
-        finishTs()
+        finishTs(this)
     }
 
 

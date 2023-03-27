@@ -61,4 +61,19 @@ object UserUtils {
         myClipboard.setPrimaryClip(ClipData.newPlainText("content", str))
     }
 
+    fun encryptGroupId(groupId: Long): String{
+        return  AESBCBUtils.bytesToHexStr("id:$groupId".toByteArray(Charsets.UTF_8))
+        // return AESBCBUtils.encrypt("$groupId") ?: ""
+    }
+
+
+    fun decryptGroupId(groupIdAes: String): Long {
+        val decrypt = AESBCBUtils.hexStrToBytes(groupIdAes).toString(Charsets.UTF_8) ?: return -1
+        return try {
+            decrypt.substring(decrypt.indexOf(":") + 1).toLong()
+        } catch (e: Exception) {
+            -1
+        }
+    }
+
 }

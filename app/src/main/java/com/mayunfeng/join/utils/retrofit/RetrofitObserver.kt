@@ -15,10 +15,10 @@ import kotlin.reflect.*
  * @param myJsonStatusProperty 自定义成功状态码的变量   例子 BaseBean::error_code
  * @param myJsonStatusCode 自定义成功状态码     字段
  * @Description:
- * onSubscribe -> onNext -> onError
+ * onSubscribe -> onNext -> onSendError
  *                    |
  *                    V
- *              onComplete
+ *              onSendComplete
  */
 abstract class RetrofitObserver<T : Any>(
     private val retrofitObserverInterface: RtObserverListener<T>,

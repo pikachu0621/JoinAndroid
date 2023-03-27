@@ -5,6 +5,7 @@ import com.mayunfeng.join.bean.BaseBean
 import com.mayunfeng.join.bean.UserLoginBean
 import com.mayunfeng.join.ui.widget.LoadFooter
 import com.mayunfeng.join.ui.widget.LoadHeader
+import com.mayunfeng.join.utils.AESBCBUtils
 import com.mayunfeng.join.utils.retrofit.RetrofitManager
 import com.pikachu.utils.utils.*
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -23,9 +24,9 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 // http://192.168.0.112:8012
 const val BASE_URL = "http://192.168.0.112:8012"
 const val HTTP_OK = 200
-const val TOKEN_ERROR_KEY = "token"
 const val TOKEN_ERROR_CODE = -3
-const val GROUP_ID_LENGTH = 100000
+const val TOKEN_ERROR_KEY = "token"
+const val AES_PASSWORD = "myf"
 
 class Application : Application() {
     override fun onCreate() {
@@ -36,6 +37,7 @@ class Application : Application() {
         DarkModeUtils.init(this)
         RetrofitManager.init(BASE_URL)
         GlideUtils.init(BASE_URL)
+        AESBCBUtils.init(AES_PASSWORD)
     }
 
     companion object {

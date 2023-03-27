@@ -8,12 +8,10 @@ import com.mayunfeng.join.api.GroupApi
 import com.mayunfeng.join.api.JoinGroupApi
 import com.mayunfeng.join.base.AppBaseActivity
 import com.mayunfeng.join.bean.BaseBean
-import com.mayunfeng.join.bean.GroupBean
 import com.mayunfeng.join.bean.LGroupBean
 import com.mayunfeng.join.bean.UserLoginBean
 import com.mayunfeng.join.databinding.ActivityAllUserBinding
 import com.mayunfeng.join.ui.adapter.AllUserAdapter
-import com.mayunfeng.join.ui.adapter.MyJoinGroupAdapter
 import com.mayunfeng.join.ui.dialog.MsgDialog
 import com.mayunfeng.join.utils.MyRetrofitObserver.Companion.mySubscribeMainThread
 import com.mayunfeng.join.utils.retrofit.QuickRtObserverListener
@@ -37,8 +35,8 @@ class AllUserActivity : AppBaseActivity<ActivityAllUserBinding, Serializable>(),
 
     private val allUserAdapter: AllUserAdapter = AllUserAdapter({
         UserInfoActivity.startUserInfoActivity(this, it)
-    }, {user->
-        // todo 加移除用户
+    }, { user ->
+        //  移除用户
         msgDialog = MsgDialog(context, getString(R.string.all_out_user), {
                 groupApi.removeUserToGroup(user.id, groupId)
                     .mySubscribeMainThread(this@AllUserActivity,
@@ -76,14 +74,14 @@ class AllUserActivity : AppBaseActivity<ActivityAllUserBinding, Serializable>(),
         }
     }
 
-    override fun onError(t: BaseBean<LGroupBean<ArrayList<UserLoginBean>>>?, e: Throwable) {
+    override fun onSendError(t: BaseBean<LGroupBean<ArrayList<UserLoginBean>>>?, e: Throwable) {
         binding.smartRefreshLayout.finishRefresh()
         msgDialog?.dismiss()
         showToast(t?.reason ?: e.message)
     }
 
 
-    override fun onComplete(t: BaseBean<LGroupBean<ArrayList<UserLoginBean>>>) {
+    override fun onSendComplete(t: BaseBean<LGroupBean<ArrayList<UserLoginBean>>>) {
         binding.smartRefreshLayout.finishRefresh()
         msgDialog?.dismiss()
         if (isPostEvt){

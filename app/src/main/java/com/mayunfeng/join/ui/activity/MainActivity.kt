@@ -75,13 +75,13 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
         userApi.create(UserApi::class.java)
             .sendUserInfo()
             .mySubscribeMainThread(this,  object : QuickRtObserverListener<BaseBean<UserLoginBean>>{
-            override fun onError(t: BaseBean<UserLoginBean>?, e: Throwable) {
+            override fun onSendError(t: BaseBean<UserLoginBean>?, e: Throwable) {
                 showToast(R.string.login_user_token_failure)
                 LoginActivity.startLoginActivity(this@MainActivity)
                 finish()
             }
 
-            override fun onComplete(t: BaseBean<UserLoginBean>) {
+            override fun onSendComplete(t: BaseBean<UserLoginBean>) {
                 initUserInfoUi(t.result!!)
             }
         }, R.string.dialog_load_title)

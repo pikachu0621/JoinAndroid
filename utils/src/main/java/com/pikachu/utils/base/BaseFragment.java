@@ -133,7 +133,9 @@ public abstract class BaseFragment<T extends ViewBinding> extends Fragment {
     /**
      * 懒加载
      */
-    protected abstract void lazyLoad();
+    protected void lazyLoad() {
+
+    }
 
 
     /**

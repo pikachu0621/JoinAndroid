@@ -155,11 +155,11 @@ class EditUserInfoActivity : AppBaseActivity<ActivityEditUserInfoBinding, UserLo
     }
 
 
-    override fun onError(t: BaseBean<UserLoginBean>?, e: Throwable) {
+    override fun onSendError(t: BaseBean<UserLoginBean>?, e: Throwable) {
         showToast(t?.reason ?: e.message)
     }
 
-    override fun onComplete(t: BaseBean<UserLoginBean>) {
+    override fun onSendComplete(t: BaseBean<UserLoginBean>) {
         postEventBus(t.result!!)
     }
 

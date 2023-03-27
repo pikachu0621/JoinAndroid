@@ -30,9 +30,8 @@ class QRCodeActivity : CaptureActivity(), PhotoActivity.PhotoChooseListener {
 
 
     private var isWer = false
-    private val joinGroupApi: JoinGroupApi = RetrofitManager.getInstance().create(JoinGroupApi::class.java)
     private var longTime = 0L
-    private var longTimeSrl = "-1ASxzxdfew12122qqwzxfd"
+    private var longTimeSrl = "gerssasadrfjdshft4reydsl24251234fdsalk"
 
     override fun getLayoutId(): Int = R.layout.activity_qrcode
 
@@ -97,7 +96,7 @@ class QRCodeActivity : CaptureActivity(), PhotoActivity.PhotoChooseListener {
             if (groupId <= 0) {
                 isWer = false
                 if (System.currentTimeMillis() - longTime >= 3000L || longTimeSrl != result.text){
-                    ToastUtils.showToast("此二维码无效")
+                    ToastUtils.showToast(getString(R.string.activity_sqr_nul))
                 }
                 longTime = System.currentTimeMillis()
                 longTimeSrl = result.text
@@ -120,7 +119,7 @@ class QRCodeActivity : CaptureActivity(), PhotoActivity.PhotoChooseListener {
         val parseQRCode = CodeUtils.parseQRCode(BitmapFactory.decodeFile(files[0]))
         val groupId = QRCodeDisplayActivity.parseQrStr(parseQRCode)
         if (groupId <= 0) {
-            ToastUtils.showToast("此二维码无效")
+            ToastUtils.showToast(getString(R.string.activity_sqr_nul))
             return
         }
         startActivity(Intent(this@QRCodeActivity, GroupInfoActivity::class.java).apply {

@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,34 +22,33 @@
             android:id="@+id/group_image"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="5dp"
             android:scaleType="centerCrop"
             android:src="@mipmap/user_img"
+            android:layout_marginStart="5dp"
+            app:qmui_border_width="1.5dp"
+            app:qmui_border_color="@color/color_principal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:qmui_border_color="@color/color_principal"
-            app:qmui_border_width="1.5dp"
             app:qmui_is_circle="true" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:layout_marginTop="2dp"
             android:maxLines="1"
             android:text="@string/test_2"
+            android:layout_marginStart="10dp"
             android:textColor="@color/color_grey1"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/group_image"
+            app:layout_constraintStart_toEndOf="@+id/tv_admin"
             app:layout_constraintTop_toTopOf="@+id/group_image" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_admin"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:layout_marginBottom="2dp"
             android:background="@drawable/dr_my_create_group_item_type_bg"
             android:gravity="center"
             android:paddingHorizontal="7dp"
@@ -58,53 +56,56 @@
             android:textColor="@color/white"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/group_image"
-            app:layout_constraintStart_toStartOf="@+id/title"
+            app:layout_constraintStart_toStartOf="@+id/group_image"
+            android:layout_marginStart="26dp"
             tools:ignore="SmallSp" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/people"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
             android:text="@string/test_13"
             android:textColor="@color/color_principal"
             android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_admin"
-            app:layout_constraintStart_toEndOf="@+id/tv_admin"
-            app:layout_constraintTop_toTopOf="@+id/tv_admin" />
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/title"
+            app:layout_constraintStart_toEndOf="@+id/title"
+            app:layout_constraintTop_toTopOf="@+id/title" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+            android:layout_marginEnd="10dp"
             android:text="@string/test_7"
             android:textColor="@color/color_grey2"
             android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_admin"
-            app:layout_constraintStart_toEndOf="@+id/people"
-            app:layout_constraintTop_toTopOf="@+id/tv_admin" />
-
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/id"
+            app:layout_constraintStart_toEndOf="@+id/id"
+            app:layout_constraintTop_toTopOf="@+id/id" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/join"
-            android:layout_width="58dp"
-            android:layout_height="28dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/dr_main_list_click_bg"
-            android:gravity="center"
-            android:text="查看"
+            android:id="@+id/id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/test_5"
             android:textColor="@color/color_grey2"
-            android:textSize="11sp"
+            android:textSize="12sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_admin"
+            app:layout_constraintStart_toStartOf="@+id/title" />
+
+        <RadioButton
+            android:id="@+id/radioButton"
+            android:layout_width="40dp"
+            android:layout_height="0dp"
+            android:clickable="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

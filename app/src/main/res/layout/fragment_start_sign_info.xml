@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.StartSignMyCreateGroupFragment">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+        android:background="@drawable/dr_dialog_load_bg"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:windowSoftInputMode="adjustResize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/MeSettingText"
+            android:text="@string/start_sign_title"
+            android:textStyle="bold" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ed_val"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/group_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/dr_dialog_edit_view_bg"
+                android:hint="@string/start_sign_title_input"
+                android:lines="1"
+                android:maxLength="12"
+                android:minHeight="50dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="15dp"
+                android:textColorHint="@color/color_grey3"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_del_1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="15dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/group_name"
+                app:layout_constraintTop_toTopOf="@+id/group_name"
+                app:srcCompat="@drawable/ic_login_edit_delete" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+        android:background="@drawable/dr_dialog_load_bg"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:windowSoftInputMode="adjustResize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/MeSettingText"
+            android:text="@string/start_sign_time"
+            android:textStyle="bold" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ed_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title">
+            <com.github.gzuliyujiang.wheelpicker.widget.TimeWheelLayout
+                android:id="@+id/dateWheelLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:wheel_indicatorSize="0dp"
+                app:wheel_itemSpace="30dp"
+                android:layout_marginEnd="20dp"
+                app:wheel_itemTextBoldSelected="true"
+                app:wheel_itemTextColor="@color/color_grey2"
+                app:wheel_itemTextColorSelected="@color/color_principal"
+                app:wheel_itemTextSize="14sp"
+                app:wheel_itemTextSizeSelected="18sp"
+                app:wheel_visibleItemCount="3" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/introduce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+        android:background="@drawable/dr_dialog_load_bg"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:windowSoftInputMode="adjustResize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/time">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/MeSettingText"
+            android:text="@string/start_sign_content"
+            android:textStyle="bold" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/group_introduce"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/dr_dialog_edit_view_bg"
+                android:fillViewport="true"
+                android:gravity="start"
+                android:hint="@string/start_sign_content_input"
+                android:lines="4"
+                android:maxLength="100"
+                android:minHeight="50dp"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="15dp"
+                android:textColorHint="@color/color_grey3"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_del_2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="15dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/group_introduce"
+                app:layout_constraintTop_toTopOf="@+id/group_introduce"
+                app:srcCompat="@drawable/ic_login_edit_delete" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

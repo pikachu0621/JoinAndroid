@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    tools:context=".ui.activity.PwsGestureActivity">
+
+    <View
+        android:id="@+id/app_status"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/app_back"
+        android:layout_width="?actionBarSize"
+        android:layout_height="?actionBarSize"
+        android:padding="14dp"
+        android:tint="@color/white"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_status"
+        app:srcCompat="@drawable/ic_drawer_back" />
+
+    <com.github.ihsg.patternlocker.PatternIndicatorView
+        android:id="@+id/pattern_indicator_view"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_back"
+        app:piv_color="#797979"
+        app:piv_errorColor="#F44336"
+        app:piv_fillColor="#000000"
+        app:piv_hitColor="@color/color_principal"
+        app:piv_lineWidth="1dp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/toast_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:alpha="0.7"
+        android:ellipsize="end"
+        android:maxLength="14"
+        android:singleLine="true"
+        android:text="@string/start_sign_type_gesture"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/pattern_indicator_view"
+        app:layout_constraintStart_toStartOf="@+id/pattern_indicator_view"
+        app:layout_constraintTop_toBottomOf="@+id/pattern_indicator_view" />
+
+
+    <com.github.ihsg.patternlocker.PatternLockerView
+        android:id="@+id/pattern_lock_view"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toast_msg"
+        app:plv_color="#797979"
+        app:plv_enableAutoClean="true"
+        app:plv_enableHapticFeedback="true"
+        app:plv_enableSkip="true"
+        app:plv_errorColor="#F44336"
+        app:plv_fillColor="#000000"
+        app:plv_hitColor="@color/color_principal"
+        app:plv_lineWidth="3dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

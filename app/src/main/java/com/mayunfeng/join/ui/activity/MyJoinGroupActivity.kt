@@ -64,13 +64,13 @@ class MyJoinGroupActivity : AppBaseActivity<ActivityMyJoinGroupBinding, Serializ
     }
 
 
-    override fun onError(t: BaseBean<ArrayList<GroupBean>>?, e: Throwable) {
+    override fun onSendError(t: BaseBean<ArrayList<GroupBean>>?, e: Throwable) {
         binding.smartRefreshLayout.finishRefresh()
         showToast(t?.reason ?: e.message)
     }
 
 
-    override fun onComplete(t: BaseBean<ArrayList<GroupBean>>) {
+    override fun onSendComplete(t: BaseBean<ArrayList<GroupBean>>) {
         binding.smartRefreshLayout.finishRefresh()
         if (t.result.isNullOrEmpty()) {
             binding.appNul.root.visibility = View.VISIBLE

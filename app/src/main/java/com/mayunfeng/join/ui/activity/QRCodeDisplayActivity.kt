@@ -5,11 +5,11 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import com.king.zxing.util.CodeUtils
-import com.mayunfeng.join.GROUP_ID_LENGTH
 import com.mayunfeng.join.base.AppBaseActivity
 import com.mayunfeng.join.bean.GroupBean
 import com.mayunfeng.join.bean.UserLoginBean
 import com.mayunfeng.join.databinding.ActivityQrcodeDisplayBinding
+import com.mayunfeng.join.utils.UserUtils
 import com.pikachu.utils.type.JumpType
 import com.pikachu.utils.utils.GlideUtils
 import java.io.Serializable
@@ -29,7 +29,7 @@ class QRCodeDisplayActivity : AppBaseActivity<ActivityQrcodeDisplayBinding, Seri
             binding.qrcImg.setImageBitmap(CodeUtils.createQRCode(createQrStr(group!!.id), binding.qrcImg.width))
         }
         binding.appCompatTextView9.text = group!!.groupName
-        binding.userName.text = "ID: ${group!!.id  + GROUP_ID_LENGTH}"
+        binding.userName.text = "ID: ${UserUtils.encryptGroupId(group!!.id)}"
         GlideUtils.with(context).loadHeaderToken(group!!.groupImg).into(binding.userImage)
     }
 

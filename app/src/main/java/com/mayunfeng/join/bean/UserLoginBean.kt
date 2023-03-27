@@ -2,6 +2,14 @@ package com.mayunfeng.join.bean
 
 import java.io.Serializable
 
+
+/**
+ *
+ * @ProjectName:    考勤记录管理系统
+ * @Package:        com.mayunfeng.join.bean
+ * @Author:         pkpk.run
+ * @Description:    null
+ */
 data class UserLoginBean(
     var baseTag: Any?,
     var createTime: String,
