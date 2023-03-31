@@ -52,6 +52,7 @@ class SearchGroupActivity : AppBaseActivity<ActivitySearchGroupBinding, Serializ
     }
 
     private fun gotoSearch(loadDialogTitle: Int = R.string.dialog_load_title) {
+        binding.smartRefreshLayout.finishRefresh()
         val group = binding.etUserName.text.toString()
         if (group.isEmpty()) {
             showToast(R.string.activity_search_nul)

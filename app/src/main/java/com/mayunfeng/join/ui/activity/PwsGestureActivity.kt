@@ -98,6 +98,8 @@ class PwsGestureActivity : AppBaseActivity<ActivityPwsGestureBinding, String>() 
                 val conversionStringPws = conversionStringPws(hitIndexList)
                 if (settingPws != conversionStringPws){
                     jitterAnimator("不匹配，请重新绘制", (0xFFFF0000).toInt())
+                    binding.patternIndicatorView.updateState(hitIndexList, true)
+                    isClear = true
                     settingPws = null
                     return
                 }

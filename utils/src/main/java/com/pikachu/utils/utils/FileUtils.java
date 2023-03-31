@@ -153,7 +153,7 @@ public final class FileUtils {
                 flag = deleteDirectory(file.getAbsolutePath());
             if (!flag) break;
         }
-        return flag;/* dirFile.delete()*/
+        return  dirFile.delete();
     }
 
 

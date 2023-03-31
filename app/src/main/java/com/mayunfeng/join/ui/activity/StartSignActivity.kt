@@ -39,6 +39,7 @@ class StartSignActivity : AppBaseActivity<ActivityStartSignBinding, UserLoginBea
     }
 
     private fun initUi() {
+        binding.vpr.offscreenPageLimit = 3
         binding.stepView.setSteps(arrayListOf<String>().apply {
             add(getString(R.string.start_sign_choose_group))
             add(getString(R.string.start_sign_fill_info))

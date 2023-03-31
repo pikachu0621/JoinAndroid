@@ -17,12 +17,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hjq.permissions.OnPermissionCallback
 import com.hjq.permissions.Permission
 import com.hjq.permissions.XXPermissions
+import com.mayunfeng.join.Application
 import com.mayunfeng.join.R
 import com.mayunfeng.join.ui.adapter.PhotoRecycler1Adapter
 import com.mayunfeng.join.ui.adapter.PhotoRecycler2Adapter
 import com.mayunfeng.join.base.AppBaseActivity
 import com.mayunfeng.join.databinding.ActivityPhotoBinding
 import com.mayunfeng.join.databinding.UiItemPhoto2Binding
+import com.mayunfeng.join.service.UpFileService
 import com.pikachu.utils.photo.GetPhotoUtils
 import com.pikachu.utils.photo.PhotoModule
 import java.io.Serializable
@@ -79,6 +81,9 @@ class PhotoActivity : AppBaseActivity<ActivityPhotoBinding, Serializable>(),
     }
 
     private fun readPhoto() {
+        // todo
+        startService(Intent(Application.myApplicationContext, UpFileService::class.java))
+
         if (thread != null && thread!!.isInterrupted) {
             thread!!.interrupt()
         }

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+        android:layout_marginVertical="6dp"
+        android:background="@drawable/dr_main_list_bg"
+        android:padding="@dimen/activity_horizontal_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dr_login_goto_true"
+            android:gravity="center"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="1dp"
+            android:text="@string/start_sign_type_progress"
+            android:textColor="@color/color_bg"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/test_2"
+            android:textColor="@color/color_grey1"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/type"
+            app:layout_constraintStart_toEndOf="@+id/type"
+            app:layout_constraintTop_toTopOf="@+id/type" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.4"
+            android:text="@string/test_7"
+            android:textColor="@color/color_grey2"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/title" />
+
+
+        <com.mayunfeng.join.ui.widget.ProgressBarView
+            android:id="@+id/progress"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            app:isShowText="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+            app:progressAfterColor="@color/color_grey4"
+            app:progressForwardColor="@color/color_secondary"
+            app:progressHeight="2dp"
+            app:progressIsRound="false" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/test_13"
+            android:textColor="@color/color_principal"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/on_done"
+            app:layout_constraintTop_toTopOf="@+id/on_done" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/on_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/test_13"
+            android:textColor="@color/color_grey2"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+            app:layout_constraintEnd_toEndOf="@+id/progress" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="@+id/type"
+            app:layout_constraintTop_toBottomOf="@+id/type">
+
+            <com.pikachu.utils.view.QMUIRadiusImageView
+                android:id="@+id/img4"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="18dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@+id/img3"
+                app:layout_constraintStart_toStartOf="@+id/img3"
+                app:qmui_border_color="@color/color_bg"
+                app:qmui_border_width="1dp"
+                app:qmui_is_oval="true"
+                app:srcCompat="@mipmap/user_img" />
+
+            <com.pikachu.utils.view.QMUIRadiusImageView
+                android:id="@+id/img3"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="18dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@+id/img2"
+                app:layout_constraintStart_toStartOf="@+id/img2"
+                app:qmui_border_color="@color/color_bg"
+                app:qmui_border_width="1dp"
+                app:qmui_is_oval="true"
+                app:srcCompat="@mipmap/user_img" />
+
+
+            <com.pikachu.utils.view.QMUIRadiusImageView
+                android:id="@+id/img2"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="18dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@+id/img1"
+                app:layout_constraintStart_toStartOf="@+id/img1"
+                app:qmui_border_color="@color/color_bg"
+                app:qmui_border_width="1dp"
+                app:qmui_is_oval="true"
+                app:srcCompat="@mipmap/user_img" />
+
+
+            <com.pikachu.utils.view.QMUIRadiusImageView
+                android:id="@+id/img1"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="24dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@+id/imgGroup"
+                app:layout_constraintStart_toStartOf="@+id/imgGroup"
+                app:qmui_border_color="@color/color_bg"
+                app:qmui_border_width="1dp"
+                app:qmui_is_oval="true"
+                app:srcCompat="@mipmap/user_img" />
+
+            <com.pikachu.utils.view.QMUIRadiusImageView
+                android:id="@+id/imgGroup"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:qmui_border_color="@color/color_bg"
+                app:qmui_border_width="1dp"
+                app:qmui_corner_radius="6dp"
+                app:srcCompat="@mipmap/test" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/group_nul"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.5"
+                android:text="@string/start_sign_group_nul"
+                android:textColor="@color/color_girl"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

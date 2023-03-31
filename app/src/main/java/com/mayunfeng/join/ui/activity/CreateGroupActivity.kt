@@ -149,7 +149,7 @@ class CreateGroupActivity : AppBaseActivity<ActivityCreateGroupBinding, Serializ
                     createGroupTypeAdapter!!.setType(groupBean!!.groupType)
                 }
             }
-        })
+        }, -1)
     }
 
 

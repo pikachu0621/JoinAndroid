@@ -1,7 +1,6 @@
 package com.mayunfeng.join.utils.retrofit
 
 
-import com.mayunfeng.join.utils.ReflectionUtils
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
 import kotlin.reflect.*
@@ -20,7 +19,7 @@ import kotlin.reflect.*
  *                    V
  *              onSendComplete
  */
-abstract class RetrofitObserver<T : Any>(
+open class RetrofitObserver<T : Any>(
     private val retrofitObserverInterface: RtObserverListener<T>,
     private val myJsonStatusProperty: KCallable<Int>,
     private var myJsonStatusCode: Int = 200,

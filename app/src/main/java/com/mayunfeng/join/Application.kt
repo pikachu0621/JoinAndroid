@@ -1,11 +1,9 @@
 package com.mayunfeng.join
 
 import android.app.Application
-import com.mayunfeng.join.bean.BaseBean
-import com.mayunfeng.join.bean.UserLoginBean
+import android.content.Context
 import com.mayunfeng.join.ui.widget.LoadFooter
 import com.mayunfeng.join.ui.widget.LoadHeader
-import com.mayunfeng.join.utils.AESBCBUtils
 import com.mayunfeng.join.utils.retrofit.RetrofitManager
 import com.pikachu.utils.utils.*
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -38,9 +36,15 @@ class Application : Application() {
         RetrofitManager.init(BASE_URL)
         GlideUtils.init(BASE_URL)
         AESBCBUtils.init(AES_PASSWORD)
+        myApplicationContext = applicationContext
     }
 
     companion object {
+
+        lateinit var myApplicationContext : Context
+
+
+
 
         fun getUrl(relativePath: String): String = GlideUtils.getUrl(BASE_URL, relativePath)
 

@@ -1,8 +1,9 @@
-package com.mayunfeng.join.utils
+package com.pikachu.utils.utils
 
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
+import java.util.*
 import javax.crypto.Cipher
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
@@ -10,11 +11,13 @@ import javax.crypto.spec.SecretKeySpec
 
 object AESBCBUtils {
 
-
+    private const val MIN_NUMBER = 33
+    private const val MAX_NUMBER = 126
+    private const val BOUND = MAX_NUMBER - MIN_NUMBER + 1
+    private const val hexStr = "0123456789ABCDEF"
     private lateinit var ivs: IvParameterSpec
     private lateinit var keys: SecretKeySpec
     private lateinit var cipher: Cipher
-    private const val hexStr = "0123456789ABCDEF"
     private val hexCode = hexStr.toCharArray()
 
     fun init(aesKey: String) {
@@ -42,7 +45,6 @@ object AESBCBUtils {
         } catch (e: Exception) {
             null
         }
-
     }
 
 
@@ -135,6 +137,20 @@ object AESBCBUtils {
         } catch (_: NoSuchAlgorithmException) {
         }
         return if (is16) md516 else md532
+    }
+
+
+    /**
+     * 随机密码
+     */
+    fun randomPassword(length: Int): String {
+        val builder = java.lang.StringBuilder()
+        val random = Random()
+        for (i in 0 until length) {
+            val value = (random.nextInt(BOUND) + MIN_NUMBER).toChar()
+            builder.append(value)
+        }
+        return builder.toString()
     }
 
 }

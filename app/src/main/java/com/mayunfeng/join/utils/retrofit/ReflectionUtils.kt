@@ -1,4 +1,4 @@
-package com.mayunfeng.join.utils
+package com.mayunfeng.join.utils.retrofit
 
 import java.lang.reflect.Field
 

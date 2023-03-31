@@ -12,7 +12,7 @@ import java.io.Serializable
  */
 data class GroupBean(
     val id: Long,
-    val userId: Int,
+    val userId: Long,
     val groupImg: String,
     val groupIntroduce: String,
     val groupName: String,

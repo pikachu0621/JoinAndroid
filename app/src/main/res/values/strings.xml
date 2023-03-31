@@ -14,6 +14,12 @@
     <string name="activity_title_qrc">扫一扫</string>
     <string name="activity_title_group_info">组信息</string>
     <string name="activity_title_search_group">查询组</string>
+    <string name="activity_title_my_start_sign">我发起的签到</string>
+
+
+    <!--MyStartSignInfoActivity-->
+    <string name="activity_title_start_sign_info">签到统计</string>
+    <string name="activity_title_start_sign_user">组员签到</string>
 
 
     <!-- login -->
@@ -125,6 +131,9 @@
     <string name="start_sign_type_sqc_pws">二维码</string>
     <string name="start_sign_type_pws">请输入4位数字密码</string>
     <string name="start_sign_type_gesture">请绘制至少4个点的图案</string>
+    <string name="start_sign_type_progress">进行中</string>
+    <string name="start_sign_type_defunct">已失效</string>
+    <string name="start_sign_group_nul">该签到发起的组已解散</string>
 
 
     <!--activity_create_group-->
@@ -171,7 +180,7 @@
     <string name="test_10">新乡学院</string>
     <string name="test_11">2023-03-10 21:16:45</string>
     <string name="test_12">valuable@136.com</string>
-    <string name="test_13">100人</string>
+    <string name="test_13">/100人</string>
 
 
 </resources>

@@ -122,7 +122,8 @@ public class GetPhotoUtils {
 
     private static void compareAdd(List<PhotoModule> photoModules, String file){
 
-        String parent = getParent(file) == null ? "" : getParent(file);
+        getParent(file);
+        String parent = getParent(file);
 
         for (PhotoModule photoModule : photoModules){
             String path = photoModule.getPath() == null ? "" : photoModule.getPath();
@@ -135,9 +136,7 @@ public class GetPhotoUtils {
         String parentFile = getParent(file);
 
         String name = "";
-        if (parentFile != null){
-           name = getName(parentFile);
-        }
+        name = getName(parentFile);
         List<String> files = new ArrayList<>();
         files.add(file);
         photoModules.add(new PhotoModule(parent, name, file, files));

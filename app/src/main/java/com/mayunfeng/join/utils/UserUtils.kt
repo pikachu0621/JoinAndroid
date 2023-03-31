@@ -5,11 +5,10 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Context.CLIPBOARD_SERVICE
-import androidx.core.content.ContextCompat.getSystemService
-import com.mayunfeng.join.Application
 import com.mayunfeng.join.TOKEN_ERROR_KEY
 import com.mayunfeng.join.ui.activity.LoginActivity
 import com.mayunfeng.join.utils.retrofit.RetrofitManager
+import com.pikachu.utils.utils.AESBCBUtils
 import com.pikachu.utils.utils.AppManagerUtils
 import com.pikachu.utils.utils.GlideUtils
 import com.pikachu.utils.utils.SharedPreferencesUtils

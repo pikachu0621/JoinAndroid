@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="10dp">
+
+
+    <com.pikachu.utils.view.QMUIRadiusImageView
+        android:id="@+id/group_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/user_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:qmui_border_color="@color/color_main_top1"
+        app:qmui_border_width="1dp"
+        app:qmui_is_circle="true" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/ff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/test_2"
+        android:textColor="@color/color_main_top1"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/group_image"
+        app:layout_constraintStart_toEndOf="@+id/state"
+        app:layout_constraintTop_toBottomOf="@+id/group_image" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:src="@drawable/ic_sign_user_complete"
+        app:layout_constraintBottom_toBottomOf="@+id/ff"
+        app:layout_constraintEnd_toStartOf="@+id/ff"
+        app:layout_constraintStart_toStartOf="@+id/group_image"
+        app:layout_constraintTop_toTopOf="@+id/ff" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

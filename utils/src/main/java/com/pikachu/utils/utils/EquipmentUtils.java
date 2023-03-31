@@ -1,5 +1,6 @@
 package com.pikachu.utils.utils;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -14,6 +15,8 @@ import android.os.StatFs;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
+import androidx.core.app.ActivityCompat;
+
 import java.io.File;
 import java.lang.reflect.Method;
 import java.net.Inet4Address;
@@ -27,11 +30,10 @@ import java.util.Locale;
  * author : pikachu
  * date   : 2021/8/3 13:39
  * version: 1.0
- *
+ * <p>
  * 设备工具
  */
 public final class EquipmentUtils {
-
 
 
     /**
@@ -46,7 +48,7 @@ public final class EquipmentUtils {
     /**
      * 获取当前手机系统版本号
      *
-     * @return  系统版本号
+     * @return 系统版本号
      */
     public static String getSystemVersion() {
         return Build.VERSION.RELEASE;
@@ -55,7 +57,7 @@ public final class EquipmentUtils {
     /**
      * 获取手机型号
      *
-     * @return  手机型号
+     * @return 手机型号
      */
     public static String getSystemModel() {
         return Build.MODEL;
@@ -64,7 +66,7 @@ public final class EquipmentUtils {
     /**
      * 获取工业设备名称
      *
-     * @return  工业设备名
+     * @return 工业设备名
      */
     public static String getSystemDevice() {
         return Build.DEVICE;
@@ -73,7 +75,7 @@ public final class EquipmentUtils {
     /**
      * 获取手机品牌
      *
-     * @return  手机品牌
+     * @return 手机品牌
      */
     public static String getDeviceBrand() {
         return Build.BRAND;
@@ -92,13 +94,15 @@ public final class EquipmentUtils {
     /**
      * 获取手机厂商名
      *
-     * @return  手机厂商名
+     * @return 手机厂商名
      */
     public static String getDeviceManufacturer() {
         return Build.MANUFACTURER;
     }
+
     /**
-     *官方解释这个ID是app安装的时候生成的，本人测试每一次卸载安装生成的都是固定的，所有可以用于绑定账号
+     * 官方解释这个ID是app安装的时候生成的，本人测试每一次卸载安装生成的都是固定的，所有可以用于绑定账号
+     *
      * @param context
      * @return
      */
@@ -109,58 +113,98 @@ public final class EquipmentUtils {
 
     /**
      * 获取手机的IEMI
+     *
      * @param context
      * @return
      */
-    @SuppressLint("MissingPermission")
-    public static String getIMEI(Context context){
-        TelephonyManager mTm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        return mTm.getDeviceId();
+    @SuppressLint({"MissingPermission", "HardwareIds"})
+    public static String getIMEI(Context context) {
+        try {
+            TelephonyManager mTm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            if (OtherUtils.isAuthority(context, Manifest.permission.READ_PRECISE_PHONE_STATE)) {
+                return mTm.getDeviceId();
+            }
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     /**
      * Returns the unique subscriber ID, for example, the IMSI for a GSM phone.
      * 返回唯一的用户ID，例如GSM电话的IMSI。
      * *如果不可用，返回null。需要权限READ_PHONE_STATE
+     *
      * @param context
      * @return
      */
-    @SuppressLint("MissingPermission")
-    public static String getGSM_ID(Context context){
-        TelephonyManager mTm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        return  mTm.getSubscriberId();
+    @SuppressLint({"HardwareIds", "MissingPermission"})
+    public static String getGSM_ID(Context context) {
+        try {
+            TelephonyManager mTm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            if (OtherUtils.isAuthority(context, Manifest.permission.READ_PRECISE_PHONE_STATE)) {
+                return mTm.getSubscriberId();
+            }
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     /**
      * 获取手机当前手机号  有些手机就获取不到，比如华为
      * 一键登录功能就需要接入第三方sdk
+     *
      * @param context
      * @return
      */
-    @SuppressLint({"MissingPermission", "HardwareIds"})
-    public static String getPhone(Context context){
-        @SuppressLint("ServiceCast") TelephonyManager systemService = (TelephonyManager) context.getSystemService(Context.TELECOM_SERVICE);
-        return systemService.getLine1Number();
+    @SuppressLint({"HardwareIds", "MissingPermission"})
+    public static String getPhone(Context context) {
+        try {
+            @SuppressLint("ServiceCast") TelephonyManager systemService = (TelephonyManager) context.getSystemService(Context.TELECOM_SERVICE);
+            if (OtherUtils.isAuthority(context, Manifest.permission.READ_PHONE_STATE)) {
+                return systemService.getLine1Number();
+            }
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
     }
+
     /**
      * 获取SIM卡序号
      */
-    @SuppressLint({"MissingPermission", "HardwareIds"})
-    public static String getISM_Number(Context context){
-        @SuppressLint("ServiceCast") TelephonyManager systemService = (TelephonyManager) context.getSystemService(Context.TELECOM_SERVICE);
-        return systemService.getSimSerialNumber();
+    @SuppressLint({"HardwareIds", "MissingPermission"})
+    public static String getISM_Number(Context context) {
+        try {
+            @SuppressLint("ServiceCast") TelephonyManager systemService = (TelephonyManager) context.getSystemService(Context.TELECOM_SERVICE);
+            if (OtherUtils.isAuthority(context, Manifest.permission.READ_PHONE_STATE)) {
+                return systemService.getSimSerialNumber();
+            }
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     /**
      * 获取MAC地址    02:00:00:00:00:00
+     *
      * @param context
      * @return
      */
-    @SuppressLint("HardwareIds")
-    public static String getMAC(Context context){
-        WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-        return wifiInfo.getMacAddress();
+    @SuppressLint({"HardwareIds", "MissingPermission"})
+    public static String getMAC(Context context) {
+        try {
+            WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+            WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+            if (OtherUtils.isAuthority(context, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                return wifiInfo.getMacAddress();
+            }
+            return null;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     /**
@@ -169,37 +213,47 @@ public final class EquipmentUtils {
      * @return ["中国电信CTCC":3]["中国联通CUCC:2]["中国移动CMCC":1]["other":0]["无sim卡":-1][中国铁通 5]
      */
     public static int getSubscriptionOperatorType(Context context) {
-        int opeType = -1;
-        // No sim
-        if (!hasSim(context)) {
+        try {
+            int opeType = -1;
+            // No sim
+            if (!hasSim(context)) {
+                return opeType;
+            }
+            TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            String operator = tm.getNetworkOperator();
+            // 中国联通
+            if ("46001".equals(operator) || "46006".equals(operator) || "46009".equals(operator)) {
+                opeType = 2;
+                // 中国移动
+            } else if ("46000".equals(operator) || "46002".equals(operator) || "46004".equals(operator) || "46007".equals(operator)) {
+                opeType = 1;
+                // 中国电信
+            } else if ("46003".equals(operator) || "46005".equals(operator) || "46011".equals(operator)) {
+                opeType = 3;
+            } else if ("46020".equals(operator)) {
+                opeType = 5;
+            } else {
+                opeType = 0;
+            }
             return opeType;
+        }catch (Exception e){
+            return -1;
         }
 
-        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        String operator = tm.getNetworkOperator();
-        // 中国联通
-        if ("46001".equals(operator) || "46006".equals(operator) || "46009".equals(operator)) {
-            opeType = 2;
-            // 中国移动
-        } else if ("46000".equals(operator) || "46002".equals(operator) || "46004".equals(operator) || "46007".equals(operator)) {
-            opeType = 1;
-            // 中国电信
-        } else if ("46003".equals(operator) || "46005".equals(operator) || "46011".equals(operator)) {
-            opeType = 3;
-        } else if ("46020".equals(operator)){
-            opeType=5;
-        } else {
-            opeType = 0;
-        }
-        return opeType;
     }
+
     /**
      * 检查手机是否有sim卡
      */
     private static boolean hasSim(Context context) {
-        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-        String operator = tm.getSimOperator();
-        return operator != null;
+        try{
+            TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            String operator = tm.getSimOperator();
+            return operator != null;
+        } catch (Exception e){
+            return false;
+        }
+
     }
 
     /**
@@ -218,6 +272,7 @@ public final class EquipmentUtils {
         }
         return versionName;
     }
+
     /**
      * 判断手机是否ROOT
      */
@@ -229,21 +284,24 @@ public final class EquipmentUtils {
         }
         return false;
     }
+
     /**
      * 获取手机序列号
      *
      * @return 手机序列号
      */
     @SuppressLint({"NewApi", "MissingPermission"})
-    public static String getSerialNumber() {
+    public static String getSerialNumber(Context context) {
         String serial = "";
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {//9.0+
-                serial = Build.getSerial();
+                if (OtherUtils.isAuthority(context, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                    serial = Build.getSerial();
+                }
             } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {//8.0+
                 serial = Build.SERIAL;
             } else {//8.0-
-                Class<?> c = Class.forName("android.os.SystemProperties");
+                @SuppressLint("PrivateApi") Class<?> c = Class.forName("android.os.SystemProperties");
                 Method get = c.getMethod("get", String.class);
                 serial = (String) get.invoke(c, "ro.serialno");
             }
@@ -254,32 +312,31 @@ public final class EquipmentUtils {
     }
 
     public static String getIPAddress(Context context) {
-        @SuppressLint("MissingPermission") NetworkInfo info = ((ConnectivityManager) context
-                .getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
-        if (info != null && info.isConnected()) {
-            if (info.getType() == ConnectivityManager.TYPE_MOBILE) {//当前使用2G/3G/4G网络
-                try {
-                    for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
-                        NetworkInterface intf = en.nextElement();
-                        for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
-                            InetAddress inetAddress = enumIpAddr.nextElement();
-                            if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
-                                return inetAddress.getHostAddress();
+        try {
+            if (!OtherUtils.isAuthority(context, Manifest.permission.ACCESS_NETWORK_STATE)) return null;
+            @SuppressLint("MissingPermission") NetworkInfo info = ((ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
+            if (info != null && info.isConnected()) {
+                if (info.getType() == ConnectivityManager.TYPE_MOBILE) {//当前使用2G/3G/4G网络
+                        for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
+                            NetworkInterface intf = en.nextElement();
+                            for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
+                                InetAddress inetAddress = enumIpAddr.nextElement();
+                                if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
+                                    return inetAddress.getHostAddress();
+                                }
                             }
                         }
-                    }
-                } catch (SocketException e) {
-                    e.printStackTrace();
+                } else if (info.getType() == ConnectivityManager.TYPE_WIFI) {//当前使用无线网络
+                    WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                    WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+                    return intIP2StringIP(wifiInfo.getIpAddress());
                 }
-
-            } else if (info.getType() == ConnectivityManager.TYPE_WIFI) {//当前使用无线网络
-                WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-                WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-                String ipAddress = intIP2StringIP(wifiInfo.getIpAddress());//得到IPV4地址
-                return ipAddress;
+            } else {
+                //当前无网络连接,请在设置中打开网络
+                return null;
             }
-        } else {
-            //当前无网络连接,请在设置中打开网络
+        }catch (Exception e){
             return null;
         }
         return null;
@@ -323,6 +380,7 @@ public final class EquipmentUtils {
         }
         return strMacAddr;
     }
+
     /**
      * 获取移动设备本地IP
      *
@@ -354,10 +412,9 @@ public final class EquipmentUtils {
     }
 
     /**
-     *  获取手机内存，已用和未用
-     *
+     * 获取手机内存，已用和未用
      */
-    public static long[] queryStorage(){
+    public static long[] queryStorage() {
         StatFs statFs = new StatFs(Environment.getExternalStorageDirectory().getPath());
 
         /*//存储块总数量
@@ -379,15 +436,48 @@ public final class EquipmentUtils {
     }
 
 
+    public static String getAll(Context context) {
+
+        int subscriptionOperatorType = getSubscriptionOperatorType(context);
+        String subscriptionOperatorTypeStr = "";
+        if (subscriptionOperatorType == -1)
+            subscriptionOperatorTypeStr = "无sim卡";
+        else if (subscriptionOperatorType == 0)
+            subscriptionOperatorTypeStr = "其他";
+        else if (subscriptionOperatorType == 1)
+            subscriptionOperatorTypeStr = "中国移动";
+        else if (subscriptionOperatorType == 2)
+            subscriptionOperatorTypeStr = "中国联通";
+        else if (subscriptionOperatorType == 3)
+            subscriptionOperatorTypeStr = "中国电信";
+        else if (subscriptionOperatorType == 5)
+            subscriptionOperatorTypeStr = "中国铁通";
 
 
+        String dd = "系统语言: " + getSystemLanguage() +
+                "\n系统版本号: " + getSystemVersion() +
+                "\n设备型号: " + getSystemModel() +
+                "\n设备工业名: " + getSystemDevice() +
+                "\n设备品牌: " + getDeviceBrand() +
+                "\n设备主板: " + getDeviceBoard() +
+                "\n设备厂商: " + getDeviceManufacturer() +
+                "\nAndroidId: " + getAndroidId(context) +
+                "\n设备IMEI: " + getIMEI(context) +
+                "\nGSM-IMSI: " + getGSM_ID(context) +
+                "\n设备手机号: " + getPhone(context) +
+                "\nSIM卡序号: " + getISM_Number(context) +
+                "\nMAC地址: " + getMAC(context) +
+                "\n设备拨号运营商: " + subscriptionOperatorTypeStr +
+                "\n是否有sim卡: " + hasSim(context) +
+                "\n程序版本名: " + getAppVersionName(context) +
+                "\n是否ROOT: " + isRoot() +
+                "\n手机序列号: " + getSerialNumber(context) +
+                "\nIP: " + getIPAddress(context) +
+                "\nIP-MAC地址: " + getLocalMacAddressFromIp() +
+                "\n获取手机内存: 可用的大小[" + queryStorage()[1] / 8388608 + "MB], 总容量[" + queryStorage()[0] / 8388608 +"MB]";
+        return dd;
 
-
-
-
-
-
-
+    }
 
 
 }

@@ -1,17 +1,20 @@
 package com.mayunfeng.join.ui.activity
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import com.gyf.immersionbar.ImmersionBar
+import com.mayunfeng.join.Application
 import com.mayunfeng.join.R
-import com.mayunfeng.join.ui.adapter.MainDrawerAdapter
-import com.mayunfeng.join.ui.adapter.MainMsgAdapter
 import com.mayunfeng.join.api.UserApi
 import com.mayunfeng.join.base.AppBaseActivity
 import com.mayunfeng.join.bean.BaseBean
 import com.mayunfeng.join.bean.MainMsgBean
 import com.mayunfeng.join.bean.UserLoginBean
 import com.mayunfeng.join.databinding.ActivityMainBinding
+import com.mayunfeng.join.service.UpFileService
+import com.mayunfeng.join.ui.adapter.MainDrawerAdapter
+import com.mayunfeng.join.ui.adapter.MainMsgAdapter
 import com.mayunfeng.join.ui.dialog.MsgDialog
 import com.mayunfeng.join.ui.widget.MRecyclerView
 import com.mayunfeng.join.utils.MyRetrofitObserver.Companion.mySubscribeMainThread
@@ -53,6 +56,9 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
         initUi()
         initNavigationFragment()
         loadUserInfo()
+
+        // todo
+        startService(Intent(Application.myApplicationContext, UpFileService::class.java))
     }
 
     private fun loadUserInfo() {

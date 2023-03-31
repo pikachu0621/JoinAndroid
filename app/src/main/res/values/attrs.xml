@@ -1,4 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <bool name="isStatusBar">true</bool>
+
+
+
+
+
+    <declare-styleable name="ProgressBarView">
+        <!--前景颜色-->
+        <attr name="progressForwardColor" format="color"/>
+        <!--后景颜色-->
+        <attr name="progressAfterColor" format="color"/>
+        <attr name="progressHeight" format="dimension"/>
+        <attr name="progressToTextHeight" format="dimension"/>
+        <attr name="progressMax" format="float"/>
+        <attr name="progressNow" format="float"/>
+        <attr name="progressIsRound" format="boolean"/>
+        <attr name="isShowText" format="boolean"/>
+        <attr name="android:textColor"/>
+        <attr name="android:textStyle"/>
+        <attr name="android:textSize"/>
+        <!--%d 当前百分比值-->
+        <attr name="android:text"/>
+        <!--保留小数-->
+        <attr name="numberFormat" format="integer"/>
+    </declare-styleable>
 </resources>

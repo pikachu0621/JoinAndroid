@@ -19,7 +19,7 @@ import retrofit2.http.POST
 interface SignApi {
 
     /**
-     * 登录/注册
+     * 发起签到
      *
      * @param groupId       组的ID-在哪个组发起的
      * @param signTitle     标题
@@ -37,5 +37,17 @@ interface SignApi {
                       @Field("sign-type") signType: Int,
                       @Field("sign-key") signKey: String?,
                       @Field("sign-time") signTime: Long): Observable<BaseBean<StartSignBean>>
+
+
+    /**
+     * 获取全部签到数据
+     *
+     */
+    @GET("/myf-sign-api/all-info")
+    fun sendAllInfo(): Observable<BaseBean<ArrayList<StartSignBean>>>
+
+
+
+
 
 }
