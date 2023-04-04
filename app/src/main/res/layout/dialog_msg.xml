@@ -57,6 +57,7 @@
 
 
     <View
+        android:id="@+id/fg"
         android:layout_width="1dp"
         android:layout_height="0dp"
         android:alpha="0.06"

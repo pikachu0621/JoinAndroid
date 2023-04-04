@@ -27,20 +27,23 @@ class MyStartSignInfoActivity : AppBaseActivity<ActivityMyStartSignInfoBinding, 
     private lateinit var myStartSignUserFragment: MyStartSignUserFragment
     private lateinit var  myStartSignStatisticsFragment: MyStartSignStatisticsFragment
     private var signId = -1L
+    private var signExpire: Boolean = false
 
         companion object {
-        fun startActivity(activity: Activity, cloudSignId: Long = -1) {
+        fun startActivity(activity: Activity, cloudSignId: Long = -1, signExpire: Boolean) {
             activity.startActivity(Intent(activity, MyStartSignInfoActivity::class.java).apply {
                 putExtra(JumpType.J0, cloudSignId)
+                putExtra(JumpType.J1, signExpire)
             })
         }
     }
 
     override fun onAppCreate(savedInstanceState: Bundle?) {
         signId = getLongExtra(JumpType.J0, -1)
+        signExpire = getBooleanExtra(JumpType.J1, false)
         if (signId < 0) return finish()
-        myStartSignUserFragment = MyStartSignUserFragment.newInstance(signId)
-        myStartSignStatisticsFragment = MyStartSignStatisticsFragment.newInstance(signId)
+        myStartSignUserFragment = MyStartSignUserFragment.newInstance(signId, signExpire)
+        myStartSignStatisticsFragment = MyStartSignStatisticsFragment.newInstance(signId, signExpire)
         initUi()
     }
 
@@ -80,4 +83,12 @@ class MyStartSignInfoActivity : AppBaseActivity<ActivityMyStartSignInfoBinding, 
             override fun onPageScrollStateChanged(state: Int) {}
         })
     }
+
+
+    override fun onDestroy() {
+        myStartSignUserFragment.onDestroy()
+        myStartSignStatisticsFragment.onDestroy()
+        super.onDestroy()
+    }
+
 }

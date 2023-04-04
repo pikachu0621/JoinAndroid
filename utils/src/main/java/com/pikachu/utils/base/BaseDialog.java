@@ -4,16 +4,19 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Window;
 import android.view.WindowManager;
 
 import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.StyleRes;
 import androidx.viewbinding.ViewBinding;
+
 import com.pikachu.utils.R;
 import com.pikachu.utils.utils.ViewBindingUtils;
 
@@ -21,7 +24,7 @@ import com.pikachu.utils.utils.ViewBindingUtils;
  * author : pikachu
  * date   : 2021/7/30 14:58
  * version: 1.0
- *
+ * <p>
  * 普通对话框
  */
 public abstract class BaseDialog<T extends ViewBinding> extends Dialog {
@@ -68,10 +71,11 @@ public abstract class BaseDialog<T extends ViewBinding> extends Dialog {
 
     /**
      * 设置 位置
+     *
      * @param x x偏移
      * @param y y偏移
      */
-    public void setXY(int x, int y){
+    public void setXY(int x, int y) {
         WindowManager.LayoutParams wlp = getWindow().getAttributes();
         wlp.gravity = Gravity.TOP | Gravity.CENTER;
         wlp.x = x;
@@ -79,26 +83,25 @@ public abstract class BaseDialog<T extends ViewBinding> extends Dialog {
     }
 
     // 设置dialog的大背景背景色为透明
-    public void setBackgroundTransparent(@FloatRange(from = 0, to = 1) float amount){
+    public void setBackgroundTransparent(@FloatRange(from = 0, to = 1) float amount) {
         getWindow().setDimAmount(amount);
         this.amount = amount;
     }
 
     public void setWidthProportion(@FloatRange(from = 0F, to = 1F) float widthProportion) {
-        WindowManager manager =getWindow().getWindowManager();
+        WindowManager manager = getWindow().getWindowManager();
         DisplayMetrics outMetrics = new DisplayMetrics();
         manager.getDefaultDisplay().getMetrics(outMetrics);
         int width = 0;
-        if (widthProportion > 0){
-            width = (int)(outMetrics.widthPixels * widthProportion);
+        if (widthProportion > 0) {
+            width = (int) (outMetrics.widthPixels * widthProportion);
         }
-        getWindow().setLayout(width == 0 ? WindowManager.LayoutParams.WRAP_CONTENT: width, WindowManager.LayoutParams.WRAP_CONTENT);
+        getWindow().setLayout(width == 0 ? WindowManager.LayoutParams.WRAP_CONTENT : width, WindowManager.LayoutParams.WRAP_CONTENT);
         this.widthProportion = widthProportion;
     }
 
 
-
-    public void setAnimations(@StyleRes int id){
+    public void setAnimations(@StyleRes int id) {
         getWindow().setWindowAnimations(id);
     }
 

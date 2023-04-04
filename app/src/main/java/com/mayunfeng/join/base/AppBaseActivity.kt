@@ -1,5 +1,6 @@
 package com.mayunfeng.join.base
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import androidx.viewbinding.ViewBinding
@@ -7,11 +8,13 @@ import com.gyf.immersionbar.ImmersionBar
 import com.mayunfeng.join.R
 import com.mayunfeng.join.bean.BaseEventBean
 import com.pikachu.utils.base.BaseActivity
+import com.pikachu.utils.utils.AppManagerUtils
 import com.pikachu.utils.utils.UiUtils
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.io.Serializable
+import java.util.*
 
 
 /**
@@ -22,6 +25,14 @@ import java.io.Serializable
  * @Description:    null
  */
 abstract class AppBaseActivity<T : ViewBinding, ED : Serializable> : BaseActivity<T>() {
+
+
+
+
+    companion object{
+        val activityStack: Stack<Activity> = Stack<Activity>()
+    }
+
     abstract fun onAppCreate(savedInstanceState: Bundle?)
     override fun initActivity(savedInstanceState: Bundle?) {
         setActivityWindowsInfo(resources.getBoolean(R.bool.isStatusBar))
@@ -30,7 +41,7 @@ abstract class AppBaseActivity<T : ViewBinding, ED : Serializable> : BaseActivit
         //EventBus.getDefault().postSticky(asnDetailEventBus)
         // 发布普通事件
         // EventBus.getDefault().post(messageEvent);
-
+        activityStack.add(this)
         try {
             findViewById<View>(R.id.app_back)?.setOnClickListener {
                 finish()
@@ -104,9 +115,15 @@ abstract class AppBaseActivity<T : ViewBinding, ED : Serializable> : BaseActivit
     }
 
 
+    open fun currentActivity(): Activity {
+        return activityStack.lastElement()
+    }
+
+
     override fun onDestroy() {
-        super.onDestroy()
         EventBus.getDefault().removeAllStickyEvents()
         EventBus.getDefault().unregister(this)
+        activityStack.remove(this)
+        super.onDestroy()
     }
 }

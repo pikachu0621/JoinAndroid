@@ -120,7 +120,6 @@ public final class AppManagerUtils {
     }
 
 
-
     /**
      * 退出应用程序
      */

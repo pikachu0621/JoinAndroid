@@ -21,7 +21,7 @@ class SignInfoListActivity : AppBaseActivity<ActivitySignInfoListBinding, String
     private val signApi: SignApi = RetrofitManager.getInstance().create(SignApi::class.java)
     private val myStartSignInfoAdapter = MyStartSignInfoAdapter({
         // 列表点击事件
-        MyStartSignInfoActivity.startActivity(this@SignInfoListActivity, it.id)
+        MyStartSignInfoActivity.startActivity(this@SignInfoListActivity, it.id, it.signExpire)
     })
 
     override fun onAppCreate(savedInstanceState: Bundle?) {
@@ -36,13 +36,11 @@ class SignInfoListActivity : AppBaseActivity<ActivitySignInfoListBinding, String
                 binding.smartRefreshLayout.finishRefreshWithNoMoreData()
             }
         }
-        startLoad()
     }
 
 
     private fun startLoad(){
         binding.appNul.root.visibility = View.GONE
-        binding.smartRefreshLayout.autoRefresh()
         signApi.sendAllInfo().mySubscribeMainThread(this, this, -1)
     }
 
@@ -64,5 +62,9 @@ class SignInfoListActivity : AppBaseActivity<ActivitySignInfoListBinding, String
         myStartSignInfoAdapter.refreshData(t.result)
     }
 
+    override fun onResume() {
+        super.onResume()
+        startLoad()
+    }
 
 }

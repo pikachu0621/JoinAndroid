@@ -12,6 +12,8 @@ import java.util.Locale;
 
 public final class TimeUtils {
 
+    private static Thread thread;
+
     public static String getDateStr(String type) {
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat sdf = new SimpleDateFormat();
@@ -335,7 +337,8 @@ public final class TimeUtils {
 
     // 定时器
     public static Thread timing(long time, Runnable runnable){
-        Thread thread = new Thread(() -> {
+        if (thread != null && thread.isAlive()) thread.interrupt();
+        thread = new Thread(() -> {
             try {
                 Thread.sleep(time);
                 UiUtils.runUi(runnable);

@@ -15,6 +15,7 @@
     <string name="activity_title_group_info">组信息</string>
     <string name="activity_title_search_group">查询组</string>
     <string name="activity_title_my_start_sign">我发起的签到</string>
+    <string name="activity_title_sign_start">签到</string>
 
 
     <!--MyStartSignInfoActivity-->
@@ -84,7 +85,7 @@
     <string name="my_create_group_dialog_edit">编辑组信息</string>
     <string name="my_create_group_dialog_dissolve">解散此组</string>
     <string name="my_create_group_dialog_dissolve_msg">此操作不可逆，是否解散此组？</string>
-    <string name="my_create_group_dialog_dissolve_out_msg">此操作不可逆，是否解推出此组？</string>
+    <string name="my_create_group_dialog_dissolve_out_msg">此操作不可逆，是否解退出此组？</string>
     <string name="my_create_group_dialog_send">发起签到</string>
     <string name="my_create_group_qrc">加入二维码</string>
 
@@ -132,8 +133,9 @@
     <string name="start_sign_type_pws">请输入4位数字密码</string>
     <string name="start_sign_type_gesture">请绘制至少4个点的图案</string>
     <string name="start_sign_type_progress">进行中</string>
-    <string name="start_sign_type_defunct">已失效</string>
+    <string name="start_sign_type_defunct">已结束</string>
     <string name="start_sign_group_nul">该签到发起的组已解散</string>
+    <string name="start_sign_group_del">此操作不可逆，是否删除此签到？</string>
 
 
     <!--activity_create_group-->
@@ -154,6 +156,8 @@
     <string name="dialog_msg_confirm">确认</string>
     <string name="dialog_msg_complete">完成</string>
     <string name="dialog_msg_out_login">你可能错过签到任务，确认退出登录吗？</string>
+    <string name="dialog_msg_out_login_q">您的账号在其它设备登录，如非本人操作，请尽快修改密码！</string>
+    <string name="dialog_msg_out_login_pws_nul">密码已过期，你被迫下线！</string>
     <string name="dialog_edit_old_password">旧密码</string>
     <string name="dialog_edit_new_password">新密码</string>
     <string name="dialog_edit_modify">修改</string>

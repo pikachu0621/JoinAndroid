@@ -15,10 +15,10 @@ import com.pikachu.utils.adapter.QuickAdapter
 enum class SingStartType(
     val type: Int
 ){
-    PASSWORD_NOT(1),
-    PASSWORD_NUM(2),
-    PASSWORD_QRC(3),
-    PASSWORD_GESTURE(4)
+    PASSWORD_NOT(0),
+    PASSWORD_NUM(1),
+    PASSWORD_QRC(2),
+    PASSWORD_GESTURE(3)
 }
 
 data class SignStartTypeBean(

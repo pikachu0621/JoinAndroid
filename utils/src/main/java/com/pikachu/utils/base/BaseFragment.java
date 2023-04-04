@@ -33,7 +33,7 @@ import java.util.List;
  * @description 用于懒加载 数据等
  */
 public abstract class BaseFragment<T extends ViewBinding> extends Fragment {
-    private final static String START_STR = "PIKACHU";
+    public final static String START_STR = "PIKACHU";
     protected View mRootView;
     protected boolean isVisible = false;   //是否可见
     private boolean isPrepared = false;    //是否初始化完成
@@ -101,7 +101,9 @@ public abstract class BaseFragment<T extends ViewBinding> extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        ViewGroup parent = (ViewGroup) mRootView.getParent();
+        ViewGroup parent = null;
+        if (mRootView != null)
+             parent = (ViewGroup) mRootView.getParent();
         if (parent != null)
             parent.removeView(mRootView);
     }

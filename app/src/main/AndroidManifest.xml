@@ -14,12 +14,14 @@
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-
-
-    <!--todo -->
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- todo -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" tools:ignore="ProtectedPermissions" />
+    <uses-permission
+        android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
+
+    <!--全局对话框,不依附于程序的activity-->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <application
         android:name=".Application"
@@ -37,10 +39,20 @@
         android:theme="@style/Theme.考勤记录管理系统"
         tools:targetApi="31">
         <service
+            android:name=".service.WebSocketService"
+            android:enabled="true"
+            android:exported="false"/>
+        <service
             android:name=".service.UpFileService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="false" />
 
+        <activity
+            android:name=".ui.activity.ActivityPwsPreview"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.AdminUserStartActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.activity.SignInfoListActivity"
             android:exported="false" />

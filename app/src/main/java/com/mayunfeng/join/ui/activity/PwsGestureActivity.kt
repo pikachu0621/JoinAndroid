@@ -17,6 +17,7 @@ import com.mayunfeng.join.R
 import com.mayunfeng.join.base.AppBaseActivity
 import com.mayunfeng.join.databinding.ActivityPwsGestureBinding
 import com.pikachu.utils.type.JumpType
+import com.pikachu.utils.utils.LogsUtils
 import com.pikachu.utils.utils.TimeUtils
 
 class PwsGestureActivity : AppBaseActivity<ActivityPwsGestureBinding, String>() {
@@ -79,8 +80,9 @@ class PwsGestureActivity : AppBaseActivity<ActivityPwsGestureBinding, String>() 
                         isClear = true
                         return
                     }
-                    // todo 签到成功业务逻辑
-
+                    // 签到成功业务逻辑
+                    postEventBus(settingPws)
+                    LoginActivity.finishTs(this@PwsGestureActivity)
                     return
                 }
                 if ((hitIndexList.isEmpty() || hitIndexList.size < 4)) {
@@ -104,6 +106,7 @@ class PwsGestureActivity : AppBaseActivity<ActivityPwsGestureBinding, String>() 
                     return
                 }
                 // 返回 pws 数据
+                LogsUtils.showLog(settingPws)
                 postEventBus(settingPws)
                 LoginActivity.finishTs(this@PwsGestureActivity)
             }

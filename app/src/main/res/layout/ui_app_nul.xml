@@ -28,6 +28,7 @@
         android:text="@string/main_start_sign_nul"
         android:textColor="@color/color_grey2"
         android:textSize="14sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/h_0"
         app:layout_constraintStart_toStartOf="@+id/h_0"

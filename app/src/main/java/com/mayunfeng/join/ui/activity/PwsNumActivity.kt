@@ -22,6 +22,9 @@ class PwsNumActivity : AppBaseActivity<ActivityPwsNumBinding, String>() {
 
     private var cloudPws: String? = null
     private var settingPws: String? = null
+    private var pwsErrorNum: Int = 0
+
+
 
     companion object {
         /**
@@ -45,6 +48,7 @@ class PwsNumActivity : AppBaseActivity<ActivityPwsNumBinding, String>() {
     }
 
     override fun onAppCreate(savedInstanceState: Bundle?) {
+        cloudPws = getStringExtra(JumpType.J0)
         binding.appBack.setOnClickListener {
             LoginActivity.finishTs(this)
         }
@@ -131,8 +135,9 @@ class PwsNumActivity : AppBaseActivity<ActivityPwsNumBinding, String>() {
                 clear()
                 return
             }
-            // todo 签到成功业务逻辑
-
+            // 签到成功业务逻辑
+            postEventBus(getPws())
+            LoginActivity.finishTs(this@PwsNumActivity)
             return
         }
         if (settingPws == null) {

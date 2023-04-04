@@ -1,11 +1,378 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragment.MyStartSignStatisticsFragment">
 
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
+        android:id="@+id/smartRefreshLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srlEnableLoadMore="false"
+        app:srlEnableOverScrollBounce="true"
+        app:srlEnableOverScrollDrag="true"
+        app:srlEnableRefresh="true">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/dr_dialog_load_bg"
+                    android:padding="@dimen/activity_horizontal_margin">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/sign_name"
+                        style="@style/MeSettingText"
+                        android:text="@string/start_sign_title"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="发起时间：02-03 13:22"
+                        android:textColor="@color/color_grey2"
+                        android:textSize="13sp"
+                        app:layout_constraintStart_toStartOf="@+id/sign_name"
+                        app:layout_constraintTop_toBottomOf="@+id/sign_name" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:ellipsize="end"
+                        android:maxLines="4"
+                        android:text="@string/test_8"
+                        android:textColor="@color/color_grey2"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/time"
+                        app:lineHeight="20dp" />
+
+                    <View
+                        android:id="@+id/view8"
+                        android:layout_width="0dp"
+                        android:layout_height=".5dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/color_grey3"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/content" />
 
 
+                    <com.pikachu.utils.view.QMUIRadiusImageView
+                        android:id="@+id/send_user_img"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="10dp"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/user_img"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/view8"
+                        app:qmui_is_circle="true" />
 
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:ellipsize="end"
+                        android:maxEms="10"
+                        android:maxLines="1"
+                        android:text="发起者：user_mame"
+                        android:textColor="@color/color_grey1"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/send_user_img"
+                        app:layout_constraintStart_toEndOf="@+id/send_user_img"
+                        app:layout_constraintTop_toTopOf="@+id/send_user_img"
+                        app:lineHeight="20dp" />
+
+                    <com.pikachu.utils.view.QMUIRadiusImageView
+                        android:id="@+id/send_group_img"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/test"
+                        app:layout_constraintBottom_toBottomOf="@+id/group_name"
+                        app:layout_constraintEnd_toStartOf="@+id/group_name"
+                        app:layout_constraintTop_toTopOf="@+id/group_name"
+                        app:qmui_corner_radius="6dp" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/group_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxEms="10"
+                        android:maxLines="1"
+                        android:text="发起者：user_mame"
+                        android:textColor="@color/color_grey1"
+                        android:textSize="13sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/send_user_img"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/send_user_img"
+                        app:lineHeight="20dp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/type_start"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/dr_dialog_load_bg"
+                    android:padding="@dimen/activity_horizontal_margin">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/user_school"
+                        style="@style/MeSettingTextVice"
+                        android:text="前往查看"
+                        app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView15"
+                        app:layout_constraintEnd_toStartOf="@+id/appCompatImageView6"
+                        app:layout_constraintTop_toTopOf="@+id/appCompatTextView15" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/appCompatImageView6"
+                        style="@style/MeSettingGoImage"
+                        app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView15"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/appCompatTextView15" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView15"
+                        style="@style/MeSettingText"
+                        android:layout_width="wrap_content"
+                        android:text="签到信息"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginStart="10dp"
+                        android:text="签到类型"
+                        android:textColor="@color/color_grey2"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toStartOf="@+id/appCompatTextView17"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView4" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/appCompatImageView4"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="14dp"
+                        android:scaleType="centerInside"
+                        app:layout_constraintEnd_toEndOf="@+id/appCompatTextView16"
+                        app:layout_constraintStart_toStartOf="@+id/appCompatTextView16"
+                        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView15"
+                        app:srcCompat="@drawable/ic_start_sign_num_psw" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView17"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="有效时长"
+                        android:textColor="@color/color_grey2"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toStartOf="@+id/appCompatTextView18"
+                        app:layout_constraintStart_toEndOf="@+id/appCompatTextView16"
+                        app:layout_constraintTop_toTopOf="@+id/appCompatTextView16" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/time_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="20分钟"
+                        android:textColor="@color/color_grey1"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView4"
+                        app:layout_constraintEnd_toEndOf="@+id/appCompatTextView17"
+                        app:layout_constraintStart_toStartOf="@+id/appCompatTextView17"
+                        app:layout_constraintTop_toTopOf="@+id/appCompatImageView4" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="是否已结束"
+                        android:textColor="@color/color_grey2"
+                        android:layout_marginEnd="10dp"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/appCompatTextView17"
+                        app:layout_constraintTop_toTopOf="@+id/appCompatTextView16" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/isEx"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="已结束"
+                        android:textColor="@color/color_main_top6"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView4"
+                        app:layout_constraintEnd_toEndOf="@+id/appCompatTextView18"
+                        app:layout_constraintStart_toStartOf="@+id/appCompatTextView18"
+                        app:layout_constraintTop_toTopOf="@+id/appCompatImageView4" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/dr_dialog_load_bg"
+                    android:padding="@dimen/activity_horizontal_margin">
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView19"
+                        style="@style/MeSettingText"
+                        android:layout_width="wrap_content"
+                        android:text="实时数据"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:text="20"
+                        android:textColor="@color/color_grey1"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/appCompatTextView20"
+                        app:layout_constraintStart_toStartOf="@+id/appCompatTextView20"
+                        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView19" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:text="10"
+                        android:textColor="@color/color_grey1"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/appCompatTextView22"
+                        app:layout_constraintStart_toStartOf="@+id/appCompatTextView22"
+                        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView19" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/ratio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:text="60.00%"
+                        android:textColor="@color/color_grey1"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="@+id/appCompatTextView23"
+                        app:layout_constraintStart_toStartOf="@+id/appCompatTextView23"
+                        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView19" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="未签人数"
+                        android:textColor="@color/color_grey2"
+                        android:textSize="12sp"
+                        android:layout_marginStart="10dp"
+                        app:layout_constraintEnd_toStartOf="@+id/appCompatTextView22"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView21" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="已签人数"
+                        android:textColor="@color/color_grey2"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toStartOf="@+id/appCompatTextView23"
+                        app:layout_constraintStart_toEndOf="@+id/appCompatTextView20"
+                        app:layout_constraintTop_toTopOf="@+id/appCompatTextView20" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="签到率"
+                        android:textColor="@color/color_grey2"
+                        android:textSize="12sp"
+                        android:layout_marginEnd="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/appCompatTextView22"
+                        app:layout_constraintTop_toTopOf="@+id/appCompatTextView22" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/del"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                    android:background="@drawable/dr_dialog_load_bg"
+                    android:gravity="center"
+                    android:text="删除此签到"
+                    android:textColor="@color/color_main_top6"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/info" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.core.widget.NestedScrollView>
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

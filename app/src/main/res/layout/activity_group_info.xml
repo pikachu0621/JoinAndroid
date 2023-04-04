@@ -104,13 +104,13 @@
                     android:layout_height="100dp"
                     android:layout_marginTop="40dp"
                     android:scaleType="centerCrop"
-                    android:src="@mipmap/user_img"
+                    android:src="@mipmap/test"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:qmui_border_color="@color/color_bg_secondary"
                     app:qmui_border_width="8dp"
-                    app:qmui_is_circle="true" />
+                    app:qmui_corner_radius="20dp" />
 
 
                 <androidx.appcompat.widget.AppCompatTextView

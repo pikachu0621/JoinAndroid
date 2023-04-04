@@ -29,7 +29,7 @@
             app:qmui_border_color="@color/color_principal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:qmui_is_circle="true" />
+            app:qmui_corner_radius="14dp"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"

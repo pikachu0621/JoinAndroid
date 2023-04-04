@@ -13,6 +13,8 @@ import com.mayunfeng.join.bean.MainMsgBean
 import com.mayunfeng.join.bean.UserLoginBean
 import com.mayunfeng.join.databinding.ActivityMainBinding
 import com.mayunfeng.join.service.UpFileService
+import com.mayunfeng.join.service.WebSocketService
+import com.mayunfeng.join.service.WebSocketType
 import com.mayunfeng.join.ui.adapter.MainDrawerAdapter
 import com.mayunfeng.join.ui.adapter.MainMsgAdapter
 import com.mayunfeng.join.ui.dialog.MsgDialog
@@ -21,10 +23,7 @@ import com.mayunfeng.join.utils.MyRetrofitObserver.Companion.mySubscribeMainThre
 import com.mayunfeng.join.utils.UserUtils
 import com.mayunfeng.join.utils.retrofit.QuickRtObserverListener
 import com.mayunfeng.join.utils.retrofit.RetrofitManager
-import com.pikachu.utils.utils.DarkModeUtils
-import com.pikachu.utils.utils.GlideUtils
-import com.pikachu.utils.utils.NetUtils
-import com.pikachu.utils.utils.TimeUtils
+import com.pikachu.utils.utils.*
 
 
 enum class UserGrade(
@@ -57,7 +56,7 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
         initNavigationFragment()
         loadUserInfo()
 
-        // todo
+        // todo 删除
         startService(Intent(Application.myApplicationContext, UpFileService::class.java))
     }
 
@@ -69,9 +68,7 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
             finish()
             return
         }
-        // todo 全局token数据
         UserUtils.loginTokenInit(null)
-
         if (!NetUtils.isNetworkConnected(context)) {
             showToast(R.string.dialog_load_title_net_error)
             LoginActivity.startLoginActivity(this)
@@ -80,27 +77,47 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
         }
         userApi.create(UserApi::class.java)
             .sendUserInfo()
-            .mySubscribeMainThread(this,  object : QuickRtObserverListener<BaseBean<UserLoginBean>>{
-            override fun onSendError(t: BaseBean<UserLoginBean>?, e: Throwable) {
-                showToast(R.string.login_user_token_failure)
-                LoginActivity.startLoginActivity(this@MainActivity)
-                finish()
-            }
+            .mySubscribeMainThread(this, object : QuickRtObserverListener<BaseBean<UserLoginBean>> {
+                override fun onSendError(t: BaseBean<UserLoginBean>?, e: Throwable) {
+                    showToast(R.string.login_user_token_failure)
+                    LoginActivity.startLoginActivity(this@MainActivity)
+                    finish()
+                }
 
-            override fun onSendComplete(t: BaseBean<UserLoginBean>) {
-                initUserInfoUi(t.result!!)
-            }
-        }, R.string.dialog_load_title)
+                override fun onSendComplete(t: BaseBean<UserLoginBean>) {
+                    initUserInfoUi(t.result!!)
+                }
+            }, R.string.dialog_load_title)
     }
 
     override fun onEventBus(event: UserLoginBean?, key: Int?, msg: String?) {
-        event?:return
+        LogsUtils.showLog("---------------- $key")
+        if (key == WebSocketType.WE_OTHER_DEVICES.type || key == WebSocketType.WE_PWS_NUL.type) {
+
+            val f =
+                if (key == WebSocketType.WE_OTHER_DEVICES.type) getString(R.string.dialog_msg_out_login_q)
+                else getString(R.string.dialog_msg_out_login_pws_nul)
+            val msgDialog = MsgDialog(currentActivity(), f, {
+                it.setCancelable(false)
+                it.setCanceledOnTouchOutside(false)
+                UserUtils.loginTokenOut(currentActivity())
+                true
+            }, cancelStr = null)
+            msgDialog.show()
+            msgDialog.setCancelable(false)
+            msgDialog.setCanceledOnTouchOutside(false)
+        }
+        event ?: return
         initUserInfoUi(event)
     }
 
     // 渲染 用户数据
     private fun initUserInfoUi(userLoginBean: UserLoginBean) {
         this.userInfo = userLoginBean
+        Application.isLoginOk = true
+        // 启动 WebSocketService
+        startService(Intent(this@MainActivity, WebSocketService::class.java))
+
 
         // 用户名
         binding.mainContent.mainUserName.text = userLoginBean.userName
@@ -155,12 +172,12 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
 
 
         // 扫码
-        binding.mainContent.addGroupCode.setOnClickListener{
-            startActivity(QRCodeActivity::class.java)
+        binding.mainContent.addGroupCode.setOnClickListener {
+            QRCodeActivity.startActivity(this)
         }
 
         // 搜索
-        binding.mainContent.addGroup.setOnClickListener{
+        binding.mainContent.addGroup.setOnClickListener {
             startActivity(SearchGroupActivity::class.java)
         }
 
@@ -182,9 +199,7 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
         // 退出登录
         binding.mainDrawer.appCompatTextView7.setOnClickListener {
             MsgDialog(context, getString(R.string.dialog_msg_out_login), {
-                UserUtils.writeLoginToken("")
-                LoginActivity.startLoginActivity(this)
-                finish()
+                UserUtils.loginTokenOut(currentActivity())
                 true
             }).show()
         }
@@ -194,6 +209,11 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
         binding.mainDrawer.QMUIRadiusImageView.setOnClickListener {
             EditUserInfoActivity.startEditUserInfoActivity(this, userInfo)
         }
+
+        binding.mainContent.mySign.setOnClickListener {
+            startActivity(AdminUserStartActivity::class.java)
+        }
+
         binding.mainContent.userInfo.setOnClickListener {
             EditUserInfoActivity.startEditUserInfoActivity(this, userInfo)
         }

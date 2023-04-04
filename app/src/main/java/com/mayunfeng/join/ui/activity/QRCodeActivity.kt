@@ -1,9 +1,11 @@
 package com.mayunfeng.join.ui.activity
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.BatteryManager
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import com.king.zxing.CameraScan
 import com.king.zxing.CaptureActivity
@@ -15,14 +17,20 @@ import com.google.zxing.Result
 import com.gyf.immersionbar.ImmersionBar
 import com.king.zxing.util.CodeUtils
 import com.mayunfeng.join.api.JoinGroupApi
+import com.mayunfeng.join.base.AppBaseActivity
 import com.mayunfeng.join.bean.BaseBean
+import com.mayunfeng.join.bean.BaseEventBean
 import com.mayunfeng.join.bean.GroupBean
 import com.mayunfeng.join.utils.MyRetrofitObserver.Companion.mySubscribeMainThread
 import com.mayunfeng.join.utils.retrofit.QuickRtObserverListener
 import com.mayunfeng.join.utils.retrofit.RetrofitManager
 import com.pikachu.utils.base.BaseActivity
+import com.pikachu.utils.type.JumpType
 import com.pikachu.utils.utils.ToastUtils
 import com.pikachu.utils.utils.UiUtils
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import java.io.File
 
 
@@ -32,32 +40,58 @@ class QRCodeActivity : CaptureActivity(), PhotoActivity.PhotoChooseListener {
     private var isWer = false
     private var longTime = 0L
     private var longTimeSrl = "gerssasadrfjdshft4reydsl24251234fdsalk"
+    private var cloudPws: String? = null
+
+    private  lateinit var qrcImage: View
+    private  lateinit var qrcSearch: View
+
+
+    companion object {
+        /**
+         * @param pws 密码 == null 设置模式
+         */
+        fun startActivity(activity: Activity, cloudPws: String? = null) {
+            activity.startActivity(Intent(activity, QRCodeActivity::class.java).apply {
+                putExtra(JumpType.J0, cloudPws)
+            })
+            activity.overridePendingTransition(R.anim.aty_in, R.anim.aty_ont)
+        }
+    }
 
     override fun getLayoutId(): Int = R.layout.activity_qrcode
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppBaseActivity.activityStack.add(this)
+        EventBus.getDefault().register(this)
+        cloudPws = intent.getStringExtra(JumpType.J0)
+
         findViewById<View>(R.id.app_back)?.setOnClickListener {
-            finish()
+            LoginActivity.finishTs(this)
         }
         ImmersionBar.with(this)
             .statusBarDarkFont(false)
             .fitsSystemWindows(false)
-            .navigationBarDarkIcon(resources.getBoolean(R.bool.isStatusBar))
-            .navigationBarColor(R.color.color_bg)
+            .navigationBarDarkIcon(true)
+            .navigationBarColor(R.color.black)
             .init()
         findViewById<View>(R.id.app_status)?.let {
             it.layoutParams.height = UiUtils.getStatusBarHeight(this)
         }
 
-        findViewById<View>(R.id.qrc_image).setOnClickListener {
+        qrcImage = findViewById<View>(R.id.qrc_image)
+        qrcSearch = findViewById<View>(R.id.qrc_search)
+
+        qrcImage.setOnClickListener {
             PhotoActivity.goPhotoImage(this, 1, 4, 1, this)
         }
-        findViewById<View>(R.id.qrc_search).setOnClickListener {
+        qrcSearch.setOnClickListener {
             startActivity(Intent(this, SearchGroupActivity::class.java))
-            finish()
+            LoginActivity.finishTs(this)
         }
-
+        cloudPws?.let {
+            qrcSearch.visibility = View.GONE
+        }
     }
 
 
@@ -92,19 +126,39 @@ class QRCodeActivity : CaptureActivity(), PhotoActivity.PhotoChooseListener {
         if (isWer) return true
         if (result != null) {
             isWer = true
-            val groupId = QRCodeDisplayActivity.parseQrStr(result.text)
-            if (groupId <= 0) {
-                isWer = false
-                if (System.currentTimeMillis() - longTime >= 3000L || longTimeSrl != result.text){
-                    ToastUtils.showToast(getString(R.string.activity_sqr_nul))
+            var groupId = 0L
+            var pws = ""
+            if(cloudPws != null){
+                pws = QRCodeDisplayActivity.parseQrStrPws(result.text)
+                if (pws == "") {
+                    isWer = false
+                    if (System.currentTimeMillis() - longTime >= 3000L || longTimeSrl != result.text){
+                        ToastUtils.showToast(getString(R.string.activity_sqr_nul))
+                    }
+                    longTime = System.currentTimeMillis()
+                    longTimeSrl = result.text
+                    return true
                 }
-                longTime = System.currentTimeMillis()
-                longTimeSrl = result.text
-                return true
+            } else {
+                groupId = QRCodeDisplayActivity.parseQrStr(result.text)
+                if (groupId <= 0) {
+                    isWer = false
+                    if (System.currentTimeMillis() - longTime >= 3000L || longTimeSrl != result.text){
+                        ToastUtils.showToast(getString(R.string.activity_sqr_nul))
+                    }
+                    longTime = System.currentTimeMillis()
+                    longTimeSrl = result.text
+                    return true
+                }
             }
-            startActivity(Intent(this@QRCodeActivity, GroupInfoActivity::class.java).apply {
-                putExtra(BaseActivity.START_STR, groupId)
-            })
+            if(cloudPws != null){
+                EventBus.getDefault().post(BaseEventBean(pws, null, null, null))
+                LoginActivity.finishTs(this@QRCodeActivity)
+            } else {
+                startActivity(Intent(this@QRCodeActivity, GroupInfoActivity::class.java).apply {
+                    putExtra(BaseActivity.START_STR, groupId)
+                })
+            }
             return false
         }
         return true
@@ -117,16 +171,45 @@ class QRCodeActivity : CaptureActivity(), PhotoActivity.PhotoChooseListener {
     override fun onChooseClick(files: MutableList<String>?, num: Int) {
         files?:return
         val parseQRCode = CodeUtils.parseQRCode(BitmapFactory.decodeFile(files[0]))
-        val groupId = QRCodeDisplayActivity.parseQrStr(parseQRCode)
-        if (groupId <= 0) {
-            ToastUtils.showToast(getString(R.string.activity_sqr_nul))
-            return
+        if(cloudPws != null){
+            val pws = QRCodeDisplayActivity.parseQrStrPws(parseQRCode)
+            if (pws == "") {
+                ToastUtils.showToast(getString(R.string.activity_sqr_nul))
+                return
+            }
+            EventBus.getDefault().post(BaseEventBean(pws, null, null, null))
+            LoginActivity.finishTs(this@QRCodeActivity)
+        } else {
+            val groupId = QRCodeDisplayActivity.parseQrStr(parseQRCode)
+            if (groupId <= 0) {
+                ToastUtils.showToast(getString(R.string.activity_sqr_nul))
+                return
+            }
+            startActivity(Intent(this@QRCodeActivity, GroupInfoActivity::class.java).apply {
+                putExtra(BaseActivity.START_STR, groupId)
+            })
         }
-        startActivity(Intent(this@QRCodeActivity, GroupInfoActivity::class.java).apply {
-            putExtra(BaseActivity.START_STR, groupId)
-        })
         //finish()
     }
 
 
+    @kotlin.jvm.Throws
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun baseEventBus(event: BaseEventBean<String>?) { }
+
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            LoginActivity.finishTs(this)
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
+    }
+
+    override fun onDestroy() {
+        AppBaseActivity.activityStack.remove(this)
+        EventBus.getDefault().removeAllStickyEvents()
+        EventBus.getDefault().unregister(this)
+        super.onDestroy()
+    }
 }

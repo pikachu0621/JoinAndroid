@@ -28,7 +28,7 @@ class SearchGroupActivity : AppBaseActivity<ActivitySearchGroupBinding, Serializ
 
     override fun onAppCreate(savedInstanceState: Bundle?) {
         binding.imgDel1.setOnClickListener {
-            startActivity(QRCodeActivity::class.java)
+            QRCodeActivity.startActivity(this)
             finish()
         }
 

@@ -2,11 +2,10 @@ package com.mayunfeng.join.api
 
 import com.mayunfeng.join.bean.BaseBean
 import com.mayunfeng.join.bean.StartSignBean
+import com.mayunfeng.join.bean.UserSignBean
+import com.mayunfeng.join.bean.UserSignTable
 import io.reactivex.rxjava3.core.Observable
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 
 /**
@@ -31,12 +30,14 @@ interface SignApi {
      */
     @FormUrlEncoded
     @POST("/myf-sign-api/start")
-    fun sendStartSign(@Field("group-id") groupId : Long,
-                      @Field("sign-title") signTitle: String?,
-                      @Field("sign-content") signContent: String?,
-                      @Field("sign-type") signType: Int,
-                      @Field("sign-key") signKey: String?,
-                      @Field("sign-time") signTime: Long): Observable<BaseBean<StartSignBean>>
+    fun sendStartSign(
+        @Field("group-id") groupId: Long,
+        @Field("sign-title") signTitle: String?,
+        @Field("sign-content") signContent: String?,
+        @Field("sign-type") signType: Int,
+        @Field("sign-key") signKey: String?,
+        @Field("sign-time") signTime: Long
+    ): Observable<BaseBean<StartSignBean>>
 
 
     /**
@@ -47,7 +48,37 @@ interface SignApi {
     fun sendAllInfo(): Observable<BaseBean<ArrayList<StartSignBean>>>
 
 
+    /**
+     * 删除签到
+     * @param signId
+     */
+    @GET("/myf-sign-api/delete-sign/{signId}")
+    fun sendDelSign(@Path("signId") signId: Long): Observable<BaseBean<ArrayList<StartSignBean>>>
 
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     *  获取全部用户签到数据
+     * @param signId
+     */
+    @GET("/myf-user-sign-api/all-info/{signId}")
+    fun sendAllUserInfo(@Path("signId") signId: Long): Observable<BaseBean<UserSignBean>>
+
+
+    /**
+     * 获取 用户签到数据
+     */
+    @GET("/myf-user-sign-api/my-sign-info")
+    fun sendMySignInfo(): Observable<BaseBean<ArrayList<UserSignTable>>>
+
+
+    /**
+     * 用户签到
+     */
+    @GET("/myf-user-sign-api/start-sign")
+    fun sendStartSign(
+        @Query("sign-id") signId: Long,
+        @Query("key") key: String? = null
+    ): Observable<BaseBean<Boolean>>
 
 }

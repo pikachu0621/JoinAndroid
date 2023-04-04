@@ -104,6 +104,7 @@ class StartSignActivity : AppBaseActivity<ActivityStartSignBinding, UserLoginBea
 
     //  todo 创建完成
     override fun onSendComplete(t: BaseBean<StartSignBean>) {
-
+        finish()
+        MyStartSignInfoActivity.startActivity(this, t.result!!.id, t.result!!.signExpire)
     }
 }

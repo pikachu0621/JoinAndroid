@@ -5,32 +5,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.CallSuper;
-import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewbinding.ViewBinding;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
 import com.pikachu.utils.utils.AppManagerUtils;
 import com.pikachu.utils.utils.LogsUtils;
 import com.pikachu.utils.utils.ToastUtils;
-import com.pikachu.utils.utils.UiUtils;
 import com.pikachu.utils.utils.ViewBindingUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 

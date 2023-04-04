@@ -1,42 +1,34 @@
 package com.mayunfeng.join.base
 
-import android.os.Bundle
-import androidx.fragment.app.FragmentActivity
+import android.app.Service
+import android.content.Intent
+import android.os.IBinder
 import androidx.viewbinding.ViewBinding
-import com.mayunfeng.join.R
 import com.mayunfeng.join.bean.BaseEventBean
-import com.pikachu.utils.base.BaseFragment
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.io.Serializable
 
-/**
- *
- * @ProjectName:    考勤记录管理系统
- * @Package:        com.mayunfeng.join.base
- * @Author:         pkpk.run
- * @Description:    null
- */
-abstract class AppBaseFragment<T : ViewBinding, ED : Serializable> : BaseFragment<T>() {
+open class BaseService<ED : Serializable>  : Service()  {
 
 
 
-
-    abstract fun onAppCreateView(
-        savedInstanceState: Bundle?,
-        binding: T,
-        activity: FragmentActivity
-    )
-
-    override fun onInitView(savedInstanceState: Bundle?, binding: T, activity: FragmentActivity) {
-        EventBus.getDefault().register(this)
-        onAppCreateView(savedInstanceState, binding, activity)
+    override fun onBind(p0: Intent?): IBinder? {
+        return null
     }
 
 
+    override fun onCreate() {
+        super.onCreate()
+        EventBus.getDefault().register(this)
+    }
 
-
+    override fun onDestroy() {
+        EventBus.getDefault().removeAllStickyEvents()
+        EventBus.getDefault().unregister(this)
+        super.onDestroy()
+    }
 
 
     // ------------------------------------------------------------------- eventbus
@@ -84,19 +76,4 @@ abstract class AppBaseFragment<T : ViewBinding, ED : Serializable> : BaseFragmen
     open fun onEventBusSticky(event: ED?, key: Int?, msg: String?) {
 
     }
-
-
-    override fun onDestroyView() {
-        EventBus.getDefault().removeAllStickyEvents()
-        EventBus.getDefault().unregister(this)
-        super.onDestroyView()
-    }
-
-    override fun onDestroy() {
-        EventBus.getDefault().removeAllStickyEvents()
-        EventBus.getDefault().unregister(this)
-        super.onDestroy()
-    }
-
-
 }

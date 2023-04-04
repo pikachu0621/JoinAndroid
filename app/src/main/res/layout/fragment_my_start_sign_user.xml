@@ -23,20 +23,34 @@
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal"
                 android:orientation="vertical">
-                <com.pikachu.utils.view.QMUIRadiusImageView
-                    android:id="@+id/group_image"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+
+
+                <RelativeLayout
                     android:layout_marginTop="20dp"
-                    android:scaleType="centerCrop"
-                    android:src="@mipmap/test"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:qmui_is_circle="true" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <com.mayunfeng.join.ui.widget.CircularProgressBarView
+                        android:id="@+id/time_bar"
+                        android:layout_width="66dp"
+                        android:layout_height="66dp"
+                        android:layout_centerInParent="true" />
+
+                    <com.pikachu.utils.view.QMUIRadiusImageView
+                        android:id="@+id/group_image"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_centerInParent="true"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/test"
+                        app:qmui_is_circle="true" />
+                </RelativeLayout>
+
+
 
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/title"
+                    android:id="@+id/time_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="剩余时间：20分钟/已结束"
@@ -46,17 +60,73 @@
                     android:textStyle="bold" />
 
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler"
-                    android:layout_marginTop="20dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:overScrollMode="never"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:spanCount="5"
-                    tools:listitem="@layout/item_sign_user" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="20dp"
+                    android:padding="8dp"
+                    android:background="@drawable/dr_dialog_load_bg"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:drawableStart="@drawable/ic_sign_user_complete"
+                        android:gravity="center"
+                        android:text=" 已签到"
+                        android:textColor="@color/color_grey2"
+                        android:textSize="13sp"
+                        app:layout_constraintEnd_toStartOf="@+id/appCompatTextView13"
+                        app:layout_constraintTop_toTopOf="@+id/appCompatTextView14" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_sign_user_wait"
+                        android:gravity="center"
+                        android:text=" 待签到"
+                        android:textColor="@color/color_grey2"
+                        android:textSize="13sp"
+                        android:layout_marginEnd="10dp"
+                        app:layout_constraintEnd_toStartOf="@+id/appCompatTextView14"
+                        app:layout_constraintTop_toTopOf="@+id/appCompatTextView14" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/appCompatTextView14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:drawableStart="@drawable/ic_sign_user_incomplete"
+                        android:gravity="center"
+                        android:text=" 未签到"
+                        android:textColor="@color/color_grey2"
+                        android:textSize="13sp"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:overScrollMode="never"
+                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView12"
+                        app:spanCount="4"
+                        tools:itemCount="20"
+                        tools:layout_editor_absoluteX="8dp"
+                        tools:listitem="@layout/item_sign_user" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.core.widget.NestedScrollView>
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>

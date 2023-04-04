@@ -90,7 +90,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:qmui_is_circle="true" />
+                    app:qmui_corner_radius="20dp" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/group_image_mask"
@@ -109,8 +109,8 @@
                     android:id="@+id/appCompatImageView3"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_marginStart="56dp"
-                    android:layout_marginTop="56dp"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="60dp"
                     android:background="@drawable/dr_edit_user_edt_bg"
                     android:scaleType="center"
                     app:layout_constraintStart_toStartOf="@+id/group_image"

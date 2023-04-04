@@ -35,9 +35,19 @@ class QRCodeDisplayActivity : AppBaseActivity<ActivityQrcodeDisplayBinding, Seri
 
     companion object{
         fun createQrStr(id: Long): String{
+            return createQrStr(id.toString())
+        }
+
+        fun createQrStr(pws: String): String{
             val t = (Timestamp(System.currentTimeMillis()).time / 1000).toString()
             val r = Random.nextInt(100001, 200000).toString()
-            return "$id#$t$r"
+            return "$pws#$t$r"
+        }
+
+        fun parseQrStrPws(str: String?): String {
+            if (str.isNullOrEmpty()) return ""
+            if (!str.contains("#")) return ""
+            return str.substring(0, str.indexOf("#"))
         }
 
         fun parseQrStr(str: String?): Long {

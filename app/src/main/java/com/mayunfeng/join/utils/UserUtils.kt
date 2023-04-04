@@ -5,7 +5,9 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Context.CLIPBOARD_SERVICE
+import com.mayunfeng.join.Application
 import com.mayunfeng.join.TOKEN_ERROR_KEY
+import com.mayunfeng.join.service.WebSocketService
 import com.mayunfeng.join.ui.activity.LoginActivity
 import com.mayunfeng.join.utils.retrofit.RetrofitManager
 import com.pikachu.utils.utils.AESBCBUtils
@@ -39,6 +41,8 @@ object UserUtils {
         RetrofitManager.getInstance().addHeader(TOKEN_ERROR_KEY, "")
         LoginActivity.startLoginActivity(activity)
         AppManagerUtils.getAppManager().finishAllActivity(activity.javaClass, LoginActivity::class.java)
+        Application.isLoginOk = false
+        WebSocketService.getWebSocketService()?.cancel()
         // context.startActivity(Intent(context, LoginActivity::class.java))
     }
 

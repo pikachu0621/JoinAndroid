@@ -137,6 +137,7 @@
                         android:paddingBottom="10dp">
 
                         <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/my_sign"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
