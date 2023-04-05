@@ -3,19 +3,29 @@ package com.mayunfeng.join.service
 import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.annotation.IntRange
 import androidx.core.app.NotificationCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.load.model.LazyHeaders
+import com.google.gson.Gson
 import com.mayunfeng.join.Application
 import com.mayunfeng.join.R
 import com.mayunfeng.join.TOKEN_ERROR_KEY
 import com.mayunfeng.join.base.BaseService
+import com.mayunfeng.join.bean.UserSignTable
+import com.mayunfeng.join.ui.activity.AdminUserStartActivity
 import com.mayunfeng.join.ui.activity.MainActivity
 import com.mayunfeng.join.utils.UserUtils
+import com.pikachu.utils.utils.GlideUtils
 import com.pikachu.utils.utils.LogsUtils
 import okhttp3.*
 import java.io.Serializable
 import java.util.concurrent.TimeUnit
+
 
 enum class WebSocketType(
     val type: Int,
@@ -26,6 +36,7 @@ enum class WebSocketType(
     WE_CLOSED(2002, "断开连接"),
     WE_OTHER_DEVICES(2003, "其它设备登录"),
     WE_PWS_NUL(2004, "密码被修改"),
+    WE_MESSAGE_GOTO_SIGN(2005, "有新签到任务"),
 }
 
 
@@ -37,7 +48,6 @@ class WebSocketService : BaseService<Serializable>() {
     private var reconnectionNumAdd: Int = 0
 
 
-
     override fun onCreate() {
         super.onCreate()
         webSocketService = this
@@ -47,9 +57,10 @@ class WebSocketService : BaseService<Serializable>() {
             MainActivity::class.java,
             R.mipmap.ic_launcher,
             getString(R.string.app_name),
-            getString(R.string.app_name)+"运行行中",
+            getString(R.string.app_name) + "运行行中",
             "签到在线中...",
-            "点击进入软件");
+            "点击进入软件"
+        );
     }
 
 
@@ -57,7 +68,6 @@ class WebSocketService : BaseService<Serializable>() {
         startWebSocket()
         return super.onStartCommand(intent, flags, startId)
     }
-
 
 
     fun startWebSocketNul() {
@@ -92,6 +102,15 @@ class WebSocketService : BaseService<Serializable>() {
             //接收服务器消息 text
             override fun onMessage(webSocket: WebSocket, text: String) {
                 isClosed = false
+                val fromJson: UserSignTable? = try {
+                    Gson().fromJson(text, UserSignTable::class.java)
+                } catch (_ : Exception){
+                    null
+                }
+                if (fromJson != null){
+                    postEventBus(fromJson, WebSocketType.WE_MESSAGE_GOTO_SIGN.type)
+                    return
+                }
                 postEventBus(text, WebSocketType.WE_MESSAGE.type)
             }
 
@@ -99,13 +118,21 @@ class WebSocketService : BaseService<Serializable>() {
             override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
                 LogsUtils.showLog("WebSocket 链接失败--${t.message}")
                 isClosed = true
-                reconnectionNumAdd ++
+                reconnectionNumAdd++
                 startWebSocket()
                 // postEventBus(null, WebSocketType.WE_CLOSED.type)
             }
 
             override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
                 isClosed = true
+                if (code == 1001) {
+                    postEventBus(null, WebSocketType.WE_OTHER_DEVICES.type)
+                    return
+                }
+                if (code == 1002) {
+                    postEventBus(null, WebSocketType.WE_PWS_NUL.type)
+                    return
+                }
                 postEventBus(null, WebSocketType.WE_CLOSED.type)
             }
 
@@ -145,6 +172,8 @@ class WebSocketService : BaseService<Serializable>() {
     companion object {
 
         private var webSocketService: WebSocketService? = null
+        private var notifyId: Int = 2
+
 
         fun getWebSocketService(): WebSocketService? = webSocketService
 
@@ -206,7 +235,42 @@ class WebSocketService : BaseService<Serializable>() {
         }
 
 
+        /**
+         * 消息通知
+         */
+        fun showMsgNotify(
+            context: Context,
+            title: String,
+            msg: String,
+            image: Bitmap? = null,
+            cls: Class<out Activity>,
+        ) {
+            val manager =
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val channel = NotificationChannel(
+                    context.applicationInfo.name,
+                    "消息通知",
+                    NotificationManager.IMPORTANCE_DEFAULT
+                )
+                manager.createNotificationChannel(channel)
+                channel.enableLights(true)
+                channel.setShowBadge(true);
+            }
+            val contentIntent = PendingIntent.getActivity(
+                context, 0, Intent(context, cls), 0
+            )
+            val notification = NotificationCompat.Builder(context, context.applicationInfo.name)
+                .setContentTitle(title)
+                .setContentText(msg)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setPriority(NotificationCompat.PRIORITY_HIGH) //设置该通知优先级
+                .setCategory(Notification.CATEGORY_MESSAGE) //设置通知类别
+                .setContentIntent(contentIntent) //触摸跳转
+            if (image != null) notification.setLargeIcon(image)
+            val build = notification.build()
+            manager.notify(notifyId++, build)
+        }
     }
-
-
 }

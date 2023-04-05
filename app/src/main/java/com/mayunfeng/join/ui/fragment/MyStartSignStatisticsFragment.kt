@@ -13,6 +13,7 @@ import com.mayunfeng.join.bean.GroupBean
 import com.mayunfeng.join.bean.StartSignBean
 import com.mayunfeng.join.bean.UserSignBean
 import com.mayunfeng.join.databinding.FragmentMyStartSignStatisticsBinding
+import com.mayunfeng.join.service.WebSocketType
 import com.mayunfeng.join.ui.activity.ActivityPwsPreview
 import com.mayunfeng.join.ui.activity.GroupInfoActivity
 import com.mayunfeng.join.ui.activity.UserInfoActivity
@@ -181,7 +182,7 @@ class MyStartSignStatisticsFragment :
     }
 
     override fun onEventBus(event: String?, key: Int?, msg: String?) {
-        if (key == 6){
+        if (key == 6 || key == WebSocketType.WE_MESSAGE.type){
             load(false)
         }
     }

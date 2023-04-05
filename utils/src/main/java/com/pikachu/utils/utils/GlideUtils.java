@@ -4,6 +4,7 @@ import static com.pikachu.utils.utils.ToastUtils.context;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.widget.ImageView;
@@ -16,11 +17,15 @@ import androidx.annotation.RawRes;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.load.model.LazyHeaders;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
 
 import java.io.File;
 import java.net.URL;
@@ -33,6 +38,13 @@ import java.util.Objects;
  * @Description: null
  */
 public class GlideUtils {
+
+
+
+    public interface ToBitmapListener{
+        void onBitmap(@Nullable  Bitmap bitmap);
+    }
+
 
     private static String baseUrl = null;
     private static String token = null;
@@ -154,6 +166,33 @@ public class GlideUtils {
         public Into transition(int transitionTime){
             load = load.transition(DrawableTransitionOptions.withCrossFade(transitionTime));
             return this;
+        }
+
+        public void intoBitmap(ToBitmapListener toBitmapListener){
+            load.listener(new RequestListener<Drawable>() {
+                /**
+                 * 加载失败
+                 * @return false 未消费，继续走into(ImageView)
+                 *         true 已消费，不再继续走into(ImageView)
+                 */
+                @Override
+                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                    toBitmapListener.onBitmap(null);
+                    return true;
+                }
+
+                /**
+                 * 加载成功
+                 * @return false 未消费，继续走into(ImageView)
+                 *         true 已消费，不再继续走into(ImageView)
+                 */
+                @Override
+                public boolean onResourceReady(Drawable drawable, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                    //这里的线程为主线程
+                    toBitmapListener.onBitmap(((BitmapDrawable) drawable).getBitmap());
+                    return true;
+                }
+            }).submit();
         }
 
         public void into(ImageView imageView){

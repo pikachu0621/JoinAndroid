@@ -25,7 +25,7 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 // 42.192.221.73
 // 192.168.0.112
 
-const val BASE_ADDRESS = "42.192.221.73"
+const val BASE_ADDRESS = "192.168.0.112"
 const val BASE_PORT = "8012"
 const val BASE_HTTP_URL = "http://${BASE_ADDRESS}:${BASE_PORT}"
 const val BASE_WS_URL = "ws://${BASE_ADDRESS}:${BASE_PORT}"

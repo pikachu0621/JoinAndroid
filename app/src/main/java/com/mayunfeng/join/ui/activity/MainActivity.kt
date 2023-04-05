@@ -2,7 +2,10 @@ package com.mayunfeng.join.ui.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import com.bumptech.glide.load.resource.bitmap.BitmapEncoder
 import com.gyf.immersionbar.ImmersionBar
 import com.mayunfeng.join.Application
 import com.mayunfeng.join.R
@@ -11,6 +14,7 @@ import com.mayunfeng.join.base.AppBaseActivity
 import com.mayunfeng.join.bean.BaseBean
 import com.mayunfeng.join.bean.MainMsgBean
 import com.mayunfeng.join.bean.UserLoginBean
+import com.mayunfeng.join.bean.UserSignTable
 import com.mayunfeng.join.databinding.ActivityMainBinding
 import com.mayunfeng.join.service.UpFileService
 import com.mayunfeng.join.service.WebSocketService
@@ -18,12 +22,14 @@ import com.mayunfeng.join.service.WebSocketType
 import com.mayunfeng.join.ui.adapter.MainDrawerAdapter
 import com.mayunfeng.join.ui.adapter.MainMsgAdapter
 import com.mayunfeng.join.ui.dialog.MsgDialog
+import com.mayunfeng.join.ui.fragment.MyStartSignUserFragment
 import com.mayunfeng.join.ui.widget.MRecyclerView
 import com.mayunfeng.join.utils.MyRetrofitObserver.Companion.mySubscribeMainThread
 import com.mayunfeng.join.utils.UserUtils
 import com.mayunfeng.join.utils.retrofit.QuickRtObserverListener
 import com.mayunfeng.join.utils.retrofit.RetrofitManager
 import com.pikachu.utils.utils.*
+import java.io.Serializable
 
 
 enum class UserGrade(
@@ -36,7 +42,7 @@ enum class UserGrade(
 
 
 @SuppressLint("UseCompatLoadingForDrawables", "SetTextI18n")
-class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
+class MainActivity : AppBaseActivity<ActivityMainBinding, Serializable>() {
 
     private var mainMsgAdapter: MainMsgAdapter? = null
     private lateinit var userInfo: UserLoginBean
@@ -90,10 +96,9 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
             }, R.string.dialog_load_title)
     }
 
-    override fun onEventBus(event: UserLoginBean?, key: Int?, msg: String?) {
+    override fun onEventBus(event: Serializable?, key: Int?, msg: String?) {
         LogsUtils.showLog("---------------- $key")
         if (key == WebSocketType.WE_OTHER_DEVICES.type || key == WebSocketType.WE_PWS_NUL.type) {
-
             val f =
                 if (key == WebSocketType.WE_OTHER_DEVICES.type) getString(R.string.dialog_msg_out_login_q)
                 else getString(R.string.dialog_msg_out_login_pws_nul)
@@ -106,8 +111,25 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
             msgDialog.show()
             msgDialog.setCancelable(false)
             msgDialog.setCanceledOnTouchOutside(false)
+            return
         }
         event ?: return
+        if (key == WebSocketType.WE_MESSAGE_GOTO_SIGN.type ){
+            if (event !is UserSignTable) return
+            GlideUtils.with(this@MainActivity).loadHeaderToken(event.startSignInfo.userTable.userImg).intoBitmap {
+                WebSocketService.showMsgNotify(
+                    Application.myApplicationContext,
+                    "你有新签到任务",
+                    "${event.startSignInfo.signTitle}，请在${MyStartSignUserFragment.formatTime(event.startSignInfo.signTime)}内签到",
+                    it,
+                    AdminUserStartActivity::class.java
+                )
+            }
+            // todo 更新消息列表
+
+            return
+        }
+        if (event !is UserLoginBean) return
         initUserInfoUi(event)
     }
 
@@ -212,6 +234,11 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, UserLoginBean>() {
 
         binding.mainContent.mySign.setOnClickListener {
             startActivity(AdminUserStartActivity::class.java)
+        }
+
+        // 历史记录
+        binding.mainContent.signRecord.setOnClickListener {
+
         }
 
         binding.mainContent.userInfo.setOnClickListener {

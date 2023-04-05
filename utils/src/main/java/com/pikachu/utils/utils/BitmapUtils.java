@@ -9,9 +9,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PixelFormat;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
@@ -19,6 +21,8 @@ import android.renderscript.ScriptIntrinsicBlur;
 
 import androidx.annotation.FloatRange;
 import androidx.annotation.NonNull;
+
+import org.jetbrains.annotations.Nullable;
 
 /**
  * bitmap 工具类
@@ -585,7 +589,24 @@ public final class BitmapUtils {
     }
 
 
-
+    /**
+     * drawable 转 bitmap
+     * @param drawable
+     * @return
+     */
+    @Nullable
+    private Bitmap drawableToBitmap(Drawable drawable) {
+        Bitmap bitmap = null;
+        int width = drawable.getIntrinsicWidth();
+        int height = drawable.getIntrinsicHeight();
+        if (width <= 0 || height <= 0) return null;
+        Bitmap.Config config = drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565;
+        bitmap = Bitmap.createBitmap(width,height,config);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, width, height);
+        drawable.draw(canvas);
+        return bitmap;
+    }
 
 
 

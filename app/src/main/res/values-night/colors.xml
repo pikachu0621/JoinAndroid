@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="color_principal">#627CBC</color>
-    <color name="color_secondary">#80627CBC</color>
+    <color name="color_principal">#BC62B8</color>
+    <color name="color_secondary">#80BC62B8</color>
     <color name="color_bg">#33394E</color>
     <color name="color_bg_secondary">#464D64</color>
 

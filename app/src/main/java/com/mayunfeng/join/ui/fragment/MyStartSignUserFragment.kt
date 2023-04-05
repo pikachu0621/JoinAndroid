@@ -9,6 +9,7 @@ import com.mayunfeng.join.bean.BaseBean
 import com.mayunfeng.join.bean.StartSignBean
 import com.mayunfeng.join.bean.UserSignBean
 import com.mayunfeng.join.databinding.FragmentMyStartSignUserBinding
+import com.mayunfeng.join.service.WebSocketType
 import com.mayunfeng.join.ui.activity.UserInfoActivity
 import com.mayunfeng.join.ui.adapter.MyStartSignUserAdapter
 import com.mayunfeng.join.utils.MyRetrofitObserver.Companion.mySubscribeMainThread
@@ -151,7 +152,7 @@ class MyStartSignUserFragment : AppBaseFragment<FragmentMyStartSignUserBinding, 
     }
 
     override fun onEventBus(event: String?, key: Int?, msg: String?) {
-        if (key == 6){
+        if (key == 6 || key == WebSocketType.WE_MESSAGE.type){
             load(false)
         }
     }
