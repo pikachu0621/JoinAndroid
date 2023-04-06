@@ -4,22 +4,22 @@ import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.annotation.IntRange
 import androidx.core.app.NotificationCompat
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.model.GlideUrl
-import com.bumptech.glide.load.model.LazyHeaders
 import com.google.gson.Gson
 import com.mayunfeng.join.Application
 import com.mayunfeng.join.R
 import com.mayunfeng.join.TOKEN_ERROR_KEY
+import com.mayunfeng.join.base.AppBaseActivity.Companion.activityStack
 import com.mayunfeng.join.base.BaseService
 import com.mayunfeng.join.bean.UserSignTable
 import com.mayunfeng.join.ui.activity.AdminUserStartActivity
+import com.mayunfeng.join.ui.activity.LoginActivity
 import com.mayunfeng.join.ui.activity.MainActivity
+import com.mayunfeng.join.ui.fragment.MyStartSignUserFragment
 import com.mayunfeng.join.utils.UserUtils
+import com.pikachu.utils.utils.BackgroundUtils
 import com.pikachu.utils.utils.GlideUtils
 import com.pikachu.utils.utils.LogsUtils
 import okhttp3.*
@@ -38,7 +38,7 @@ enum class WebSocketType(
     WE_PWS_NUL(2004, "密码被修改"),
     WE_MESSAGE_GOTO_SIGN(2005, "有新签到任务"),
 }
-
+const val CLOSE_ALL_NOTIFY_KEY = "closeAllNotify"
 
 class WebSocketService : BaseService<Serializable>() {
 
@@ -108,6 +108,16 @@ class WebSocketService : BaseService<Serializable>() {
                     null
                 }
                 if (fromJson != null){
+                    GlideUtils.with(this@WebSocketService)
+                        .loadHeaderToken(fromJson.startSignInfo.userTable.userImg).intoBitmap {
+                            showMsgNotify(
+                                Application.myApplicationContext,
+                                "你有新签到任务",
+                                "${fromJson.startSignInfo.signTitle}，请在${MyStartSignUserFragment.formatTime(fromJson.startSignInfo.signTime)}内签到",
+                                it,
+                                Intent(this@WebSocketService, AdminUserStartActivity::class.java)
+                            )
+                        }
                     postEventBus(fromJson, WebSocketType.WE_MESSAGE_GOTO_SIGN.type)
                     return
                 }
@@ -127,10 +137,12 @@ class WebSocketService : BaseService<Serializable>() {
                 isClosed = true
                 if (code == 1001) {
                     postEventBus(null, WebSocketType.WE_OTHER_DEVICES.type)
+                    showUserOut("你的账号已在别处登录", "如非本人操作，请尽快修改密码！")
                     return
                 }
                 if (code == 1002) {
                     postEventBus(null, WebSocketType.WE_PWS_NUL.type)
+                    showUserOut("你的密码已过期", "密码已过期，你被迫下线！")
                     return
                 }
                 postEventBus(null, WebSocketType.WE_CLOSED.type)
@@ -140,10 +152,12 @@ class WebSocketService : BaseService<Serializable>() {
                 isClosed = true
                 if (code == 1001) {
                     postEventBus(null, WebSocketType.WE_OTHER_DEVICES.type)
+                    showUserOut("你的账号已在别处登录", "如非本人操作，请尽快修改密码！")
                     return
                 }
                 if (code == 1002) {
                     postEventBus(null, WebSocketType.WE_PWS_NUL.type)
+                    showUserOut("你的密码已过期", "密码已过期，你被迫下线！")
                     return
                 }
                 postEventBus(null, WebSocketType.WE_CLOSED.type)
@@ -152,11 +166,11 @@ class WebSocketService : BaseService<Serializable>() {
 
     }
 
+
     override fun onDestroy() {
         cancel()
         super.onDestroy()
     }
-
 
     fun sendMsg(msg: String) {
         webSocket?.send(msg)
@@ -173,6 +187,7 @@ class WebSocketService : BaseService<Serializable>() {
 
         private var webSocketService: WebSocketService? = null
         private var notifyId: Int = 2
+        private var notifyIdList: ArrayList<Int> = arrayListOf()
 
 
         fun getWebSocketService(): WebSocketService? = webSocketService
@@ -195,6 +210,24 @@ class WebSocketService : BaseService<Serializable>() {
             }
             return isRunning
         }
+
+
+
+        fun showUserOut(title: String, msg: String){
+            if (BackgroundUtils.getRunningTask(
+                    Application.myApplicationContext,
+                    Application.myApplicationContext.packageName)
+            ) return
+            UserUtils.loginTokenOut(activityStack.lastElement())
+            showMsgNotify(
+                Application.myApplicationContext,
+                title,
+                msg,
+                null,
+                Intent(Application.myApplicationContext, LoginActivity::class.java)
+            )
+        }
+
 
 
         /**
@@ -235,6 +268,14 @@ class WebSocketService : BaseService<Serializable>() {
         }
 
 
+        fun closeAllNotify(context: Context){
+            val notificationManager =
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notifyIdList.forEach { notificationManager.cancel(it) }
+            notifyIdList.clear()
+        }
+
+
         /**
          * 消息通知
          */
@@ -243,7 +284,7 @@ class WebSocketService : BaseService<Serializable>() {
             title: String,
             msg: String,
             image: Bitmap? = null,
-            cls: Class<out Activity>,
+            intent: Intent,
         ) {
             val manager =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -258,11 +299,12 @@ class WebSocketService : BaseService<Serializable>() {
                 channel.setShowBadge(true);
             }
             val contentIntent = PendingIntent.getActivity(
-                context, 0, Intent(context, cls), 0
+                context, 0, intent, 0
             )
             val notification = NotificationCompat.Builder(context, context.applicationInfo.name)
                 .setContentTitle(title)
                 .setContentText(msg)
+                .setAutoCancel(true)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setPriority(NotificationCompat.PRIORITY_HIGH) //设置该通知优先级
@@ -270,7 +312,9 @@ class WebSocketService : BaseService<Serializable>() {
                 .setContentIntent(contentIntent) //触摸跳转
             if (image != null) notification.setLargeIcon(image)
             val build = notification.build()
-            manager.notify(notifyId++, build)
+            val notifyIdListNum = notifyId++
+            notifyIdList.add(notifyIdListNum)
+            manager.notify(notifyIdListNum, build)
         }
     }
 }

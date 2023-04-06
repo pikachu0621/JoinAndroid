@@ -1,5 +1,6 @@
 package com.mayunfeng.join.ui.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,6 +10,8 @@ import com.mayunfeng.join.bean.BaseBean
 import com.mayunfeng.join.bean.StartSignBean
 import com.mayunfeng.join.bean.UserSignTable
 import com.mayunfeng.join.databinding.ActivityAdminUserStartBinding
+import com.mayunfeng.join.service.CLOSE_ALL_NOTIFY_KEY
+import com.mayunfeng.join.service.WebSocketService
 import com.mayunfeng.join.ui.adapter.AdminUserStartAdapter
 import com.mayunfeng.join.ui.adapter.MyStartSignInfoAdapter
 import com.mayunfeng.join.utils.MyRetrofitObserver.Companion.mySubscribeMainThread
@@ -83,7 +86,6 @@ class AdminUserStartActivity : AppBaseActivity<ActivityAdminUserStartBinding, St
     override fun onEventBus(event: String?, key: Int?, msg: String?) {
         if (event != null && signId != -1L) startSign(signId, event)
     }
-
 
 
     private fun startSign(signId: Long, key: String? = null) {

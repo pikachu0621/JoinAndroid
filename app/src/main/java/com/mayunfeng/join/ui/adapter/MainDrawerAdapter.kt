@@ -28,8 +28,8 @@ data class MainDrawerItemData(
                 add(MainDrawerItemData(0, "", partition = "组员功能"))
                 add(MainDrawerItemData(R.drawable.ic_drawer_user_sign_start, "当前签到", AdminUserStartActivity::class.java))
                 add(MainDrawerItemData(R.drawable.ic_drawer_user_sign_add_group, "我加入的组", MyJoinGroupActivity::class.java))
-                add(MainDrawerItemData(R.drawable.ic_drawer_user_sign_info, "历史记录", SignInfoListActivity::class.java))
-                add(MainDrawerItemData(R.drawable.ic_drawer_user_sign_msg, "我的信息", SignInfoListActivity::class.java))
+                // add(MainDrawerItemData(R.drawable.ic_drawer_user_sign_info, "历史记录", SignInfoListActivity::class.java))
+                add(MainDrawerItemData(R.drawable.ic_drawer_user_sign_msg, "我的信息", AdminMsgActivity::class.java))
                 if (!isRootUser) return@apply
                 add(MainDrawerItemData(0, "", partition = "创建者功能"))
                 add(MainDrawerItemData(R.drawable.ic_drawer_root_user_sign_add_group, "创建组", CreateGroupActivity::class.java))

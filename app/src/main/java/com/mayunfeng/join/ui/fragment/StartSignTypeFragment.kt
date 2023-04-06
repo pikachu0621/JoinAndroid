@@ -46,7 +46,7 @@ class StartSignTypeFragment : AppBaseFragment<FragmentStartSignTypeBinding, Stri
     }
 
     override fun onEventBus(event: String?, key: Int?, msg: String?) {
-        if (event != null) {
+        if (event != null && key != 10) {
             pws = event
             adapter.setSingStartType(type)
         }

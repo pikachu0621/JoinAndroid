@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/color_bg_secondary">
+    android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -72,20 +71,34 @@
             app:lineHeight="20dp" />
 
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/click"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/state_bg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
             android:background="@drawable/dr_main_list_click_bg"
+            android:gravity="center"
+            android:layout_marginTop="14dp"
             android:paddingHorizontal="12dp"
             android:paddingVertical="6dp"
-            android:text="@string/test_2"
-            android:textColor="@color/color_grey1"
-            android:textSize="11sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/content" />
+            app:layout_constraintTop_toBottomOf="@+id/content" >
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/ic_sign_user_complete"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/click"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/test_2"
+                android:textColor="@color/color_grey1"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

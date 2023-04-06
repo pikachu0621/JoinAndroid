@@ -36,6 +36,11 @@ class StartSignInfoFragment : AppBaseFragment<FragmentStartSignInfoBinding, Stri
             TimeEntity.target(0,10,0))
     }
 
+    override fun onEventBus(event: String?, key: Int?, msg: String?) {
+        if (key == 10) {
+            binding.groupName.setText(event)
+        }
+    }
 
 
     fun getTitle(): String = binding.groupName.text.toString()

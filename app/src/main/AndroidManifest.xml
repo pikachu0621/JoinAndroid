@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <!-- 允许访问网络 -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 网状态 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 读取外部存储 -->
@@ -18,10 +17,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission
         android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
-        tools:ignore="ProtectedPermissions" />
-
-    <!--全局对话框,不依附于程序的activity-->
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+        tools:ignore="ProtectedPermissions" /> <!-- 全局对话框,不依附于程序的activity -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:name=".Application"
@@ -41,18 +38,22 @@
         <service
             android:name=".service.WebSocketService"
             android:enabled="true"
-            android:exported="false"/>
+            android:exported="false" />
         <service
             android:name=".service.UpFileService"
             android:enabled="true"
             android:exported="false" />
 
         <activity
+            android:name=".ui.activity.AdminMsgActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.ActivityPwsPreview"
             android:exported="false" />
         <activity
             android:name=".ui.activity.AdminUserStartActivity"
-            android:exported="false" />
+            android:exported="true"
+            android:launchMode="singleTop" />
         <activity
             android:name=".ui.activity.SignInfoListActivity"
             android:exported="false" />
@@ -110,7 +111,8 @@
             android:exported="false" />
         <activity
             android:name=".ui.activity.LoginActivity"
-            android:exported="false">
+            android:exported="true"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

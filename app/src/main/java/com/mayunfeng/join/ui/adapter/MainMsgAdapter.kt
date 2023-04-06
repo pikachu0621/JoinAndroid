@@ -3,9 +3,10 @@ package com.mayunfeng.join.ui.adapter
 import android.annotation.SuppressLint
 import android.view.View
 import com.mayunfeng.join.R
+import com.mayunfeng.join.bean.UserSignTable
 import com.mayunfeng.join.databinding.ItemMainMsgBinding
-import com.mayunfeng.join.bean.MainMsgBean
 import com.pikachu.utils.adapter.QuickAdapter
+import com.pikachu.utils.utils.TimeUtils
 
 /**
  *
@@ -14,34 +15,39 @@ import com.pikachu.utils.adapter.QuickAdapter
  * @Author:         pkpk.run
  * @Description:    null
  */
-class MainMsgAdapter(`data`: MutableList<MainMsgBean>? = null) :
-    QuickAdapter<ItemMainMsgBinding, MainMsgBean>(`data`) {
+class MainMsgAdapter( private val clickItem: (itemData: UserSignTable) -> Unit) : QuickAdapter<ItemMainMsgBinding, UserSignTable>(null) {
 
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onQuickBindView(
         binding: ItemMainMsgBinding,
-        itemData: MainMsgBean,
+        itemData: UserSignTable,
         position: Int,
-        `data`: MutableList<MainMsgBean>
+        `data`: MutableList<UserSignTable>
     ) {
-        binding.title.text = itemData.titleStr
-        binding.time.text = itemData.timeStr
-        binding.content.text = itemData.contentStr
-        binding.click.text = itemData.clickStr
-        when(itemData.clickType){
-            0 -> {
-                binding.type.visibility = View.VISIBLE
-                binding.type.text = context.resources.getString(R.string.main_list_item_sign)
-                binding.type.background = context.resources.getDrawable(R.drawable.dr_main_sign_bg,null)
-            }
-            1 -> {
-                binding.type.visibility = View.VISIBLE
-                binding.type.text = context.resources.getString(R.string.main_list_item_join)
-                binding.type.background = context.resources.getDrawable(R.drawable.dr_main_join_bg,null)
-            }
-            else -> {
-                binding.type.visibility = View.GONE
-            }
+        val startSignInfo = itemData.startSignInfo
+        binding.title.text = startSignInfo.signTitle
+        binding.time.text = TimeUtils.strToStr(startSignInfo.createTime, "yyyy-MM-dd HH:mm:ss", "MM-dd HH:mm")
+        binding.content.text = startSignInfo.signContent
+        if (itemData.signComplete){
+            binding.state.setImageResource(R.drawable.ic_sign_user_complete)
+            binding.stateBg.setBackgroundResource(R.drawable.dr_main_list_msg1_bg)
+            binding.click.setTextColor(context.resources.getColor(R.color.color_main_top1))
+            binding.click.text = "已完成"
+            binding.root.setOnClickListener { }
+        } else if (startSignInfo.signExpire) {
+            // 未完成 并且已过期
+            binding.state.setImageResource(R.drawable.ic_sign_user_incomplete)
+            binding.stateBg.setBackgroundResource(R.drawable.dr_main_list_msg3_bg)
+            binding.click.setTextColor(context.resources.getColor(R.color.color_main_top6))
+            binding.click.text = "已过期"
+            binding.root.setOnClickListener {}
+        } else {
+            binding.state.setImageResource(R.drawable.ic_sign_user_wait)
+            binding.stateBg.setBackgroundResource(R.drawable.dr_main_list_msg2_bg)
+            binding.click.setTextColor(context.resources.getColor(R.color.color_main_top3))
+            binding.click.text = "前往签到"
+            binding.root.setOnClickListener { clickItem(itemData) }
         }
+        binding.type.text = context.resources.getString(R.string.main_list_item_sign)
     }
 }

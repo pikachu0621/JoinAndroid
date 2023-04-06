@@ -72,6 +72,13 @@ interface SignApi {
     fun sendMySignInfo(): Observable<BaseBean<ArrayList<UserSignTable>>>
 
 
+
+    /**
+     * 获取 该用户全部签到任务
+     */
+    @GET("/myf-user-sign-api/my-sign-all-info")
+    fun sendMySignAllInfo(): Observable<BaseBean<ArrayList<UserSignTable>>>
+
     /**
      * 用户签到
      */

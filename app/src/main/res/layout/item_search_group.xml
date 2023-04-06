@@ -25,7 +25,7 @@
             android:layout_height="50dp"
             android:layout_marginStart="5dp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/user_img"
+            android:src="@mipmap/ic_launcher"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:qmui_border_color="@color/color_principal"

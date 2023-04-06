@@ -31,37 +31,13 @@
 
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/appCompatImageView2"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="@dimen/activity_horizontal_margin"
-                    android:layout_marginTop="32dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_drawer_pi" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/appCompatTextView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/activity_vertical_margin"
-                    android:text="@string/test_1"
-                    android:textColor="@color/color_grey1"
-                    android:textSize="15sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView2"
-                    app:layout_constraintStart_toEndOf="@+id/appCompatImageView2"
-                    app:layout_constraintTop_toTopOf="@+id/appCompatImageView2" />
-
-
-                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/out_dr"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="@dimen/activity_horizontal_margin"
                     android:padding="1dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView2"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/appCompatImageView2"
+                    app:layout_constraintTop_toTopOf="@+id/QMUIRadiusImageView"
                     app:srcCompat="@drawable/ic_drawer_back" />
 
 
@@ -69,11 +45,12 @@
                     android:id="@+id/QMUIRadiusImageView"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:layout_marginTop="30dp"
                     android:scaleType="centerCrop"
-                    android:src="@mipmap/user_img"
-                    app:layout_constraintStart_toStartOf="@+id/appCompatImageView2"
-                    app:layout_constraintTop_toBottomOf="@+id/appCompatImageView2"
+                    android:src="@mipmap/ic_launcher"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="52dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:qmui_is_circle="true" />
 
                 <androidx.appcompat.widget.AppCompatTextView

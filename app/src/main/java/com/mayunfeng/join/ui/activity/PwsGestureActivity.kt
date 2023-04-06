@@ -81,7 +81,7 @@ class PwsGestureActivity : AppBaseActivity<ActivityPwsGestureBinding, String>() 
                         return
                     }
                     // 签到成功业务逻辑
-                    postEventBus(settingPws)
+                    postEventBus(conversionStringPws(hitIndexList))
                     LoginActivity.finishTs(this@PwsGestureActivity)
                     return
                 }

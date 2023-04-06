@@ -26,7 +26,7 @@ class StartSignMyCreateGroupFragment : AppBaseFragment<FragmentStartSignMyCreate
 
     private val groupApi: GroupApi = RetrofitManager.getInstance().create(GroupApi::class.java)
     private var signMyCreateGroupAdapter: SignMyCreateGroupAdapter = SignMyCreateGroupAdapter({
-
+        postEventBus(it.groupName, 10)
     })
 
     companion object {

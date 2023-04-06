@@ -23,7 +23,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/user_img"
+            android:src="@mipmap/ic_launcher"
             android:layout_marginStart="5dp"
             app:qmui_border_color="@color/color_principal"
             app:layout_constraintStart_toStartOf="parent"

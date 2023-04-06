@@ -102,7 +102,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/user_name"
-                    app:srcCompat="@mipmap/test_qrc" />
+                    app:srcCompat="@mipmap/ic_launcher" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -112,7 +112,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/user_img"
+                android:src="@mipmap/ic_launcher"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

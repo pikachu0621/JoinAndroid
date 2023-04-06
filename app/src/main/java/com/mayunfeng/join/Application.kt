@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import com.mayunfeng.join.service.CLOSE_ALL_NOTIFY_KEY
 import com.mayunfeng.join.service.WebSocketService
 import com.mayunfeng.join.ui.widget.LoadFooter
 import com.mayunfeng.join.ui.widget.LoadHeader
@@ -25,7 +26,9 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 // 42.192.221.73
 // 192.168.0.112
 
+// 服务端 ip 地址
 const val BASE_ADDRESS = "192.168.0.112"
+// 端口
 const val BASE_PORT = "8012"
 const val BASE_HTTP_URL = "http://${BASE_ADDRESS}:${BASE_PORT}"
 const val BASE_WS_URL = "ws://${BASE_ADDRESS}:${BASE_PORT}"

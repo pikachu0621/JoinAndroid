@@ -5,6 +5,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Context.CLIPBOARD_SERVICE
+import android.content.Intent
 import com.mayunfeng.join.Application
 import com.mayunfeng.join.TOKEN_ERROR_KEY
 import com.mayunfeng.join.service.WebSocketService
@@ -43,6 +44,7 @@ object UserUtils {
         AppManagerUtils.getAppManager().finishAllActivity(activity.javaClass, LoginActivity::class.java)
         Application.isLoginOk = false
         WebSocketService.getWebSocketService()?.cancel()
+        activity.stopService(Intent(activity, WebSocketService::class.java))
         // context.startActivity(Intent(context, LoginActivity::class.java))
     }
 

@@ -116,7 +116,7 @@
                 app:qmui_border_color="@color/color_bg"
                 app:qmui_border_width="1dp"
                 app:qmui_is_oval="true"
-                app:srcCompat="@mipmap/user_img" />
+                app:srcCompat="@mipmap/ic_launcher" />
 
             <com.pikachu.utils.view.QMUIRadiusImageView
                 android:id="@+id/img3"
@@ -129,7 +129,7 @@
                 app:qmui_border_color="@color/color_bg"
                 app:qmui_border_width="1dp"
                 app:qmui_is_oval="true"
-                app:srcCompat="@mipmap/user_img" />
+                app:srcCompat="@mipmap/ic_launcher" />
 
 
             <com.pikachu.utils.view.QMUIRadiusImageView
@@ -143,7 +143,7 @@
                 app:qmui_border_color="@color/color_bg"
                 app:qmui_border_width="1dp"
                 app:qmui_is_oval="true"
-                app:srcCompat="@mipmap/user_img" />
+                app:srcCompat="@mipmap/ic_launcher" />
 
 
             <com.pikachu.utils.view.QMUIRadiusImageView
@@ -157,7 +157,7 @@
                 app:qmui_border_color="@color/color_bg"
                 app:qmui_border_width="1dp"
                 app:qmui_is_oval="true"
-                app:srcCompat="@mipmap/user_img" />
+                app:srcCompat="@mipmap/ic_launcher" />
 
             <com.pikachu.utils.view.QMUIRadiusImageView
                 android:id="@+id/imgGroup"
@@ -169,7 +169,7 @@
                 app:qmui_border_color="@color/color_bg"
                 app:qmui_border_width="1dp"
                 app:qmui_corner_radius="6dp"
-                app:srcCompat="@mipmap/test" />
+                app:srcCompat="@mipmap/ic_launcher" />
 
 
             <androidx.appcompat.widget.AppCompatTextView

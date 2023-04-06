@@ -19,7 +19,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:scaleType="centerCrop"
-            android:src="@mipmap/user_img"
+            android:src="@mipmap/ic_launcher"
             app:qmui_is_circle="true" />
 
         <androidx.appcompat.widget.AppCompatTextView
