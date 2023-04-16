@@ -1,9 +1,7 @@
 package com.mayunfeng.join.ui.dialog
 
 import android.content.Context
-import android.os.Build
 import android.view.View
-import android.view.WindowManager
 import com.mayunfeng.join.databinding.DialogMsgBinding
 import com.pikachu.utils.base.BaseDialog
 

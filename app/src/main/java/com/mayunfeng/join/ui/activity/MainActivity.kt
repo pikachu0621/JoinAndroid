@@ -237,11 +237,19 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, Serializable>() {
             startActivity(SignInfoListActivity::class.java)
         }
 
+        // 更多设置
+        binding.mainDrawer.appCompatTextView5.setOnClickListener {
+            startActivity(SettingActivity::class.java)
+        }
+
+        // 切换主题
         binding.mainDrawer.appCompatTextView6.setOnClickListener {
             if (DarkModeUtils.isDarkMode(context)) {
                 DarkModeUtils.applyDayMode(this)
+                SharedPreferencesUtils.write("SystemMode",  2)
             } else {
                 DarkModeUtils.applyNightMode(this)
+                SharedPreferencesUtils.write("SystemMode",  1)
             }
         }
     }

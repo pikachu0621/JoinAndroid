@@ -5,11 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.FragmentActivity
 import com.mayunfeng.join.R
-import com.mayunfeng.join.api.JoinGroupApi
 import com.mayunfeng.join.api.SignApi
 import com.mayunfeng.join.base.AppBaseFragment
 import com.mayunfeng.join.bean.BaseBean
-import com.mayunfeng.join.bean.GroupBean
 import com.mayunfeng.join.bean.StartSignBean
 import com.mayunfeng.join.bean.UserSignBean
 import com.mayunfeng.join.databinding.FragmentMyStartSignStatisticsBinding
@@ -23,10 +21,8 @@ import com.mayunfeng.join.utils.retrofit.QuickRtObserverListener
 import com.mayunfeng.join.utils.retrofit.RetrofitManager
 import com.pikachu.utils.type.JumpType
 import com.pikachu.utils.utils.GlideUtils
-import com.pikachu.utils.utils.LogsUtils
 import com.pikachu.utils.utils.OtherUtils
 import com.pikachu.utils.utils.TimeUtils
-import org.greenrobot.eventbus.EventBus
 
 
 class MyStartSignStatisticsFragment :

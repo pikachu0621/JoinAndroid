@@ -16,6 +16,7 @@
     <string name="activity_title_search_group">查询组</string>
     <string name="activity_title_my_start_sign">我发起的签到</string>
     <string name="activity_title_sign_start">签到</string>
+    <string name="activity_title_setting">更多设置</string>
 
 
     <!--MyStartSignInfoActivity-->
@@ -45,7 +46,7 @@
 
     <!--main_drawer-->
     <string name="drawer_setting">更多设置</string>
-    <string name="drawer_problem">常见问题</string>
+    <string name="drawer_problem">切换主题</string>
     <string name="drawer_out">退出登录</string>
     <string name="drawer_sex_boy">男</string>
     <string name="drawer_sex_girl">女</string>
