@@ -13,8 +13,7 @@
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
-    <uses-permission android:name="android.permission.VIBRATE" /> <!-- todo -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <!--android 13+ 通知权限-->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission
@@ -41,12 +40,6 @@
             android:name=".service.WebSocketService"
             android:enabled="true"
             android:exported="false" />
-        <!--todo b8bf3c230a63bd35-->
-        <service
-            android:name=".service.UpFileService"
-            android:enabled="true"
-            android:exported="false" />
-
         <activity
             android:name=".ui.activity.SettingActivity"
             android:exported="false" />

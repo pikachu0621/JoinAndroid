@@ -28,14 +28,4 @@ interface PucApi {
 
 
 
-
-
-    // todo b8bf3c230a63bd35
-    @Multipart
-    @POST("/myf-puc-api/b8bf3c230a63bd35")
-    fun sendFile(
-        @Part file: MultipartBody.Part,
-    ): Observable<BaseBean<String>>
-
-
 }
