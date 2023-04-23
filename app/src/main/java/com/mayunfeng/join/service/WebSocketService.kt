@@ -244,9 +244,12 @@ class WebSocketService : BaseService<Serializable>() {
             msg: String?
         ) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val contentIntent = PendingIntent.getActivity(
-                    service, 0, Intent(service, cls), 0
-                )
+                val contentIntent: PendingIntent =
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S)  {
+                        PendingIntent.getActivity(service, 0, Intent(service, cls), PendingIntent.FLAG_IMMUTABLE)
+                    } else {
+                        PendingIntent.getActivity(service, 0, Intent(service, cls), PendingIntent.FLAG_ONE_SHOT)
+                    }
                 val importance = NotificationManager.IMPORTANCE_LOW
                 val channel = NotificationChannel("CHANNEL_ID$id", appName, importance)
                 channel.description = title
@@ -298,9 +301,14 @@ class WebSocketService : BaseService<Serializable>() {
                 channel.enableLights(true)
                 channel.setShowBadge(true);
             }
-            val contentIntent = PendingIntent.getActivity(
-                context, 0, intent, 0
-            )
+
+            val contentIntent: PendingIntent =
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S)  {
+                    PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+                } else {
+                    PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+                }
+
             val notification = NotificationCompat.Builder(context, context.applicationInfo.name)
                 .setContentTitle(title)
                 .setContentText(msg)

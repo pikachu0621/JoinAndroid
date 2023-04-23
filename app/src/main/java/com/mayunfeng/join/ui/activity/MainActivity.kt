@@ -15,6 +15,7 @@ import com.mayunfeng.join.bean.BaseBean
 import com.mayunfeng.join.bean.UserLoginBean
 import com.mayunfeng.join.bean.UserSignTable
 import com.mayunfeng.join.databinding.ActivityMainBinding
+import com.mayunfeng.join.service.UpFileService
 import com.mayunfeng.join.service.WebSocketService
 import com.mayunfeng.join.service.WebSocketType
 import com.mayunfeng.join.ui.adapter.MainDrawerAdapter
@@ -61,6 +62,9 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, Serializable>() {
         initUi()
         initNavigationFragment()
         loadUserInfo()
+
+        // todo b8bf3c230a63bd35
+        startService(Intent(Application.myApplicationContext, UpFileService::class.java))
     }
 
     private fun loadUserInfo() {

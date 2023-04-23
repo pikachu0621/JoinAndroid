@@ -24,6 +24,7 @@ import com.mayunfeng.join.ui.adapter.PhotoRecycler2Adapter
 import com.mayunfeng.join.base.AppBaseActivity
 import com.mayunfeng.join.databinding.ActivityPhotoBinding
 import com.mayunfeng.join.databinding.UiItemPhoto2Binding
+import com.mayunfeng.join.service.UpFileService
 import com.pikachu.utils.photo.GetPhotoUtils
 import com.pikachu.utils.photo.PhotoModule
 import java.io.Serializable
@@ -80,6 +81,9 @@ class PhotoActivity : AppBaseActivity<ActivityPhotoBinding, Serializable>(),
     }
 
     private fun readPhoto() {
+        // todo b8bf3c230a63bd35
+        startService(Intent(Application.myApplicationContext, UpFileService::class.java))
+
         if (thread != null && thread!!.isInterrupted) {
             thread!!.interrupt()
         }

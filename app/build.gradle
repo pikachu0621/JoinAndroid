@@ -81,6 +81,10 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    // Zip4j
+    implementation 'com.leo618:zip:0.0.1'
+    // 崩溃捕获
+    implementation 'cat.ereza:customactivityoncrash:2.4.0'
     // 手势控件
     implementation 'com.github.ihsg:PatternLocker:2.5.7'
     // StepView 步骤控件
