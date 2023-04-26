@@ -15,9 +15,17 @@ API文档
 -------
 [API文档](https://console-docs.apipost.cn/preview/9e608885058d3ede/38f1d8c9f866c1c9)
 
-服务端代码
-----
-[服务端](https://github.com/pikachu0621/MyfJoinSpring)
+Android端代码
+---
+[Android端](https://github.com/pikachu0621/MyfJoinAndroid)
+
+vue管理端代码
+---
+[vue管理端](https://github.com/pikachu0621/MyfJoinVue)
+
+SpringBoot服务端代码
+---
+[vue管理端](https://github.com/pikachu0621/MyfJoinSpring)
 
 
 下载apk
