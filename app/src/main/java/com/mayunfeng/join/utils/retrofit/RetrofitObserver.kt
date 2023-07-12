@@ -55,7 +55,7 @@ open class RetrofitObserver<T : Any>(
             error = true
             val throwable = Throwable("errorCode == null || errorCode.toInt() != myJsonStatusCode")
             if (retrofitInterceptor?.onRetrofitCode(errorCode?.toInt()) == true) return
-            retrofitObserverInterface.onRetrofitError(t,                                 throwable)
+            retrofitObserverInterface.onRetrofitError(t, throwable)
             return
         }
         this.t = t

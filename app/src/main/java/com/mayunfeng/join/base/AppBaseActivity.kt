@@ -38,7 +38,7 @@ abstract class AppBaseActivity<T : ViewBinding, ED : Serializable> : BaseActivit
 
     abstract fun onAppCreate(savedInstanceState: Bundle?)
     override fun initActivity(savedInstanceState: Bundle?) {
-        // resources.getBoolean(R.bool.isStatusBar)
+
         setActivityWindowsInfo(!DarkModeUtils.isDarkMode(this))
         EventBus.getDefault().register(this)
         // 发布粘性事件
