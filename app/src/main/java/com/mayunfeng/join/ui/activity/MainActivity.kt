@@ -50,7 +50,7 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, Serializable>() {
 
     override fun setActivityWindowsInfo(isStatusBar: Boolean) {
         ImmersionBar.with(this)
-            .statusBarDarkFont(true)
+            .statusBarDarkFont(isStatusBar)
             .fitsSystemWindows(false)
             .navigationBarDarkIcon(isStatusBar)
             .navigationBarColor(R.color.color_bg)
@@ -65,7 +65,7 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, Serializable>() {
 
     private fun loadUserInfo() {
         val loginToken = UserUtils.readLoginToken()
-        if (loginToken == null || loginToken.isEmpty()) {
+        if (loginToken.isNullOrEmpty()) {
             showToast(R.string.login_user_token_nul)
             UserUtils.loginTokenOut(this)
             return
@@ -173,7 +173,7 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, Serializable>() {
         binding.mainContent.recycler.adapter = mainMsgAdapter
 
         binding.mainContent.view2.setOnClickListener {
-            binding.root.open()
+            binding.root.`open`()
         }
 
 

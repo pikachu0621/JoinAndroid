@@ -45,10 +45,9 @@
     <style name="MeSettingClickLayout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">60dp</item>
-        <item name="android:layout_marginTop">1dp</item>
-        <item name="android:background">@color/color_bg</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:orientation">horizontal</item>
         <item name="android:paddingStart">@dimen/activity_horizontal_margin</item>

@@ -306,7 +306,8 @@ class WebSocketService : BaseService<Serializable>() {
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S)  {
                     PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
                 } else {
-                    PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+                    PendingIntent.getActivity(context, 0, intent,
+                        PendingIntent.FLAG_ONE_SHOT or PendingIntent.FLAG_IMMUTABLE)
                 }
 
             val notification = NotificationCompat.Builder(context, context.applicationInfo.name)

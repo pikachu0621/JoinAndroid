@@ -1,7 +1,9 @@
 package com.mayunfeng.join.base
 
 import android.app.Activity
+import android.content.res.Configuration
 import android.os.Bundle
+import android.view.ActionMode
 import android.view.View
 import androidx.viewbinding.ViewBinding
 import com.gyf.immersionbar.ImmersionBar
@@ -9,6 +11,7 @@ import com.mayunfeng.join.R
 import com.mayunfeng.join.bean.BaseEventBean
 import com.pikachu.utils.base.BaseActivity
 import com.pikachu.utils.utils.AppManagerUtils
+import com.pikachu.utils.utils.DarkModeUtils
 import com.pikachu.utils.utils.UiUtils
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -35,7 +38,8 @@ abstract class AppBaseActivity<T : ViewBinding, ED : Serializable> : BaseActivit
 
     abstract fun onAppCreate(savedInstanceState: Bundle?)
     override fun initActivity(savedInstanceState: Bundle?) {
-        setActivityWindowsInfo(resources.getBoolean(R.bool.isStatusBar))
+        // resources.getBoolean(R.bool.isStatusBar)
+        setActivityWindowsInfo(!DarkModeUtils.isDarkMode(this))
         EventBus.getDefault().register(this)
         // 发布粘性事件
         //EventBus.getDefault().postSticky(asnDetailEventBus)
@@ -50,11 +54,9 @@ abstract class AppBaseActivity<T : ViewBinding, ED : Serializable> : BaseActivit
                 it.layoutParams.height =
                 UiUtils.getStatusBarHeight(this@AppBaseActivity)
             }
-        } catch (_: Exception) {
-        }
+        } catch (_: Exception) { }
         onAppCreate(savedInstanceState)
     }
-
 
     // ------------------------------------------------------------------- eventbus
 
@@ -107,13 +109,12 @@ abstract class AppBaseActivity<T : ViewBinding, ED : Serializable> : BaseActivit
     open fun setActivityWindowsInfo(isStatusBar: Boolean) {
         ImmersionBar.with(this)
             .navigationBarDarkIcon(isStatusBar)
-            .statusBarDarkFont(true)
+            .statusBarDarkFont(isStatusBar)
             .fitsSystemWindows(true)
             .navigationBarColor(R.color.color_bg)
             .statusBarColor(R.color.color_bg)
             .init()
     }
-
 
     open fun currentActivity(): Activity {
         return activityStack.lastElement()

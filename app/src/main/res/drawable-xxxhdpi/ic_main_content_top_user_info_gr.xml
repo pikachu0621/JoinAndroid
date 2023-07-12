@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:width="40dp"
-        android:height="40dp">
+        android:height="40dp"
+        tools:ignore="UnusedAttribute">
         <shape android:shape="oval">
             <solid android:color="@color/color_main_top4" />
         </shape>
@@ -12,5 +14,6 @@
         android:width="24dp"
         android:height="24dp"
         android:gravity="center"
-        android:drawable="@drawable/ic_main_content_top_user_info"/>
+        android:drawable="@drawable/ic_main_content_top_user_info"
+        tools:ignore="UnusedAttribute" />
 </layer-list>
