@@ -36,7 +36,7 @@
 
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_user_name"
+            android:id="@+id/et_user_nickname"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginHorizontal="10dp"
@@ -64,9 +64,9 @@
             android:padding="11dp"
             android:tint="@color/color_grey3"
             android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="@+id/et_user_name"
-            app:layout_constraintStart_toStartOf="@+id/et_user_name"
-            app:layout_constraintTop_toTopOf="@+id/et_user_name"
+            app:layout_constraintBottom_toBottomOf="@+id/et_user_nickname"
+            app:layout_constraintStart_toStartOf="@+id/et_user_nickname"
+            app:layout_constraintTop_toTopOf="@+id/et_user_nickname"
             app:srcCompat="@drawable/ic_qrc_search" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -75,9 +75,9 @@
             android:layout_height="40dp"
             android:padding="10dp"
             android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="@+id/et_user_name"
-            app:layout_constraintEnd_toEndOf="@+id/et_user_name"
-            app:layout_constraintTop_toTopOf="@+id/et_user_name"
+            app:layout_constraintBottom_toBottomOf="@+id/et_user_nickname"
+            app:layout_constraintEnd_toEndOf="@+id/et_user_nickname"
+            app:layout_constraintTop_toTopOf="@+id/et_user_nickname"
             app:srcCompat="@drawable/ic_main_head_add_code" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

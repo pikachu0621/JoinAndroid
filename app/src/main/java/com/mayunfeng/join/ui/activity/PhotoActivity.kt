@@ -41,8 +41,8 @@ class PhotoActivity : AppBaseActivity<ActivityPhotoBinding, Serializable>(),
     private var photoRecycler2Adapter: PhotoRecycler2Adapter? = null
     private var thread: Thread? = null
     private var isShow = false
-    var has: MutableList<String>? = null
-    var num = 0
+    private var has: MutableList<String>? = null
+    private var num = 0
 
     @SuppressLint("SetTextI18n")
     override fun onAppCreate(savedInstanceState: Bundle?) {
@@ -195,7 +195,7 @@ class PhotoActivity : AppBaseActivity<ActivityPhotoBinding, Serializable>(),
 
     override fun onRestart() {
         super.onRestart()
-        if (XXPermissions.isGranted(context, Permission.WRITE_EXTERNAL_STORAGE)) {
+        if (XXPermissions.isGranted(context, Permission.READ_MEDIA_IMAGES)) {
             readPhoto()
         }
     }

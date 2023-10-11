@@ -99,7 +99,7 @@ class MyStartSignStatisticsFragment :
 
 
         GlideUtils.with(context).loadHeaderToken(userTable.userImg).into(binding.sendUserImg)
-        binding.userName.text = "发起者：${userTable.userName}"
+        binding.userNickname.text = "发起者：${userTable.userNickname}"
         if (signGroupInfo == null) {
             binding.sendGroupImg.visibility = View.GONE
             binding.groupName.text = getString(R.string.start_sign_group_nul)
@@ -152,7 +152,7 @@ class MyStartSignStatisticsFragment :
         )
         binding.ratio.text = "${keepDecimal}%"
 
-        binding.userName.setOnClickListener {
+        binding.userNickname.setOnClickListener {
             UserInfoActivity.startUserInfoActivity(requireActivity(), userTable)
         }
 

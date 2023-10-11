@@ -97,7 +97,8 @@
 
     <!--EditUserInfoActivity-->
     <string name="edit_user_info_account">账号</string>
-    <string name="edit_user_info_name">姓名</string>
+    <string name="edit_user_info_name">昵称</string>
+    <string name="edit_user_info_hidden">公开个人资料</string>
     <string name="edit_user_info_sex">性别</string>
     <string name="edit_user_info_age">年龄</string>
     <string name="edit_user_info_birth">出生日期</string>
@@ -107,6 +108,7 @@
     <string name="edit_user_info_create_time">创建时间</string>
     <string name="edit_user_info_password">修改密码</string>
     <string name="edit_user_info_password_vice">点击修改</string>
+    <string name="edit_user_info_open">该用户部分资料未公开</string>
 
     <!--PhotoActivity-->
     <string name="photo_title">全部图片</string>

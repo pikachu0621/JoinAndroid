@@ -26,7 +26,7 @@ class MyStartSignUserAdapter(private val clickItem: (itemData: UserSignTable) ->
         data: MutableList<UserSignTable>
     ) {
        GlideUtils.with(context).loadHeaderToken(itemData.userTable.userImg).into(binding.groupImage)
-        binding.ff.text = itemData.userTable.userName
+        binding.ff.text = itemData.userTable.userNickname
 
         val color1 = context.resources.getColor(R.color.color_main_top1)
         val color2 = context.resources.getColor(R.color.color_main_top3)

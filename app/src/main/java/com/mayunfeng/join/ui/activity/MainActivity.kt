@@ -122,8 +122,8 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, Serializable>() {
         Application.isLoginOk = true
 
         // 用户名
-        binding.mainContent.mainUserName.text = userLoginBean.userName
-        binding.mainDrawer.tvUserName.text = userLoginBean.userName
+        binding.mainContent.mainUserNickname.text = userLoginBean.userNickname
+        binding.mainDrawer.tvUserNickname.text = userLoginBean.userNickname
 
         // 用户头像
         GlideUtils.with(this)

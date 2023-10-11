@@ -18,7 +18,7 @@
         app:srcCompat="@drawable/ic_app_back" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_user_name"
+        android:id="@+id/tv_user_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -86,9 +86,35 @@
                     android:orientation="vertical"
                     app:layout_constraintTop_toBottomOf="@+id/user_image">
 
+
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/dr_dialog_load_bg"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/user_open_click"
+                            style="@style/MeSettingClickLayout">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/MeSettingText"
+                                android:text="@string/edit_user_info_hidden" />
+
+                            <androidx.appcompat.widget.SwitchCompat
+                                android:id="@+id/user_open_sw"
+                                android:clickable="false"
+                                android:checked="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/activity_horizontal_margin"
                         android:background="@drawable/dr_dialog_load_bg"
                         android:orientation="vertical">
 
@@ -105,6 +131,7 @@
                                 android:text="@string/test_12" />
                         </androidx.appcompat.widget.LinearLayoutCompat>
 
+
                         <androidx.appcompat.widget.LinearLayoutCompat
                             android:id="@+id/user_age_click"
                             style="@style/MeSettingClickLayout">
@@ -119,8 +146,9 @@
                                 android:text="@string/test_9" />
                         </androidx.appcompat.widget.LinearLayoutCompat>
 
+
                         <androidx.appcompat.widget.LinearLayoutCompat
-                            android:id="@+id/user_name_click"
+                            android:id="@+id/user_nickname_click"
                             style="@style/MeSettingClickLayout">
 
                             <androidx.appcompat.widget.AppCompatTextView
@@ -128,7 +156,7 @@
                                 android:text="@string/edit_user_info_name" />
 
                             <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/user_name"
+                                android:id="@+id/user_nickname"
                                 style="@style/MeSettingTextVice"
                                 android:text="@string/test_2" />
 
@@ -227,6 +255,7 @@
                         android:layout_marginBottom="@dimen/activity_horizontal_margin"
                         android:background="@drawable/dr_dialog_load_bg"
                         android:orientation="vertical">
+
                         <androidx.appcompat.widget.LinearLayoutCompat
                             android:id="@+id/user_password_click"
                             style="@style/MeSettingClickLayout">

@@ -47,19 +47,19 @@ class EditInfoDialog(
 ) : BaseBottomSheetDialog<DialogEditUserInfoBinding>(context) {
 
     override fun onViewCreate(binding: DialogEditUserInfoBinding) {
-        binding.etUserName.filters = arrayOf(InputFilter.LengthFilter(maxLength))
+        binding.etUserNickname.filters = arrayOf(InputFilter.LengthFilter(maxLength))
         binding.title.text = title
-        binding.etUserName.hint = hint
+        binding.etUserNickname.hint = hint
 
 
-        binding.etUserName.addTextChangedListener {
+        binding.etUserNickname.addTextChangedListener {
             binding.ctvPws.isChecked = if (EditUserInfoDialogType.PASSWORD == eType) {
-                (!binding.etUserName.text.isNullOrEmpty() && !binding.etUserPassword.text.isNullOrEmpty())
+                (!binding.etUserNickname.text.isNullOrEmpty() && !binding.etUserPassword.text.isNullOrEmpty())
             } else {
-                !binding.etUserName.text.isNullOrEmpty() && defaultData != binding.etUserName.text.toString()
+                !binding.etUserNickname.text.isNullOrEmpty() && defaultData != binding.etUserNickname.text.toString()
             }
             binding.ctvPws.isClickable = binding.ctvPws.isChecked
-            binding.imgDel1.visibility = if (!binding.etUserName.text.isNullOrEmpty()) {
+            binding.imgDel1.visibility = if (!binding.etUserNickname.text.isNullOrEmpty()) {
                 View.VISIBLE
             } else {
                 View.GONE
@@ -68,16 +68,16 @@ class EditInfoDialog(
 
         if (eType == EditUserInfoDialogType.HIGH) {
 
-            binding.etUserName.maxLines = 4
-            binding.etUserName.setLines(4)
-            binding.etUserName.gravity = Gravity.TOP
+            binding.etUserNickname.maxLines = 4
+            binding.etUserNickname.setLines(4)
+            binding.etUserNickname.gravity = Gravity.TOP
 
         } else if (eType == EditUserInfoDialogType.PASSWORD) {
-            binding.etUserName.setText("")
+            binding.etUserNickname.setText("")
             binding.edVal2.visibility = View.VISIBLE
             binding.etUserPassword.addTextChangedListener {
                 binding.ctvPws.isChecked =
-                    (!binding.etUserName.text.isNullOrEmpty() && !binding.etUserPassword.text.isNullOrEmpty())
+                    (!binding.etUserNickname.text.isNullOrEmpty() && !binding.etUserPassword.text.isNullOrEmpty())
                 binding.ctvPws.isClickable = binding.ctvPws.isChecked
                 binding.imgDel2.visibility = if (!binding.etUserPassword.text.isNullOrEmpty()) {
                     View.VISIBLE
@@ -89,7 +89,7 @@ class EditInfoDialog(
         }
 
         binding.imgDel1.setOnClickListener {
-            binding.etUserName.setText("")
+            binding.etUserNickname.setText("")
         }
         binding.imgDel2.setOnClickListener {
             binding.etUserPassword.setText("")
@@ -102,7 +102,7 @@ class EditInfoDialog(
             }
             if (clickOk(
                     this,
-                    binding.etUserName.text.toString(),
+                    binding.etUserNickname.text.toString(),
                     binding.etUserPassword.text.toString()
                 )
             ) {
@@ -111,14 +111,14 @@ class EditInfoDialog(
         }
         binding.ctvPws.isChecked = false
         binding.ctvPws.isClickable = false
-        binding.etUserName.setText(defaultData)
+        binding.etUserNickname.setText(defaultData)
     }
 
 
     override fun show() {
         super.show()
-        OtherUtils.showSoftInputFromWindow(binding.etUserName)
-        binding.etUserName.setSelection(binding.etUserName.length())
+        OtherUtils.showSoftInputFromWindow(binding.etUserNickname)
+        binding.etUserNickname.setSelection(binding.etUserNickname.length())
     }
 }
 

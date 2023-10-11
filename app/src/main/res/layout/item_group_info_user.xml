@@ -23,7 +23,7 @@
             app:qmui_is_circle="true" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/user_name"
+            android:id="@+id/user_nickname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"

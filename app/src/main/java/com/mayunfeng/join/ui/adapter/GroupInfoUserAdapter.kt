@@ -46,7 +46,7 @@ class GroupInfoUserAdapter(
         binding.more.visibility = View.GONE
         binding.my.visibility = View.VISIBLE
         GlideUtils.with(context).loadHeaderToken(itemData.userImg).into(binding.groupUser4)
-        binding.userName.text = itemData.userName
+        binding.userNickname.text = itemData.userNickname
 
     }
 

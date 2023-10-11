@@ -55,12 +55,16 @@ class EditUserInfoActivity : AppBaseActivity<ActivityEditUserInfoBinding, UserLo
         }
 
 
-        binding.userNameClick.setOnClickListener {
+        binding.userOpenClick.setOnClickListener {
+            userApi.sendEditOpen(!binding.userOpenSw.isChecked).mySubscribeMainThread(this, this, R.string.dialog_load_title_modify)
+        }
+
+        binding.userNicknameClick.setOnClickListener {
             EditInfoDialog(
                 context,
                 "${getString(R.string.dialog_edit_modify)}${getString(R.string.edit_user_info_name)}",
                 "${getString(R.string.dialog_edit_input)}${getString(R.string.edit_user_info_name)}",
-                userLoginBean.userName,
+                userLoginBean.userNickname,
                 10
             ) { _, v1, _ ->
                 userApi.sendEditName(v1)
@@ -143,8 +147,9 @@ class EditUserInfoActivity : AppBaseActivity<ActivityEditUserInfoBinding, UserLo
         GlideUtils.with(this)
             .loadHeaderToken(userLoginBean.userImg)
             .into(binding.userImage)
+        binding.userOpenSw.isChecked = userLoginBean.userOpenProfile
         binding.userAccount.text = userLoginBean.userAccount
-        binding.userName.text = userLoginBean.userName
+        binding.userNickname.text = userLoginBean.userNickname
         binding.userSex.text =
             if (userLoginBean.userSex) getString(R.string.drawer_sex_boy) else getString(R.string.drawer_sex_girl)
         binding.userAge.text = "${userLoginBean.userAge}"

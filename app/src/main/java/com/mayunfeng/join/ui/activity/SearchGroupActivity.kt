@@ -36,10 +36,10 @@ class SearchGroupActivity : AppBaseActivity<ActivitySearchGroupBinding, Serializ
 
         initUi()
         TimeUtils.timing(300) {
-            OtherUtils.showSoftInputFromWindow(binding.etUserName)
+            OtherUtils.showSoftInputFromWindow(binding.etUserNickname)
         }
 
-        binding.etUserName.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+        binding.etUserNickname.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
                 (getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(
                     currentFocus?.windowToken,
@@ -53,7 +53,7 @@ class SearchGroupActivity : AppBaseActivity<ActivitySearchGroupBinding, Serializ
 
     private fun gotoSearch(loadDialogTitle: Int = R.string.dialog_load_title) {
         binding.smartRefreshLayout.finishRefresh()
-        val group = binding.etUserName.text.toString()
+        val group = binding.etUserNickname.text.toString()
         if (group.isEmpty()) {
             showToast(R.string.activity_search_nul)
             return

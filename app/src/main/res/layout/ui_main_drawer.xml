@@ -54,7 +54,7 @@
                     app:qmui_is_circle="true" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_user_name"
+                    android:id="@+id/tv_user_nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/activity_vertical_margin"
@@ -98,9 +98,9 @@
                     android:text="@string/test_3"
                     android:textColor="@color/white"
                     android:textSize="10sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_user_name"
-                    app:layout_constraintStart_toEndOf="@+id/tv_user_name"
-                    app:layout_constraintTop_toTopOf="@+id/tv_user_name"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_user_nickname"
+                    app:layout_constraintStart_toEndOf="@+id/tv_user_nickname"
+                    app:layout_constraintTop_toTopOf="@+id/tv_user_nickname"
                     tools:ignore="SmallSp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -114,9 +114,9 @@
                     android:text="@string/test_4"
                     android:textColor="@color/white"
                     android:textSize="10sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_user_name"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_user_nickname"
                     app:layout_constraintStart_toEndOf="@+id/tv_sex"
-                    app:layout_constraintTop_toTopOf="@+id/tv_user_name"
+                    app:layout_constraintTop_toTopOf="@+id/tv_user_nickname"
                     tools:ignore="SmallSp" />
 
                 <View

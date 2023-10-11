@@ -20,7 +20,7 @@
         app:srcCompat="@drawable/ic_app_back" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_user_name"
+        android:id="@+id/tv_user_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -94,8 +94,31 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/user_account"
                                 style="@style/MeSettingTextVice"
-                                android:layout_marginEnd="0dp"
                                 android:text="@string/test_12" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/user_nickname_click"
+                            style="@style/MeSettingClickLayout">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/MeSettingText"
+                                android:text="@string/edit_user_info_name" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/user_nickname"
+                                style="@style/MeSettingTextVice"
+                                android:text="@string/test_2" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/user_open_vsd"
+                            style="@style/MeSettingClickLayout"
+                            android:visibility="gone"
+                            android:gravity="center">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/MeSettingTextVice"
+                                android:text="@string/edit_user_info_open" />
                         </androidx.appcompat.widget.LinearLayoutCompat>
 
                         <androidx.appcompat.widget.LinearLayoutCompat
@@ -110,20 +133,6 @@
                                 android:id="@+id/user_age"
                                 style="@style/MeSettingTextVice"
                                 android:text="@string/test_9" />
-                        </androidx.appcompat.widget.LinearLayoutCompat>
-
-                        <androidx.appcompat.widget.LinearLayoutCompat
-                            android:id="@+id/user_name_click"
-                            style="@style/MeSettingClickLayout">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                style="@style/MeSettingText"
-                                android:text="@string/edit_user_info_name" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/user_name"
-                                style="@style/MeSettingTextVice"
-                                android:text="@string/test_2" />
                         </androidx.appcompat.widget.LinearLayoutCompat>
 
                         <androidx.appcompat.widget.LinearLayoutCompat
@@ -160,6 +169,7 @@
 
 
                     <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/user_introduce_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"

@@ -25,9 +25,11 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 // 192.168.0.105
 // 42.192.221.73
 // 192.168.0.112
+// 47.122.20.228
+// 192.168.31.11
 
 // 服务端 ip 地址
-const val BASE_ADDRESS = "42.192.221.73"
+const val BASE_ADDRESS = "192.168.31.11"
 // 端口
 const val BASE_PORT = "8012"
 const val BASE_HTTP_URL = "http://${BASE_ADDRESS}:${BASE_PORT}"

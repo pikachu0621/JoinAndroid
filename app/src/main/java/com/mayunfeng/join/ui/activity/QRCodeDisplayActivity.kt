@@ -29,7 +29,7 @@ class QRCodeDisplayActivity : AppBaseActivity<ActivityQrcodeDisplayBinding, Seri
             binding.qrcImg.setImageBitmap(CodeUtils.createQRCode(createQrStr(group!!.id), binding.qrcImg.width))
         }
         binding.appCompatTextView9.text = group!!.groupName
-        binding.userName.text = "ID: ${UserUtils.encryptGroupId(group!!.id)}"
+        binding.userNickname.text = "ID: ${UserUtils.encryptGroupId(group!!.id)}"
         GlideUtils.with(context).loadHeaderToken(group!!.groupImg).into(binding.userImage)
     }
 

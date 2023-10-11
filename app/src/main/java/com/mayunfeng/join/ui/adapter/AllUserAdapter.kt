@@ -39,7 +39,7 @@ class AllUserAdapter(private val clickItem:(itemData: UserLoginBean) -> Unit,
         GlideUtils.with(context)
             .loadHeaderToken(itemData.userImg)
             .into(binding.userImage)
-        binding.title.text = itemData.userName
+        binding.title.text = itemData.userNickname
         binding.tvAdmin.visibility =  if (position == 0) View.VISIBLE else View.GONE
         binding.root.setOnClickListener { clickItem(itemData) }
         if (isCreateUser && position != 0) {

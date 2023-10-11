@@ -25,7 +25,7 @@
         app:srcCompat="@drawable/ic_app_back" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_user_name"
+        android:id="@+id/tv_user_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"

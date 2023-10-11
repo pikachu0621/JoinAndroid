@@ -40,7 +40,7 @@ class LoginActivity : AppBaseActivity<ActivityLoginBinding, UserLoginBean>(), Qu
         click()
         val readUserAccount = UserUtils.readUserAccount()
         if (!readUserAccount.isNullOrEmpty()) {
-            binding.etUserName.setText(readUserAccount)
+            binding.etUserNickname.setText(readUserAccount)
         }
     }
 
@@ -50,11 +50,11 @@ class LoginActivity : AppBaseActivity<ActivityLoginBinding, UserLoginBean>(), Qu
             finishTs(this)
         }
 
-        binding.etUserName.addTextChangedListener {
+        binding.etUserNickname.addTextChangedListener {
             binding.ctvPws.isChecked =
-                (!binding.etUserName.text.isNullOrEmpty() && !binding.etUserPassword.text.isNullOrEmpty())
+                (!binding.etUserNickname.text.isNullOrEmpty() && !binding.etUserPassword.text.isNullOrEmpty())
             binding.ctvPws.isClickable = binding.ctvPws.isChecked
-            binding.imgDel1.visibility = if (!binding.etUserName.text.isNullOrEmpty()) {
+            binding.imgDel1.visibility = if (!binding.etUserNickname.text.isNullOrEmpty()) {
                 View.VISIBLE
             } else {
                 View.GONE
@@ -63,7 +63,7 @@ class LoginActivity : AppBaseActivity<ActivityLoginBinding, UserLoginBean>(), Qu
 
         binding.etUserPassword.addTextChangedListener {
             binding.ctvPws.isChecked =
-                (!binding.etUserName.text.isNullOrEmpty() && !binding.etUserPassword.text.isNullOrEmpty())
+                (!binding.etUserNickname.text.isNullOrEmpty() && !binding.etUserPassword.text.isNullOrEmpty())
             binding.ctvPws.isClickable = binding.ctvPws.isChecked
             binding.imgDel2.visibility = if (!binding.etUserPassword.text.isNullOrEmpty()) {
                 View.VISIBLE
@@ -72,7 +72,7 @@ class LoginActivity : AppBaseActivity<ActivityLoginBinding, UserLoginBean>(), Qu
             }
         }
         binding.imgDel1.setOnClickListener {
-            binding.etUserName.setText("")
+            binding.etUserNickname.setText("")
         }
         binding.imgDel2.setOnClickListener {
             binding.etUserPassword.setText("")
@@ -118,7 +118,7 @@ class LoginActivity : AppBaseActivity<ActivityLoginBinding, UserLoginBean>(), Qu
         }
         RetrofitManager.getInstance()
             .create(UserApi::class.java)
-            .sendLogin(binding.etUserName.text.toString(), binding.etUserPassword.text.toString())
+            .sendLogin(binding.etUserNickname.text.toString(), binding.etUserPassword.text.toString())
             .mySubscribeMainThread(this, this, R.string.dialog_load_title_login)
     }
 

@@ -3,6 +3,7 @@ package com.mayunfeng.join.ui.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import com.mayunfeng.join.R
 import com.mayunfeng.join.api.UserApi
 import com.mayunfeng.join.base.AppBaseActivity
@@ -48,12 +49,25 @@ class UserInfoActivity : AppBaseActivity<ActivityUserInfoBinding, UserLoginBean>
             .loadHeaderToken(userLoginBean.userImg)
             .into(binding.userImage)
         binding.userAccount.text = userLoginBean.userAccount
-        binding.userName.text = userLoginBean.userName
-        binding.userSex.text = if (userLoginBean.userSex) getString(R.string.drawer_sex_boy) else getString(R.string.drawer_sex_girl)
-        binding.userAge.text = "${userLoginBean.userAge}"
-        binding.userAccount.text = userLoginBean.userAccount
-        binding.userSchool.text = userLoginBean.userUnit
-        binding.userIntroduce.text = userLoginBean.userIntroduce
+        binding.userNickname.text = userLoginBean.userNickname
+        binding.userOpenVsd.visibility = View.VISIBLE
+        binding.userSexClick.visibility = View.GONE
+        binding.userAgeClick.visibility = View.GONE
+        binding.userUnitClick.visibility = View.GONE
+        binding.userIntroduceLayout.visibility = View.GONE
+        if (userLoginBean.userAccount == UserUtils.readUserAccount()
+            || userLoginBean.userOpenProfile){
+            binding.userSex.text = if (userLoginBean.userSex) getString(R.string.drawer_sex_boy) else getString(R.string.drawer_sex_girl)
+            binding.userAge.text = "${userLoginBean.userAge}"
+            binding.userSchool.text = userLoginBean.userUnit
+            binding.userIntroduce.text = userLoginBean.userIntroduce
+
+            binding.userOpenVsd.visibility = View.GONE
+            binding.userSexClick.visibility = View.VISIBLE
+            binding.userAgeClick.visibility = View.VISIBLE
+            binding.userUnitClick.visibility = View.VISIBLE
+            binding.userIntroduceLayout.visibility = View.VISIBLE
+        }
     }
 
 }

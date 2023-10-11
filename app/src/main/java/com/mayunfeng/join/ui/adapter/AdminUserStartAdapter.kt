@@ -37,8 +37,8 @@ class AdminUserStartAdapter(
         binding.content.text = startSignInfo.signContent
 
         GlideUtils.with(context).loadHeaderToken(userTable.userImg).into(binding.sendUserImg)
-        binding.userName.text = "发起者：${userTable.userName}"
-        binding.userName.setOnClickListener { clickUser(userTable) }
+        binding.userNickname.text = "发起者：${userTable.userNickname}"
+        binding.userNickname.setOnClickListener { clickUser(userTable) }
         if (signGroupInfo == null) {
             binding.sendGroupImg.visibility = View.GONE
             binding.groupName.text = context.getString(R.string.start_sign_group_nul)

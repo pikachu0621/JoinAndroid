@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@+id/title">
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_user_name"
+            android:id="@+id/et_user_nickname"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:minHeight="50dp"
@@ -68,8 +68,8 @@
             android:layout_height="50dp"
             android:padding="15dp"
             android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/et_user_name"
-            app:layout_constraintTop_toTopOf="@+id/et_user_name"
+            app:layout_constraintEnd_toEndOf="@+id/et_user_nickname"
+            app:layout_constraintTop_toTopOf="@+id/et_user_nickname"
             app:srcCompat="@drawable/ic_login_edit_delete" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

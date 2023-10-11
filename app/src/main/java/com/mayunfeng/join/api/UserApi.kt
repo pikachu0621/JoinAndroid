@@ -1,6 +1,5 @@
 package com.mayunfeng.join.api
 
-import com.mayunfeng.join.TOKEN_ERROR_KEY
 import com.mayunfeng.join.bean.BaseBean
 import com.mayunfeng.join.bean.UserLoginBean
 import io.reactivex.rxjava3.core.Observable
@@ -8,8 +7,6 @@ import okhttp3.MultipartBody
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Headers
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
@@ -75,12 +72,22 @@ interface UserApi {
      * 修改 用户名字
      *
      * 需要token
-     * @param name name
+     * @param nickname nickname
      *
      * @return BaseBean<UserLoginBean>
      */
-    @GET("/myf-user-api/edit-name")
-    fun sendEditName(@Query("name") name: String?): Observable<BaseBean<UserLoginBean>>
+    @GET("/myf-user-api/edit-nickname")
+    fun sendEditName(@Query("nickname") nickname: String?): Observable<BaseBean<UserLoginBean>>
+
+
+    /**
+     * 修改用户信息开放 null 自动更改
+     *
+     * @param isOpen 是否开放
+     */
+    @GET("/myf-user-api/edit-open")
+    fun sendEditOpen(@Query("open") isOpen: Boolean? = null): Observable<BaseBean<UserLoginBean>>
+
 
 
     /**
