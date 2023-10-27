@@ -1,5 +1,6 @@
 package com.mayunfeng.join.ui.adapter
 
+import android.annotation.SuppressLint
 import com.mayunfeng.join.R
 import com.mayunfeng.join.bean.StartSignBean
 import com.mayunfeng.join.bean.UserSignTable
@@ -19,6 +20,7 @@ class MyStartSignUserAdapter(private val clickItem: (itemData: UserSignTable) ->
         refresh()
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onQuickBindView(
         binding: ItemSignUserBinding,
         itemData: UserSignTable,

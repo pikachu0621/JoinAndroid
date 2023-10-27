@@ -153,4 +153,7 @@ interface UserApi {
         @Field("new-password") newPassword: String?
     ): Observable<BaseBean<UserLoginBean>>
 
+
+    @GET("/myf-user-api/out-login")
+    fun outLogin(): Observable<BaseBean<Boolean>>
 }

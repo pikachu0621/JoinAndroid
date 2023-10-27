@@ -1,0 +1,274 @@
+<resources>
+    <string name="app_name">Attendance record management system</string>
+
+
+    <!--activity-->
+    <string name="activity_title_edit_user">Edit data</string>
+    <string name="activity_title_user_info">User information</string>
+    <string name="activity_title_create_group">Create group</string>
+    <string name="activity_title_create_group_edit">Edit group</string>
+    <string name="activity_title_my_create_group">I started the group</string>
+    <string name="activity_title_my_join_group">I joined the group</string>
+    <string name="activity_title_all_user">Whole crew</string>
+    <string name="activity_title_qrc_join">Add QR code</string>
+    <string name="activity_title_qrc">Sweep</string>
+    <string name="activity_title_group_info">Group information</string>
+    <string name="activity_title_search_group">Query group</string>
+    <string name="activity_title_my_start_sign">I initiated the check-in</string>
+    <string name="activity_title_sign_start">Sign-in</string>
+    <string name="activity_title_setting">More settings</string>
+
+
+    <!--MyStartSignInfoActivity-->
+    <string name="activity_title_start_sign_info">Check-in statistics</string>
+    <string name="activity_title_start_sign_user">Team member check-in</string>
+
+
+    <!-- login -->
+    <string name="login_welcome">Welcome to use</string>
+    <string name="login_welcome_2">Unregistered accounts are automatically registered and logged in</string>
+    <string name="login_welcome_3">Only registered accounts can log in via email verification code</string>
+    <string name="login_name_welcome">Account password login</string>
+    <string name="login_email_welcome">Email verification code login</string>
+    <string name="login_name">Username/e-mail</string>
+    <string name="login_password">User password</string>
+    <string name="login_vcode">Email verification code</string>
+    <string name="login_get_vcode">Get verification code</string>
+    <string name="login_goto">Login/Register</string>
+    <string name="login_goto2">Login</string>
+
+    <string name="login_user_grade_0">User</string>
+    <string name="login_user_grade_1">Administrator</string>
+    <string name="login_user_grade_2">Super administrator</string>
+    <string name="login_user_id">User ID: </string>
+    <string name="login_user_token_nul">Please log in first!</string>
+    <string name="login_user_token_failure">Login failure!</string>
+
+    <!--main_drawer-->
+    <string name="drawer_setting">More Settings</string>
+    <string name="drawer_problem">Switch topic</string>
+    <string name="drawer_out">Log out</string>
+    <string name="drawer_sex_boy">Male</string>
+    <string name="drawer_sex_girl">Female</string>
+
+    <string name="drawer_list_group_user">Crew function</string>
+    <string name="drawer_list_group_user_sign_in">Current sign in</string>
+    <string name="drawer_list_group_user_join_group">I joined the group</string>
+    <string name="drawer_list_group_user_info">My information</string>
+    <string name="drawer_list_group_user_historical_record">Historical record</string>
+    <string name="drawer_list_group_creator">Creator function</string>
+    <string name="drawer_list_group_creator_group">Group</string>
+    <string name="drawer_list_group_creator_my_group">I created the group</string>
+    <string name="drawer_list_group_creator_start_sign">Initiate check-in</string>
+    <string name="drawer_list_group_creator_my_ok_group">Created</string>
+    <string name="drawer_list_group_creator_sign_info">Team member check-in information</string>
+
+
+    <!--更新-->
+    <string name="load_header_up_data">Update successfully</string>
+    <string name="load_footer_err">Load failure</string>
+    <string name="load_footer_null">No data</string>
+
+
+    <!--main top-->
+    <!--用户 （签到，我的团队，历史记录，我的资料）
+       管理员 （发起签到，签到，批阅签到，我的团队）-->
+    <string name="main_top_user_sign_start">Current sign in</string>
+    <string name="main_top_user_sign_group">My group</string>
+    <string name="main_top_user_sign_record">Historical record</string>
+    <string name="main_top_user_info">My information</string>
+    <string name="main_top_root_user_sign_start">Initiate check-in</string>
+    <string name="main_top_root_user_sign_check">Review and sign in</string>
+    <!--msg-->
+    <string name="main_list_item_join">Add</string>
+    <string name="main_list_item_sign">Sign</string>
+
+
+    <!--StartSignActivity-->
+    <string name="main_start_sign_nul">No data currently available</string>
+
+
+    <string name="activity_qrc_image">Photo album</string>
+    <string name="activity_qrc_search">Search</string>
+    <string name="activity_qrc_face">Face to face</string>
+    <string name="activity_search_group">Enter group ID Group / Name</string>
+    <string name="activity_search_nul">Search terms can\'t be empty!</string>
+    <string name="activity_sqr_nul">This QR code is invalid</string>
+
+    <!--MyCreateGroupActivity-->
+    <string name="my_create_group_dialog_edit">Edit group information</string>
+    <string name="my_create_group_dialog_dissolve">Disband this group</string>
+    <string name="my_create_group_dialog_dissolve_msg">This operation is not reversible. Do you want to dissolve this group?</string>
+    <string name="my_create_group_dialog_dissolve_out_msg">This operation is not reversible. Do you want to exit this group?</string>
+    <string name="my_create_group_dialog_send">Initiate check-in</string>
+    <string name="my_create_group_qrc">Add QR code</string>
+    <string name="my_initiate_sign_time">Initiation time</string>
+
+    <!--GroupInfoActivity-->
+    <string name="group_info_more">More</string>
+    <string name="group_info_info">Group information</string>
+    <string name="group_info_people">People</string>
+    <string name="group_info_join_ok">Join successfully</string>
+    <string name="group_info_join_group">Join the group</string>
+    <string name="group_info_out_group">Exit the group</string>
+    <string name="group_info_out_ok">Exit successfully</string>
+    <string name="group_info_dissolve_ok">Successful dissolution</string>
+    <string name="group_info_dissolve_group">Disband the section</string>
+    <string name="group_info_copy_group_id">ID of a replication group</string>
+    <string name="group_info_copy_group_name">Name of the replication group</string>
+
+
+    <!--EditUserInfoActivity-->
+    <string name="edit_user_info_account">Account number</string>
+    <string name="edit_user_info_name">Nickname</string>
+    <string name="edit_user_info_hidden">Private account</string>
+    <string name="edit_user_info_sex">Sex</string>
+    <string name="edit_user_info_age">Age</string>
+    <string name="edit_user_info_birth">Date of birth</string>
+    <string name="edit_user_info_introduce">Personal signature</string>
+    <string name="edit_user_info_introduce_vice">Click to edit</string>
+    <string name="edit_user_info_unit">Affiliated unit / School</string>
+    <string name="edit_user_info_create_time">Creation time</string>
+    <string name="edit_user_info_password">Change password</string>
+    <string name="edit_user_info_password_vice">Click to modify</string>
+    <string name="edit_user_info_open">Part of the user\'s profile is not public</string>
+
+    <!--PhotoActivity-->
+    <string name="photo_title">All pictures</string>
+    <string name="photo_nul">No picture</string>
+    <string name="photo_crop">Picture cropping</string>
+    <string name="photo_choose_nul">No image selected</string>
+    <string name="photo_crop_error">Cropping failure</string>
+
+    <!--activity_start_sign-->
+    <string name="start_sign_next_step">Next</string>
+    <string name="start_sign_create">Start by creating a group</string>
+    <string name="start_sign_choose_group">Selective group</string>
+    <string name="start_sign_fill_info">Fill in information</string>
+    <string name="start_sign_sign_type">Sign-in method</string>
+    <string name="start_sign">Initiate check-in</string>
+    <string name="start_sign_title">Title</string>
+    <string name="start_sign_title_input">The title that initiated the check-in (can be empty)</string>
+    <string name="start_sign_time">Duration</string>
+    <string name="start_sign_content_input">Content to initiate check-in (can be empty)</string>
+    <string name="start_sign_content">Content</string>
+    <string name="start_sign_type_nul_pws">No password</string>
+    <string name="start_sign_type_num_pws">Digital cipher</string>
+    <string name="start_sign_type_gesture_pws">Gesture cipher</string>
+    <string name="start_sign_type_sqc_pws">Two-dimensional code</string>
+    <string name="start_sign_type_pws">Please enter a 4-digit password</string>
+    <string name="start_sign_type_gesture">Please draw a pattern of at least 4 dots</string>
+    <string name="start_sign_type_progress">Under way</string>
+    <string name="start_sign_type_defunct">Already ended</string>
+    <string name="start_sign_type_unlimited">Unlimited time</string>
+    <string name="start_sign_group_nul">The check-in initiated group has been dissolved</string>
+    <string name="start_sign_group_del">This operation is not reversible, do you want to delete this check-in?</string>
+    <string name="start_sign_user_ok">Sign in completed</string>
+    <string name="start_sign_not_group">Unselected group</string>
+    <string name="start_sign_initiator_user">Initiator</string>
+    <string name="start_sign_initiator_group">Sponsor group</string>
+    <string name="start_sign_user_sign_ok">Completed</string>
+    <string name="start_sign_user_sign_expired">Expired</string>
+    <string name="start_sign_user_sign_goto">Check-in</string>
+    <string name="start_sign_user_sign_complete">Signed in</string>
+    <string name="start_sign_user_sign_user_all">Overall number of people</string>
+
+
+    <!--activity_create_group-->
+    <string name="create_group_name">Group name</string>
+    <string name="create_group_name_input">Give the group a nice name</string>
+    <string name="create_group_introduce">Group Chat Introduction</string>
+    <string name="create_group_introduce_input">Add introduction to make it easier for members to understand the purpose of this group!</string>
+    <string name="create_group_type">Group type</string>
+    <string name="create_group_error">Failure</string>
+    <string name="create_group_create_error">Creation failure</string>
+
+    <!--dialog -->
+    <string name="dialog_load_title">Loading…</string>
+    <string name="dialog_load_title_login">Log in…</string>
+    <string name="dialog_load_title_modify">Under revision…</string>
+    <string name="dialog_load_title_net_error">The network is abnormal!</string>
+    <string name="dialog_msg_cancel">Cancel</string>
+    <string name="dialog_msg_confirm">Affirm</string>
+    <string name="dialog_msg_complete">Complete</string>
+    <string name="dialog_msg_out_login">Could you have missed the sign-in task, confirm logout?</string>
+    <string name="dialog_msg_out_login_q">Your account is logged in on other devices, if it is not operated by yourself, please change the password as soon as possible!</string>
+    <string name="dialog_msg_out_login_pws_nul">Password has expired, you are forced to log out!</string>
+    <string name="dialog_edit_old_password">Old password</string>
+    <string name="dialog_edit_new_password">New password</string>
+    <string name="dialog_edit_modify">Edit</string>
+    <string name="dialog_edit_input">Please enter</string>
+    <string name="dialog_edit_sex_title">Modify gender</string>
+    <string name="dialog_edit_age_title">Age modification</string>
+    <string name="dialog_edit_birth_title">Change the date of birth</string>
+    <string name="dialog_edit_nul">Cannot be empty</string>
+
+
+    <!--PhotoActivity-->
+    <string name="photo_all">All</string>
+    <string name="photo_on">None</string>
+
+    <!--pws-->
+    <string name="edit_pws_pattern_error">Pattern error</string>
+    <string name="edit_pws_pattern_for4">At least four points</string>
+    <string name="edit_pws_pattern_again">Re-draw</string>
+    <string name="edit_pws_pattern_mismatch">Does not match, please redraw</string>
+    <string name="edit_pws_num_err">Password error</string>
+    <string name="edit_pws_num_again">Re-input</string>
+
+    <!--其他-->
+    <string name="all_out_user">This operation is not reversible. Do you want to remove the user?</string>
+    <string name="user_out_err">Exit failure</string>
+    <string name="app_again_out">Press exit again</string>
+    <string name="app_err">Error</string>
+    <string name="app_permissions_turn_down">Authorization has been permanently denied, please grant manually</string>
+    <string name="app_permissions_err">Permission grant failure</string>
+    <string name="app_years">Years</string>
+    <string name="app_month">Month</string>
+    <string name="app_days">Days</string>
+    <string name="app_min">Min</string>
+    <string name="app_sec">Sec</string>
+    <string name="app_h">Hour</string>
+    <string name="app_hour">Hour</string>
+    <string name="app_minutes">Minutes</string>
+    <string name="app_delete_ok">Successfully deleted</string>
+    <string name="app_residue">Surplus</string>
+
+
+
+    <!--settings-->
+    <string name="settings_theme_title">Theme</string>
+    <string name="settings_theme_sys">Following system</string>
+    <string name="settings_theme_night">Night pattern</string>
+    <string name="settings_theme_day">Daytime pattern</string>
+    <string name="settings_theme_app">Software</string>
+    <string name="settings_theme_app_cache">Clear cache</string>
+    <string name="settings_theme_app_issue">FAQ</string>
+    <string name="settings_theme_app_service">Terms of service</string>
+    <string name="settings_theme_app_privacy">Privacy Policy</string>
+    <string name="settings_theme_item">Item</string>
+    <string name="settings_theme_item_state">State</string>
+    <string name="settings_theme_language">Language</string>
+    <string name="settings_theme_language_cn">Chinese</string>
+    <string name="settings_theme_language_en">English</string>
+
+    <!--setting-->
+    <string name="settings_disclaimer">Disclaimer!\n\nAll components used in this project are[Apache License 2.0]\n\nThe following are open source project names\nretrofit2\nokhttp3\nrxjava3\nrxAndroid\ngson\neventbus\nrefresh\nlottie\nzxing\nCompressHelper\nAddressPicker\nkotlin-stdlib-jdk8\n\nItems are commercially available but please follow[Apache License 2.0]Open source protocol\nby-wechat：pkpk-run</string>
+
+    <string name="test">TEST</string>
+    <string name="test_1">Higher mathematics / There is no punch card at present</string>
+    <string name="test_2">***</string>
+    <string name="test_3">Female</string>
+    <string name="test_4">Member/Administrator</string>
+    <string name="test_5">ID: 0000000001</string>
+    <string name="test_6">Online</string>
+    <string name="test_7">02-03 13:22</string>
+    <string name="test_8">\@****** ****** California Institute of Technology California Institute of TechnologyCalifornia Institute of TechnologyCalifornia Institute of TechnologyCalifornia Institute of TechnologyCalifornia Institute of TechnologyCalifornia Institute of TechnologyCalifornia Institute of TechnologyCalifornia Institute of TechnologyCalifornia Institute of TechnologyCalifornia Institute of TechnologyCalifornia Institute of TechnologyCalifornia Institute of TechnologyCalifornia Institute of Technology</string>
+    <string name="test_9">22</string>
+    <string name="test_10">California Institute of Technology</string>
+    <string name="test_11">2023-03-10 21:16:45</string>
+    <string name="test_12">******@136.com</string>
+    <string name="test_13">/100 People</string>
+
+
+</resources>

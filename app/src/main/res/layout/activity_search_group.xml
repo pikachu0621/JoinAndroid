@@ -80,6 +80,18 @@
             app:layout_constraintTop_toTopOf="@+id/et_user_nickname"
             app:srcCompat="@drawable/ic_main_head_add_code" />
 
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_del_3"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@+id/et_user_nickname"
+            app:layout_constraintEnd_toStartOf="@+id/img_del_1"
+            app:layout_constraintTop_toTopOf="@+id/et_user_nickname"
+            app:srcCompat="@drawable/ic_main_face_to_face" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatTextView

@@ -113,7 +113,7 @@ class WebSocketService : BaseService<Serializable>() {
                             showMsgNotify(
                                 Application.myApplicationContext,
                                 "你有新签到任务",
-                                "${fromJson.startSignInfo.signTitle}，请在${MyStartSignUserFragment.formatTime(fromJson.startSignInfo.signTime)}内签到",
+                                "${fromJson.startSignInfo.signTitle}，请在${MyStartSignUserFragment.formatTime(fromJson.startSignInfo.signTime, baseContext)}内签到",
                                 it,
                                 Intent(this@WebSocketService, AdminUserStartActivity::class.java)
                             )

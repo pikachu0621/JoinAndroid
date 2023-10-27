@@ -97,7 +97,7 @@ class EditInfoDialog(
 
         binding.ctvPws.setOnClickListener {
             if (!NetUtils.isNetworkConnected(context)) {
-                ToastUtils.showToast(context.getString(R.string.dialog_load_title_net_error))
+                ToastUtils.showToast(context.resources.getString(R.string.dialog_load_title_net_error))
                 return@setOnClickListener
             }
             if (clickOk(
@@ -161,7 +161,7 @@ class EditSexDialog(
 
         binding.ok.setOnClickListener {
             if (!NetUtils.isNetworkConnected(context)) {
-                ToastUtils.showToast(context.getString(R.string.dialog_load_title_net_error))
+                ToastUtils.showToast(context.resources.getString(R.string.dialog_load_title_net_error))
                 return@setOnClickListener
             }
             if (clickOk(this, isBoy)) {
@@ -209,7 +209,7 @@ class EditAgeDialog(
         binding.dateWheelLayout.dayLabelView.setTextColor(color)
         binding.dateWheelLayout.dayLabelView.typeface = typeface
         binding.dateWheelLayout.setDateMode(DateMode.YEAR_MONTH_DAY)
-        binding.dateWheelLayout.setDateLabel("年", "月", "日")
+        binding.dateWheelLayout.setDateLabel(context.resources.getString(R.string.app_years), context.resources.getString(R.string.app_month), context.resources.getString(R.string.app_days))
         selectedDate = setSelectedDate(birth)
         binding.dateWheelLayout.setOnDateSelectedListener { year, month, day ->
             binding.ok.isChecked = selectedDate.day != day || selectedDate.month != month || selectedDate.year != year
@@ -221,7 +221,7 @@ class EditAgeDialog(
             val month = binding.dateWheelLayout.selectedMonth
             val day = binding.dateWheelLayout.selectedDay
             if (!NetUtils.isNetworkConnected(context)) {
-                ToastUtils.showToast(context.getString(R.string.dialog_load_title_net_error))
+                ToastUtils.showToast(context.resources.getString(R.string.dialog_load_title_net_error))
                 return@setOnClickListener
             }
             if (clickOk(this,

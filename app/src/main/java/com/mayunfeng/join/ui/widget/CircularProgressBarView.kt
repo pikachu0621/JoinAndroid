@@ -129,7 +129,7 @@ open class CircularProgressBarView : View {
 		canvas.drawCircle(halfWidth, halfHeight, radius - halfStrokeWidth, mPaint)
 
 		// 画当前进度的圆环
-		mPaint.setColor(mPrimaryColor) // 改变画笔颜色
+		mPaint.color = mPrimaryColor // 改变画笔颜色
 		mRectF.top = halfHeight - radius + halfStrokeWidth
 		mRectF.bottom = halfHeight + radius - halfStrokeWidth
 		mRectF.left = halfWidth - radius + halfStrokeWidth

@@ -69,7 +69,7 @@ class MyStartSignStatisticsFragment :
                                     showToast(t?.reason ?: e.message)
                                 }
                                 override fun onSendComplete(t: BaseBean<ArrayList<StartSignBean>>) {
-                                    showToast("删除成功")
+                                    showToast(R.string.app_delete_ok)
                                     requireActivity().finish()
                                 }
                             })
@@ -88,7 +88,7 @@ class MyStartSignStatisticsFragment :
 
 
         binding.signName.text = startSignTable.signTitle
-        binding.time.text = "发起时间：${
+        binding.time.text = "${context.resources.getString(R.string.my_initiate_sign_time)}：${
             TimeUtils.strToStr(
                 startSignTable.createTime,
                 "yyyy-MM-dd HH:mm:ss",
@@ -99,7 +99,7 @@ class MyStartSignStatisticsFragment :
 
 
         GlideUtils.with(context).loadHeaderToken(userTable.userImg).into(binding.sendUserImg)
-        binding.userNickname.text = "发起者：${userTable.userNickname}"
+        binding.userNickname.text = "${context.resources.getString(R.string.start_sign_initiator_user)}：${userTable.userNickname}"
         if (signGroupInfo == null) {
             binding.sendGroupImg.visibility = View.GONE
             binding.groupName.text = getString(R.string.start_sign_group_nul)
@@ -109,7 +109,7 @@ class MyStartSignStatisticsFragment :
             binding.sendGroupImg.visibility = View.VISIBLE
             GlideUtils.with(context).loadHeaderToken(signGroupInfo.groupImg)
                 .into(binding.sendGroupImg)
-            binding.groupName.text = "发起组：${signGroupInfo.groupName}"
+            binding.groupName.text = "${context.resources.getString(R.string.start_sign_initiator_group)}：${signGroupInfo.groupName}"
             binding.groupName.setTextColor(getColor(R.color.color_grey1))
             binding.groupName.setOnClickListener {
                 startActivity(GroupInfoActivity::class.java, signGroupInfo.id)
@@ -136,13 +136,13 @@ class MyStartSignStatisticsFragment :
             2 -> binding.appCompatImageView4.setImageResource(R.drawable.ic_start_sign_qrc)
             3 -> binding.appCompatImageView4.setImageResource(R.drawable.ic_start_sign_psw_gesture)
         }
-        binding.timeAll.text = MyStartSignUserFragment.formatTime(startSignTable.signTime)
+        binding.timeAll.text = MyStartSignUserFragment.formatTime(startSignTable.signTime, context)
         binding.isEx.text = if (startSignTable.signExpire) {
             binding.isEx.setTextColor(getColor(R.color.color_main_top6))
-            "已结束"
+            context.resources.getString(R.string.start_sign_type_defunct)
         } else {
             binding.isEx.setTextColor(getColor(R.color.color_main_top1))
-            "进行中"
+            context.resources.getString(R.string.start_sign_type_progress)
         }
         binding.appCompatTextView21.text = "${startSignTable.signNotCompletedPeople}"
         binding.appCompatTextView24.text = "${startSignTable.signHaveCompletedPeople}"

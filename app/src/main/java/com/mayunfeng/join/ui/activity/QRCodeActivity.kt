@@ -39,7 +39,7 @@ class QRCodeActivity : CaptureActivity(), PhotoActivity.PhotoChooseListener {
 
     private var isWer = false
     private var longTime = 0L
-    private var longTimeSrl = "gerssasadrfjdshft4reydsl24251234fdsalk"
+    private var longTimeSrl = "asd_fgh_jkl_zxc_vbn_mbd_1o3_qwe_1tdf_sd2"
     private var cloudPws: String? = null
 
     private  lateinit var qrcImage: View
@@ -48,7 +48,7 @@ class QRCodeActivity : CaptureActivity(), PhotoActivity.PhotoChooseListener {
 
     companion object {
         /**
-         * @param pws 密码 == null 设置模式
+         * @param cloudPws 密码 == null 设置模式
          */
         fun startActivity(activity: Activity, cloudPws: String? = null) {
             activity.startActivity(Intent(activity, QRCodeActivity::class.java).apply {
@@ -79,8 +79,8 @@ class QRCodeActivity : CaptureActivity(), PhotoActivity.PhotoChooseListener {
             it.layoutParams.height = UiUtils.getStatusBarHeight(this)
         }
 
-        qrcImage = findViewById<View>(R.id.qrc_image)
-        qrcSearch = findViewById<View>(R.id.qrc_search)
+        qrcImage = findViewById(R.id.qrc_image)
+        qrcSearch = findViewById(R.id.qrc_search)
 
         qrcImage.setOnClickListener {
             PhotoActivity.goPhotoImage(this, 1, 4, 1, this)

@@ -9,6 +9,7 @@ import com.mayunfeng.join.service.CLOSE_ALL_NOTIFY_KEY
 import com.mayunfeng.join.service.WebSocketService
 import com.mayunfeng.join.ui.widget.LoadFooter
 import com.mayunfeng.join.ui.widget.LoadHeader
+import com.mayunfeng.join.utils.LanguageUtils
 import com.mayunfeng.join.utils.retrofit.RetrofitManager
 import com.pikachu.utils.utils.*
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
@@ -23,17 +24,22 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
  */
 
 // 192.168.0.105
+
 // 42.192.221.73
+
 // 192.168.0.112
 // 47.122.20.228
-// 192.168.31.11
+// 192.168.31.11 192.168.31.52
 
 // 服务端 ip 地址
-const val BASE_ADDRESS = "192.168.31.11"
+const val BASE_ADDRESS = "42.192.221.73"
 // 端口
 const val BASE_PORT = "8012"
-const val BASE_HTTP_URL = "http://${BASE_ADDRESS}:${BASE_PORT}"
-const val BASE_WS_URL = "ws://${BASE_ADDRESS}:${BASE_PORT}"
+
+const val BASE_HTTP = "http"
+const val BASE_WS = "ws"
+const val BASE_HTTP_URL = "${BASE_HTTP}://${BASE_ADDRESS}:${BASE_PORT}"
+const val BASE_WS_URL = "${BASE_WS}://${BASE_ADDRESS}:${BASE_PORT}"
 const val HTTP_OK = 200
 const val TOKEN_ERROR_CODE = -3
 const val TOKEN_ERROR_KEY = "token"
@@ -49,6 +55,7 @@ class Application : Application() {
         RetrofitManager.init(BASE_HTTP_URL)
         GlideUtils.init(BASE_HTTP_URL)
         AESBCBUtils.init(AES_PASSWORD)
+        // LanguageUtils.init(this)
         myApplicationContext = applicationContext
 
 

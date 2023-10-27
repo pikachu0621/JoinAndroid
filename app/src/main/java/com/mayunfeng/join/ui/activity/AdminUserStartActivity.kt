@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import com.mayunfeng.join.R
 import com.mayunfeng.join.api.SignApi
 import com.mayunfeng.join.base.AppBaseActivity
 import com.mayunfeng.join.bean.BaseBean
@@ -97,7 +98,7 @@ class AdminUserStartActivity : AppBaseActivity<ActivityAdminUserStartBinding, St
 
             override fun onSendComplete(t: BaseBean<Boolean>) {
                 startLoad()
-                showToast("签到完成")
+                showToast(getString(R.string.start_sign_user_ok))
             }
         })
 

@@ -96,8 +96,9 @@
         app:layout_constraintTop_toTopOf="@+id/view2"
         app:srcCompat="@drawable/ic_qrc_search" />
 
+
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/user_msg"
+        android:id="@+id/user_face"
         android:layout_width="?actionBarSize"
         android:layout_height="?actionBarSize"
         android:background="?android:attr/selectableItemBackground"
@@ -107,7 +108,23 @@
         app:layout_constraintBottom_toBottomOf="@+id/view2"
         app:layout_constraintEnd_toStartOf="@+id/add_group"
         app:layout_constraintTop_toTopOf="@+id/view2"
+        app:srcCompat="@drawable/ic_main_face_to_face" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/user_msg"
+        android:layout_width="?actionBarSize"
+        android:layout_height="?actionBarSize"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:scaleType="center"
+        app:layout_constraintBottom_toBottomOf="@+id/view2"
+        app:layout_constraintEnd_toStartOf="@+id/user_face"
+        app:layout_constraintTop_toTopOf="@+id/view2"
         app:srcCompat="@drawable/ic_main_head_msg" />
+
+
+
 
     <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:id="@+id/smartRefreshLayout"
@@ -158,6 +175,7 @@
                                 android:layout_marginTop="4dp"
                                 android:gravity="center"
                                 android:text="@string/main_top_user_sign_start"
+                                android:paddingHorizontal="10dp"
                                 android:textColor="@color/color_grey1"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -182,6 +200,7 @@
                                 android:layout_marginTop="4dp"
                                 android:gravity="center"
                                 android:text="@string/main_top_root_user_sign_start"
+                                android:paddingHorizontal="10dp"
                                 android:textColor="@color/color_grey1"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -206,6 +225,7 @@
                                 android:layout_marginTop="4dp"
                                 android:gravity="center"
                                 android:text="@string/main_top_root_user_sign_check"
+                                android:paddingHorizontal="10dp"
                                 android:textColor="@color/color_grey1"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
@@ -230,6 +250,7 @@
                                 android:layout_marginTop="4dp"
                                 android:gravity="center"
                                 android:text="@string/main_top_user_info"
+                                android:paddingHorizontal="10dp"
                                 android:textColor="@color/color_grey1"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />

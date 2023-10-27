@@ -32,20 +32,20 @@ class MainMsgAdapter( private val clickItem: (itemData: UserSignTable) -> Unit) 
             binding.state.setImageResource(R.drawable.ic_sign_user_complete)
             binding.stateBg.setBackgroundResource(R.drawable.dr_main_list_msg1_bg)
             binding.click.setTextColor(context.resources.getColor(R.color.color_main_top1))
-            binding.click.text = "已完成"
+            binding.click.text = context.resources.getString(R.string.start_sign_user_sign_ok)
             binding.root.setOnClickListener { }
         } else if (startSignInfo.signExpire) {
             // 未完成 并且已过期
             binding.state.setImageResource(R.drawable.ic_sign_user_incomplete)
             binding.stateBg.setBackgroundResource(R.drawable.dr_main_list_msg3_bg)
             binding.click.setTextColor(context.resources.getColor(R.color.color_main_top6))
-            binding.click.text = "已过期"
+            binding.click.text = context.resources.getString(R.string.start_sign_user_sign_expired)
             binding.root.setOnClickListener {}
         } else {
             binding.state.setImageResource(R.drawable.ic_sign_user_wait)
             binding.stateBg.setBackgroundResource(R.drawable.dr_main_list_msg2_bg)
             binding.click.setTextColor(context.resources.getColor(R.color.color_main_top3))
-            binding.click.text = "前往签到"
+            binding.click.text = context.resources.getString(R.string.start_sign_user_sign_goto)
             binding.root.setOnClickListener { clickItem(itemData) }
         }
         binding.type.text = context.resources.getString(R.string.main_list_item_sign)

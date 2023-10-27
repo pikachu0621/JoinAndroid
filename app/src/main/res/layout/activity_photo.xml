@@ -55,8 +55,9 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/top_5"
-            android:layout_width="60dp"
+            android:layout_width="wrap_content"
             android:layout_height="33dp"
+            android:paddingHorizontal="20dp"
             android:background="@drawable/dr_login_goto_true"
             android:gravity="center"
             android:text="@string/dialog_msg_confirm"

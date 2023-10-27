@@ -51,6 +51,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view3">
         <androidx.core.widget.NestedScrollView
+            android:overScrollMode="never"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <LinearLayout
@@ -59,7 +60,7 @@
                 android:orientation="vertical"
                 android:paddingHorizontal="@dimen/activity_horizontal_margin">
 
-                <!--清理-->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -70,7 +71,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="主题"
+                        android:text="@string/settings_theme_title"
                         android:textSize="16sp"
                         android:textColor="@color/color_principal"
                         android:textStyle="bold"/>
@@ -87,7 +88,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="跟随系统"
+                            android:text="@string/settings_theme_sys"
                             android:textColor="@color/color_grey2" />
 
                         <CheckBox
@@ -113,7 +114,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="夜间模式"
+                            android:text="@string/settings_theme_night"
                             android:textColor="@color/color_grey2" />
 
                         <CheckBox
@@ -138,11 +139,102 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="日间模式"
+                            android:text="@string/settings_theme_day"
                             android:textColor="@color/color_grey2" />
 
                         <CheckBox
                             android:id="@+id/tt3"
+                            android:clickable="false"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
+                    android:background="@drawable/dr_dialog_load_bg"
+                    android:padding="12dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings_theme_language"
+                        android:textSize="16sp"
+                        android:textColor="@color/color_principal"
+                        android:textStyle="bold"/>
+
+                    <LinearLayout
+                        android:id="@+id/l1"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/settings_theme_sys"
+                            android:textColor="@color/color_grey2" />
+
+                        <CheckBox
+                            android:id="@+id/ll1"
+                            android:clickable="false"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/color_grey4" />
+                    <LinearLayout
+                        android:id="@+id/l2"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/settings_theme_language_cn"
+                            android:textColor="@color/color_grey2" />
+
+                        <CheckBox
+                            android:id="@+id/ll2"
+                            android:clickable="false"
+                            android:layout_width="30dp"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/color_grey4" />
+                    <LinearLayout
+                        android:id="@+id/l3"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/settings_theme_language_en"
+                            android:textColor="@color/color_grey2" />
+
+                        <CheckBox
+                            android:id="@+id/ll3"
                             android:clickable="false"
                             android:layout_width="30dp"
                             android:layout_height="wrap_content"/>
@@ -162,7 +254,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="软件"
+                        android:text="@string/settings_theme_app"
                         android:textSize="16sp"
                         android:textColor="@color/color_principal"
                         android:textStyle="bold" />
@@ -178,8 +270,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="清除缓存"
-                            android:textColor="@color/color_grey2" />
+                            android:text="@string/settings_theme_app_cache"
+                            android:textColor="@color/color_grey3" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -204,8 +296,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="常见问题"
-                            android:textColor="@color/color_grey2"/>
+                            android:text="@string/settings_theme_app_issue"
+                            android:textColor="@color/color_grey3"/>
                     </LinearLayout>
 
                     <View
@@ -223,8 +315,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="服务条款"
-                            android:textColor="@color/color_grey2" />
+                            android:text="@string/settings_theme_app_service"
+                            android:textColor="@color/color_grey3" />
 
                     </LinearLayout>
 
@@ -244,8 +336,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="隐私政策"
-                            android:textColor="@color/color_grey2"/>
+                            android:text="@string/settings_theme_app_privacy"
+                            android:textColor="@color/color_grey3"/>
 
                     </LinearLayout>
 
@@ -259,12 +351,13 @@
                     android:layout_marginTop="@dimen/activity_horizontal_margin"
                     android:background="@drawable/dr_dialog_load_bg"
                     android:orientation="vertical"
+                    android:layout_marginBottom="@dimen/activity_horizontal_margin"
                     android:padding="12dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="项目"
+                        android:text="@string/settings_theme_item"
                         android:textSize="16sp"
                         android:textColor="@color/color_principal"
                         android:textStyle="bold" />
@@ -280,7 +373,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="申明"
+                            android:text="@string/settings_theme_item_state"
                             android:textColor="@color/color_grey2" />
                     </LinearLayout>
 
@@ -308,7 +401,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:gravity="center_vertical"
                             android:orientation="vertical">
 

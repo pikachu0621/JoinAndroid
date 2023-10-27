@@ -73,8 +73,8 @@ class PhotoActivity : AppBaseActivity<ActivityPhotoBinding, Serializable>(),
         photoRecycler1Adapter!!.setMaxW(maxW)
         photoRecycler1Adapter!!.setBorderW(borderW)
         photoRecycler1Adapter!!.setMaxNum(maxNum)
-        binding.top3.text = "全部" + GetPhotoUtils.getTypeStr()
-        binding.p61.text = "没有" + GetPhotoUtils.getTypeStr()
+        binding.top3.text = getString(R.string.photo_all) + GetPhotoUtils.getTypeStr()
+        binding.p61.text = getString(R.string.photo_on) + GetPhotoUtils.getTypeStr()
         permissions()
         // readPhoto()
     }
@@ -150,7 +150,7 @@ class PhotoActivity : AppBaseActivity<ActivityPhotoBinding, Serializable>(),
     }
 
     override fun onItemClick(has: MutableList<String>, position: Int, num: Int) {
-        binding.top5.text = if (num <= 0) "确认" else "确认($num)"
+        binding.top5.text = if (num <= 0) getString(R.string.dialog_msg_confirm) else "${getString(R.string.dialog_msg_confirm)}($num)"
         this.has = has
         this.num = num
     }
@@ -212,10 +212,10 @@ class PhotoActivity : AppBaseActivity<ActivityPhotoBinding, Serializable>(),
                 override fun onDenied(permissions: MutableList<String>, doNotAskAgain: Boolean) {
                     if (doNotAskAgain) {
                         XXPermissions.startPermissionActivity(context, permissions)
-                        showToast("已被被永久拒绝授权，请手动授予")
+                        showToast(R.string.app_permissions_turn_down)
                         return
                     }
-                    showToast("权限失败")
+                    showToast(R.string.app_permissions_err)
                 }
             })
     }

@@ -104,7 +104,7 @@
                             <androidx.appcompat.widget.SwitchCompat
                                 android:id="@+id/user_open_sw"
                                 android:clickable="false"
-                                android:checked="true"
+                                android:checked="false"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
                         </androidx.appcompat.widget.LinearLayoutCompat>

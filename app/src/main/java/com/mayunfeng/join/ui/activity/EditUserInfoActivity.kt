@@ -56,7 +56,7 @@ class EditUserInfoActivity : AppBaseActivity<ActivityEditUserInfoBinding, UserLo
 
 
         binding.userOpenClick.setOnClickListener {
-            userApi.sendEditOpen(!binding.userOpenSw.isChecked).mySubscribeMainThread(this, this, R.string.dialog_load_title_modify)
+            userApi.sendEditOpen(binding.userOpenSw.isChecked).mySubscribeMainThread(this, this, R.string.dialog_load_title_modify)
         }
 
         binding.userNicknameClick.setOnClickListener {
@@ -147,7 +147,7 @@ class EditUserInfoActivity : AppBaseActivity<ActivityEditUserInfoBinding, UserLo
         GlideUtils.with(this)
             .loadHeaderToken(userLoginBean.userImg)
             .into(binding.userImage)
-        binding.userOpenSw.isChecked = userLoginBean.userOpenProfile
+        binding.userOpenSw.isChecked = !userLoginBean.userOpenProfile
         binding.userAccount.text = userLoginBean.userAccount
         binding.userNickname.text = userLoginBean.userNickname
         binding.userSex.text =

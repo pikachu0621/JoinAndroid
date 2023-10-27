@@ -28,7 +28,7 @@ class PwsGestureActivity : AppBaseActivity<ActivityPwsGestureBinding, String>() 
 
     companion object{
         /**
-         * @param pws 密码 == null 设置模式
+         * @param cloudPws 密码 == null 设置模式
          */
         fun startActivity(activity: Activity, cloudPws: String? = null) {
             activity.startActivity(Intent(activity, PwsGestureActivity::class.java).apply {
@@ -74,7 +74,7 @@ class PwsGestureActivity : AppBaseActivity<ActivityPwsGestureBinding, String>() 
 
                 if (cloudPws != null){
                     if (conversionStringPws(hitIndexList) != cloudPws){
-                        jitterAnimator("图案错误", (0xFFFF0000).toInt())
+                        jitterAnimator(getString(R.string.edit_pws_pattern_error), (0xFFFF0000).toInt())
                         view.updateStatus(true)
                         binding.patternIndicatorView.updateState(hitIndexList, true)
                         isClear = true
@@ -86,20 +86,20 @@ class PwsGestureActivity : AppBaseActivity<ActivityPwsGestureBinding, String>() 
                     return
                 }
                 if ((hitIndexList.isEmpty() || hitIndexList.size < 4)) {
-                    jitterAnimator("至少4个点", (0xFFFF0000).toInt())
+                    jitterAnimator(getString(R.string.edit_pws_pattern_for4), (0xFFFF0000).toInt())
                     view.updateStatus(true)
                     binding.patternIndicatorView.updateState(hitIndexList, true)
                     isClear = true
                     return
                 }
                 if (settingPws == null){
-                    jitterAnimator("再次绘制", ContextCompat.getColor(context, R.color.color_principal), false)
+                    jitterAnimator(getString(R.string.edit_pws_pattern_again), ContextCompat.getColor(context, R.color.color_principal), false)
                     settingPws = conversionStringPws(hitIndexList)
                     return
                 }
                 val conversionStringPws = conversionStringPws(hitIndexList)
                 if (settingPws != conversionStringPws){
-                    jitterAnimator("不匹配，请重新绘制", (0xFFFF0000).toInt())
+                    jitterAnimator(getString(R.string.edit_pws_pattern_mismatch), (0xFFFF0000).toInt())
                     binding.patternIndicatorView.updateState(hitIndexList, true)
                     isClear = true
                     settingPws = null

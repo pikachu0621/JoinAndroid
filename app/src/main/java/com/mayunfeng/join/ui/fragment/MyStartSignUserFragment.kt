@@ -1,5 +1,7 @@
 package com.mayunfeng.join.ui.fragment
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.mayunfeng.join.R
@@ -53,6 +55,7 @@ class MyStartSignUserFragment : AppBaseFragment<FragmentMyStartSignUserBinding, 
         // load(isShowLoadAmd)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initTime(startSignTable: StartSignBean) {
         GlideUtils.with(context).loadHeaderToken(startSignTable.userTable.userImg)
             .into(binding.groupImage)
@@ -60,14 +63,14 @@ class MyStartSignUserFragment : AppBaseFragment<FragmentMyStartSignUserBinding, 
         if (startSignTable.signExpire) {
             binding.timeBar.setPrimaryColor(getColor(R.color.color_main_top6))
             binding.timeBar.setBackgroundColor(getColor(R.color.color_main_top6))
-            binding.timeTxt.text = "已结束"
+            binding.timeTxt.text = context.resources.getString(R.string.start_sign_type_defunct)
             return
         }
 
         if (startSignTable.signTime == -1L) {
             binding.timeBar.setPrimaryColor(getColor(R.color.color_principal))
             binding.timeBar.setBackgroundColor(getColor(R.color.color_grey4))
-            binding.timeTxt.text = "不限时"
+            binding.timeTxt.text = context.resources.getString(R.string.start_sign_type_unlimited)
             return
         }
 
@@ -80,7 +83,7 @@ class MyStartSignUserFragment : AppBaseFragment<FragmentMyStartSignUserBinding, 
                 for (i in startSignTable.signTimeRemaining.toInt() downTo 0) {
                     UiUtils.runUi {
                         binding.timeBar.progress = i
-                        binding.timeTxt.text = "剩余：${formatTime(i.toLong())}"
+                        binding.timeTxt.text = "${context.resources.getString(R.string.app_residue)}：${formatTime(i.toLong(), context)}"
                     }
                     Thread.sleep(1000)
                 }
@@ -124,16 +127,16 @@ class MyStartSignUserFragment : AppBaseFragment<FragmentMyStartSignUserBinding, 
 
         /**
          *
-         * @param time 秒
+         * @param seconds 秒
          * @return String
          */
-        fun formatTime(seconds: Long): String {
+        fun formatTime(seconds: Long, context: Context): String {
             val h = seconds / 3600
             val min = seconds % 3600 / 60
             val second = seconds % 3600 % 60
-            if (h <= 0L && min > 0) return "${min}分${second}秒"
-            if (min <= 0L) return "${second}秒"
-            return "${h}时${min}分${second}秒"
+            if (h <= 0L && min > 0) return "${min}${context.resources.getString(R.string.app_min)}${second}${context.resources.getString(R.string.app_sec)}"
+            if (min <= 0L) return "${second}${context.resources.getString(R.string.app_sec)}"
+            return "${h}${context.resources.getString(R.string.app_h)}${min}${context.resources.getString(R.string.app_min)}${second}${context.resources.getString(R.string.app_sec)}"
         }
     }
 

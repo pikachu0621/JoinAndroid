@@ -33,12 +33,14 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/appCompatTextView2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="@string/login_welcome_2"
         android:textColor="@color/color_grey2"
         android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/appCompatTextView"
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
 

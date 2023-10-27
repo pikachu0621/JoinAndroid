@@ -22,7 +22,8 @@
     <androidx.appcompat.widget.AppCompatCheckedTextView
         android:id="@+id/ok"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:paddingHorizontal="10dp"
+        android:layout_height="46dp"
         android:checked="false"
         android:gravity="center"
         android:text="@string/dialog_msg_complete"

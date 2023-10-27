@@ -28,7 +28,7 @@ class PwsNumActivity : AppBaseActivity<ActivityPwsNumBinding, String>() {
 
     companion object {
         /**
-         * @param pws 密码 == null 设置模式
+         * @param cloudPws 密码 == null 设置模式
          */
         fun startActivity(activity: Activity, cloudPws: String? = null) {
             activity.startActivity(Intent(activity, PwsNumActivity::class.java).apply {
@@ -131,7 +131,7 @@ class PwsNumActivity : AppBaseActivity<ActivityPwsNumBinding, String>() {
         }
         if( cloudPws != null){
             if (cloudPws != getPws()){
-                jitterAnimator("密码错误", (0xFFFF0000).toInt())
+                jitterAnimator(getString(R.string.edit_pws_num_err), (0xFFFF0000).toInt())
                 clear()
                 return
             }
@@ -142,13 +142,13 @@ class PwsNumActivity : AppBaseActivity<ActivityPwsNumBinding, String>() {
         }
         if (settingPws == null) {
             settingPws = getPws()
-            jitterAnimator("再次输入", ContextCompat.getColor(context, R.color.color_principal), false)
+            jitterAnimator(getString(R.string.edit_pws_num_again), ContextCompat.getColor(context, R.color.color_principal), false)
             clear()
             return
         }
 
         if (settingPws != getPws()){
-            jitterAnimator("不匹配，请重新输入", (0xFFFF0000).toInt())
+            jitterAnimator(getString(R.string.edit_pws_pattern_mismatch), (0xFFFF0000).toInt())
             settingPws = null
             clear()
             return

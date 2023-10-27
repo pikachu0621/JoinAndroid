@@ -42,7 +42,7 @@ enum class UserGrade(
 class MainActivity : AppBaseActivity<ActivityMainBinding, Serializable>() {
 
     private lateinit var userInfo: UserLoginBean
-    private var userApi = RetrofitManager.getInstance()
+    private var userApi = RetrofitManager.getInstance().create(UserApi::class.java)
     private var outTime = 0L
     private val mainMsgAdapter = MainMsgAdapter{
         startActivity(AdminUserStartActivity::class.java)
@@ -76,7 +76,7 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, Serializable>() {
             UserUtils.loginTokenOut(this)
             return
         }
-        userApi.create(UserApi::class.java).sendUserInfo()
+        userApi.sendUserInfo()
             .mySubscribeMainThread(this, object : QuickRtObserverListener<BaseBean<UserLoginBean>> {
                 override fun onSendError(t: BaseBean<UserLoginBean>?, e: Throwable) {
                     showToast(R.string.login_user_token_failure)
@@ -90,7 +90,7 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, Serializable>() {
     }
 
     override fun onEventBus(event: Serializable?, key: Int?, msg: String?) {
-        LogsUtils.showLog("---------------- $key")
+        LogsUtils.showLog(key)
         if (key == WebSocketType.WE_OTHER_DEVICES.type || key == WebSocketType.WE_PWS_NUL.type) {
             val f =
                 if (key == WebSocketType.WE_OTHER_DEVICES.type) getString(R.string.dialog_msg_out_login_q)
@@ -208,7 +208,15 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, Serializable>() {
         // 退出登录
         binding.mainDrawer.appCompatTextView7.setOnClickListener {
             MsgDialog(context, getString(R.string.dialog_msg_out_login), {
-                UserUtils.loginTokenOut(currentActivity())
+                userApi.outLogin().mySubscribeMainThread(this@MainActivity, object : QuickRtObserverListener<BaseBean<Boolean>> {
+                    override fun onSendComplete(t: BaseBean<Boolean>) {
+                        if (t.result != null && t.result!!){
+                            UserUtils.loginTokenOut(currentActivity())
+                        } else showToast(getString(R.string.user_out_err))
+                    }
+
+                    override fun onRetrofitError(t: BaseBean<Boolean>?, e: Throwable) = showToast(getString(R.string.user_out_err))
+                })
                 true
             }).show()
         }
@@ -296,10 +304,11 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, Serializable>() {
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (System.currentTimeMillis() - outTime <= 5000) {
+                UserUtils.appOut(this)
                 return super.onKeyDown(keyCode, event)
             }
             outTime = System.currentTimeMillis()
-            showToast("再按一次退出")
+            showToast(getString(R.string.app_again_out))
             return true
         }
         return super.onKeyDown(keyCode, event)

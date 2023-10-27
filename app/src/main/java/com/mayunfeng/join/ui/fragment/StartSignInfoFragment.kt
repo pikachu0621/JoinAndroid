@@ -29,7 +29,7 @@ class StartSignInfoFragment : AppBaseFragment<FragmentStartSignInfoBinding, Stri
         binding.dateWheelLayout.hourLabelView.typeface = typeface
         binding.dateWheelLayout.minuteLabelView.setTextColor(color)
         binding.dateWheelLayout.minuteLabelView.typeface = typeface
-        binding.dateWheelLayout.setTimeLabel("小时", "分钟", "")
+        binding.dateWheelLayout.setTimeLabel(getString(R.string.app_hour), getString(R.string.app_minutes) , "")
         binding.dateWheelLayout.setRange(
             TimeEntity.target(0, 2, 0),
             TimeEntity.target(24, 59, 0),

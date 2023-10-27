@@ -1,38 +1,27 @@
 package com.mayunfeng.join.ui.activity
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import com.mayunfeng.join.R
 import com.mayunfeng.join.base.AppBaseActivity
 import com.mayunfeng.join.databinding.ActivitySettingBinding
 import com.mayunfeng.join.ui.dialog.MsgDialog
+import com.mayunfeng.join.utils.LanguageUtils
 import com.pikachu.utils.utils.DarkModeUtils
 import com.pikachu.utils.utils.SharedPreferencesUtils
 import java.io.Serializable
+import java.util.Locale
+
 
 class SettingActivity : AppBaseActivity<ActivitySettingBinding, Serializable>() {
 
     override fun onAppCreate(savedInstanceState: Bundle?) {
 
         binding.fragmentSettingLin1.setOnClickListener {
-            val msgDialog = MsgDialog(this, "免责声明！\n\n本项目使用到的所有组件均为<Apache License 2.0>" +
-                    "\n\n以下为开源项目名" +
-                    "\nretrofit2" +
-                    "\nokhttp3" +
-                    "\nrxjava3" +
-                    "\nrxAndroid" +
-                    "\ngson" +
-                    "\neventbus" +
-                    "\nrefresh" +
-                    "\nlottie" +
-                    "\nzxing" +
-                    "\nCompressHelper" +
-                    "\nAddressPicker" +
-                    "\nkotlin-stdlib-jdk8" +
-                    "\n\n项目可商用但请遵循<Apache License 2.0>开源协议" +
-                    "\nby：Pikachu_WeChat", { true }, cancelStr = ""
-            )
+            val msgDialog = MsgDialog(this, getString(R.string.settings_disclaimer), { true }, cancelStr = "")
             msgDialog.show()
             msgDialog.setWidthProportion(0.75F)
         }
@@ -66,6 +55,28 @@ class SettingActivity : AppBaseActivity<ActivitySettingBinding, Serializable>() 
             binding.tt3.isChecked = true
         }
 
+
+
+/*
+        binding.l1.setOnClickListener {
+            LanguageUtils.toggle(context, LanguageUtils.Language.SYS)
+            binding.ll1.isChecked = true
+            binding.ll2.isChecked = false
+            binding.ll3.isChecked = false
+        }
+        binding.l2.setOnClickListener {
+            LanguageUtils.toggle(context, LanguageUtils.Language.CN)
+            binding.ll1.isChecked = false
+            binding.ll2.isChecked = true
+            binding.ll3.isChecked = false
+        }
+        binding.l3.setOnClickListener {
+            LanguageUtils.toggle(context, LanguageUtils.Language.EN)
+            binding.ll1.isChecked = false
+            binding.ll2.isChecked = false
+            binding.ll3.isChecked = true
+        }*/
+
     }
 
     override fun onResume() {
@@ -75,6 +86,12 @@ class SettingActivity : AppBaseActivity<ActivitySettingBinding, Serializable>() 
             1 ->  binding.tt2.isChecked = true
             2 ->  binding.tt3.isChecked = true
         }
+
+       /* when(LanguageUtils.getLanguageCode()){
+            LanguageUtils.Language.SYS ->  binding.ll1.isChecked = true
+            LanguageUtils.Language.CN -> binding.ll2.isChecked = true
+            LanguageUtils.Language.EN -> binding.ll3.isChecked = true
+        }*/
     }
 
 
@@ -84,5 +101,4 @@ class SettingActivity : AppBaseActivity<ActivitySettingBinding, Serializable>() 
             `data` = Uri.parse(url)
         })
     }
-
 }

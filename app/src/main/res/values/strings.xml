@@ -51,6 +51,18 @@
     <string name="drawer_sex_boy">男</string>
     <string name="drawer_sex_girl">女</string>
 
+    <string name="drawer_list_group_user">组员功能</string>
+    <string name="drawer_list_group_user_sign_in">当前签到</string>
+    <string name="drawer_list_group_user_join_group">我加入的组</string>
+    <string name="drawer_list_group_user_info">我的信息</string>
+    <string name="drawer_list_group_user_historical_record">历史记录</string>
+    <string name="drawer_list_group_creator">创建者功能</string>
+    <string name="drawer_list_group_creator_group">创建组</string>
+    <string name="drawer_list_group_creator_my_group">我创建的组</string>
+    <string name="drawer_list_group_creator_start_sign">发起签到</string>
+    <string name="drawer_list_group_creator_my_ok_group">已创建的</string>
+    <string name="drawer_list_group_creator_sign_info">组员签到信息</string>
+
 
     <!--更新-->
     <string name="load_header_up_data">更新成功</string>
@@ -78,6 +90,7 @@
 
     <string name="activity_qrc_image">相册</string>
     <string name="activity_qrc_search">搜索</string>
+    <string name="activity_qrc_face">面对面</string>
     <string name="activity_search_group">输入组ID/组名</string>
     <string name="activity_search_nul">搜索词不能为空哦！</string>
     <string name="activity_sqr_nul">此二维码无效</string>
@@ -89,16 +102,26 @@
     <string name="my_create_group_dialog_dissolve_out_msg">此操作不可逆，是否解退出此组？</string>
     <string name="my_create_group_dialog_send">发起签到</string>
     <string name="my_create_group_qrc">加入二维码</string>
+    <string name="my_initiate_sign_time">发起时间</string>
 
     <!--GroupInfoActivity-->
     <string name="group_info_more">更多</string>
     <string name="group_info_info">组信息</string>
+    <string name="group_info_people">人</string>
+    <string name="group_info_join_ok">加入成功</string>
+    <string name="group_info_join_group">加入该组</string>
+    <string name="group_info_out_group">退出该组</string>
+    <string name="group_info_out_ok">退出成功</string>
+    <string name="group_info_dissolve_ok">解散成功</string>
+    <string name="group_info_dissolve_group">解散该组</string>
+    <string name="group_info_copy_group_id">已复制组ID</string>
+    <string name="group_info_copy_group_name">已复制组名</string>
 
 
     <!--EditUserInfoActivity-->
     <string name="edit_user_info_account">账号</string>
     <string name="edit_user_info_name">昵称</string>
-    <string name="edit_user_info_hidden">公开个人资料</string>
+    <string name="edit_user_info_hidden">私密账号</string>
     <string name="edit_user_info_sex">性别</string>
     <string name="edit_user_info_age">年龄</string>
     <string name="edit_user_info_birth">出生日期</string>
@@ -137,8 +160,18 @@
     <string name="start_sign_type_gesture">请绘制至少4个点的图案</string>
     <string name="start_sign_type_progress">进行中</string>
     <string name="start_sign_type_defunct">已结束</string>
+    <string name="start_sign_type_unlimited">不限时</string>
     <string name="start_sign_group_nul">该签到发起的组已解散</string>
     <string name="start_sign_group_del">此操作不可逆，是否删除此签到？</string>
+    <string name="start_sign_user_ok">签到完成</string>
+    <string name="start_sign_not_group">未选择组</string>
+    <string name="start_sign_initiator_user">发起者</string>
+    <string name="start_sign_initiator_group">发起组</string>
+    <string name="start_sign_user_sign_ok">已完成</string>
+    <string name="start_sign_user_sign_expired">已过期</string>
+    <string name="start_sign_user_sign_goto">前往签到</string>
+    <string name="start_sign_user_sign_complete">已签到</string>
+    <string name="start_sign_user_sign_user_all">总人数</string>
 
 
     <!--activity_create_group-->
@@ -171,7 +204,58 @@
     <string name="dialog_edit_nul">不能为空</string>
 
 
+
+    <!--PhotoActivity-->
+    <string name="photo_all">全部</string>
+    <string name="photo_on">没有</string>
+
+    <!--pws-->
+    <string name="edit_pws_pattern_error">图案错误</string>
+    <string name="edit_pws_pattern_for4">至少4个点</string>
+    <string name="edit_pws_pattern_again">再次绘制</string>
+    <string name="edit_pws_pattern_mismatch">不匹配，请重新绘制</string>
+    <string name="edit_pws_num_err">密码错误</string>
+    <string name="edit_pws_num_again">再次输入</string>
+
+
+    <!--settings-->
+    <string name="settings_theme_title">主题</string>
+    <string name="settings_theme_sys">跟随系统</string>
+    <string name="settings_theme_night">夜间模式</string>
+    <string name="settings_theme_day">日间模式</string>
+    <string name="settings_theme_app">软件</string>
+    <string name="settings_theme_app_cache">清除缓存</string>
+    <string name="settings_theme_app_issue">常见问题</string>
+    <string name="settings_theme_app_service">服务条款</string>
+    <string name="settings_theme_app_privacy">隐私政策</string>
+    <string name="settings_theme_item">项目</string>
+    <string name="settings_theme_item_state">申明</string>
+    <string name="settings_theme_language">语言</string>
+    <string name="settings_theme_language_cn">中文</string>
+    <string name="settings_theme_language_en">英文</string>
+
+    <!--其他-->
     <string name="all_out_user">此操作不可逆，是否请出该用户？</string>
+    <string name="user_out_err">退出失败</string>
+    <string name="app_again_out">再按一次退出</string>
+    <string name="app_err">出错</string>
+    <string name="app_permissions_turn_down">已被被永久拒绝授权，请手动授予</string>
+    <string name="app_permissions_err">权限授予失败</string>
+    <string name="app_years">年</string>
+    <string name="app_month">月</string>
+    <string name="app_days">日</string>
+    <string name="app_min">分</string>
+    <string name="app_sec">秒</string>
+    <string name="app_h">时</string>
+    <string name="app_hour">小时</string>
+    <string name="app_minutes">分钟</string>
+    <string name="app_delete_ok">删除成功</string>
+    <string name="app_residue">剩余</string>
+
+
+
+    <!--setting-->
+    <string name="settings_disclaimer">免责声明！\n\n本项目使用到的所有组件均为[Apache License 2.0]\n\n以下为开源项目名\nretrofit2\nokhttp3\nrxjava3\nrxAndroid\ngson\neventbus\nrefresh\nlottie\nzxing\nCompressHelper\nAddressPicker\nkotlin-stdlib-jdk8\n\n项目可商用但请遵循[Apache License 2.0]开源协议\nby：pkpk-run</string>
 
     <string name="test">TEST</string>
     <string name="test_1">高数第15节课-未签到/当前暂无打卡</string>
@@ -183,10 +267,11 @@
     <string name="test_7">02-03 13:22</string>
     <string name="test_8">\@****** ****** 据开发商的后果发挥几点开始广泛的好几个 据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个据开发商的后果发挥几点开始广泛的好几个 02-03 13:22</string>
     <string name="test_9">22</string>
-    <string name="test_10">新乡学院</string>
+    <string name="test_10">加州理工学院</string>
     <string name="test_11">2023-03-10 21:16:45</string>
     <string name="test_12">******@136.com</string>
     <string name="test_13">/100人</string>
+
 
 
 </resources>

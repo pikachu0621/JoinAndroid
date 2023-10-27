@@ -1,5 +1,6 @@
 package com.mayunfeng.join.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.View
 import com.mayunfeng.join.R
 import com.mayunfeng.join.bean.GroupBean
@@ -15,6 +16,7 @@ class MyStartSignInfoAdapter(
 ) : QuickAdapter<ItemMyStartSignBinding, StartSignBean>(`data`) {
 
 
+    @SuppressLint("SetTextI18n")
     override fun onQuickBindView(
         binding: ItemMyStartSignBinding,
         itemData: StartSignBean,
@@ -27,13 +29,13 @@ class MyStartSignInfoAdapter(
         binding.title.text = itemData.signTitle
         binding.type.text = if (itemData.signExpire) {
             binding.type.setBackgroundResource(R.drawable.dr_my_start_sign_item_failure)
-            context.getString(R.string.start_sign_type_defunct)
+            context.resources.getString(R.string.start_sign_type_defunct)
         } else {
             binding.type.setBackgroundResource(R.drawable.dr_login_goto_true)
-            context.getString(R.string.start_sign_type_progress)
+            context.resources.getString(R.string.start_sign_type_progress)
         }
-        binding.done.text = "已签到：${itemData.signHaveCompletedPeople}人"
-        binding.onDone.text = " / 总人数：${itemData.signAllPeople}人"
+        binding.done.text = "${context.resources.getString(R.string.start_sign_user_sign_complete)}：${itemData.signHaveCompletedPeople}${context.resources.getString(R.string.group_info_people)}"
+        binding.onDone.text = " / ${context.resources.getString(R.string.start_sign_user_sign_user_all)}：${itemData.signAllPeople}人"
         binding.progress.setMax(itemData.signAllPeople.toFloat())
         binding.progress.setProgress(itemData.signHaveCompletedPeople.toFloat())
 

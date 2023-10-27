@@ -1,5 +1,7 @@
 package com.mayunfeng.join.ui.adapter
 
+import android.annotation.SuppressLint
+import com.mayunfeng.join.R
 import com.mayunfeng.join.bean.GroupBean
 import com.mayunfeng.join.databinding.ItemMyCreateBinding
 import com.pikachu.utils.adapter.QuickAdapter
@@ -17,6 +19,7 @@ class MyCreateGroupAdapter(private val clickItem:(itemData: GroupBean) -> Unit,
                            private val clickMore:(itemData: GroupBean) -> Unit,
                            `data`: MutableList<GroupBean>? = null):
     QuickAdapter<ItemMyCreateBinding, GroupBean>(`data`) {
+    @SuppressLint("SetTextI18n")
     override fun onQuickBindView(
         binding: ItemMyCreateBinding,
         itemData: GroupBean,
@@ -28,7 +31,7 @@ class MyCreateGroupAdapter(private val clickItem:(itemData: GroupBean) -> Unit,
             .into(binding.groupImage)
         binding.title.text = itemData.groupName
         binding.tvAdmin.text = itemData.groupType
-        binding.people.text = "${ itemData.groupPeople }人"
+        binding.people.text = "${ itemData.groupPeople }${context.resources.getString(R.string.group_info_people)}"
         binding.time.text = TimeUtils.strToStr(itemData.createTime, "yyyy-MM-dd HH:mm:ss", "MM-dd HH:mm")
         binding.root.setOnClickListener { clickItem(itemData) }
         binding.more.setOnClickListener { clickMore(itemData) }

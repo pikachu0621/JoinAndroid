@@ -1,5 +1,6 @@
 package com.mayunfeng.join.ui.adapter
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.View
 import com.mayunfeng.join.R
@@ -21,6 +22,7 @@ class AdminUserStartAdapter(
     private val clickGroup: (itemData: GroupBean) -> Unit
 ): QuickAdapter<ItemMySignInfoBinding, UserSignTable>(null) {
 
+    @SuppressLint("SetTextI18n")
     override fun onQuickBindView(
         binding: ItemMySignInfoBinding,
         itemData: UserSignTable,
@@ -37,18 +39,18 @@ class AdminUserStartAdapter(
         binding.content.text = startSignInfo.signContent
 
         GlideUtils.with(context).loadHeaderToken(userTable.userImg).into(binding.sendUserImg)
-        binding.userNickname.text = "发起者：${userTable.userNickname}"
+        binding.userNickname.text = "${context.resources.getString(R.string.start_sign_initiator_user)}：${userTable.userNickname}"
         binding.userNickname.setOnClickListener { clickUser(userTable) }
         if (signGroupInfo == null) {
             binding.sendGroupImg.visibility = View.GONE
-            binding.groupName.text = context.getString(R.string.start_sign_group_nul)
+            binding.groupName.text = context.resources.getString(R.string.start_sign_group_nul)
             binding.groupName.setTextColor(context.resources.getColor(R.color.color_main_top6))
             binding.groupName.setOnClickListener {}
         } else {
             binding.sendGroupImg.visibility = View.VISIBLE
             GlideUtils.with(context).loadHeaderToken(signGroupInfo.groupImg)
                 .into(binding.sendGroupImg)
-            binding.groupName.text = "发起组：${signGroupInfo.groupName}"
+            binding.groupName.text = "${context.resources.getString(R.string.start_sign_initiator_group)}：${signGroupInfo.groupName}"
             binding.groupName.setTextColor(context.resources.getColor(R.color.color_grey1))
             binding.groupName.setOnClickListener { clickGroup(signGroupInfo) }
         }

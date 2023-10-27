@@ -56,7 +56,7 @@ class UserInfoActivity : AppBaseActivity<ActivityUserInfoBinding, UserLoginBean>
         binding.userUnitClick.visibility = View.GONE
         binding.userIntroduceLayout.visibility = View.GONE
         if (userLoginBean.userAccount == UserUtils.readUserAccount()
-            || userLoginBean.userOpenProfile){
+            || !userLoginBean.userOpenProfile){
             binding.userSex.text = if (userLoginBean.userSex) getString(R.string.drawer_sex_boy) else getString(R.string.drawer_sex_girl)
             binding.userAge.text = "${userLoginBean.userAge}"
             binding.userSchool.text = userLoginBean.userUnit

@@ -58,7 +58,7 @@ class StartSignActivity : AppBaseActivity<ActivityStartSignBinding, UserLoginBea
             //
             val groupId = startSignMyCreateGroupFragment.getGroupId()
             if ( groupId <= 0) {
-                showToast("未选择组")
+                showToast(R.string.start_sign_not_group)
                 binding.vpr.currentItem = 0
                 return@setOnClickListener
             }
@@ -86,11 +86,7 @@ class StartSignActivity : AppBaseActivity<ActivityStartSignBinding, UserLoginBea
 
             override fun onPageSelected(position: Int) {
                 binding.stepView.go(position, true)
-                binding.join.text = if (position == 2){
-                    getString(R.string.start_sign)
-                } else {
-                    getString(R.string.start_sign_next_step)
-                }
+                binding.join.text = if (position == 2) getString(R.string.start_sign) else getString(R.string.start_sign_next_step)
             }
             override fun onPageScrollStateChanged(state: Int) {}
         })

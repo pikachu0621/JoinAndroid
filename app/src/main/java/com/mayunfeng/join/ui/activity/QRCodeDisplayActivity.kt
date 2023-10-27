@@ -1,6 +1,7 @@
 package com.mayunfeng.join.ui.activity
 
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
@@ -22,6 +23,7 @@ import kotlin.random.Random
 class QRCodeDisplayActivity : AppBaseActivity<ActivityQrcodeDisplayBinding, Serializable>() {
 
     private var group: GroupBean? = null
+    @SuppressLint("SetTextI18n")
     override fun onAppCreate(savedInstanceState: Bundle?) {
         group = getSerializableExtra(JumpType.J0, GroupBean::class.java)
         if (group == null) finish()

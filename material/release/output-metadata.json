@@ -11,9 +11,9 @@
       "type": "SINGLE",
       "filters": [],
       "attributes": [],
-      "versionCode": 1,
-      "versionName": "1.0.0",
-      "outputFile": "join_1.0.0.apk"
+      "versionCode": 3,
+      "versionName": "1.0.2",
+      "outputFile": "join_1.0.2.apk"
     }
   ],
   "elementType": "File"

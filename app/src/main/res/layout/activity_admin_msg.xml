@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:text="我的信息"
+        android:text="@string/drawer_list_group_user_info"
         android:textColor="@color/color_grey1"
         android:textSize="15sp"
         android:textStyle="bold"

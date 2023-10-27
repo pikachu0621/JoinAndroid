@@ -48,6 +48,12 @@ object UserUtils {
         // context.startActivity(Intent(context, LoginActivity::class.java))
     }
 
+    fun appOut(context: Context){
+        Application.isLoginOk = false
+        WebSocketService.getWebSocketService()?.cancel()
+        context.stopService(Intent(context, WebSocketService::class.java))
+    }
+
 
     fun loginTokenInit(loginToken: String?){
         var token: String? = loginToken

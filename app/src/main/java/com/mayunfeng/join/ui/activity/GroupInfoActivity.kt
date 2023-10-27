@@ -1,5 +1,6 @@
 package com.mayunfeng.join.ui.activity
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import com.mayunfeng.join.R
 import com.mayunfeng.join.api.GroupApi
@@ -47,6 +48,7 @@ class GroupInfoActivity : AppBaseActivity<ActivityGroupInfoBinding, Serializable
 
 
 
+    @SuppressLint("SetTextI18n")
     private  fun initUi(group: GroupBean){
         groupBean = group
         GlideUtils.with(context).loadHeaderToken(group.groupImg).into(binding.groupImage)
@@ -54,7 +56,7 @@ class GroupInfoActivity : AppBaseActivity<ActivityGroupInfoBinding, Serializable
         binding.groupName.text = group.groupName
         binding.groupName2.text = group.groupName
         binding.groupId.text = UserUtils.encryptGroupId(group.id)
-        binding.groupPeople.text = "${ group.groupPeople }人"
+        binding.groupPeople.text = "${ group.groupPeople }${getString(R.string.group_info_people)}"
         binding.groupType.text = group.groupType
         binding.groupIntroduce.text = group.groupIntroduce
 
@@ -72,13 +74,13 @@ class GroupInfoActivity : AppBaseActivity<ActivityGroupInfoBinding, Serializable
 
                                 override fun onSendComplete(t: BaseBean<GroupBean>) {
                                     postEventBus(null)
-                                    showToast("加入成功")
+                                    showToast(getString(R.string.group_info_join_ok))
                                     initUi(t.result!!)
                                     // finish()
                                 }
                             })
                 }
-                 "加入该组"
+                 getString(R.string.group_info_join_group)
             }
             1 -> {
                 binding.join.setTextColor(resources.getColor(R.color.color_main_top6))
@@ -96,14 +98,14 @@ class GroupInfoActivity : AppBaseActivity<ActivityGroupInfoBinding, Serializable
 
                                         override fun onSendComplete(t: BaseBean<String>) {
                                             postEventBus(null)
-                                            showToast("退出成功")
+                                            showToast(R.string.group_info_out_ok)
                                             finish()
                                         }
                                     })
                             true
                         }).show()
                 }
-                "退出该组"
+                getString(R.string.group_info_out_group)
             }
             2 -> {
                 binding.join.setTextColor(resources.getColor(R.color.color_main_top6))
@@ -117,7 +119,7 @@ class GroupInfoActivity : AppBaseActivity<ActivityGroupInfoBinding, Serializable
                                     object : QuickRtObserverListener<BaseBean<ArrayList<GroupBean>>> {
                                         override fun onSendComplete(t: BaseBean<ArrayList<GroupBean>>) {
                                             postEventBus(null)
-                                            showToast("解散成功")
+                                            showToast(R.string.group_info_dissolve_ok)
                                             finish()
                                         }
                                     })
@@ -125,18 +127,18 @@ class GroupInfoActivity : AppBaseActivity<ActivityGroupInfoBinding, Serializable
                         }).show()
 
                 }
-                "解散该组"
+                getString(R.string.group_info_dissolve_group)
             }
-            else ->{ "出错" }
+            else -> getString(R.string.app_err)
         }
 
         binding.groupIdCopy.setOnClickListener {
             UserUtils.copyStr(context, binding.groupId.text.toString())
-            showToast("已复制组ID")
+            showToast(R.string.group_info_copy_group_id)
         }
         binding.groupNameCopy.setOnClickListener {
             UserUtils.copyStr(context, binding.groupName.text.toString())
-            showToast("已复制组名")
+            showToast(R.string.group_info_copy_group_name)
         }
     }
 
