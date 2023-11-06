@@ -416,7 +416,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
-                                android:text="https://github.com/pikachu0621/MyfJoinAndroid"
+                                android:text="https://github.com/pikachu0621/pkJoinAndroid"
                                 android:textSize="12sp"
                                 android:textStyle="italic"
                                 android:textColor="@color/color_principal" />

@@ -58,7 +58,7 @@
             app:layout_constraintTop_toTopOf="@+id/title" />
 
 
-        <com.mayunfeng.join.ui.widget.ProgressBarView
+        <com.pkpk.join.ui.widget.ProgressBarView
             android:id="@+id/progress"
             android:layout_width="0dp"
             android:layout_height="40dp"

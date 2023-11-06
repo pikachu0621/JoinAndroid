@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.mayunfeng.join'
+    namespace 'com.pkpk.join'
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.mayunfeng.join"
+        applicationId "com.pkpk.join"
         minSdk 21
         targetSdk 32
         versionCode 3

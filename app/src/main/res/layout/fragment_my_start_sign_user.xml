@@ -30,7 +30,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
-                    <com.mayunfeng.join.ui.widget.CircularProgressBarView
+                    <com.pkpk.join.ui.widget.CircularProgressBarView
                         android:id="@+id/time_bar"
                         android:layout_width="66dp"
                         android:layout_height="66dp"

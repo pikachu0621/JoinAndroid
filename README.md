@@ -1,8 +1,8 @@
 
-myf_join
+JoinAndroid
 ======
 
-前端请修改你的IP 路径：`com.mayunfeng.join.Application`
+前端请修改你的IP 路径：`com.pkpk.join.Application`
 ```kotlin
 // 设备ip   如果是 windows   请在 cmd 输入 `ipconfig` 命令查看
 const val BASE_ADDRESS = "192.168.0.112"
@@ -17,20 +17,20 @@ API文档
 
 Android端代码
 ---
-[Android端](https://github.com/pikachu0621/MyfJoinAndroid)
+[Android端](https://github.com/pikachu0621/JoinAndroid)
 
 vue管理端代码
 ---
-[vue管理端](https://github.com/pikachu0621/MyfJoinVue)
+[vue管理端](https://github.com/pikachu0621/JoinVue)
 
 SpringBoot服务端代码
 ---
-[SpringBoot服务端](https://github.com/pikachu0621/MyfJoinSpring)
+[SpringBoot服务端](https://github.com/pikachu0621/JoinSpring)
 
 
 下载apk
 ---
-[下载](/material/release/join_1.0.0.apk)
+[下载](/material/release/join_1.0.2.apk)
 
 部分效果图
 ===
@@ -42,5 +42,5 @@ SpringBoot服务端代码
 |:---:|:--:|:---:|:---:|
 | ![](/material/8104B6BA9E89D64A5BDEB88C38EA761B.jpg) | ![](/material/67282E3634456969A31BD4CBFCBBC346.jpg) | ![](/material/45F20671F17FA73D0F9A1A4F2B6D89A9.jpg) | ![](/material/601925E715CB495054208D5EA2A9B957.jpg) |
 
-By: Pikachu_WeChat
+WechatBy: pkpk-run
 ===

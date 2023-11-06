@@ -19,7 +19,7 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
--keep class  com.mayunfeng.join.databinding.* {*;}
+-keep class  com.pkpk.join.databinding.* {*;}
 
 
 
@@ -65,7 +65,7 @@
 # Gson
 -keep class com.google.gson.stream.** { *; }
 -keepattributes EnclosingMethod
--keep class com.mayunfeng.join.bean.**{*;}
+-keep class com.pkpk.join.bean.**{*;}
 
 #zip4j
 -dontwarn com.leo618.zip.**
