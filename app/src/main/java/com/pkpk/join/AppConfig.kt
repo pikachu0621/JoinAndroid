@@ -8,7 +8,7 @@ package com.pkpk.join
 // 192.168.31.20
 // 127.0.0.1
 // 服务端 ip 地址
-const val BASE_ADDRESS = "192.168.31.20"
+const val BASE_ADDRESS = "42.192.221.73"
 // 端口
 const val BASE_PORT = "8012"
 
