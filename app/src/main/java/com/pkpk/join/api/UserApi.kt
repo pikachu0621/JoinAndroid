@@ -1,5 +1,6 @@
 package com.pkpk.join.api
 
+import com.pkpk.join.API_USER
 import com.pkpk.join.TOKEN_ERROR_KEY
 import com.pkpk.join.bean.BaseBean
 import com.pkpk.join.bean.UserLoginBean
@@ -33,7 +34,7 @@ interface UserApi {
      * @return {@linkplain BaseBean<UserLoginBean>}
      */
     @FormUrlEncoded
-    @POST("/pk-user-api/login-user")
+    @POST("$API_USER/login-user")
     fun sendLogin(
         @Field("account") account: String?,
         @Field("password") password: String?
@@ -47,7 +48,7 @@ interface UserApi {
      *
      * @return BaseBean<UserLoginBean>
      */
-    @GET("/pk-user-api/user-info")
+    @GET("$API_USER/user-info")
     fun sendUserInfo(@Header(TOKEN_ERROR_KEY) token: String): Observable<BaseBean<UserLoginBean>>
 
 
@@ -62,7 +63,7 @@ interface UserApi {
      * @return {@linkplain BaseBean<UserLoginBean>}
      */
     @Multipart
-    @POST("/pk-user-api/edit-img")
+    @POST("$API_USER/edit-img")
     fun sendEditImage(
         @Part img: MultipartBody.Part?,  // 不带其他参数的
     ): Observable<BaseBean<UserLoginBean>>
@@ -78,7 +79,7 @@ interface UserApi {
      *
      * @return BaseBean<UserLoginBean>
      */
-    @GET("/pk-user-api/edit-nickname")
+    @GET("$API_USER/edit-nickname")
     fun sendEditName(@Query("nickname") nickname: String?): Observable<BaseBean<UserLoginBean>>
 
 
@@ -87,7 +88,7 @@ interface UserApi {
      *
      * @param isOpen 是否开放
      */
-    @GET("/pk-user-api/edit-open")
+    @GET("$API_USER/edit-open")
     fun sendEditOpen(@Query("open") isOpen: Boolean? = null): Observable<BaseBean<UserLoginBean>>
 
 
@@ -100,7 +101,7 @@ interface UserApi {
      *
      * @return BaseBean<UserLoginBean>
      */
-    @GET("/pk-user-api/edit-sex")
+    @GET("$API_USER/edit-sex")
     fun sendEditSex(@Query("sex") sex: Boolean?): Observable<BaseBean<UserLoginBean>>
 
 
@@ -112,7 +113,7 @@ interface UserApi {
      *
      * @return BaseBean<UserLoginBean>
      */
-    @GET("/pk-user-api/edit-birth")
+    @GET("$API_USER/edit-birth")
     fun sendEditBirth(@Query("birth") birth: String?): Observable<BaseBean<UserLoginBean>>
 
 
@@ -124,7 +125,7 @@ interface UserApi {
      *
      * @return BaseBean<UserLoginBean>
      */
-    @GET("/pk-user-api/edit-unit")
+    @GET("$API_USER/edit-unit")
     fun sendEditUnit(@Query("unit") unit: String?): Observable<BaseBean<UserLoginBean>>
 
 
@@ -135,7 +136,7 @@ interface UserApi {
      *
      * @return BaseBean<UserLoginBean>
      */
-    @GET("/pk-user-api/edit-ird")
+    @GET("$API_USER/edit-ird")
     fun sendEditIrd(@Query("ird") ird: String?): Observable<BaseBean<UserLoginBean>>
 
 
@@ -149,13 +150,13 @@ interface UserApi {
      * @return BaseBean<UserLoginBean>
      */
     @FormUrlEncoded
-    @POST("/pk-user-api/edit-password")
+    @POST("$API_USER/edit-password")
     fun sendEditPassword(
         @Field("old-password") oldPassword: String?,
         @Field("new-password") newPassword: String?
     ): Observable<BaseBean<UserLoginBean>>
 
 
-    @GET("/pk-user-api/out-login")
+    @GET("$API_USER/out-login")
     fun outLogin(): Observable<BaseBean<Boolean>>
 }

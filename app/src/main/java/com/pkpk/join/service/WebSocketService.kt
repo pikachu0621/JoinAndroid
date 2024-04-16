@@ -31,12 +31,14 @@ enum class WebSocketType(
     val type: Int,
     val msg: String
 ) {
-    WE_OK(2000, "链接成功"),
+    WE_OK(2000, "连接成功"),
     WE_MESSAGE(2001, "有消息"),
     WE_CLOSED(2002, "断开连接"),
     WE_OTHER_DEVICES(2003, "其它设备登录"),
     WE_PWS_NUL(2004, "密码被修改"),
     WE_MESSAGE_GOTO_SIGN(2005, "有新签到任务"),
+    WE_LOAD(2006, "连接中"),
+    WE_FINISH(2007, "连接结束"),
 }
 const val CLOSE_ALL_NOTIFY_KEY = "closeAllNotify"
 
@@ -78,7 +80,7 @@ class WebSocketService : BaseService<Serializable>() {
     fun startWebSocket() {
         if (!isClosed || reconnectionNumAdd >= reconnectionNum) return
         LogsUtils.showLog("------------开始连接------------")
-
+        postEventBus(null, WebSocketType.WE_LOAD.type)
         val client = OkHttpClient.Builder()
             .retryOnConnectionFailure(true)               //允许失败重试
             .readTimeout(5, TimeUnit.SECONDS)     //设置读取超时时间
@@ -94,6 +96,7 @@ class WebSocketService : BaseService<Serializable>() {
 
             //连接成功
             override fun onOpen(webSocket: WebSocket, response: Response) {
+                postEventBus(null, WebSocketType.WE_FINISH.type)
                 isClosed = false
                 LogsUtils.showLog("WebSocket 链接成功!")
                 postEventBus(null, WebSocketType.WE_OK.type)
@@ -126,6 +129,7 @@ class WebSocketService : BaseService<Serializable>() {
 
             //连接失败调用 异常信息t.getMessage()
             override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
+                postEventBus(null, WebSocketType.WE_FINISH.type)
                 LogsUtils.showLog("WebSocket 链接失败--${t.message}")
                 isClosed = true
                 reconnectionNumAdd++
@@ -134,6 +138,7 @@ class WebSocketService : BaseService<Serializable>() {
             }
 
             override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
+                postEventBus(null, WebSocketType.WE_FINISH.type)
                 isClosed = true
                 if (code == 1001) {
                     postEventBus(null, WebSocketType.WE_OTHER_DEVICES.type)
@@ -149,6 +154,7 @@ class WebSocketService : BaseService<Serializable>() {
             }
 
             override fun onClosing(webSocket: WebSocket, code: Int, reason: String) {
+                postEventBus(null, WebSocketType.WE_FINISH.type)
                 isClosed = true
                 if (code == 1001) {
                     postEventBus(null, WebSocketType.WE_OTHER_DEVICES.type)

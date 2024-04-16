@@ -2,27 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <!-- 允许访问网络 -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!-- 网状态 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!-- 读取外部存储 -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!-- 写入外部存储 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 网状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 读取外部存储 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 写入外部存储 -->
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:ignore="ScopedStorage" />
-    <!-- 管理外部存储 -->
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />
-    <!-- 前台服务 -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <!-- Android 13版本适配，细化存储权限 -->
+        tools:ignore="ScopedStorage" /> <!-- 管理外部存储 -->
+    <uses-permission
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" /> <!-- 前台服务 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" /> <!-- Android 13版本适配，细化存储权限 -->
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <!--android 13+ 通知权限-->
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
-    <!-- 全局对话框,不依附于程序的activity -->
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- android 13+ 通知权限 -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- 全局对话框,不依附于程序的activity -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
@@ -38,12 +32,17 @@
         android:resizeableActivity="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.考勤记录管理系统"
+        android:theme="@style/Theme.App"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.activity.LookImageActivity"
+            android:exported="false" />
+
         <service
             android:name=".service.WebSocketService"
             android:enabled="true"
             android:exported="false" />
+
         <activity
             android:name=".ui.activity.SettingActivity"
             android:exported="false" />
@@ -99,7 +98,7 @@
             android:name=".ui.activity.CreateGroupActivity"
             android:configChanges="keyboard"
             android:exported="false"
-            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize|adjustPan" />
         <activity
             android:name=".ui.activity.CropActivity"
             android:exported="false" />

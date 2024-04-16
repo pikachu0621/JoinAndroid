@@ -99,7 +99,19 @@
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 style="@style/MeSettingText"
-                                android:text="@string/edit_user_info_hidden" />
+                                android:text="@string/edit_user_info_hidden"
+                                android:layout_weight="0"
+                                android:layout_width="wrap_content"/>
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/click_app_query"
+                                android:layout_width="40dp"
+                                android:layout_height="match_parent"
+                                android:scaleType="center"
+                                app:srcCompat="@drawable/ic_app_query"/>
+                            <View
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"/>
 
                             <androidx.appcompat.widget.SwitchCompat
                                 android:id="@+id/user_open_sw"

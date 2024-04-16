@@ -89,6 +89,24 @@ public class GetPhotoUtils {
         return result;
     }
 
+    // 获取路径相册
+    public static PhotoModule getSystemPathLibs(PhotoModule photoModule) {
+        String fileOne = null;
+        List<String> files = new ArrayList<>();
+        ContentResolver contentResolver = context.getContentResolver();
+        @SuppressLint("Recycle")
+        Cursor cursor = contentResolver.query(uri, null, null, null, ContactsContract.Contacts._ID + " DESC");
+        if (cursor == null || cursor.getCount() <= 0) return null;
+        while (cursor.moveToNext()) {
+            int index = cursor.getColumnIndexOrThrow(data);
+            String path = cursor.getString(index);
+            if (fileOne == null) fileOne = path;
+            if (getParent(path).equals(photoModule.getPath())) files.add(path);
+        }
+        photoModule.setFiles(files);
+        return photoModule;
+    }
+
 
     // 获取相册 （按文件夹分  不同文件夹算一个）
     public static List<PhotoModule> getSystemLibs() {
@@ -110,7 +128,7 @@ public class GetPhotoUtils {
         }
         if (photoModules.size() > 0) {
             Collections.sort(photoModules, (o1, o2) -> o2.getFiles().size() - o1.getFiles().size());
-            photoModules.add(0, new PhotoModule("", "全部"+ typeStr , fileOne, files));
+            photoModules.add(0, new PhotoModule("", "全部"+ typeStr , fileOne, files, true));
         }
         return photoModules;
 

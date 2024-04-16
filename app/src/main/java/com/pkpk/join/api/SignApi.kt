@@ -1,5 +1,7 @@
 package com.pkpk.join.api
 
+import com.pkpk.join.API_START_SIGN
+import com.pkpk.join.API_USER_SIGN
 import com.pkpk.join.bean.BaseBean
 import com.pkpk.join.bean.StartSignBean
 import com.pkpk.join.bean.UserSignBean
@@ -29,7 +31,7 @@ interface SignApi {
      *
      */
     @FormUrlEncoded
-    @POST("/pk-sign-api/start")
+    @POST("$API_START_SIGN/start")
     fun sendStartSign(
         @Field("group-id") groupId: Long,
         @Field("sign-title") signTitle: String?,
@@ -44,7 +46,7 @@ interface SignApi {
      * 获取全部签到数据
      *
      */
-    @GET("/pk-sign-api/all-info")
+    @GET("$API_START_SIGN/all-info")
     fun sendAllInfo(): Observable<BaseBean<ArrayList<StartSignBean>>>
 
 
@@ -52,7 +54,7 @@ interface SignApi {
      * 删除签到
      * @param signId
      */
-    @GET("/pk-sign-api/delete-sign/{signId}")
+    @GET("$API_START_SIGN/delete-sign/{signId}")
     fun sendDelSign(@Path("signId") signId: Long): Observable<BaseBean<ArrayList<StartSignBean>>>
 
 
@@ -61,14 +63,14 @@ interface SignApi {
      *  获取全部用户签到数据
      * @param signId
      */
-    @GET("/pk-user-sign-api/all-info/{signId}")
+    @GET("$API_USER_SIGN/all-info/{signId}")
     fun sendAllUserInfo(@Path("signId") signId: Long): Observable<BaseBean<UserSignBean>>
 
 
     /**
      * 获取 用户签到数据
      */
-    @GET("/pk-user-sign-api/my-sign-info")
+    @GET("$API_USER_SIGN/my-sign-info")
     fun sendMySignInfo(): Observable<BaseBean<ArrayList<UserSignTable>>>
 
 
@@ -76,13 +78,13 @@ interface SignApi {
     /**
      * 获取 该用户全部签到任务
      */
-    @GET("/pk-user-sign-api/my-sign-all-info")
+    @GET("$API_USER_SIGN/my-sign-all-info")
     fun sendMySignAllInfo(): Observable<BaseBean<ArrayList<UserSignTable>>>
 
     /**
      * 用户签到
      */
-    @GET("/pk-user-sign-api/start-sign")
+    @GET("$API_USER_SIGN/start-sign")
     fun sendStartSign(
         @Query("sign-id") signId: Long,
         @Query("key") key: String? = null

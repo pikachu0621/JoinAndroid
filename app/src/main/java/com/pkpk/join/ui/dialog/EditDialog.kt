@@ -10,14 +10,19 @@ import android.view.View
 import androidx.core.widget.addTextChangedListener
 import com.github.gzuliyujiang.wheelpicker.annotation.DateMode
 import com.github.gzuliyujiang.wheelpicker.entity.DateEntity
+import com.pikachu.utils.base.BaseBottomSheetDialog
+import com.pikachu.utils.base.BaseDialog
+import com.pikachu.utils.base.BasePopupWindow
+import com.pikachu.utils.utils.NetUtils
+import com.pikachu.utils.utils.OtherUtils
+import com.pikachu.utils.utils.ToastUtils
 import com.pkpk.join.R
 import com.pkpk.join.databinding.DialogEditUserAgeBinding
 import com.pkpk.join.databinding.DialogEditUserInfoBinding
 import com.pkpk.join.databinding.DialogEditUserSexBinding
-import com.pikachu.utils.base.BaseBottomSheetDialog
-import com.pikachu.utils.utils.NetUtils
-import com.pikachu.utils.utils.OtherUtils
-import com.pikachu.utils.utils.ToastUtils
+import com.pkpk.join.databinding.DialogLoadBinding
+import com.pkpk.join.databinding.DialogMsgBinding
+import com.pkpk.join.databinding.DialogQueryMsgBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -209,10 +214,15 @@ class EditAgeDialog(
         binding.dateWheelLayout.dayLabelView.setTextColor(color)
         binding.dateWheelLayout.dayLabelView.typeface = typeface
         binding.dateWheelLayout.setDateMode(DateMode.YEAR_MONTH_DAY)
-        binding.dateWheelLayout.setDateLabel(context.resources.getString(R.string.app_years), context.resources.getString(R.string.app_month), context.resources.getString(R.string.app_days))
+        binding.dateWheelLayout.setDateLabel(
+            context.resources.getString(R.string.app_years),
+            context.resources.getString(R.string.app_month),
+            context.resources.getString(R.string.app_days)
+        )
         selectedDate = setSelectedDate(birth)
         binding.dateWheelLayout.setOnDateSelectedListener { year, month, day ->
-            binding.ok.isChecked = selectedDate.day != day || selectedDate.month != month || selectedDate.year != year
+            binding.ok.isChecked =
+                selectedDate.day != day || selectedDate.month != month || selectedDate.year != year
             binding.ok.isClickable = binding.ok.isChecked
         }
 
@@ -224,19 +234,22 @@ class EditAgeDialog(
                 ToastUtils.showToast(context.resources.getString(R.string.dialog_load_title_net_error))
                 return@setOnClickListener
             }
-            if (clickOk(this,
+            if (clickOk(
+                    this,
                     "$year-${
-                        if(month<= 9) "0" else ""
+                        if (month <= 9) "0" else ""
                     }$month-${
-                        if(day<= 9) "0" else ""
-                    }$day")) {
+                        if (day <= 9) "0" else ""
+                    }$day"
+                )
+            ) {
                 dismiss()
             }
         }
     }
 
-   private fun setSelectedDate(date: String, pattern: String = "yyyy-MM-dd"): DateEntity {
-        val simpleDateFormat = SimpleDateFormat(pattern,  Locale.SIMPLIFIED_CHINESE)
+    private fun setSelectedDate(date: String, pattern: String = "yyyy-MM-dd"): DateEntity {
+        val simpleDateFormat = SimpleDateFormat(pattern, Locale.SIMPLIFIED_CHINESE)
         var parse: Date?
         try {
             parse = simpleDateFormat.parse(date)
@@ -245,7 +258,7 @@ class EditAgeDialog(
             parse = Date()
             e.printStackTrace()
         }
-         return DateEntity.target(parse)
+        return DateEntity.target(parse)
     }
 
 
@@ -255,3 +268,94 @@ class EditAgeDialog(
     }
 
 }
+
+
+class LoadingDialog(
+    context: Context,
+    private val title: String = ""
+) : BaseDialog<DialogLoadBinding>(context) {
+    override fun onViewCreate(binding: DialogLoadBinding) {
+        setWidthProportion(0F)
+        setCancelable(false) // 设置按返回键是否可关闭
+        setCanceledOnTouchOutside(false) // 设置外部触摸可关闭
+        if (title.isEmpty()) binding.loadTitle.visibility = View.GONE
+        else binding.loadTitle.text = title
+    }
+}
+
+
+class MsgDialog(
+    context: Context,
+    private val title: String = "",
+    private val clickOk: (dialog: MsgDialog) -> Boolean,
+    private val okStr: String = context.resources.getString(R.string.dialog_msg_confirm),
+    private val cancelStr: String? = context.resources.getString(R.string.dialog_msg_cancel),
+    private val clickCancel: (dialog: MsgDialog) -> Boolean = { true }
+) : BaseDialog<DialogMsgBinding>(context) {
+    override fun onViewCreate(binding: DialogMsgBinding) {
+        setWidthProportion(0.65F)
+        binding.msg.text = title
+        binding.ok.text = okStr
+        if (cancelStr.isNullOrEmpty()) {
+            binding.cancel.visibility = View.GONE
+            binding.fg.visibility = View.GONE
+        } else {
+            binding.cancel.visibility = View.VISIBLE
+            binding.fg.visibility = View.VISIBLE
+            binding.cancel.text = cancelStr
+        }
+        binding.cancel.setOnClickListener {
+            if (clickCancel(this)) {
+                dismiss()
+            }
+        }
+        binding.ok.setOnClickListener {
+            if (clickOk(this)) {
+                dismiss()
+            }
+        }
+    }
+
+}
+
+class MsgQueryDialog(
+    private val msg: String? = null,
+    private val title: String? = null,
+    context: Context) :
+    BasePopupWindow<DialogQueryMsgBinding>(context) {
+    override fun onViewCreate(binding: DialogQueryMsgBinding) {
+        title?.let {
+            binding.title.text = it
+        } ?: run {
+            binding.title.visibility = View.GONE
+        }
+
+        msg?.let {
+            binding.msg.text = it
+        } ?: run {
+            binding.msg.visibility = View.GONE
+        }
+    }
+
+
+    companion object {
+        fun View.showTop(msg: String? = null, title: String? = null) {
+            MsgQueryDialog(msg, title, this.context).showTop(this, 0, 0)
+        }
+
+        fun View.showBottom(msg: String? = null, title: String? = null) {
+            MsgQueryDialog(title, msg, this.context).showBottom(this, 0, 0)
+        }
+
+        fun View.showLeft(msg: String? = null, title: String? = null) {
+            MsgQueryDialog(title, msg, this.context).showLeft(this, 0, 0)
+        }
+
+        fun View.showRight( msg: String? = null, title: String? = null) {
+            MsgQueryDialog(title, msg, this.context).showRight(this, 0, 0)
+        }
+    }
+}
+
+
+

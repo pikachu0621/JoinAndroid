@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -296,7 +298,6 @@ public final class TimeUtils {
     }
 
 
-
     public static long dateToLong(Date date) {
         return date.getTime();
     }
@@ -326,7 +327,7 @@ public final class TimeUtils {
         return sdf.format(date);
     }
 
-    public static String dateToStr(long time , String type) {
+    public static String dateToStr(long time, String type) {
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat sdf = new SimpleDateFormat();
         sdf.applyPattern(type);
@@ -334,9 +335,32 @@ public final class TimeUtils {
     }
 
 
+    // 判断今日是否生日
+    public static boolean isTimeBirthday(String birthdayString, String pattern) {
+        Date birthday = parseDate(birthdayString, pattern);
+        if (birthday == null) return false;
+        Date today = Calendar.getInstance().getTime();
+        Calendar birthdayCalendar = Calendar.getInstance();
+        birthdayCalendar.setTime(birthday);
+        Calendar todayCalendar = Calendar.getInstance();
+        todayCalendar.setTime(today);
+        return birthdayCalendar.get(Calendar.MONTH) == todayCalendar.get(Calendar.MONTH)
+                && birthdayCalendar.get(Calendar.DAY_OF_MONTH) == todayCalendar.get(Calendar.DAY_OF_MONTH);
+    }
+    public static Date parseDate(String dateString, String pattern) {
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
+        try {
+            return dateFormat.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
     // 定时器
-    public static Thread timing(long time, Runnable runnable){
+    public static Thread timing(long time, Runnable runnable) {
         if (thread != null && thread.isAlive()) thread.interrupt();
         thread = new Thread(() -> {
             try {

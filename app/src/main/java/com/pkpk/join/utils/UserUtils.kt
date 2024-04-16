@@ -13,8 +13,10 @@ import com.pkpk.join.ui.activity.LoginActivity
 import com.pkpk.join.utils.retrofit.RetrofitManager
 import com.pikachu.utils.utils.AESBCBUtils
 import com.pikachu.utils.utils.AppManagerUtils
+import com.pikachu.utils.utils.EquipmentUtils
 import com.pikachu.utils.utils.GlideUtils
 import com.pikachu.utils.utils.SharedPreferencesUtils
+import com.pkpk.join.DEVICE_INFO_PARAMETER
 
 
 /**
@@ -37,27 +39,28 @@ object UserUtils {
     fun readLoginToken(): String? = SharedPreferencesUtils.readString("login_token")
 
 
-    fun loginTokenOut(activity: Activity){
+    fun loginTokenOut(activity: Activity) {
         writeLoginToken("")
         RetrofitManager.getInstance().addHeader(TOKEN_ERROR_KEY, "")
         LoginActivity.startLoginActivity(activity)
-        AppManagerUtils.getAppManager().finishAllActivity(activity.javaClass, LoginActivity::class.java)
+        AppManagerUtils.getAppManager()
+            .finishAllActivity(activity.javaClass, LoginActivity::class.java)
         Application.isLoginOk = false
         WebSocketService.getWebSocketService()?.cancel()
         activity.stopService(Intent(activity, WebSocketService::class.java))
         // context.startActivity(Intent(context, LoginActivity::class.java))
     }
 
-    fun appOut(context: Context){
+    fun appOut(context: Context) {
         Application.isLoginOk = false
         WebSocketService.getWebSocketService()?.cancel()
         context.stopService(Intent(context, WebSocketService::class.java))
     }
 
 
-    fun loginTokenInit(loginToken: String?){
+    fun loginTokenInit(loginToken: String?) {
         var token: String? = loginToken
-        if (loginToken == null){
+        if (loginToken == null) {
             token = readLoginToken()
         }
         if (token == null) return
@@ -67,16 +70,29 @@ object UserUtils {
     }
 
 
-    fun copyStr(context: Context, str: String){
-        val myClipboard: ClipboardManager = context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+    fun copyStr(context: Context, str: String) {
+        val myClipboard: ClipboardManager =
+            context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
         myClipboard.setPrimaryClip(ClipData.newPlainText("content", str))
     }
 
-    fun encryptGroupId(groupId: Long): String{
-        return  AESBCBUtils.bytesToHexStr("id:$groupId".toByteArray(Charsets.UTF_8))
+    fun encryptGroupId(groupId: Long): String {
+        return AESBCBUtils.bytesToHexStr("id:$groupId".toByteArray(Charsets.UTF_8))
         // return AESBCBUtils.encrypt("$groupId") ?: ""
     }
 
+    /**
+     * 添加设备信息
+     */
+    fun addDeviceInfo(context: Context, info: String? = null) {
+        val all = if (info.isNullOrEmpty()) {
+            EquipmentUtils.getAllJson(context)
+        } else {
+            info
+        }
+        val encryptInfo = AESBCBUtils.encrypt(all) ?: "encrypt error"
+        RetrofitManager.getInstance().addHeader(DEVICE_INFO_PARAMETER, encryptInfo)
+    }
 
     fun decryptGroupId(groupIdAes: String): Long {
         val decrypt = AESBCBUtils.hexStrToBytes(groupIdAes).toString(Charsets.UTF_8) ?: return -1

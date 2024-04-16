@@ -19,6 +19,7 @@ import com.pikachu.utils.type.JumpType
 import com.pikachu.utils.utils.LogsUtils
 import com.pikachu.utils.utils.TimeUtils
 
+const val PwsGestureEvt = 101
 class PwsGestureActivity : AppBaseActivity<ActivityPwsGestureBinding, String>() {
 
 
@@ -80,7 +81,7 @@ class PwsGestureActivity : AppBaseActivity<ActivityPwsGestureBinding, String>() 
                         return
                     }
                     // 签到成功业务逻辑
-                    postEventBus(conversionStringPws(hitIndexList))
+                    postEventBus(conversionStringPws(hitIndexList), PwsGestureEvt)
                     LoginActivity.finishTs(this@PwsGestureActivity)
                     return
                 }
@@ -106,7 +107,7 @@ class PwsGestureActivity : AppBaseActivity<ActivityPwsGestureBinding, String>() 
                 }
                 // 返回 pws 数据
                 LogsUtils.showLog(settingPws)
-                postEventBus(settingPws)
+                postEventBus(settingPws, PwsGestureEvt)
                 LoginActivity.finishTs(this@PwsGestureActivity)
             }
 

@@ -18,9 +18,12 @@ data class GroupBean(
     val groupType: String,
     val createTime: String,
     val groupPeople: Int,
+    val groupVerifyPws: String?,
+    val groupIsSearch: Boolean,
     val baseTag: Any?,
     val groupTopFourPeople: List<UserLoginBean>,
-    val groupAndUser: Int
+    val groupAndUser: Int,
+    val groupIsVerify: Boolean,
 ): Serializable
 
 

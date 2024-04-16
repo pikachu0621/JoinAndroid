@@ -3,6 +3,7 @@ package com.pkpk.join.ui.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import com.pikachu.utils.base.BasePopupWindow
 import com.pkpk.join.R
 import com.pkpk.join.api.UserApi
 import com.pkpk.join.base.AppBaseActivity
@@ -16,6 +17,9 @@ import com.pkpk.join.utils.retrofit.QuickRtObserverListener
 import com.pkpk.join.utils.retrofit.RetrofitManager
 import com.pikachu.utils.type.JumpType
 import com.pikachu.utils.utils.GlideUtils
+import com.pkpk.join.ui.dialog.MsgQueryDialog.Companion.showBottom
+import com.pkpk.join.ui.dialog.MsgQueryDialog.Companion.showRight
+import com.pkpk.join.ui.dialog.MsgQueryDialog.Companion.showTop
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -139,6 +143,10 @@ class EditUserInfoActivity : AppBaseActivity<ActivityEditUserInfoBinding, UserLo
             }.show()
         }
 
+        binding.clickAppQuery.setOnClickListener {
+            it.showTop("其他用户将无法查看您的资料")
+        }
+
     }
 
 
@@ -147,7 +155,7 @@ class EditUserInfoActivity : AppBaseActivity<ActivityEditUserInfoBinding, UserLo
         GlideUtils.with(this)
             .loadHeaderToken(userLoginBean.userImg)
             .into(binding.userImage)
-        binding.userOpenSw.isChecked = !userLoginBean.userOpenProfile
+        binding.userOpenSw.isChecked = userLoginBean.userOpenProfile
         binding.userAccount.text = userLoginBean.userAccount
         binding.userNickname.text = userLoginBean.userNickname
         binding.userSex.text =

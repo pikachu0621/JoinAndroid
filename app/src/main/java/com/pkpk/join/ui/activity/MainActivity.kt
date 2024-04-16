@@ -26,6 +26,8 @@ import com.pkpk.join.utils.UserUtils
 import com.pkpk.join.utils.retrofit.QuickRtObserverListener
 import com.pkpk.join.utils.retrofit.RetrofitManager
 import com.pikachu.utils.utils.*
+import com.pkpk.join.ui.dialog.MsgQueryDialog.Companion.showTop
+import com.pkpk.join.ui.widget.LoadHeader
 import java.io.Serializable
 
 
@@ -91,6 +93,21 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, Serializable>() {
 
     override fun onEventBus(event: Serializable?, key: Int?, msg: String?) {
         LogsUtils.showLog(key)
+        when(key){
+            WebSocketType.WE_CLOSED.type or WebSocketType.WE_FINISH.type  -> {
+                binding.mainContent.mainUserStateBg.background = getDrawable(R.drawable.dr_main_state_out)
+                binding.mainContent.mainUserState.text = getString(R.string.main_top_root_user_offline)
+            }
+            WebSocketType.WE_OK.type -> {
+                binding.mainContent.mainUserStateBg.background = getDrawable(R.drawable.dr_main_state_in)
+                binding.mainContent.mainUserState.text = getString(R.string.main_top_root_user_online)
+            }
+            WebSocketType.WE_CLOSED.type -> {
+                binding.mainContent.mainUserStateBg.background = getDrawable(R.drawable.dr_main_state_load)
+                binding.mainContent.mainUserState.text = getString(R.string.main_top_root_user_connecting)
+            }
+        }
+
         if (key == WebSocketType.WE_OTHER_DEVICES.type || key == WebSocketType.WE_PWS_NUL.type) {
             val f =
                 if (key == WebSocketType.WE_OTHER_DEVICES.type) getString(R.string.dialog_msg_out_login_q)
@@ -159,6 +176,15 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, Serializable>() {
         // 用户账号
         binding.mainDrawer.tvUserId.text =
             "${getString(R.string.login_user_id)}${userLoginBean.userAccount}"
+
+        // 用户是否今天生日
+        if (TimeUtils.isTimeBirthday(userLoginBean.userBirth,"yyyy-MM-dd")){
+            (binding.mainContent.smartRefreshLayout.refreshHeader as LoadHeader).setAnimationBirthday(true)
+            Application.setAnimationBirthday(true)
+        } else {
+            (binding.mainContent.smartRefreshLayout.refreshHeader as LoadHeader).setAnimationBirthday(false)
+            Application.setAnimationBirthday(false)
+        }
 
         //....
         // 启动 WebSocketService
@@ -265,8 +291,7 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, Serializable>() {
 
     // 加载消息
     private fun loadSignInfo() {
-        binding.mainContent.appNul.root.visibility = View.GONE
-        binding.mainContent.root.setBackgroundColor(resources.getColor(R.color.color_bg_secondary))
+        // binding.mainContent.root.setBackgroundColor(resources.getColor(R.color.color_bg_secondary))
 
         RetrofitManager.getInstance().create(SignApi::class.java).sendMySignAllInfo().mySubscribeMainThread(
             this,
@@ -274,7 +299,8 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, Serializable>() {
 
                 override fun onSendError(t: BaseBean<ArrayList<UserSignTable>>?, e: Throwable) {
                     binding.mainContent.appNul.root.visibility = View.VISIBLE
-                    binding.mainContent.root.setBackgroundColor(resources.getColor(R.color.color_bg))
+                    binding.mainContent.recycler.visibility = View.GONE
+                    binding.mainContent.rootColorBg.setBackgroundColor(resources.getColor(R.color.color_bg))
                     binding.mainContent.smartRefreshLayout.finishRefresh()
                     showToast(t?.reason ?: e.message)
                 }
@@ -283,11 +309,13 @@ class MainActivity : AppBaseActivity<ActivityMainBinding, Serializable>() {
                     binding.mainContent.smartRefreshLayout.finishRefresh()
                     if (t.result.isNullOrEmpty()) {
                         binding.mainContent.appNul.root.visibility = View.VISIBLE
-                        binding.mainContent.root.setBackgroundColor(resources.getColor(R.color.color_bg))
+                        binding.mainContent.recycler.visibility = View.GONE
+                        binding.mainContent.rootColorBg.setBackgroundColor(resources.getColor(R.color.color_bg))
                         return
                     }
-                    binding.mainContent.root.setBackgroundColor(resources.getColor(R.color.color_bg_secondary))
+                    binding.mainContent.rootColorBg.setBackgroundColor(resources.getColor(R.color.color_bg_secondary))
                     binding.mainContent.appNul.root.visibility = View.GONE
+                    binding.mainContent.recycler.visibility = View.VISIBLE
                     mainMsgAdapter.refreshData(t.result)
                 }
             },

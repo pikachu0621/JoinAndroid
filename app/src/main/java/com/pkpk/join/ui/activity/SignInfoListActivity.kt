@@ -39,7 +39,7 @@ class SignInfoListActivity : AppBaseActivity<ActivitySignInfoListBinding, String
 
 
     private fun startLoad(){
-        binding.appNul.root.visibility = View.GONE
+        // binding.appNul.root.visibility = View.GONE
         signApi.sendAllInfo().mySubscribeMainThread(this, this, -1)
     }
 

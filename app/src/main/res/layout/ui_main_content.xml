@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:text="@string/test_6"
+        android:text="@string/main_top_root_user_offline"
         android:textColor="@color/color_grey1"
         android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="@+id/iv_brand_return"
@@ -64,7 +64,7 @@
         android:id="@+id/main_user_state_bg"
         android:layout_width="10dp"
         android:layout_height="10dp"
-        android:background="@drawable/dr_main_state_in"
+        android:background="@drawable/dr_main_state_out"
         app:layout_constraintBottom_toBottomOf="@+id/main_user_state"
         app:layout_constraintStart_toStartOf="@+id/main_user_nickname"
         app:layout_constraintTop_toTopOf="@+id/main_user_state" />
@@ -135,6 +135,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view2">
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/root_color_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:overScrollMode="never">
@@ -287,7 +288,7 @@
                     <include
                         android:id="@+id/app_nul"
                         layout="@layout/ui_app_nul"
-                        android:layout_marginTop="100dp"
+                        android:layout_marginTop="120dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:visibility="gone" />

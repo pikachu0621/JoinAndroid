@@ -85,16 +85,16 @@
                         android:text="@string/create_group_name"
                         android:textStyle="bold" />
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/user_msg"
-                            android:layout_marginTop="20dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:overScrollMode="never"
-                            tools:itemCount="4"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            tools:listitem="@layout/item_group_info_user"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/user_msg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal"
+                        android:overScrollMode="never"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="4"
+                        tools:listitem="@layout/item_group_info_user" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -138,76 +138,92 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/appCompatTextView8">
+
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:id="@+id/group_name_copy"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <androidx.appcompat.widget.AppCompatTextView
                             style="@style/MeSettingText"
                             android:layout_height="50dp"
                             android:gravity="center_vertical"
                             android:text="组名称" />
+
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/group_name_2"
                             style="@style/MeSettingTextVice"
                             android:text="@string/test_2" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:background="@color/color_bg_secondary"/>
+                        android:background="@color/color_bg_secondary" />
+
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:id="@+id/group_id_copy"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <androidx.appcompat.widget.AppCompatTextView
                             style="@style/MeSettingText"
                             android:layout_height="50dp"
                             android:gravity="center_vertical"
                             android:text="组号" />
+
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/group_id"
                             style="@style/MeSettingTextVice"
                             android:text="@string/test_2" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:background="@color/color_bg_secondary"/>
+                        android:background="@color/color_bg_secondary" />
+
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <androidx.appcompat.widget.AppCompatTextView
                             style="@style/MeSettingText"
                             android:layout_height="50dp"
                             android:gravity="center_vertical"
                             android:text="组人数" />
+
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/group_people"
-                            android:textColor="@color/color_principal"
                             style="@style/MeSettingTextVice"
-                            android:text="@string/test_2" />
+                            android:text="@string/test_2"
+                            android:textColor="@color/color_principal" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:background="@color/color_bg_secondary"/>
+                        android:background="@color/color_bg_secondary" />
+
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <androidx.appcompat.widget.AppCompatTextView
                             style="@style/MeSettingText"
                             android:layout_height="50dp"
                             android:gravity="center_vertical"
                             android:text="组类型" />
+
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/group_type"
                             android:layout_width="wrap_content"
                             android:layout_height="24dp"
+                            android:layout_marginStart="26dp"
                             android:background="@drawable/dr_my_create_group_item_type_bg"
                             android:gravity="center"
                             android:paddingHorizontal="@dimen/activity_horizontal_margin"
@@ -216,29 +232,197 @@
                             android:textSize="10sp"
                             app:layout_constraintBottom_toBottomOf="@+id/group_image"
                             app:layout_constraintStart_toStartOf="@+id/group_image"
-                            android:layout_marginStart="26dp"
                             tools:ignore="SmallSp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:background="@color/color_bg_secondary"/>
+                        android:background="@color/color_bg_secondary" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/group_verify_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/MeSettingText"
+                                android:layout_height="50dp"
+                                android:gravity="center_vertical"
+                                android:text="加入密码" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/group_verify"
+                                android:layout_width="wrap_content"
+                                android:layout_height="24dp"
+                                android:layout_marginStart="26dp"
+                                android:background="@drawable/dr_my_create_group_item_type_bg"
+                                android:gravity="center"
+                                android:paddingHorizontal="@dimen/activity_horizontal_margin"
+                                android:text="@string/test_2"
+                                android:textColor="@color/white"
+                                android:textSize="10sp"
+                                app:layout_constraintBottom_toBottomOf="@+id/group_image"
+                                app:layout_constraintStart_toStartOf="@+id/group_image"
+                                tools:ignore="SmallSp" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/color_bg_secondary" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/group_search_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/MeSettingText"
+                                android:layout_height="50dp"
+                                android:gravity="center_vertical"
+                                android:text="是否可搜索" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/group_search"
+                                android:layout_width="wrap_content"
+                                android:layout_height="24dp"
+                                android:layout_marginStart="26dp"
+                                android:background="@drawable/dr_my_create_group_item_type_bg"
+                                android:gravity="center"
+                                android:paddingHorizontal="@dimen/activity_horizontal_margin"
+                                android:text="@string/test_2"
+                                android:textColor="@color/white"
+                                android:textSize="10sp"
+                                app:layout_constraintBottom_toBottomOf="@+id/group_image"
+                                app:layout_constraintStart_toStartOf="@+id/group_image"
+                                tools:ignore="SmallSp" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/color_bg_secondary" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
+
                         <androidx.appcompat.widget.AppCompatTextView
                             style="@style/MeSettingText"
                             android:layout_height="50dp"
                             android:gravity="center_vertical"
                             android:text="组简介" />
+
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/group_introduce"
                             style="@style/MeSettingTextVice"
-                            android:text="@string/test_2"
-                            android:layout_marginTop="-6dp"/>
+                            android:layout_marginTop="-6dp"
+                            android:text="@string/test_2" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/root_controls"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/info">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_group_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                        android:layout_marginTop="@dimen/activity_horizontal_margin"
+                        android:text="@string/group_info_controls"
+                        android:textColor="@color/color_grey2"
+                        android:textSize="12sp" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/controls"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                        android:layout_marginTop="3dp"
+                        android:background="@drawable/dr_dialog_load_bg"
+                        android:orientation="vertical"
+                        android:padding="@dimen/activity_horizontal_margin"
+                        android:windowSoftInputMode="adjustResize"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/join">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/group_edit_info"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/MeSettingText"
+                                android:text="@string/my_create_group_dialog_edit" />
+
+                            <androidx.appcompat.widget.AppCompatImageView style="@style/MeSettingGoImage" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/color_bg_secondary" />
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/group_qrc"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/MeSettingText"
+                                android:text="@string/my_create_group_qrc" />
+
+                            <androidx.appcompat.widget.AppCompatImageView style="@style/MeSettingGoImage" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/color_bg_secondary" />
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                style="@style/MeSettingText"
+                                android:text="@string/my_create_group_ftf" />
+
+                            <androidx.appcompat.widget.AppCompatImageView style="@style/MeSettingGoImage" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
 
@@ -247,18 +431,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="20dp"
                     android:background="@drawable/dr_dialog_load_bg"
                     android:gravity="center"
                     android:text="加入该组/退出该组/解散该组"
                     android:textColor="@color/color_principal"
                     android:textSize="13sp"
                     android:textStyle="bold"
-                    android:layout_marginTop="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/info" />
+                    app:layout_constraintTop_toBottomOf="@+id/root_controls" />
 
-
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/join" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </com.scwang.smart.refresh.layout.SmartRefreshLayout>

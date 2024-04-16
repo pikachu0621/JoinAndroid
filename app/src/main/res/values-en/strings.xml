@@ -253,7 +253,7 @@
     <string name="settings_theme_language_en">English</string>
 
     <!--setting-->
-    <string name="settings_disclaimer">Disclaimer!\n\nAll components used in this project are[Apache License 2.0]\n\nThe following are open source project names\nretrofit2\nokhttp3\nrxjava3\nrxAndroid\ngson\neventbus\nrefresh\nlottie\nzxing\nCompressHelper\nAddressPicker\nkotlin-stdlib-jdk8\n\nItems are commercially available but please follow[Apache License 2.0]Open source protocol\nby-wechat：pkpk-run</string>
+    <string name="settings_disclaimer">Disclaimer!\n\nAll components used in this project are[Apache License 2.0]\n\nThe following are open source project names\nretrofit2\nokhttp3\nrxjava3\nrxAndroid\ngson\neventbus\nrefresh\nlottie\nzxing\nCompressHelper\nAddressPicker\nkotlin-stdlib-jdk8\n\nPlease follow[Apache License 2.0]Open source protocol\nby-wechat：pkpk-run</string>
 
     <string name="test">TEST</string>
     <string name="test_1">Higher mathematics / There is no punch card at present</string>

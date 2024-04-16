@@ -24,7 +24,7 @@ class SettingActivity : AppBaseActivity<ActivitySettingBinding, Serializable>() 
         }
 
         binding.fragmentSettingLin2.setOnClickListener {
-            jumpURl(this, "https://github.com/pikachu0621/pkJoinAndroid")
+            jumpURl(this, "https://github.com/pikachu0621/JoinAndroid")
         }
 
 
@@ -78,7 +78,7 @@ class SettingActivity : AppBaseActivity<ActivitySettingBinding, Serializable>() 
 
     override fun onResume() {
         super.onResume()
-        when(SharedPreferencesUtils.readInt("SystemMode") ){
+        when(SharedPreferencesUtils.readInt("SystemMode", 0) ){
             0 ->  binding.tt1.isChecked = true
             1 ->  binding.tt2.isChecked = true
             2 ->  binding.tt3.isChecked = true

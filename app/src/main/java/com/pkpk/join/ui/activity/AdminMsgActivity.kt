@@ -35,7 +35,7 @@ class AdminMsgActivity : AppBaseActivity<ActivityAdminMsgBinding, String>(), Qui
     }
 
     private fun startLoad() {
-        binding.appNul.root.visibility = View.GONE
+        // binding.appNul.root.visibility = View.GONE
         signApi.sendMySignAllInfo().mySubscribeMainThread(this, this, -1)
     }
 

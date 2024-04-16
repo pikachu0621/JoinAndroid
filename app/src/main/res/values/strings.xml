@@ -79,6 +79,9 @@
     <string name="main_top_user_info">我的资料</string>
     <string name="main_top_root_user_sign_start">发起签到</string>
     <string name="main_top_root_user_sign_check">批阅签到</string>
+    <string name="main_top_root_user_online">在线</string>
+    <string name="main_top_root_user_connecting">连接中…</string>
+    <string name="main_top_root_user_offline">离线</string>
     <!--msg-->
     <string name="main_list_item_join">加</string>
     <string name="main_list_item_sign">签</string>
@@ -101,12 +104,14 @@
     <string name="my_create_group_dialog_dissolve_msg">此操作不可逆，是否解散此组？</string>
     <string name="my_create_group_dialog_dissolve_out_msg">此操作不可逆，是否解退出此组？</string>
     <string name="my_create_group_dialog_send">发起签到</string>
-    <string name="my_create_group_qrc">加入二维码</string>
+    <string name="my_create_group_qrc">此组二维码</string>
+    <string name="my_create_group_ftf">面对面加组</string>
     <string name="my_initiate_sign_time">发起时间</string>
 
     <!--GroupInfoActivity-->
     <string name="group_info_more">更多</string>
     <string name="group_info_info">组信息</string>
+    <string name="group_info_controls">组操作</string>
     <string name="group_info_people">人</string>
     <string name="group_info_join_ok">加入成功</string>
     <string name="group_info_join_group">加入该组</string>
@@ -122,6 +127,13 @@
     <string name="edit_user_info_account">账号</string>
     <string name="edit_user_info_name">昵称</string>
     <string name="edit_user_info_hidden">私密账号</string>
+    <string name="edit_user_info_cipher_join">密码加入</string>
+    <string name="edit_user_info_npc">可搜索此群</string>
+    <string name="edit_user_info_verify">加入密码验证</string>
+    <string name="edit_user_info_verify_pws">密码</string>
+    <string name="edit_user_info_verify_set">设置</string>
+    <string name="edit_user_info_qr">启用二维码加入</string>
+    <string name="edit_user_info_ftf">启用面对面加入</string>
     <string name="edit_user_info_sex">性别</string>
     <string name="edit_user_info_age">年龄</string>
     <string name="edit_user_info_birth">出生日期</string>
@@ -178,8 +190,9 @@
     <string name="create_group_name">组名</string>
     <string name="create_group_name_input">给组起个好听的名字吧</string>
     <string name="create_group_introduce">组介绍</string>
-    <string name="create_group_introduce_input">添加介绍更方便组员了解本组用途哦！</string>
+    <string name="create_group_introduce_input">添加介绍更方便组员了解本组用途哦！(可空)</string>
     <string name="create_group_type">组类型</string>
+    <string name="create_group_privacy">组隐私</string>
     <string name="create_group_error">失败</string>
     <string name="create_group_create_error">创建失败</string>
 
@@ -202,7 +215,6 @@
     <string name="dialog_edit_age_title">修改年龄</string>
     <string name="dialog_edit_birth_title">修改出生日期</string>
     <string name="dialog_edit_nul">不能为空</string>
-
 
 
     <!--PhotoActivity-->
@@ -253,9 +265,8 @@
     <string name="app_residue">剩余</string>
 
 
-
     <!--setting-->
-    <string name="settings_disclaimer">免责声明！\n\n本项目使用到的所有组件均为[Apache License 2.0]\n\n以下为开源项目名\nretrofit2\nokhttp3\nrxjava3\nrxAndroid\ngson\neventbus\nrefresh\nlottie\nzxing\nCompressHelper\nAddressPicker\nkotlin-stdlib-jdk8\n\n项目可商用但请遵循[Apache License 2.0]开源协议\nby：pkpk-run</string>
+    <string name="settings_disclaimer">免责声明！\n\n本项目使用到的所有组件均为[Apache License 2.0]\n\n以下为开源项目名\nretrofit2\nokhttp3\nrxjava3\nrxAndroid\ngson\neventbus\nrefresh\nlottie\nzxing\nCompressHelper\nAddressPicker\nkotlin-stdlib-jdk8\n\n项目请遵循[Apache License 2.0]开源协议\nby：pkpk-run</string>
 
     <string name="test">TEST</string>
     <string name="test_1">高数第15节课-未签到/当前暂无打卡</string>
@@ -271,7 +282,6 @@
     <string name="test_11">2023-03-10 21:16:45</string>
     <string name="test_12">******@136.com</string>
     <string name="test_13">/100人</string>
-
 
 
 </resources>

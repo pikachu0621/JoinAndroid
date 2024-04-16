@@ -7,12 +7,14 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.PopupWindow;
 
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.viewbinding.ViewBinding;
 
+import com.pikachu.utils.utils.UiUtils;
 import com.pikachu.utils.utils.ViewBindingUtils;
 
 
@@ -35,8 +37,6 @@ public abstract class BasePopupWindow<T extends ViewBinding> extends PopupWindow
 
 
 
-
-    @SuppressLint("UseCompatLoadingForDrawables")
     public BasePopupWindow(@NonNull Context context) {
         super(context);
         this.context = context;
@@ -44,105 +44,149 @@ public abstract class BasePopupWindow<T extends ViewBinding> extends PopupWindow
         setOutsideTouchable(true);
         setFocusable(true);
         setTransparent(0);
-
         binding = ViewBindingUtils.create(getClass(), LayoutInflater.from(context));
         root = binding.getRoot();
-        //透明背景
+    }
+    @Override
+    public void showAsDropDown(View anchor) {
+        super.showAsDropDown(anchor);
+    }
+
+    private interface ComputeShow {
+        class ComputeData {
+            int byViewHeight;
+            int byViewWidth;
+            int rootHeight;
+            int rootWidth;
+            int byViewLeft;
+            int byViewTop;
+
+            public ComputeData(int byViewHeight, int byViewWidth, int rootHeight, int rootWidth, int byViewLeft, int byViewTop) {
+                this.byViewHeight = byViewHeight;
+                this.byViewWidth = byViewWidth;
+                this.rootHeight = rootHeight;
+                this.rootWidth = rootWidth;
+                this.byViewLeft = byViewLeft;
+                this.byViewTop = byViewTop;
+            }
+        }
+        void compute(ComputeData computeData);
+    }
+
+    private void computeShow(View view, ComputeShow computeShow){
         onViewCreate(binding);
         setContentView(root);
+        ViewTreeObserver viewTreeObserver = root.getViewTreeObserver();
+        super.showAsDropDown(view,   0 , 0);
+        viewTreeObserver.addOnPreDrawListener(() -> {
+            dismiss();
+            int byViewHeight = view.getMeasuredHeight();
+            int byViewWidth = view.getMeasuredWidth();
+            int rootHeight = root.getMeasuredHeight();
+            int rootWidth = root.getMeasuredWidth();
+            int[] location = new int[2];
+            view.getLocationOnScreen(location);
+            int byViewLeft = location[0];
+            int byViewTop = location[1];
+            computeShow.compute(new ComputeShow.ComputeData(byViewHeight, byViewWidth, rootHeight, rootWidth, byViewLeft, byViewTop));
+            return true;
+        });
     }
 
+    /**
+     * 首选显示上部 上部空间不够显示下部
+     *
+     * @param view
+     * @param xoff
+     * @param yoff
+     */
+    public void showTop(View view, int xoff, int yoff) {
+        computeShow(view, computeData -> {
+            if (computeData.byViewTop >= computeData.rootHeight) {
+                if (computeData.byViewLeft + computeData.byViewWidth / 2 > computeData.rootWidth / 2){
+                    showAsDropDown(view,   - (computeData.rootWidth / 2  - computeData.byViewWidth / 2)  + xoff, -(computeData.byViewHeight + computeData.rootHeight) + yoff);
+                } else {
+                    showAsDropDown(view,   xoff , -(computeData.byViewHeight + computeData.rootHeight) + yoff);
+                }
+            } else {
+                if (computeData.byViewLeft + computeData.byViewWidth / 2 > computeData.rootWidth / 2){
+                    showAsDropDown(view,   - (computeData.rootWidth / 2  - computeData.byViewWidth / 2)  + xoff ,  yoff);
+                } else {
+                    showAsDropDown(view,   xoff , yoff);
+                }
+            }
+        });
+    }
 
+    public void showBottom(View view, int xoff, int yoff) {
+        computeShow(view, computeData -> {
+            if (computeData.byViewTop < computeData.rootHeight) {
+                if (computeData.byViewLeft + computeData.byViewWidth / 2 > computeData.rootWidth / 2){
+                    super.showAsDropDown(view,   - (computeData.rootWidth / 2  - computeData.byViewWidth / 2)  + xoff, yoff);
+                } else {
+                    super.showAsDropDown(view,   xoff ,  yoff);
+                }
+            } else {
+                if (computeData.byViewLeft + computeData.byViewWidth / 2 > computeData.rootWidth / 2){
+                    super.showAsDropDown(view,   - (computeData.rootWidth / 2  - computeData.byViewWidth / 2)  + xoff ,  -(computeData.byViewHeight + computeData.rootHeight) + yoff);
+                } else {
+                    super.showAsDropDown(view,   xoff , yoff);
+                }
+            }
+        });
+    }
 
+    public void showLeft(View view, int xoff, int yoff) {
+        computeShow(view, computeData -> {
+            if (computeData.byViewLeft  >= computeData.rootWidth){
+                // ok
+                if (computeData.byViewTop >= computeData.rootHeight / 2 - computeData.byViewHeight / 2) {
+                    super.showAsDropDown(view,   - (computeData.rootWidth)  + xoff, -(computeData.byViewHeight / 2 + computeData.rootHeight / 2) + yoff);
+                } else {
+                    super.showAsDropDown(view,   - (computeData.rootWidth)  + xoff,  yoff);
+                }
+            } else {
 
+                if (computeData.byViewTop >= computeData.rootHeight / 2 - computeData.byViewHeight / 2) {
+                    super.showAsDropDown(view,    computeData.byViewWidth  + xoff, -(computeData.byViewHeight / 2 + computeData.rootHeight / 2) + yoff);
+                } else {
+                    super.showAsDropDown(view,    computeData.byViewWidth  + xoff,  yoff);
+                }
+            }
+        });
+    }
+
+    public void showRight(View view, int xoff, int yoff) {
+        computeShow(view, computeData -> {
+            if (computeData.byViewLeft < computeData.rootWidth){
+                // ok
+                if (computeData.byViewTop >= computeData.rootHeight / 2 - computeData.byViewHeight / 2) {
+                    super.showAsDropDown(view,    computeData.byViewWidth  + xoff, -(computeData.byViewHeight / 2 + computeData.rootHeight / 2) + yoff);
+                } else {
+                    super.showAsDropDown(view,    computeData.byViewWidth  + xoff,  yoff);
+                }
+            } else {
+                if (computeData.byViewTop >= computeData.rootHeight / 2 - computeData.byViewHeight / 2) {
+                    super.showAsDropDown(view,   - (computeData.rootWidth)  + xoff, -(computeData.byViewHeight / 2 + computeData.rootHeight / 2) + yoff);
+                } else {
+                    super.showAsDropDown(view,   - (computeData.rootWidth)  + xoff,  yoff);
+                }
+            }
+        });
+    }
 
 
     /**
-     * 依附控件  上方显示
-     *
-     * @param view   依附控件
-     * @param minTop 顶部空间最小值 （如果顶部空间不够则向下偏移）
-     * @param yBelow 向下偏移的量
-     * @param yTop   向上偏移的量
+     * 设置 可触摸取消
      */
-    public void showAsTop(View view, int minTop, int yBelow, int yTop) {
-        int height = root.getHeight();
-        int[] location = new int[2];
-        view.getLocationOnScreen(location);
-        if (location[1] > minTop) {
-            super.showAsDropDown(view, (location[0] + view.getWidth() / 2) - height / 2, yBelow);
-        } else {
-            super.showAsDropDown(view, 0, yTop);
-        }
-    }
-
-    public void showAsTop(View view, int y) {
-        showAsTop(view, 400, y, y);
-    }
-
-    public void showAsTop(View view) {
-        showAsTop(view, 400, 100, 100);
-    }
-
-
-/*    public void show(View view){
-
-        int height = contentView.getHeight();
-        int[] location = new int[2];
-        view.getLocationOnScreen(location);
-        if (location[1] > 500 ) {
-            super.showAsDropDown(view,(location[0] + view.getWidth() / 2) - height / 2 , -380);
-        }else {
-            super.showAsDropDown(view, 0, 100);
-        }
-
-    }*/
-
-
-
-    /**
-     * 依附控件  上下显示
-     *
-     * @param view   依附控件
-     * @param maxTop 底部空间最小值 （如果底部空间不够则向上偏移）
-     * @param yBelow 向下偏移的量
-     * @param yTop   向上偏移的量
-     */
-    public void showAsBottom(View view, int maxTop, int yBelow, int yTop) {
-        int height = root.getHeight();
-        int[] location = new int[2];
-        view.getLocationOnScreen(location);
-        if (location[1] <= maxTop) {
-            super.showAsDropDown(view, (location[0] + view.getWidth() / 2) - height / 2, yBelow);
-        } else {
-            super.showAsDropDown(view, 0, yTop);
-        }
-    }
-
-
-    public void showAsBottom(View view, int maxTop, int y) {
-        showAsTop(view, maxTop, y, y);
-    }
-
-    public void showAsBottom(View view, int maxTop) {
-        showAsTop(view, maxTop, 100, 100);
-    }
-
-
-    public void showAsDropDown(View view, int y) {
-        showAsDropDown(view, 0, y);
-    }
-
-
-
-
-    /** 设置 可触摸取消 */
     @Override
     public void setOutsideTouchable(boolean touchable) {
         super.setOutsideTouchable(touchable);
     }
 
-    /** 设置 可聚焦*/
+    /**
+     * 设置 可聚焦
+     */
     @Override
     public void setFocusable(boolean focusable) {
         super.setFocusable(focusable);
@@ -151,8 +195,8 @@ public abstract class BasePopupWindow<T extends ViewBinding> extends PopupWindow
     /**
      * 设置透明
      * 0 透明
-     * */
-    public void setTransparent(@IntRange(from=0,to=255) int alpha) {
+     */
+    public void setTransparent(@IntRange(from = 0, to = 255) int alpha) {
         Drawable drawable = new ColorDrawable(context.getResources().getColor(android.R.color.black));
         drawable.setAlpha(alpha);
         setBackgroundDrawable(drawable);
@@ -160,9 +204,9 @@ public abstract class BasePopupWindow<T extends ViewBinding> extends PopupWindow
 
 
     // 全屏
-    public void setIsWhole(boolean isWhole){
-        setHeight(isWhole ? ViewGroup.LayoutParams.MATCH_PARENT:ViewGroup.LayoutParams.WRAP_CONTENT);
-        setWidth(isWhole ? ViewGroup.LayoutParams.MATCH_PARENT:ViewGroup.LayoutParams.WRAP_CONTENT);
+    public void setIsWhole(boolean isWhole) {
+        setHeight(isWhole ? ViewGroup.LayoutParams.MATCH_PARENT : ViewGroup.LayoutParams.WRAP_CONTENT);
+        setWidth(isWhole ? ViewGroup.LayoutParams.MATCH_PARENT : ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
 }

@@ -10,6 +10,7 @@ import com.pkpk.join.ui.widget.LoadFooter
 import com.pkpk.join.ui.widget.LoadHeader
 import com.pkpk.join.utils.retrofit.RetrofitManager
 import com.pikachu.utils.utils.*
+import com.pkpk.join.utils.UserUtils
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 
 
@@ -20,29 +21,6 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
  * @Author:         pkpk.run
  * @Description:    null
  */
-
-// 192.168.0.105
-
-// 42.192.221.73
-
-// 192.168.0.112
-// 47.122.20.228
-// 192.168.31.11 192.168.31.52
-
-// 服务端 ip 地址
-const val BASE_ADDRESS = "192.168.31.11"
-// 端口
-const val BASE_PORT = "8012"
-
-const val BASE_HTTP = "http"
-const val BASE_WS = "ws"
-const val BASE_HTTP_URL = "${BASE_HTTP}://${BASE_ADDRESS}:${BASE_PORT}"
-const val BASE_WS_URL = "${BASE_WS}://${BASE_ADDRESS}:${BASE_PORT}"
-const val HTTP_OK = 200
-const val TOKEN_ERROR_CODE = -3
-const val TOKEN_ERROR_KEY = "token"
-const val AES_PASSWORD = "pkpk"
-
 class Application : Application() {
     override fun onCreate() {
         super.onCreate()
@@ -54,6 +32,7 @@ class Application : Application() {
         GlideUtils.init(BASE_HTTP_URL)
         AESBCBUtils.init(AES_PASSWORD)
         // LanguageUtils.init(this)
+        UserUtils.addDeviceInfo(this)
         myApplicationContext = applicationContext
 
 
@@ -95,6 +74,19 @@ class Application : Application() {
         fun getUrl(relativePath: String): String = GlideUtils.getUrl(BASE_HTTP_URL, relativePath)
         fun getWsUrl(relativePath: String): String = GlideUtils.getUrl(BASE_WS_URL, relativePath)
 
+        fun setAnimationBirthday(isBirthday: Boolean){
+            //设置全局的Header构建器
+            SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
+                //全局设置主题颜色
+                layout.setPrimaryColorsId(
+                    R.color.color_principal,
+                    R.color.color_grey1
+                )
+                val loadHeader = LoadHeader(context)
+                loadHeader.setAnimationBirthday(isBirthday)
+                loadHeader
+            }
+        }
         init {
             //设置全局的Header构建器
             SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->

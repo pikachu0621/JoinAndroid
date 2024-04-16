@@ -1,5 +1,6 @@
 package com.pkpk.join.api
 
+import com.pkpk.join.API_PUBLIC
 import com.pkpk.join.bean.BaseBean
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.*
@@ -19,7 +20,7 @@ interface PucApi {
      *
      * @return {@linkplain Observable<BaseBean<Array<String>>>}
      */
-    @GET("/pk-puc-api/puc-group-type")
+    @GET("$API_PUBLIC/puc-group-type")
     fun sendGroupType(): Observable<BaseBean<Array<String>>>
 
 

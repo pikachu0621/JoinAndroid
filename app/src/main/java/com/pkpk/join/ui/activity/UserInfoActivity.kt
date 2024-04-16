@@ -35,6 +35,9 @@ class UserInfoActivity : AppBaseActivity<ActivityUserInfoBinding, UserLoginBean>
 
     private fun initUserInfoUi(userLoginBean: UserLoginBean) {
         this.userLoginBean = userLoginBean
+        binding.userImage.setOnClickListener {
+            LookImageActivity.startActivity(this, userLoginBean.userImg)
+        }
         GlideUtils.with(this)
             .loadHeaderToken(userLoginBean.userImg)
             .into(binding.userImage)

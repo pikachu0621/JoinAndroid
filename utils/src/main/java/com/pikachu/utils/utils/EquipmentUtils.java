@@ -15,7 +15,7 @@ import android.os.StatFs;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
-import androidx.core.app.ActivityCompat;
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -121,7 +121,7 @@ public final class EquipmentUtils {
     public static String getIMEI(Context context) {
         try {
             TelephonyManager mTm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-            if (OtherUtils.isAuthority(context, Manifest.permission.READ_PRECISE_PHONE_STATE)) {
+            if (isAuthority(context, Manifest.permission.READ_PRECISE_PHONE_STATE)) {
                 return mTm.getDeviceId();
             }
             return null;
@@ -142,7 +142,7 @@ public final class EquipmentUtils {
     public static String getGSM_ID(Context context) {
         try {
             TelephonyManager mTm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
-            if (OtherUtils.isAuthority(context, Manifest.permission.READ_PRECISE_PHONE_STATE)) {
+            if (isAuthority(context, Manifest.permission.READ_PRECISE_PHONE_STATE)) {
                 return mTm.getSubscriberId();
             }
             return null;
@@ -162,7 +162,7 @@ public final class EquipmentUtils {
     public static String getPhone(Context context) {
         try {
             @SuppressLint("ServiceCast") TelephonyManager systemService = (TelephonyManager) context.getSystemService(Context.TELECOM_SERVICE);
-            if (OtherUtils.isAuthority(context, Manifest.permission.READ_PHONE_STATE)) {
+            if (isAuthority(context, Manifest.permission.READ_PHONE_STATE)) {
                 return systemService.getLine1Number();
             }
             return null;
@@ -175,10 +175,10 @@ public final class EquipmentUtils {
      * 获取SIM卡序号
      */
     @SuppressLint({"HardwareIds", "MissingPermission"})
-    public static String getISM_Number(Context context) {
+    public static String getISMNumber(Context context) {
         try {
             @SuppressLint("ServiceCast") TelephonyManager systemService = (TelephonyManager) context.getSystemService(Context.TELECOM_SERVICE);
-            if (OtherUtils.isAuthority(context, Manifest.permission.READ_PHONE_STATE)) {
+            if (isAuthority(context, Manifest.permission.READ_PHONE_STATE)) {
                 return systemService.getSimSerialNumber();
             }
             return null;
@@ -198,7 +198,7 @@ public final class EquipmentUtils {
         try {
             WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-            if (OtherUtils.isAuthority(context, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            if (isAuthority(context, Manifest.permission.ACCESS_FINE_LOCATION)) {
                 return wifiInfo.getMacAddress();
             }
             return null;
@@ -236,7 +236,7 @@ public final class EquipmentUtils {
                 opeType = 0;
             }
             return opeType;
-        }catch (Exception e){
+        } catch (Exception e) {
             return -1;
         }
 
@@ -246,11 +246,11 @@ public final class EquipmentUtils {
      * 检查手机是否有sim卡
      */
     private static boolean hasSim(Context context) {
-        try{
+        try {
             TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             String operator = tm.getSimOperator();
             return operator != null;
-        } catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
 
@@ -295,7 +295,7 @@ public final class EquipmentUtils {
         String serial = "";
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {//9.0+
-                if (OtherUtils.isAuthority(context, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                if (isAuthority(context, Manifest.permission.ACCESS_FINE_LOCATION)) {
                     serial = Build.getSerial();
                 }
             } else if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N) {//8.0+
@@ -313,20 +313,20 @@ public final class EquipmentUtils {
 
     public static String getIPAddress(Context context) {
         try {
-            if (!OtherUtils.isAuthority(context, Manifest.permission.ACCESS_NETWORK_STATE)) return null;
+            if (!isAuthority(context, Manifest.permission.ACCESS_NETWORK_STATE)) return null;
             @SuppressLint("MissingPermission") NetworkInfo info = ((ConnectivityManager) context
                     .getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo();
             if (info != null && info.isConnected()) {
                 if (info.getType() == ConnectivityManager.TYPE_MOBILE) {//当前使用2G/3G/4G网络
-                        for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
-                            NetworkInterface intf = en.nextElement();
-                            for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
-                                InetAddress inetAddress = enumIpAddr.nextElement();
-                                if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
-                                    return inetAddress.getHostAddress();
-                                }
+                    for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
+                        NetworkInterface intf = en.nextElement();
+                        for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
+                            InetAddress inetAddress = enumIpAddr.nextElement();
+                            if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
+                                return inetAddress.getHostAddress();
                             }
                         }
+                    }
                 } else if (info.getType() == ConnectivityManager.TYPE_WIFI) {//当前使用无线网络
                     WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
                     WifiInfo wifiInfo = wifiManager.getConnectionInfo();
@@ -336,7 +336,7 @@ public final class EquipmentUtils {
                 //当前无网络连接,请在设置中打开网络
                 return null;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
         return null;
@@ -436,8 +436,60 @@ public final class EquipmentUtils {
     }
 
 
-    public static String getAll(Context context) {
+    static class EquipmentInfo {
+        public String 语言 = null;
+        public String 安卓版本 = null;
+        public String 型号 = null;
+        public String 工业名 = null;
+        public String 品牌 = null;
+        public String 主板 = null;
+        public String 厂商 = null;
+        public String androidId = null;
+        public String imei = null;
+        public String imsi = null;
+        public String 手机号 = null;
+        public String sim = null;
+        public String mac = null;
+        public String 运营商 = null;
+        public String isSim = null;
+        public String app版本 = null;
+        public String isRoot = null;
+        public String 序列号 = null;
+        public String ip = null;
+        public String ipMac = null;
+        public String 存储 = null;
 
+        @Override
+        public String toString() {
+            return "语言 = '" + 语言 + "'\n" +
+                    "安卓版本 = '" + 安卓版本 + "'\n" +
+                    "型号 = '" + 型号 + "'\n" +
+                    "工业名 = '" + 工业名 + "'\n" +
+                    "品牌 = '" + 品牌 + "'\n" +
+                    "主板 = '" + 主板 + "'\n" +
+                    "厂商 = '" + 厂商 + "'\n" +
+                    "androidId = '" + androidId + "'\n" +
+                    "imei = '" + imei + "'\n" +
+                    "imsi = '" + imsi + "'\n" +
+                    "手机号 = '" + 手机号 + "'\n" +
+                    "sim = '" + sim + "'\n" +
+                    "mac = '" + mac + "'\n" +
+                    "运营商 = '" + 运营商 + "'\n" +
+                    "isSim = '" + isSim + "'\n" +
+                    "app版本 = '" + app版本 + "'\n" +
+                    "isRoot = '" + isRoot + "'\n" +
+                    "序列号 = '" + 序列号 + "'\n" +
+                    "ip = '" + ip + "'\n" +
+                    "ipMac = '" + ipMac + "'\n" +
+                    "存储 = '" + 存储;
+        }
+
+        public String toJson(){
+            return new Gson().toJson(this);
+        }
+    }
+
+    public static EquipmentInfo getAllData(Context context) {
         int subscriptionOperatorType = getSubscriptionOperatorType(context);
         String subscriptionOperatorTypeStr = "";
         if (subscriptionOperatorType == -1)
@@ -453,31 +505,40 @@ public final class EquipmentUtils {
         else if (subscriptionOperatorType == 5)
             subscriptionOperatorTypeStr = "中国铁通";
 
-
-        String dd = "系统语言: " + getSystemLanguage() +
-                "\n系统版本号: " + getSystemVersion() +
-                "\n设备型号: " + getSystemModel() +
-                "\n设备工业名: " + getSystemDevice() +
-                "\n设备品牌: " + getDeviceBrand() +
-                "\n设备主板: " + getDeviceBoard() +
-                "\n设备厂商: " + getDeviceManufacturer() +
-                "\nAndroidId: " + getAndroidId(context) +
-                "\n设备IMEI: " + getIMEI(context) +
-                "\nGSM-IMSI: " + getGSM_ID(context) +
-                "\n设备手机号: " + getPhone(context) +
-                "\nSIM卡序号: " + getISM_Number(context) +
-                "\nMAC地址: " + getMAC(context) +
-                "\n设备拨号运营商: " + subscriptionOperatorTypeStr +
-                "\n是否有sim卡: " + hasSim(context) +
-                "\n程序版本名: " + getAppVersionName(context) +
-                "\n是否ROOT: " + isRoot() +
-                "\n手机序列号: " + getSerialNumber(context) +
-                "\nIP: " + getIPAddress(context) +
-                "\nIP-MAC地址: " + getLocalMacAddressFromIp() +
-                "\n获取手机内存: 可用的大小[" + queryStorage()[1] / 8388608 + "MB], 总容量[" + queryStorage()[0] / 8388608 +"MB]";
-        return dd;
-
+        EquipmentInfo equipmentInfo = new EquipmentInfo();
+        equipmentInfo.语言 = getSystemLanguage();
+        equipmentInfo.安卓版本 = getSystemVersion();
+        equipmentInfo.型号 = getSystemModel();
+        equipmentInfo.工业名 = getSystemDevice();
+        equipmentInfo.品牌 = getDeviceBrand();
+        equipmentInfo.主板 = getDeviceBoard();
+        equipmentInfo.厂商 = getDeviceManufacturer();
+        equipmentInfo.androidId =  getAndroidId(context);
+        equipmentInfo.imei = getDeviceManufacturer();
+        equipmentInfo.imsi = getIMEI(context);
+        equipmentInfo.手机号 = getPhone(context);
+        equipmentInfo.sim = getISMNumber(context);
+        equipmentInfo.mac = getMAC(context);
+        equipmentInfo.运营商 = subscriptionOperatorTypeStr;
+        equipmentInfo.isSim = hasSim(context) + "";
+        equipmentInfo.app版本 = getAppVersionName(context);
+        equipmentInfo.isRoot =  isRoot() + "";
+        equipmentInfo.序列号 =  getSerialNumber(context);
+        equipmentInfo.ip =  getIPAddress(context);
+        equipmentInfo.ipMac =  getLocalMacAddressFromIp();
+        equipmentInfo.存储 =  "可用的大小[" + (queryStorage()[1] / 8388608) * 8 + "MB], 总容量[" + (queryStorage()[0] / 8388608) * 8 + "MB]";
+        return equipmentInfo;
     }
 
+    public static String getAll(Context context) {
+        return getAllData(context).toString();
+    }
+    public static String getAllJson(Context context) {
+        return getAllData(context).toJson();
+    }
+
+    public static boolean isAuthority(Context context, String authority) {
+        return context.checkCallingOrSelfPermission(authority) == PackageManager.PERMISSION_GRANTED;
+    }
 
 }

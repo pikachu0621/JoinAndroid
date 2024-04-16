@@ -18,6 +18,8 @@ import com.pkpk.join.databinding.ActivityPwsNumBinding
 import com.pikachu.utils.type.JumpType
 import com.pikachu.utils.utils.TimeUtils
 
+
+const val PwsNumEvt = 100
 class PwsNumActivity : AppBaseActivity<ActivityPwsNumBinding, String>() {
 
     private var cloudPws: String? = null
@@ -136,7 +138,7 @@ class PwsNumActivity : AppBaseActivity<ActivityPwsNumBinding, String>() {
                 return
             }
             // 签到成功业务逻辑
-            postEventBus(getPws())
+            postEventBus(getPws(), PwsNumEvt)
             LoginActivity.finishTs(this@PwsNumActivity)
             return
         }
@@ -155,7 +157,7 @@ class PwsNumActivity : AppBaseActivity<ActivityPwsNumBinding, String>() {
         }
 
         // 返回 pws 数据
-        postEventBus(getPws())
+        postEventBus(getPws(), PwsNumEvt)
         LoginActivity.finishTs(this@PwsNumActivity)
     }
 

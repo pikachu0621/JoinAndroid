@@ -38,6 +38,7 @@ class CreateGroupActivity : AppBaseActivity<ActivityCreateGroupBinding, Serializ
     private var imageFile: File? = null
     private var createGroupTypeAdapter: CreateGroupTypeAdapter? = null
     private var groupBean: GroupBean? = null
+    private var groupVerifyPws: String? = null
 
 
     companion object{
@@ -65,6 +66,11 @@ class CreateGroupActivity : AppBaseActivity<ActivityCreateGroupBinding, Serializ
         GlideUtils.with(context).loadHeaderToken(groupBean.groupImg).into(binding.groupImage)
         binding.groupName.setText(groupBean.groupName)
         binding.groupIntroduce.setText(groupBean.groupIntroduce)
+        binding.groupIntroduce.setText(groupBean.groupIntroduce)
+        binding.groupSearch.isChecked = groupBean.groupIsSearch
+        binding.groupVerify.isChecked = !groupBean.groupVerifyPws.isNullOrEmpty()
+        binding.groupVerifyPws.text = if(groupBean.groupVerifyPws.isNullOrEmpty()) "" else "${getString(R.string.edit_user_info_verify_pws)}${groupBean.groupVerifyPws}"
+        groupVerifyPws = groupBean.groupVerifyPws
         binding.ok.isChecked = true
         binding.ok.isClickable = true
     }
@@ -73,15 +79,19 @@ class CreateGroupActivity : AppBaseActivity<ActivityCreateGroupBinding, Serializ
     private fun sendGroup() {
         // 上传图片 及其参数
         binding.ok.setOnClickListener {
-            if (!binding.groupName.text.isNullOrEmpty() && !binding.groupIntroduce.text.isNullOrEmpty() && binding.groupImageMask.visibility != View.VISIBLE){
+            if (isEditOk()){
                 // 上传
                 if (groupBean == null){
-                    val addFormDataPart = MultipartBody.Builder().setType(MultipartBody.FORM)
-                        .addFormDataPart("name", binding.groupName.text.toString())
-                        .addFormDataPart("type", createGroupTypeAdapter!!.getType())
-                        .addFormDataPart("ird", binding.groupIntroduce.text.toString())
-                        .addFormDataPart("img", imageFile!!.name, RequestBody.create(MediaType.parse("image/png"), imageFile!!))
-                        .build()
+                    val addFormDataPart = MultipartBody.Builder().setType(MultipartBody.FORM).apply {
+                        addFormDataPart("name", binding.groupName.text.toString())
+                        addFormDataPart("type", createGroupTypeAdapter!!.getType())
+                        addFormDataPart("ird", binding.groupIntroduce.text.toString())
+                        addFormDataPart("search", binding.groupSearch.isChecked.toString())
+                        addFormDataPart("verify", groupVerifyPws ?: "")
+                        if (imageFile != null && imageFile!!.exists()){
+                            addFormDataPart("img", imageFile!!.name, RequestBody.create(MediaType.parse("image/png"), imageFile!!))
+                        }
+                    }.build()
                     groupApi.sendCreateGroup(addFormDataPart).mySubscribeMainThread(this, this)
                     return@setOnClickListener
                 }
@@ -90,6 +100,8 @@ class CreateGroupActivity : AppBaseActivity<ActivityCreateGroupBinding, Serializ
                     if (!binding.groupName.text.isNullOrEmpty()) addFormDataPart("name", binding.groupName.text.toString())
                     addFormDataPart("type", createGroupTypeAdapter!!.getType())
                     if (!binding.groupName.text.isNullOrEmpty()) addFormDataPart("ird", binding.groupIntroduce.text.toString())
+                    addFormDataPart("search", binding.groupSearch.isChecked.toString())
+                    addFormDataPart("verify", this@CreateGroupActivity.groupVerifyPws ?: "")
                     if (imageFile != null && imageFile!!.exists()) addFormDataPart("img", imageFile!!.name, RequestBody.create(MediaType.parse("image/png"), imageFile!!))
                 }.build()
                 groupApi.sendEditUserGroup(addFormDataPart).mySubscribeMainThread(this, this)
@@ -106,7 +118,7 @@ class CreateGroupActivity : AppBaseActivity<ActivityCreateGroupBinding, Serializ
     private fun initEdit() {
 
         binding.groupName.addTextChangedListener {
-            binding.ok.isChecked = !binding.groupName.text.isNullOrEmpty() && !binding.groupIntroduce.text.isNullOrEmpty() && binding.groupImageMask.visibility != View.VISIBLE
+            binding.ok.isChecked = isEditOk()
             binding.ok.isClickable = binding.ok.isChecked
             binding.imgDel1.visibility = if (!binding.groupName.text.isNullOrEmpty()) {
                 View.VISIBLE
@@ -116,7 +128,7 @@ class CreateGroupActivity : AppBaseActivity<ActivityCreateGroupBinding, Serializ
         }
 
         binding.groupIntroduce.addTextChangedListener {
-            binding.ok.isChecked = !binding.groupName.text.isNullOrEmpty() && !binding.groupIntroduce.text.isNullOrEmpty() && binding.groupImageMask.visibility != View.VISIBLE
+            binding.ok.isChecked = isEditOk()
             binding.ok.isClickable = binding.ok.isChecked
             binding.imgDel2.visibility = if (!binding.groupIntroduce.text.isNullOrEmpty()) {
                 View.VISIBLE
@@ -132,6 +144,19 @@ class CreateGroupActivity : AppBaseActivity<ActivityCreateGroupBinding, Serializ
             binding.groupIntroduce.setText("")
         }
 
+        binding.groupOpenSearchClick.setOnClickListener {
+            binding.groupSearch.isChecked = !binding.groupSearch.isChecked
+        }
+
+        binding.groupOpenVerifyClick.setOnClickListener {
+            if (binding.groupVerify.isChecked) {
+                binding.groupVerify.isChecked = false
+                groupVerifyPws = ""
+                binding.groupVerifyPws.text = ""
+                return@setOnClickListener
+            }
+            PwsNumActivity.startActivity(this)
+        }
     }
 
     private fun initTypeList() {
@@ -152,6 +177,10 @@ class CreateGroupActivity : AppBaseActivity<ActivityCreateGroupBinding, Serializ
         }, -1)
     }
 
+    /**
+     * 主要数据是否编辑完成
+     */
+    private fun isEditOk()  = !binding.groupName.text.isNullOrEmpty() /*&& !binding.groupIntroduce.text.isNullOrEmpty() && binding.groupImageMask.visibility != View.VISIBLE*/
 
     // 选择的图片
     override fun onChooseClick(files: MutableList<String>?, num: Int) {
@@ -171,10 +200,18 @@ class CreateGroupActivity : AppBaseActivity<ActivityCreateGroupBinding, Serializ
         }
         binding.groupImageMask.visibility = View.GONE
         binding.groupImage.setImageBitmap(BitmapFactory.decodeFile(file.absolutePath))
-        binding.ok.isChecked = !binding.groupName.text.isNullOrEmpty() && !binding.groupIntroduce.text.isNullOrEmpty() && binding.groupImageMask.visibility != View.VISIBLE
+        //  && !binding.groupIntroduce.text.isNullOrEmpty() && binding.groupImageMask.visibility != View.VISIBLE
+        binding.ok.isChecked = isEditOk()
         binding.ok.isClickable = binding.ok.isChecked
     }
 
+    override fun onEventBus(event: Serializable?, key: Int?, msg: String?) {
+        if (event != null && key == PwsNumEvt) {
+            groupVerifyPws = event as String
+            binding.groupVerify.isChecked = true
+            binding.groupVerifyPws.text = if(groupVerifyPws.isNullOrEmpty()) "" else "${getString(R.string.edit_user_info_verify_pws)}: $groupVerifyPws"
+        }
+    }
 
     // 创建失败
     override fun onSendError(t: BaseBean<GroupBean>?, e: Throwable) {
@@ -184,7 +221,7 @@ class CreateGroupActivity : AppBaseActivity<ActivityCreateGroupBinding, Serializ
     // 创建成功
     override fun onSendComplete(t: BaseBean<GroupBean>) {
         showToast(R.string.dialog_msg_complete)
-        postEventBus(t)
+        postEventBus(t, GroupInfoActivityEvt)
         finish()
     }
 }

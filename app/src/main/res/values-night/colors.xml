@@ -5,6 +5,7 @@
     <color name="color_secondary">#80BC62B8</color>
     <color name="color_bg">#33394E</color>
     <color name="color_bg_secondary">#464D64</color>
+    <color name="color_bg_dialog_query">#FFFFFF</color>
 
     <color name="color_grey1">#FFFFFF</color>
     <color name="color_grey2">#CCCCCC</color>
@@ -21,6 +22,10 @@
     <color name="color_main_top5">#4299C2</color>
     <color name="color_main_top6">#C24242</color>
 
+
+    <color name="color_status_out">#C24242</color>
+    <color name="color_status_in">#4BC242</color>
+    <color name="color_status_load">#C2AD42</color>
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>

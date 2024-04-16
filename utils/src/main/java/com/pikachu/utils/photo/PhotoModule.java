@@ -17,12 +17,19 @@ public class PhotoModule {
     private String file; // 第一张图片
     private List<String> files; // 相册所有图片
 
+    private boolean isAll = false; // 是否为全部相册
+
 
     public PhotoModule(String path, String name, String file, List<String> files) {
+        this(path, name, file, files, false);
+    }
+
+    public PhotoModule(String path, String name, String file, List<String> files, boolean isAll) {
         this.path = path;
         this.name = name;
         this.file = file;
         this.files = files;
+        this.isAll = isAll;
     }
 
     public String getFile() {
@@ -55,5 +62,13 @@ public class PhotoModule {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public boolean isAll() {
+        return isAll;
+    }
+
+    public void setAll(boolean all) {
+        isAll = all;
     }
 }

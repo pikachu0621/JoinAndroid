@@ -25,7 +25,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
-
+const val QRCodeEvt = 102
 class QRCodeActivity : CaptureActivity(), PhotoActivity.PhotoChooseListener {
 
 
@@ -144,7 +144,7 @@ class QRCodeActivity : CaptureActivity(), PhotoActivity.PhotoChooseListener {
                 }
             }
             if(cloudPws != null){
-                EventBus.getDefault().post(BaseEventBean(pws, null, null, null))
+                EventBus.getDefault().post(BaseEventBean(pws, QRCodeEvt, null, null))
                 LoginActivity.finishTs(this@QRCodeActivity)
             } else {
                 startActivity(Intent(this@QRCodeActivity, GroupInfoActivity::class.java).apply {
@@ -169,7 +169,7 @@ class QRCodeActivity : CaptureActivity(), PhotoActivity.PhotoChooseListener {
                 ToastUtils.showToast(getString(R.string.activity_sqr_nul))
                 return
             }
-            EventBus.getDefault().post(BaseEventBean(pws, null, null, null))
+            EventBus.getDefault().post(BaseEventBean(pws, QRCodeEvt, null, null))
             LoginActivity.finishTs(this@QRCodeActivity)
         } else {
             val groupId = QRCodeDisplayActivity.parseQrStr(parseQRCode)

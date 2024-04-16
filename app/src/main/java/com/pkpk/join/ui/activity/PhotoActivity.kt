@@ -42,12 +42,13 @@ class PhotoActivity : AppBaseActivity<ActivityPhotoBinding, Serializable>(),
     private var isShow = false
     private var has: MutableList<String>? = null
     private var num = 0
+    private var clickItemData: PhotoModule? = null
 
     @SuppressLint("SetTextI18n")
     override fun onAppCreate(savedInstanceState: Bundle?) {
         GetPhotoUtils.init(context, type)
-        binding.r1.setOnClickListener {  showAndStop(!isShow) }
-        binding.p5.setOnClickListener {  showAndStop(!isShow) }
+        binding.r1.setOnClickListener { showAndStop(!isShow) }
+        binding.p5.setOnClickListener { showAndStop(!isShow) }
         binding.appBack.setOnClickListener {
             if (photoChooseListener != null) {
                 if (has != null) {
@@ -83,9 +84,16 @@ class PhotoActivity : AppBaseActivity<ActivityPhotoBinding, Serializable>(),
             thread!!.interrupt()
         }
         thread = Thread {
+            val systemPhotoLibs = GetPhotoUtils.getSystemLibs()
+            if (clickItemData != null) {
+                val systemPathLibs = GetPhotoUtils.getSystemPathLibs(clickItemData)
+                runOnUiThread {
+                    photoRecycler1Adapter!!.refreshData(systemPathLibs.files)
+                    photoRecycler2Adapter!!.refreshData(systemPhotoLibs)
+                }
+                return@Thread
+            }
             val systemList = GetPhotoUtils.getSystemList()
-            val systemPhotoLibs =
-                GetPhotoUtils.getSystemLibs()
             runOnUiThread {
                 if (systemList.size <= 0) {
                     binding.p61.visibility = View.VISIBLE
@@ -129,7 +137,8 @@ class PhotoActivity : AppBaseActivity<ActivityPhotoBinding, Serializable>(),
         val scaleYProper = PropertyValuesHolder.ofFloat("translationY", 0f, -800f)
         val rotation = PropertyValuesHolder.ofFloat("rotation", 0f)
         val animator1 = ObjectAnimator.ofPropertyValuesHolder(binding.p5, alphaProper) // 遮罩
-        val animator2 = ObjectAnimator.ofPropertyValuesHolder(binding.p6, alphaProper, scaleYProper) // 列表
+        val animator2 =
+            ObjectAnimator.ofPropertyValuesHolder(binding.p6, alphaProper, scaleYProper) // 列表
         val animator3 = ObjectAnimator.ofPropertyValuesHolder(binding.top4, rotation) // 旋转
         animator1.addListener(object : AnimatorListenerAdapter() {
             override fun onAnimationStart(animation: Animator, isReverse: Boolean) {}
@@ -149,7 +158,8 @@ class PhotoActivity : AppBaseActivity<ActivityPhotoBinding, Serializable>(),
     }
 
     override fun onItemClick(has: MutableList<String>, position: Int, num: Int) {
-        binding.top5.text = if (num <= 0) getString(R.string.dialog_msg_confirm) else "${getString(R.string.dialog_msg_confirm)}($num)"
+        binding.top5.text =
+            if (num <= 0) getString(R.string.dialog_msg_confirm) else "${getString(R.string.dialog_msg_confirm)}($num)"
         this.has = has
         this.num = num
     }
@@ -160,6 +170,11 @@ class PhotoActivity : AppBaseActivity<ActivityPhotoBinding, Serializable>(),
         position: Int,
         data: MutableList<PhotoModule?>,
     ) {
+        clickItemData = if (itemData.isAll) {
+            null
+        } else {
+            itemData
+        }
         photoRecycler1Adapter!!.refreshData(itemData.files)
         showAndStop(false.also { isShow = it })
         this.binding.top3.text = itemData.name
@@ -187,7 +202,7 @@ class PhotoActivity : AppBaseActivity<ActivityPhotoBinding, Serializable>(),
         return super.onKeyDown(keyCode, event)
     }
 
-    private fun finishTs(){
+    private fun finishTs() {
         finish()
         overridePendingTransition(R.anim.aty_ont, R.anim.aty_out)
     }
@@ -200,14 +215,14 @@ class PhotoActivity : AppBaseActivity<ActivityPhotoBinding, Serializable>(),
     }
 
 
-
-    private fun permissions(){
+    private fun permissions() {
         XXPermissions.with(this)
             .permission(Permission.WRITE_EXTERNAL_STORAGE)
             .request(object : OnPermissionCallback {
                 override fun onGranted(permissions: MutableList<String>, allGranted: Boolean) {
                     readPhoto()
                 }
+
                 override fun onDenied(permissions: MutableList<String>, doNotAskAgain: Boolean) {
                     if (doNotAskAgain) {
                         XXPermissions.startPermissionActivity(context, permissions)

@@ -1,5 +1,6 @@
 package com.pkpk.join.api
 
+import com.pkpk.join.API_GROUP
 import com.pkpk.join.bean.BaseBean
 import com.pkpk.join.bean.GroupBean
 import com.pkpk.join.bean.LGroupBean
@@ -22,7 +23,7 @@ interface GroupApi {
      *
      * @return {@linkplain Observable<BaseBean<Array<String>>>}
      */
-    @POST("/pk-group-api/create")
+    @POST("$API_GROUP/create")
     fun sendCreateGroup(
         @Body body: RequestBody // 带其他参数的    不要 @Multipart
     ): Observable<BaseBean<GroupBean>>
@@ -31,7 +32,7 @@ interface GroupApi {
     /**
      * 获取用户创建的群组
      */
-    @GET("/pk-group-api/user-create-group")
+    @GET("$API_GROUP/user-create-group")
     fun sendUserCreateGroup(): Observable<BaseBean<ArrayList<GroupBean>>>
 
 
@@ -40,7 +41,7 @@ interface GroupApi {
     /**
      * 删除群组
      */
-    @GET("/pk-group-api/delete-group/{id}")
+    @GET("$API_GROUP/delete-group/{id}")
     fun sendDeleteGroup(@Path("id") id: Long): Observable<BaseBean<ArrayList<GroupBean>>>
 
 
@@ -49,7 +50,7 @@ interface GroupApi {
     /**
      * 编辑群组
      */
-    @POST("/pk-group-api/edit-group")
+    @POST("$API_GROUP/edit-group")
     fun sendEditUserGroup(
         @Body body: RequestBody // 带其他参数的    不要 @Multipart
     ): Observable<BaseBean<GroupBean>>
@@ -59,7 +60,7 @@ interface GroupApi {
     /**
      * 查询群组info
      */
-    @GET("/pk-group-api/query-group/{id}")
+    @GET("$API_GROUP/query-group/{id}")
     fun sendQueryGroupInfo(@Path("id") id: Long): Observable<BaseBean<GroupBean>>
 
 
@@ -67,7 +68,7 @@ interface GroupApi {
     /**
      * 踢出某用户
      */
-    @GET("/pk-group-api/remove-user-group")
+    @GET("$API_GROUP/remove-user-group")
     fun removeUserToGroup(
         @Query("user-id") targetUserId: Long?,
         @Query("group-id")  byGroupId: Long?
@@ -77,7 +78,7 @@ interface GroupApi {
     /**
      * 模糊查询群组info
      */
-    @GET("/pk-group-api/like-group")
+    @GET("$API_GROUP/like-group")
     fun sendLikeGroupList(@Query("id-name") groupNameAndGroupId: String): Observable<BaseBean<ArrayList<GroupBean>>>
 
 

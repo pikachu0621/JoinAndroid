@@ -54,7 +54,7 @@ class AdminUserStartActivity : AppBaseActivity<ActivityAdminUserStartBinding, St
 
     private fun startLoad() {
         signId = -1
-        binding.appNul.root.visibility = View.GONE
+        // binding.appNul.root.visibility = View.GONE
         binding.smartRefreshLayout.autoRefresh()
         signApi.sendMySignInfo().mySubscribeMainThread(this, this, -1)
     }
@@ -78,7 +78,7 @@ class AdminUserStartActivity : AppBaseActivity<ActivityAdminUserStartBinding, St
     }
 
     override fun onEventBus(event: String?, key: Int?, msg: String?) {
-        if (event != null && signId != -1L) startSign(signId, event)
+        if (event != null && (key == PwsNumEvt || key == PwsGestureEvt || key == QRCodeEvt) && signId != -1L) startSign(signId, event)
     }
 
 

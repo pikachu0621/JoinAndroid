@@ -37,6 +37,15 @@ class LoadHeader: RelativeLayout, RefreshHeader {
         addView(uiLoadHeaderBinding.root)
     }
 
+    fun setAnimationBirthday(isBirthday: Boolean){
+        if (isBirthday){
+            uiLoadHeaderBinding.h0.setAnimation("animation/animation_load_header_birthday.json")
+        } else {
+            uiLoadHeaderBinding.h0.setAnimation("animation/animation_load_header_1.json")
+        }
+    }
+
+
     override fun onStateChanged(
         refreshLayout: RefreshLayout,
         oldState: RefreshState,
